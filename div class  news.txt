@@ -1,0 +1,24 @@
+<div class="news">
+
+
+<div class="date">
+2026.07.26
+</div>
+
+
+<h2>
+資料公開
+</h2>
+
+
+<p>
+
+技術資料・活動資料を公開しました。
+
+</p>
+
+
+<a class="pdf" href="document.pdf" target="_blank">
+PDFを見る
+</a>
+
