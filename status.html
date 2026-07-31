@@ -233,7 +233,143 @@ padding:20px;
 }
 
 }
+.report-box{
 
+position:fixed;
+
+right:25px;
+
+bottom:25px;
+
+width:320px;
+
+background:#fff;
+
+border-radius:18px;
+
+padding:20px;
+
+box-shadow:0 10px 30px rgba(0,0,0,.2);
+
+border-top:5px solid #006f68;
+
+z-index:9999;
+
+animation:fadeIn .3s;
+
+}
+
+.report-box h3{
+
+color:#006f68;
+
+margin-bottom:10px;
+
+font-size:20px;
+
+}
+
+.report-box p{
+
+color:#555;
+
+font-size:14px;
+
+line-height:1.6;
+
+margin-bottom:15px;
+
+}
+
+.report-btn{
+
+display:block;
+
+text-align:center;
+
+background:#006f68;
+
+color:#fff;
+
+text-decoration:none;
+
+padding:12px;
+
+border-radius:10px;
+
+font-weight:bold;
+
+transition:.3s;
+
+}
+
+.report-btn:hover{
+
+background:#00524d;
+
+}
+
+.close-btn{
+
+position:absolute;
+
+top:10px;
+
+right:10px;
+
+border:none;
+
+background:none;
+
+font-size:20px;
+
+cursor:pointer;
+
+color:#666;
+
+}
+
+.close-btn:hover{
+
+color:#000;
+
+}
+
+@keyframes fadeIn{
+
+from{
+
+opacity:0;
+
+transform:translateY(20px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:translateY(0);
+
+}
+
+}
+
+@media(max-width:600px){
+
+.report-box{
+
+left:15px;
+
+right:15px;
+
+bottom:15px;
+
+width:auto;
+
+}
+
+}
 </style>
 
 </head>
@@ -513,10 +649,31 @@ load();
 
 setInterval(load,5000);
 
+function closeReport(){
 
+document.getElementById("reportBox").style.display="none";
+
+}
 </script>
+<div id="reportBox" class="report-box">
 
+<button class="close-btn" onclick="closeReport()">✕</button>
 
+<h3>⚠️ 不具合を発見しましたか？</h3>
+
+<p>
+サービスに問題や表示の不具合を見つけた場合は、
+Googleフォームからご報告ください。
+</p>
+
+<a href="https://forms.gle/kRhMupMydqeaiFa98"
+target="_blank"
+rel="noopener"
+class="report-btn">
+不具合を報告する
+</a>
+
+</div>
 </body>
 
 </html>
