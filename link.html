@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>バイナリ[公式] | Link</title>
+
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+
+body{
+    font-family:-apple-system,BlinkMacSystemFont,
+    "Segoe UI",sans-serif;
+    color:white;
+}
+
+
+
+/* ナビ */
+
+header{
+    position:absolute;
+    top:0;
+    width:100%;
+    padding:25px;
+    z-index:10;
+}
+
+
+nav{
+    max-width:1200px;
+    margin:auto;
+}
+
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin-right:25px;
+    font-weight:bold;
+}
+
+
+
+
+/* メイン */
+
+.hero{
+
+    min-height:100vh;
+
+    padding-top:120px;
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+
+
+
+/* 背景動画 */
+
+.bg-video{
+
+    position:absolute;
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    top:0;
+    left:0;
+
+    z-index:-2;
+
+}
+
+
+
+
+/* 暗いフィルター */
+
+.hero::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:100%;
+    height:100%;
+
+    background:rgba(0,0,0,0.45);
+
+    z-index:-1;
+
+}
+
+
+
+
+/* タイトル */
+
+.content{
+
+    text-align:center;
+
+}
+
+
+.content h1{
+
+    font-size:80px;
+
+    letter-spacing:10px;
+
+}
+
+
+
+.content p{
+
+    font-size:22px;
+
+    margin-top:20px;
+
+}
+
+
+
+
+/* Link一覧 */
+
+.links{
+
+    max-width:1100px;
+
+    margin:60px auto;
+
+    padding:20px;
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:25px;
+
+}
+
+
+
+.link-box{
+
+    display:block;
+
+    text-decoration:none;
+
+    color:white;
+
+    background:rgba(255,255,255,0.15);
+
+    border:1px solid rgba(255,255,255,0.3);
+
+    border-radius:20px;
+
+    padding:25px;
+
+    backdrop-filter:blur(10px);
+
+    transition:.3s;
+
+}
+
+
+
+.link-box:hover{
+
+    transform:translateY(-8px);
+
+    background:rgba(255,255,255,0.25);
+
+}
+
+
+
+.link-box h2{
+
+    font-size:22px;
+
+}
+
+
+
+.link-box p{
+
+    margin-top:10px;
+
+    opacity:.85;
+
+}
+
+
+
+.new{
+
+    display:inline-block;
+
+    background:red;
+
+    padding:4px 10px;
+
+    border-radius:20px;
+
+    font-size:12px;
+
+    margin-bottom:10px;
+
+}
+
+
+
+
+/* スマホ */
+
+@media(max-width:700px){
+
+
+nav a{
+
+    font-size:12px;
+
+    margin-right:8px;
+
+}
+
+
+.content h1{
+
+    font-size:45px;
+
+}
+
+
+.content p{
+
+    font-size:18px;
+
+}
+
+
+.links{
+
+    grid-template-columns:1fr;
+
+}
+
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+
+<header>
+
+<nav>
+
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="projects.html">Projects</a>
+<a href="videos.html">利用ガイド</a>
+<a href="news.html">News</a>
+<a href="documents.html">Documents</a>
+<a href="link.html">Link</a>
+<a href="contact.html">Contact</a>
+
+</nav>
+
+</header>
+
+
+
+
+<section class="hero">
+
+
+<video class="bg-video"
+autoplay
+muted
+loop
+playsinline>
+
+<source src="https://bainarinoakaunto.github.io/2681/%E3%83%9B%E3%83%BC%E3%83%A0.MP4"
+type="video/mp4">
+
+</video>
+
+
+
+
+<div class="content">
+
+<h1>
+LINK
+</h1>
+
+<p>
+BAINARI関連サイト一覧
+</p>
+
+</div>
+
+
+
+
+<div class="links">
+
+
+
+<a class="link-box"
+href="https://bainarinoakaunto.github.io/2681/Digitalstudy.html"
+target="_blank">
+
+<span class="new">NEW</span>
+
+<h2>
+Digital暗記カード
+</h2>
+
+<p>
+学習をサポートするWebアプリ</p>
+
+</a>
+
+
+
+<a class="link-box"
+href="https://bainarinoakaunto.github.io/2681/passseiseji.html"
+target="_blank">
+
+<span class="new">NEW</span>
+
+<h2>
+パスワードランダム生成
+</h2>
+
+<p>
+パスワード作成ツール</p>
+
+</a>
+
+
+
+<a class="link-box"
+href="https://bainarinoakaunto.github.io/2681/calendar.html"
+target="_blank">
+
+<span class="new">NEW</span>
+
+<h2>
+勉強calendar
+</h2>
+
+<p>
+学習管理アプリ</p>
+
+</a>
+
+
+
+<a class="link-box"
+href="https://ryop.blog.jp"
+target="_blank">
+
+<h2>
+ryo運営ブログのすべて
+</h2>
+
+<p>
+ブログ一覧</p>
+
+</a>
+
+
+
+<a class="link-box"
+href="https://ryo15542.blog.jp"
+target="_blank">
+
+<h2>
+RYO15542ブログ
+</h2>
+
+<p>
+個人ブログ</p>
+
+</a>
+
+
+
+<a class="link-box"
+href="https://transceivermaniac.blog.jp"
+target="_blank">
+
+<h2>
+無線マニアの集まり
+</h2>
+
+<p>
+無線関連サイト</p>
+
+</a>
+
+
+
+<a class="link-box"
+href="https://ryo15542web.my.canva.site/t5537"
+target="_blank">
+
+<h2>
+特定トランシーバーの集まりホームページ
+</h2>
+
+<p>
+専用ホームページ</p>
+
+</a>
+
+
+
+<a class="link-box"
+href="https://timaryo15542.liblo.jp"
+target="_blank">
+
+<h2>
+ryoタイマー
+</h2>
+
+<p>
+タイマーサービス</p>
+
+</a>
+
+
+
+<a class="link-box"
+href="https://canva.link/rao79nmoad3v4wi"
+target="_blank">
+
+<h2>
+ブログ観覧方法説明特設サイト
+</h2>
+
+<p>
+利用方法説明</p>
+
+</a>
+
+
+
+</div>
+
+
+</section>
+
+
+</body>
+
+</html>

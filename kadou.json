@@ -1,0 +1,19 @@
+{
+  "system": "All services are operating normally.",
+
+  "blog": {
+    "status": "正常稼働中"
+  },
+
+  "tube": {
+    "status": "正常稼働中"
+  },
+
+  "timer": {
+    "status": "正常稼働中"
+  },
+
+  "project": {
+    "status": "正常稼働中"
+  }
+}
