@@ -1,6 +1,11 @@
 {
   "system": "All services are operating normally.",
 
+  "kabu": {
+    "status": "正常稼働中"
+  },
+
+  
   "blog": {
     "status": "正常稼働中"
   },
