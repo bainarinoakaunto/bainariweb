@@ -6,377 +6,233 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>バイナリ[公式]| Status</title>
+<title>バイナリ[公式] | Status</title>
 
 <style>
 
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
 body{
-
-font-family:-apple-system,BlinkMacSystemFont,
-"Segoe UI",sans-serif;
-
-background:#f5f7f7;
-
-color:#222;
-
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    background:#f5f7f7;
+    color:#222;
 }
-
 
 /* header */
 
 header{
-
-background:#006f68;
-
-padding:25px;
-
+    background:#006f68;
+    padding:25px;
 }
-
 
 nav{
-
-max-width:1200px;
-
-margin:auto;
-
+    max-width:1200px;
+    margin:auto;
 }
-
 
 nav a{
-
-color:white;
-
-text-decoration:none;
-
-margin-right:25px;
-
-font-weight:bold;
-
+    color:white;
+    text-decoration:none;
+    margin-right:25px;
+    font-weight:bold;
 }
-
-
 
 /* main */
 
 main{
-
-max-width:1100px;
-
-margin:70px auto;
-
-padding:20px;
-
+    max-width:1100px;
+    margin:70px auto;
+    padding:20px;
 }
-
-
 
 .title{
-
-font-size:55px;
-
-color:#006f68;
-
-margin-bottom:15px;
-
+    font-size:55px;
+    color:#006f68;
+    margin-bottom:15px;
 }
-
-
 
 .description{
-
-font-size:18px;
-
-margin-bottom:40px;
-
-color:#555;
-
+    font-size:18px;
+    margin-bottom:40px;
+    color:#555;
 }
-
-
 
 /* 情報 */
 
 .meta{
-
-background:white;
-
-border-radius:20px;
-
-padding:20px;
-
-margin-bottom:30px;
-
-box-shadow:0 10px 30px rgba(0,0,0,0.08);
-
-display:flex;
-
-justify-content:space-between;
-
-flex-wrap:wrap;
-
-gap:10px;
-
-color:#555;
-
+    background:white;
+    border-radius:20px;
+    padding:20px;
+    margin-bottom:30px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+    color:#555;
 }
-
-
 
 /* status */
 
 .status-box{
-
-background:white;
-
-border-radius:20px;
-
-padding:30px;
-
-margin-bottom:30px;
-
-box-shadow:0 10px 30px rgba(0,0,0,0.08);
-
+    background:white;
+    border-radius:20px;
+    padding:30px;
+    margin-bottom:30px;
+    box-shadow:0 10px 30px rgba(0,0,0,0.08);
 }
-
-
 
 .status-top{
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-flex-wrap:wrap;
-
-gap:10px;
-
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:10px;
 }
-
-
 
 .name{
-
-font-size:22px;
-
-font-weight:bold;
-
-color:#006f68;
-
+    font-size:22px;
+    font-weight:bold;
+    color:#006f68;
 }
-
-
 
 .status{
-
-font-weight:bold;
-
-color:#16a34a;
-
+    font-weight:bold;
+    color:#16a34a;
 }
 
+.status.normal{
+    color:#16a34a;
+}
 
+.status.warning{
+    color:#d97706;
+}
+
+.status.error{
+    color:#dc2626;
+}
 
 .info{
-
-margin-top:15px;
-
-color:#555;
-
+    margin-top:15px;
+    color:#555;
 }
-
-
 
 /* footer */
 
 footer{
-
-text-align:center;
-
-padding:40px;
-
-color:#777;
-
+    text-align:center;
+    padding:40px;
+    color:#777;
 }
 
+/* 不具合報告 */
 
-
-@media(max-width:600px){
-
-.title{
-
-font-size:40px;
-
-}
-
-
-nav a{
-
-font-size:13px;
-
-margin-right:10px;
-
-}
-
-
-.status-box{
-
-padding:20px;
-
-}
-
-}
 .report-box{
-
-position:fixed;
-
-right:25px;
-
-bottom:25px;
-
-width:320px;
-
-background:#fff;
-
-border-radius:18px;
-
-padding:20px;
-
-box-shadow:0 10px 30px rgba(0,0,0,.2);
-
-border-top:5px solid #006f68;
-
-z-index:9999;
-
-animation:fadeIn .3s;
-
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    width:320px;
+    background:#fff;
+    border-radius:18px;
+    padding:20px;
+    box-shadow:0 10px 30px rgba(0,0,0,.2);
+    border-top:5px solid #006f68;
+    z-index:9999;
+    animation:fadeIn .3s;
 }
 
 .report-box h3{
-
-color:#006f68;
-
-margin-bottom:10px;
-
-font-size:20px;
-
+    color:#006f68;
+    margin-bottom:10px;
+    font-size:20px;
 }
 
 .report-box p{
-
-color:#555;
-
-font-size:14px;
-
-line-height:1.6;
-
-margin-bottom:15px;
-
+    color:#555;
+    font-size:14px;
+    line-height:1.6;
+    margin-bottom:15px;
 }
 
 .report-btn{
-
-display:block;
-
-text-align:center;
-
-background:#006f68;
-
-color:#fff;
-
-text-decoration:none;
-
-padding:12px;
-
-border-radius:10px;
-
-font-weight:bold;
-
-transition:.3s;
-
+    display:block;
+    text-align:center;
+    background:#006f68;
+    color:#fff;
+    text-decoration:none;
+    padding:12px;
+    border-radius:10px;
+    font-weight:bold;
+    transition:.3s;
 }
 
 .report-btn:hover{
-
-background:#00524d;
-
+    background:#00524d;
 }
 
 .close-btn{
-
-position:absolute;
-
-top:10px;
-
-right:10px;
-
-border:none;
-
-background:none;
-
-font-size:20px;
-
-cursor:pointer;
-
-color:#666;
-
+    position:absolute;
+    top:10px;
+    right:10px;
+    border:none;
+    background:none;
+    font-size:20px;
+    cursor:pointer;
+    color:#666;
 }
 
 .close-btn:hover{
-
-color:#000;
-
+    color:#000;
 }
 
 @keyframes fadeIn{
 
-from{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
 
-opacity:0;
-
-transform:translateY(20px);
-
-}
-
-to{
-
-opacity:1;
-
-transform:translateY(0);
-
-}
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 
 }
 
 @media(max-width:600px){
 
-.report-box{
+    .title{
+        font-size:40px;
+    }
 
-left:15px;
+    nav a{
+        font-size:13px;
+        margin-right:10px;
+    }
 
-right:15px;
+    .status-box{
+        padding:20px;
+    }
 
-bottom:15px;
-
-width:auto;
+    .report-box{
+        left:15px;
+        right:15px;
+        bottom:15px;
+        width:auto;
+    }
 
 }
 
-}
 </style>
 
 </head>
 
-
 <body>
-
 
 <header>
 
@@ -396,49 +252,36 @@ width:auto;
 
 </header>
 
-
-
 <main>
-
 
 <div class="title">
 STATUS
 </div>
 
-
 <div class="description">
 BAINARI関連サービスの稼働状況
 </div>
 
-
-
 <div class="meta">
 
 <div id="system">
-Loading...
+読み込み中...
 </div>
-
 
 <div>
 現在時刻：
-<span id="clock">
---:--:--
-</span>
+<span id="clock">--:--:--</span>
 </div>
-
 
 <div>
 Last Sync：
-<span id="sync">
---
-</span>
+<span id="sync">--</span>
+</div>
+
 </div>
 
 
-</div>
-
-
-
+<!-- ブログ -->
 
 <div class="status-box">
 
@@ -449,13 +292,15 @@ Last Sync：
 </div>
 
 <div id="blogStatus" class="status">
-Loading...
+読み込み中...
 </div>
 
 </div>
 
 </div>
 
+
+<!-- 株シミュレーター -->
 
 <div class="status-box">
 
@@ -466,13 +311,15 @@ Loading...
 </div>
 
 <div id="kabu" class="status">
-Loading...
+読み込み中...
 </div>
 
 </div>
 
 </div>
 
+
+<!-- ryoチューブ -->
 
 <div class="status-box">
 
@@ -483,7 +330,7 @@ ryoチューブ
 </div>
 
 <div id="tubeStatus" class="status">
-Loading...
+読み込み中...
 </div>
 
 </div>
@@ -491,7 +338,7 @@ Loading...
 </div>
 
 
-
+<!-- ryoタイマー -->
 
 <div class="status-box">
 
@@ -502,7 +349,7 @@ ryoタイマー
 </div>
 
 <div id="timerStatus" class="status">
-Loading...
+読み込み中...
 </div>
 
 </div>
@@ -510,7 +357,7 @@ Loading...
 </div>
 
 
-
+<!-- サポートサービス -->
 
 <div class="status-box">
 
@@ -521,21 +368,14 @@ Loading...
 </div>
 
 <div id="projectStatus" class="status">
-Loading...
+読み込み中...
 </div>
 
 </div>
 
-
-
 </div>
-
-
 
 </main>
-
-
-
 
 <footer>
 
@@ -544,134 +384,8 @@ Loading...
 </footer>
 
 
+<!-- 不具合報告 -->
 
-
-<script>
-
-
-const url =
-"https://bainarinoakaunto.github.io/bainariweb/kadou.json";
-
-
-
-// 現在時刻
-
-function updateClock(){
-
-const now=new Date();
-
-
-const h=String(now.getHours()).padStart(2,"0");
-
-const m=String(now.getMinutes()).padStart(2,"0");
-
-const s=String(now.getSeconds()).padStart(2,"0");
-
-
-document.getElementById("clock").innerText =
-`${h}:${m}:${s}`;
-
-}
-
-
-updateClock();
-
-setInterval(updateClock,1000);
-
-
-
-
-// 稼働情報取得
-
-function formatTime(){
-
-const now=new Date();
-
-return now.toLocaleTimeString("ja-JP");
-
-}
-
-
-
-async function load(){
-
-
-try{
-
-
-const res =
-await fetch(url+"?t="+Date.now());
-
-
-const data =
-await res.json();
-
-
-
-document.getElementById("system").innerText =
-data.system || "All Systems Operational";
-
-
-
-if(data.blog){
-
-document.getElementById("blogStatus").innerText =
-data.blog.status;
-
-}
-
-
-if(data.tube){
-
-document.getElementById("tubeStatus").innerText =
-data.tube.status;
-
-}
-
-
-if(data.timer){
-
-document.getElementById("timerStatus").innerText =
-data.timer.status;
-
-}
-
-
-if(data.project){
-
-document.getElementById("projectStatus").innerText =
-data.project.status;
-
-}
-
-
-
-document.getElementById("sync").innerText =
-formatTime();
-
-
-
-}catch(e){
-
-console.log(e);
-
-}
-
-
-}
-
-
-
-load();
-
-setInterval(load,5000);
-
-function closeReport(){
-
-document.getElementById("reportBox").style.display="none";
-
-}
-</script>
 <div id="reportBox" class="report-box">
 
 <button class="close-btn" onclick="closeReport()">✕</button>
@@ -683,14 +397,286 @@ document.getElementById("reportBox").style.display="none";
 Googleフォームからご報告ください。
 </p>
 
-<a href="https://forms.gle/kRhMupMydqeaiFa98"
+<a
+href="https://forms.gle/kRhMupMydqeaiFa98"
 target="_blank"
 rel="noopener"
 class="report-btn">
+
 不具合を報告する
+
 </a>
 
 </div>
+
+
+<script>
+
+/* =========================
+   稼働状況JSON
+========================= */
+
+const url =
+"https://bainarinoakaunto.github.io/bainariweb/kadou.json";
+
+
+/* =========================
+   現在時刻
+========================= */
+
+function updateClock(){
+
+    const now = new Date();
+
+    const h = String(now.getHours()).padStart(2,"0");
+    const m = String(now.getMinutes()).padStart(2,"0");
+    const s = String(now.getSeconds()).padStart(2,"0");
+
+    document.getElementById("clock").innerText =
+        `${h}:${m}:${s}`;
+
+}
+
+updateClock();
+
+setInterval(updateClock,1000);
+
+
+/* =========================
+   ステータス表示
+========================= */
+
+function setStatus(elementId,status){
+
+    const element =
+        document.getElementById(elementId);
+
+    if(!element){
+        return;
+    }
+
+    element.innerText =
+        status || "状態不明";
+
+
+    /* 色をリセット */
+
+    element.classList.remove(
+        "normal",
+        "warning",
+        "error"
+    );
+
+
+    /* 正常 */
+
+    if(
+        status === "正常稼働中" ||
+        status === "稼働中" ||
+        status === "All Systems Operational"
+    ){
+
+        element.classList.add("normal");
+
+    }
+
+
+    /* 警告 */
+
+    else if(
+        status &&
+        (
+            status.includes("メンテナンス") ||
+            status.includes("遅延") ||
+            status.includes("一部")
+        )
+    ){
+
+        element.classList.add("warning");
+
+    }
+
+
+    /* 障害 */
+
+    else if(
+        status &&
+        (
+            status.includes("停止") ||
+            status.includes("障害") ||
+            status.includes("エラー")
+        )
+    ){
+
+        element.classList.add("error");
+
+    }
+
+}
+
+
+/* =========================
+   JSON読み込み
+========================= */
+
+async function load(){
+
+    try{
+
+        const res =
+            await fetch(
+                url + "?t=" + Date.now(),
+                {
+                    cache:"no-store"
+                }
+            );
+
+
+        if(!res.ok){
+
+            throw new Error(
+                "HTTP Error: " + res.status
+            );
+
+        }
+
+
+        const data =
+            await res.json();
+
+
+        /* システム全体 */
+
+        document.getElementById("system").innerText =
+            data.system ||
+            "All Systems Operational";
+
+
+        /* ブログ */
+
+        if(data.blog){
+
+            setStatus(
+                "blogStatus",
+                data.blog.status
+            );
+
+        }
+
+
+        /* =========================
+           株シミュレーター
+           ここが重要
+        ========================= */
+
+        if(data.kabu){
+
+            setStatus(
+                "kabu",
+                data.kabu.status
+            );
+
+        }
+        else{
+
+            setStatus(
+                "kabu",
+                "状態不明"
+            );
+
+        }
+
+
+        /* ryoチューブ */
+
+        if(data.tube){
+
+            setStatus(
+                "tubeStatus",
+                data.tube.status
+            );
+
+        }
+
+
+        /* ryoタイマー */
+
+        if(data.timer){
+
+            setStatus(
+                "timerStatus",
+                data.timer.status
+            );
+
+        }
+
+
+        /* プロジェクト */
+
+        if(data.project){
+
+            setStatus(
+                "projectStatus",
+                data.project.status
+            );
+
+        }
+
+
+        /* 最終同期時刻 */
+
+        document.getElementById("sync").innerText =
+            new Date().toLocaleTimeString(
+                "ja-JP"
+            );
+
+
+    }
+
+    catch(e){
+
+        console.error(
+            "Status JSONの読み込みに失敗しました:",
+            e
+        );
+
+
+        document.getElementById("system").innerText =
+            "ステータス情報を取得できません";
+
+
+        document.getElementById("sync").innerText =
+            "取得失敗";
+
+    }
+
+}
+
+
+/* 初回読み込み */
+
+load();
+
+
+/* 5秒ごとに更新 */
+
+setInterval(load,5000);
+
+
+/* =========================
+   不具合報告ボックス
+========================= */
+
+function closeReport(){
+
+    document.getElementById(
+        "reportBox"
+    ).style.display = "none";
+
+}
+
+</script>
+
 </body>
 
 </html>
