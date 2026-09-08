@@ -8,72 +8,275 @@
 
 <title>バイナリ[公式] | Link</title>
 
+<link rel="icon" type="image/png" href="243101166.png">
 
 <style>
 
 *{
+    box-sizing:border-box;
     margin:0;
     padding:0;
-    box-sizing:border-box;
 }
-
 
 body{
-    font-family:-apple-system,BlinkMacSystemFont,
-    "Segoe UI",sans-serif;
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Helvetica Neue",
+        Arial,
+        "Noto Sans JP",
+        sans-serif;
+
     color:white;
+    background:#111;
 }
 
 
-
-/* ナビ */
+/* =========================
+   HEADER / NAV
+========================= */
 
 header{
-    position:absolute;
+    position:fixed;
     top:0;
+    right:0;
     width:100%;
-    padding:25px;
-    z-index:10;
-}
 
+    padding:4px 15px;
+
+    z-index:1000;
+
+    display:flex;
+    justify-content:flex-end;
+    align-items:flex-start;
+}
 
 nav{
-    max-width:1200px;
-    margin:auto;
+    width:max-content;
+    max-width:calc(100vw - 30px);
+    height:58px;
+
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+
+    background:#006F68;
+
+    padding:0;
+    margin:0;
+
+    border-radius:8px;
+    overflow:hidden;
+
+    box-shadow:0 3px 12px rgba(0,0,0,.20);
+}
+
+nav a{
+    height:58px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    gap:6px;
+
+    padding:0 10px;
+
+    color:white;
+    text-decoration:none;
+
+    font-size:13px;
+    font-weight:bold;
+
+    white-space:nowrap;
+
+    transition:.2s;
+}
+
+nav a:hover{
+    background:rgba(255,255,255,.14);
 }
 
 
-nav a{
+/* =========================
+   ICON
+========================= */
+
+.icon{
+    width:19px;
+    height:19px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    flex-shrink:0;
+}
+
+.icon svg{
+    width:19px;
+    height:19px;
+
+    fill:none;
+
+    stroke:currentColor;
+
+    stroke-width:1.8;
+
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+
+/* =========================
+   MOBILE MENU BUTTON
+========================= */
+
+.menu-button{
+    display:none;
+
+    position:absolute;
+
+    top:4px;
+    right:15px;
+
+    width:50px;
+    height:50px;
+
+    border:0;
+    border-radius:8px;
+
+    background:#006F68;
     color:white;
-    text-decoration:none;
-    margin-right:25px;
+
+    cursor:pointer;
+
+    align-items:center;
+    justify-content:center;
+
+    flex-direction:column;
+
+    gap:3px;
+
+    box-shadow:0 3px 12px rgba(0,0,0,.20);
+}
+
+.hamburger{
+    width:21px;
+    height:16px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:space-between;
+}
+
+.hamburger span{
+    width:21px;
+    height:2px;
+
+    display:block;
+
+    background:white;
+
+    border-radius:2px;
+
+    transition:.25s;
+}
+
+.menu-text{
+    font-size:8px;
+    line-height:8px;
     font-weight:bold;
 }
 
+.menu-button.active .hamburger span:nth-child(1){
+    transform:translateY(7px) rotate(45deg);
+}
+
+.menu-button.active .hamburger span:nth-child(2){
+    opacity:0;
+}
+
+.menu-button.active .hamburger span:nth-child(3){
+    transform:translateY(-7px) rotate(-45deg);
+}
 
 
+/* =========================
+   MOBILE MENU
+========================= */
 
-/* メイン */
+.mobile-menu{
+    display:none;
+
+    position:absolute;
+
+    top:62px;
+    right:15px;
+
+    width:250px;
+
+    padding:5px;
+
+    background:#006F68;
+
+    border-radius:8px;
+
+    box-shadow:0 6px 20px rgba(0,0,0,.25);
+}
+
+.mobile-menu.active{
+    display:block;
+}
+
+.mobile-menu a{
+    width:100%;
+    min-height:47px;
+
+    padding:11px 14px;
+
+    display:flex;
+    align-items:center;
+
+    gap:12px;
+
+    color:white;
+    text-decoration:none;
+
+    font-size:14px;
+    font-weight:bold;
+
+    border-radius:5px;
+}
+
+.mobile-menu a:hover{
+    background:rgba(255,255,255,.14);
+}
+
+
+/* =========================
+   HERO
+========================= */
 
 .hero{
-
     min-height:100vh;
 
-    padding-top:120px;
+    padding-top:140px;
+    padding-bottom:70px;
 
     position:relative;
 
     overflow:hidden;
-
 }
 
 
-
-
-/* 背景動画 */
+/* =========================
+   BACKGROUND VIDEO
+========================= */
 
 .bg-video{
-
     position:absolute;
 
     width:100%;
@@ -85,16 +288,14 @@ nav a{
     left:0;
 
     z-index:-2;
-
 }
 
 
-
-
-/* 暗いフィルター */
+/* =========================
+   DARK FILTER
+========================= */
 
 .hero::before{
-
     content:"";
 
     position:absolute;
@@ -102,52 +303,48 @@ nav a{
     width:100%;
     height:100%;
 
-    background:rgba(0,0,0,0.45);
+    top:0;
+    left:0;
+
+    background:rgba(0,0,0,.45);
 
     z-index:-1;
-
 }
 
 
-
-
-/* タイトル */
+/* =========================
+   TITLE
+========================= */
 
 .content{
-
     text-align:center;
 
+    padding:0 20px;
 }
 
-
 .content h1{
-
     font-size:80px;
 
     letter-spacing:10px;
 
+    font-weight:800;
 }
 
-
-
 .content p{
-
     font-size:22px;
 
     margin-top:20px;
-
 }
 
 
-
-
-/* Link一覧 */
+/* =========================
+   LINKS
+========================= */
 
 .links{
-
     max-width:1100px;
 
-    margin:60px auto;
+    margin:60px auto 0;
 
     padding:20px;
 
@@ -156,22 +353,19 @@ nav a{
     grid-template-columns:repeat(3,1fr);
 
     gap:25px;
-
 }
 
 
-
 .link-box{
-
     display:block;
 
     text-decoration:none;
 
     color:white;
 
-    background:rgba(255,255,255,0.15);
+    background:rgba(255,255,255,.15);
 
-    border:1px solid rgba(255,255,255,0.3);
+    border:1px solid rgba(255,255,255,.3);
 
     border-radius:20px;
 
@@ -179,42 +373,39 @@ nav a{
 
     backdrop-filter:blur(10px);
 
+    -webkit-backdrop-filter:blur(10px);
+
     transition:.3s;
-
 }
-
-
 
 .link-box:hover{
-
     transform:translateY(-8px);
 
-    background:rgba(255,255,255,0.25);
-
+    background:rgba(255,255,255,.25);
 }
-
-
 
 .link-box h2{
-
     font-size:22px;
 
+    line-height:1.5;
 }
 
-
-
 .link-box p{
-
     margin-top:10px;
 
     opacity:.85;
 
+    font-size:16px;
+
+    line-height:1.6;
 }
 
 
+/* =========================
+   NEW
+========================= */
 
 .new{
-
     display:inline-block;
 
     background:red;
@@ -227,45 +418,111 @@ nav a{
 
     margin-bottom:10px;
 
+    font-weight:bold;
 }
 
 
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1100px){
+
+    nav a{
+        padding:0 7px;
+        font-size:11px;
+    }
+
+    .icon,
+    .icon svg{
+        width:17px;
+        height:17px;
+    }
+
+}
 
 
-/* スマホ */
+@media(max-width:900px){
+
+    .links{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
 
 @media(max-width:700px){
 
+    header{
+        padding:4px 8px;
+    }
 
-nav a{
+    nav{
+        display:none;
+    }
 
-    font-size:12px;
+    .menu-button{
+        display:flex;
+        right:8px;
+    }
 
-    margin-right:8px;
+    .mobile-menu{
+        top:62px;
+        right:8px;
+    }
+
+    .hero{
+        padding-top:105px;
+        padding-bottom:50px;
+    }
+
+    .content h1{
+        font-size:45px;
+
+        letter-spacing:6px;
+    }
+
+    .content p{
+        font-size:18px;
+
+        margin-top:15px;
+    }
+
+    .links{
+        grid-template-columns:1fr;
+
+        margin-top:35px;
+
+        padding:15px;
+    }
+
+    .link-box{
+        padding:25px 20px;
+
+        border-radius:16px;
+    }
+
+    .link-box h2{
+        font-size:20px;
+    }
 
 }
 
 
-.content h1{
+/* =========================
+   SMALL MOBILE
+========================= */
 
-    font-size:45px;
+@media(max-width:400px){
 
-}
+    .content h1{
+        font-size:38px;
+        letter-spacing:4px;
+    }
 
-
-.content p{
-
-    font-size:18px;
-
-}
-
-
-.links{
-
-    grid-template-columns:1fr;
-
-}
-
+    .content p{
+        font-size:16px;
+    }
 
 }
 
@@ -277,44 +534,354 @@ nav a{
 <body>
 
 
-
 <header>
+
+
+<!-- =========================
+     PC NAV
+========================= -->
 
 <nav>
 
-<a href="index.html">Home</a>
-<a href="about.html">About</a>
-<a href="projects.html">Projects</a>
-<a href="videos.html">利用ガイド</a>
-<a href="news.html">News</a>
-<a href="documents.html">Documents</a>
-<a href="link.html">Link</a>
-<a href="status.html">Status</a>
-<a href="contact.html">Contact</a>
+
+<a href="index.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M3 11.5L12 4l9 7.5"/>
+<path d="M5 10.5V20h14v-9.5"/>
+<path d="M9 20v-6h6v6"/>
+</svg>
+</span>
+
+Home
+
+</a>
+
+
+<a href="about.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<circle cx="12" cy="8" r="3"/>
+<path d="M5 21c0-3.5 3-6 7-6s7 2.5 7 6"/>
+</svg>
+</span>
+
+About
+
+</a>
+
+
+<a href="projects.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<rect x="3" y="4" width="18" height="16" rx="2"/>
+<path d="M8 9l3 3-3 3"/>
+<path d="M13 15h4"/>
+</svg>
+</span>
+
+Projects
+
+</a>
+
+
+<a href="videos.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="9"/>
+<path d="M10 8l6 4-6 4z"/>
+</svg>
+</span>
+
+利用ガイド
+
+</a>
+
+
+<a href="news.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M4 5h16v14H4z"/>
+<path d="M7 8h10"/>
+<path d="M7 12h10"/>
+<path d="M7 16h6"/>
+</svg>
+</span>
+
+News
+
+</a>
+
+
+<a href="documents.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M6 3h9l4 4v14H6z"/>
+<path d="M14 3v5h5"/>
+<path d="M9 13h6"/>
+<path d="M9 17h6"/>
+</svg>
+</span>
+
+Documents
+
+</a>
+
+
+<a href="link.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M10 13a5 5 0 0 0 7.1.1l2-2a5 5 0 0 0-7.1-7.1l-1.2 1.2"/>
+<path d="M14 11a5 5 0 0 0-7.1-.1l-2 2a5 5 0 0 0 7.1 7.1l1.2-1.2"/>
+</svg>
+</span>
+
+Link
+
+</a>
+
+
+<a href="status.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M4 19V9"/>
+<path d="M10 19V5"/>
+<path d="M16 19v-7"/>
+<path d="M22 19V3"/>
+</svg>
+</span>
+
+Status
+
+</a>
+
+
+<a href="contact.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<rect x="3" y="5" width="18" height="14" rx="2"/>
+<path d="M3 7l9 6 9-6"/>
+</svg>
+</span>
+
+Contact
+
+</a>
+
 
 </nav>
 
-</header>
 
+<!-- =========================
+     MOBILE BUTTON
+========================= -->
+
+<button
+class="menu-button"
+id="menuButton"
+aria-label="メニュー"
+aria-expanded="false"
+>
+
+<div class="hamburger">
+
+<span></span>
+<span></span>
+<span></span>
+
+</div>
+
+<span class="menu-text">MENU</span>
+
+</button>
+
+
+<!-- =========================
+     MOBILE NAV
+========================= -->
+
+<div
+class="mobile-menu"
+id="mobileMenu"
+>
+
+
+<a href="index.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M3 11.5L12 4l9 7.5"/>
+<path d="M5 10.5V20h14v-9.5"/>
+<path d="M9 20v-6h6v6"/>
+</svg>
+</span>
+
+Home
+
+</a>
+
+
+<a href="about.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<circle cx="12" cy="8" r="3"/>
+<path d="M5 21c0-3.5 3-6 7-6s7 2.5 7 6"/>
+</svg>
+</span>
+
+About
+
+</a>
+
+
+<a href="projects.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<rect x="3" y="4" width="18" height="16" rx="2"/>
+<path d="M8 9l3 3-3 3"/>
+<path d="M13 15h4"/>
+</svg>
+</span>
+
+Projects
+
+</a>
+
+
+<a href="videos.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="9"/>
+<path d="M10 8l6 4-6 4z"/>
+</svg>
+</span>
+
+利用ガイド
+
+</a>
+
+
+<a href="news.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M4 5h16v14H4z"/>
+<path d="M7 8h10"/>
+<path d="M7 12h10"/>
+<path d="M7 16h6"/>
+</svg>
+</span>
+
+News
+
+</a>
+
+
+<a href="documents.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M6 3h9l4 4v14H6z"/>
+<path d="M14 3v5h5"/>
+<path d="M9 13h6"/>
+<path d="M9 17h6"/>
+</svg>
+</span>
+
+Documents
+
+</a>
+
+
+<a href="link.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M10 13a5 5 0 0 0 7.1.1l2-2a5 5 0 0 0-7.1-7.1l-1.2 1.2"/>
+<path d="M14 11a5 5 0 0 0-7.1-.1l-2 2a5 5 0 0 0 7.1 7.1l1.2-1.2"/>
+</svg>
+</span>
+
+Link
+
+</a>
+
+
+<a href="status.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M4 19V9"/>
+<path d="M10 19V5"/>
+<path d="M16 19v-7"/>
+<path d="M22 19V3"/>
+</svg>
+</span>
+
+Status
+
+</a>
+
+
+<a href="contact.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<rect x="3" y="5" width="18" height="14" rx="2"/>
+<path d="M3 7l9 6 9-6"/>
+</svg>
+</span>
+
+Contact
+
+</a>
+
+
+</div>
+
+</header>
 
 
 
 <section class="hero">
 
 
-<video class="bg-video"
+<!-- =========================
+     BACKGROUND VIDEO
+========================= -->
+
+<video
+class="bg-video"
 autoplay
 muted
 loop
-playsinline>
+playsinline
+>
 
-<source src="https://bainarinoakaunto.github.io/2681/%E3%83%9B%E3%83%BC%E3%83%A0.MP4"
-type="video/mp4">
+<source
+src="https://bainarinoakaunto.github.io/2681/%E3%83%9B%E3%83%BC%E3%83%A0.MP4"
+type="video/mp4"
+>
 
 </video>
 
 
 
+<!-- =========================
+     TITLE
+========================= -->
 
 <div class="content">
 
@@ -330,13 +897,19 @@ BAINARI関連サイト一覧
 
 
 
+<!-- =========================
+     LINK LIST
+========================= -->
 
 <div class="links">
 
-<a class="link-box"
-href="https://bainarinoakaunto.github.io/kabusimyureta/"
-target="_blank">
 
+<a
+class="link-box"
+href="https://bainarinoakaunto.github.io/kabusimyureta/"
+target="_blank"
+rel="noopener noreferrer"
+>
 
 <span class="new">NEW</span>
 
@@ -345,29 +918,38 @@ target="_blank">
 </h2>
 
 <p>
-学習をサポートするWebアプリ</p>
+学習をサポートするWebアプリ
+</p>
 
 </a>
-    
-<a class="link-box"
-href="https://bainarinoakaunto.github.io/2681/Digitalstudy.html"
-target="_blank">
 
+
+
+<a
+class="link-box"
+href="https://bainarinoakaunto.github.io/2681/Digitalstudy.html"
+target="_blank"
+rel="noopener noreferrer"
+>
 
 <h2>
 Digital暗記カード
 </h2>
 
 <p>
-学習をサポートするWebアプリ</p>
+学習をサポートするWebアプリ
+</p>
 
 </a>
 
 
 
-<a class="link-box"
+<a
+class="link-box"
 href="https://bainarinoakaunto.github.io/2681/passseiseji.html"
-target="_blank">
+target="_blank"
+rel="noopener noreferrer"
+>
 
 <span class="new">NEW</span>
 
@@ -376,15 +958,19 @@ target="_blank">
 </h2>
 
 <p>
-パスワード作成ツール</p>
+パスワード作成ツール
+</p>
 
 </a>
 
 
 
-<a class="link-box"
+<a
+class="link-box"
 href="https://bainarinoakaunto.github.io/2681/calendar.html"
-target="_blank">
+target="_blank"
+rel="noopener noreferrer"
+>
 
 <span class="new">NEW</span>
 
@@ -393,106 +979,214 @@ target="_blank">
 </h2>
 
 <p>
-学習管理アプリ</p>
+学習管理アプリ
+</p>
 
 </a>
 
 
 
-<a class="link-box"
+<a
+class="link-box"
 href="https://ryop.blog.jp"
-target="_blank">
+target="_blank"
+rel="noopener noreferrer"
+>
 
 <h2>
 ryo運営ブログのすべて
 </h2>
 
 <p>
-ブログ一覧</p>
+ブログ一覧
+</p>
 
 </a>
 
 
 
-<a class="link-box"
+<a
+class="link-box"
 href="https://ryo15542.blog.jp"
-target="_blank">
+target="_blank"
+rel="noopener noreferrer"
+>
 
 <h2>
 RYO15542ブログ
 </h2>
 
 <p>
-個人ブログ</p>
+個人ブログ
+</p>
 
 </a>
 
 
 
-<a class="link-box"
+<a
+class="link-box"
 href="https://transceivermaniac.blog.jp"
-target="_blank">
+target="_blank"
+rel="noopener noreferrer"
+>
 
 <h2>
 無線マニアの集まり
 </h2>
 
 <p>
-無線関連サイト</p>
+無線関連サイト
+</p>
 
 </a>
 
 
 
-<a class="link-box"
+<a
+class="link-box"
 href="https://ryo15542web.my.canva.site/t5537"
-target="_blank">
+target="_blank"
+rel="noopener noreferrer"
+>
 
 <h2>
 特定トランシーバーの集まりホームページ
 </h2>
 
 <p>
-専用ホームページ</p>
+専用ホームページ
+</p>
 
 </a>
 
 
 
-<a class="link-box"
+<a
+class="link-box"
 href="https://timaryo15542.liblo.jp"
-target="_blank">
+target="_blank"
+rel="noopener noreferrer"
+>
 
 <h2>
 ryoタイマー
 </h2>
 
 <p>
-タイマーサービス</p>
+タイマーサービス
+</p>
 
 </a>
 
 
 
-<a class="link-box"
+<a
+class="link-box"
 href="https://canva.link/rao79nmoad3v4wi"
-target="_blank">
+target="_blank"
+rel="noopener noreferrer"
+>
 
 <h2>
 ブログ観覧方法説明特設サイト
 </h2>
 
 <p>
-利用方法説明</p>
+利用方法説明
+</p>
 
 </a>
-
 
 
 </div>
 
 
 </section>
+
+
+
+<script>
+
+/* =========================
+   MOBILE MENU
+========================= */
+
+const menuButton =
+document.getElementById("menuButton");
+
+const mobileMenu =
+document.getElementById("mobileMenu");
+
+
+menuButton.addEventListener(
+"click",
+function(){
+
+    mobileMenu.classList.toggle("active");
+
+    menuButton.classList.toggle("active");
+
+    const isOpen =
+        mobileMenu.classList.contains("active");
+
+    menuButton.setAttribute(
+        "aria-expanded",
+        isOpen
+    );
+
+});
+
+
+/* メニュー項目をクリックしたら閉じる */
+
+mobileMenu
+.querySelectorAll("a")
+.forEach(function(link){
+
+    link.addEventListener(
+    "click",
+    function(){
+
+        mobileMenu.classList.remove("active");
+
+        menuButton.classList.remove("active");
+
+        menuButton.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
+    });
+
+});
+
+
+/* メニュー外をクリックしたら閉じる */
+
+document.addEventListener(
+"click",
+function(event){
+
+    if(
+        !mobileMenu.contains(event.target) &&
+        !menuButton.contains(event.target)
+    ){
+
+        mobileMenu.classList.remove("active");
+
+        menuButton.classList.remove("active");
+
+        menuButton.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
+    }
+
+});
+
+</script>
 
 
 </body>
