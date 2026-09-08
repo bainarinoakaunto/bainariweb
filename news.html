@@ -2,598 +2,1174 @@
 <html lang="ja">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>バイナリ[公式] | News</title>
+<title>NEWS | BAINARI Official Website</title>
+
+<link rel="icon" type="image/png" href="243101166.png">
 
 <style>
 
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
 body{
-font-family:-apple-system,BlinkMacSystemFont,
-"Segoe UI",sans-serif;
-background:#f5f7f7;
-color:#222;
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Helvetica Neue",
+        Arial,
+        "Noto Sans JP",
+        sans-serif;
+    background:#f5f7f7;
+    color:#222;
 }
 
+/* =========================
+   HEADER / NAV
+========================= */
+
 header{
-background:#006f68;
-padding:25px;
+    position:fixed;
+    top:0;
+    right:0;
+    width:100%;
+    padding:4px 15px;
+    z-index:1000;
+
+    display:flex;
+    justify-content:flex-end;
+    align-items:flex-start;
 }
 
 nav{
-max-width:1200px;
-margin:auto;
+    width:max-content;
+    max-width:calc(100vw - 30px);
+    height:58px;
+
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+
+    background:#006F68;
+    padding:0;
+    margin:0;
+
+    border-radius:8px;
+    overflow:hidden;
+
+    box-shadow:0 3px 12px rgba(0,0,0,.20);
 }
 
 nav a{
-color:white;
-text-decoration:none;
-margin-right:25px;
-font-weight:bold;
+    height:58px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    gap:6px;
+    padding:0 10px;
+
+    color:white;
+    text-decoration:none;
+
+    font-size:13px;
+    font-weight:bold;
+    white-space:nowrap;
+
+    transition:.2s;
 }
 
+nav a:hover{
+    background:rgba(255,255,255,.14);
+}
+
+.icon{
+    width:19px;
+    height:19px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    flex-shrink:0;
+}
+
+.icon svg{
+    width:19px;
+    height:19px;
+
+    fill:none;
+    stroke:currentColor;
+    stroke-width:1.8;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+/* =========================
+   MOBILE MENU BUTTON
+========================= */
+
+.menu-button{
+    display:none;
+
+    position:absolute;
+    top:4px;
+    right:15px;
+
+    width:50px;
+    height:50px;
+
+    border:0;
+    border-radius:8px;
+
+    background:#006F68;
+    color:white;
+
+    cursor:pointer;
+
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    gap:3px;
+
+    box-shadow:0 3px 12px rgba(0,0,0,.20);
+}
+
+.hamburger{
+    width:21px;
+    height:16px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+}
+
+.hamburger span{
+    width:21px;
+    height:2px;
+
+    display:block;
+
+    background:white;
+    border-radius:2px;
+
+    transition:.25s;
+}
+
+.menu-text{
+    font-size:8px;
+    line-height:8px;
+    font-weight:bold;
+}
+
+.menu-button.active .hamburger span:nth-child(1){
+    transform:translateY(7px) rotate(45deg);
+}
+
+.menu-button.active .hamburger span:nth-child(2){
+    opacity:0;
+}
+
+.menu-button.active .hamburger span:nth-child(3){
+    transform:translateY(-7px) rotate(-45deg);
+}
+
+/* =========================
+   MOBILE MENU
+========================= */
+
+.mobile-menu{
+    display:none;
+
+    position:absolute;
+    top:62px;
+    right:15px;
+
+    width:250px;
+    padding:5px;
+
+    background:#006F68;
+
+    border-radius:8px;
+
+    box-shadow:0 6px 20px rgba(0,0,0,.25);
+}
+
+.mobile-menu.active{
+    display:block;
+}
+
+.mobile-menu a{
+    width:100%;
+    min-height:47px;
+
+    padding:11px 14px;
+
+    display:flex;
+    align-items:center;
+
+    gap:12px;
+
+    color:white;
+    text-decoration:none;
+
+    font-size:14px;
+    font-weight:bold;
+
+    border-radius:5px;
+}
+
+.mobile-menu a:hover{
+    background:rgba(255,255,255,.14);
+}
+
+/* =========================
+   MAIN
+========================= */
+
 main{
-max-width:1100px;
-margin:70px auto;
-padding:20px;
+    max-width:1100px;
+    margin:0 auto;
+
+    padding:140px 20px 70px;
 }
 
 .title{
-font-size:55px;
-color:#006f68;
-margin-bottom:40px;
+    font-size:55px;
+    font-weight:800;
+
+    color:#006F68;
+
+    margin-bottom:40px;
+
+    letter-spacing:2px;
 }
 
+/* =========================
+   NEWS
+========================= */
+
 .news{
-background:white;
-padding:35px;
-border-radius:20px;
-margin-bottom:30px;
-box-shadow:0 10px 30px rgba(0,0,0,0.08);
+    background:white;
+
+    padding:35px;
+
+    border-radius:20px;
+
+    margin-bottom:30px;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
 }
 
 .date{
-color:#079c94;
-font-weight:bold;
+    color:#079C94;
+
+    font-size:15px;
+    font-weight:bold;
+
+    margin-bottom:8px;
 }
 
 .news h1{
-color:#006f68;
-margin:15px 0;
-font-size:30px;
+    color:#006F68;
+
+    font-size:30px;
+
+    margin:15px 0 20px;
+
+    line-height:1.5;
 }
 
 .news h2{
-color:#006f68;
-margin:25px 0 15px;
+    color:#006F68;
+
+    font-size:21px;
+
+    margin:25px 0 15px;
 }
 
 .news p{
-font-size:18px;
-line-height:1.8;
-margin-bottom:15px;
+    font-size:18px;
+
+    line-height:1.8;
+
+    margin-bottom:15px;
 }
 
 .news ul{
-margin:10px 0 20px 25px;
-line-height:1.8;
-font-size:18px;
+    margin:10px 0 20px 25px;
+
+    font-size:18px;
+
+    line-height:1.8;
 }
 
 .news-info{
-background:#f0f8f7;
-border-left:5px solid #079c94;
-padding:15px 20px;
-margin-top:25px;
-border-radius:10px;
+    background:#f0f8f7;
+
+    border-left:5px solid #079C94;
+
+    padding:15px 20px;
+
+    margin-top:25px;
+
+    border-radius:10px;
 }
 
 .news-info p{
-margin-bottom:5px;
+    margin-bottom:5px;
 }
 
 .news-link{
-margin-top:20px;
+    margin-top:20px;
 }
 
 .news-link a{
-display:inline-block;
-padding:10px 25px;
-background:#079c94;
-color:white;
-border-radius:25px;
-text-decoration:none;
-font-weight:bold;
+    display:inline-block;
+
+    padding:10px 25px;
+
+    background:#079C94;
+    color:white;
+
+    border-radius:25px;
+
+    text-decoration:none;
+
+    font-weight:bold;
+
+    transition:.2s;
 }
 
 .news-link a:hover{
-background:#006f68;
+    background:#006F68;
 }
+
+/* =========================
+   FOOTER
+========================= */
 
 footer{
-text-align:center;
-padding:40px;
-color:#777;
+    text-align:center;
+
+    padding:40px;
+
+    color:#777;
+
+    font-size:14px;
 }
 
-@media(max-width:600px){
+/* =========================
+   RESPONSIVE
+========================= */
 
-nav a{
-display:inline-block;
-margin:5px 10px 5px 0;
+@media(max-width:1100px){
+
+    nav a{
+        padding:0 7px;
+        font-size:11px;
+    }
+
+    .icon,
+    .icon svg{
+        width:17px;
+        height:17px;
+    }
+
 }
 
-main{
-margin:40px auto;
-padding:15px;
-}
+@media(max-width:700px){
 
-.title{
-font-size:42px;
-}
+    header{
+        padding:4px 8px;
+    }
 
-.news{
-padding:25px 20px;
-}
+    nav{
+        display:none;
+    }
 
-.news h1{
-font-size:25px;
-}
+    .menu-button{
+        display:flex;
+        right:8px;
+    }
 
-.news p,
-.news ul{
-font-size:16px;
-}
+    .mobile-menu{
+        top:62px;
+        right:8px;
+    }
+
+    main{
+        padding:105px 15px 50px;
+    }
+
+    .title{
+        font-size:42px;
+        margin-bottom:30px;
+    }
+
+    .news{
+        padding:25px 20px;
+        border-radius:16px;
+        margin-bottom:20px;
+    }
+
+    .news h1{
+        font-size:25px;
+    }
+
+    .news h2{
+        font-size:19px;
+    }
+
+    .news p,
+    .news ul{
+        font-size:16px;
+    }
 
 }
 
 </style>
-
 </head>
+
 
 <body>
 
 <header>
 
-<nav>
-<a href="index.html">Home</a>
-<a href="about.html">About</a>
-<a href="projects.html">Projects</a>
-<a href="videos.html">利用ガイド</a>
-<a href="news.html">News</a>
-<a href="documents.html">Documents</a>
-<a href="link.html">Link</a>
-<a href="status.html">Status</a>
-<a href="contact.html">Contact</a>
-</nav>
+    <!-- PC NAV -->
+    <nav>
+
+        <a href="index.html">
+            <span class="icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M3 11.5L12 4l9 7.5"/>
+                    <path d="M5 10.5V20h14v-9.5"/>
+                    <path d="M9 20v-6h6v6"/>
+                </svg>
+            </span>
+            Home
+        </a>
+
+        <a href="about.html">
+            <span class="icon">
+                <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="8" r="3"/>
+                    <path d="M5 21c0-3.5 3-6 7-6s7 2.5 7 6"/>
+                </svg>
+            </span>
+            About
+        </a>
+
+        <a href="projects.html">
+            <span class="icon">
+                <svg viewBox="0 0 24 24">
+                    <rect x="3" y="4" width="18" height="16" rx="2"/>
+                    <path d="M8 9l3 3-3 3"/>
+                    <path d="M13 15h4"/>
+                </svg>
+            </span>
+            Projects
+        </a>
+
+        <a href="videos.html">
+            <span class="icon">
+                <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="9"/>
+                    <path d="M10 8l6 4-6 4z"/>
+                </svg>
+            </span>
+            利用ガイド
+        </a>
+
+        <a href="news.html">
+            <span class="icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M4 5h16v14H4z"/>
+                    <path d="M7 8h10"/>
+                    <path d="M7 12h10"/>
+                    <path d="M7 16h6"/>
+                </svg>
+            </span>
+            News
+        </a>
+
+        <a href="documents.html">
+            <span class="icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M6 3h9l4 4v14H6z"/>
+                    <path d="M14 3v5h5"/>
+                    <path d="M9 13h6"/>
+                    <path d="M9 17h6"/>
+                </svg>
+            </span>
+            Documents
+        </a>
+
+        <a href="link.html">
+            <span class="icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M10 13a5 5 0 0 0 7.1.1l2-2a5 5 0 0 0-7.1-7.1l-1.2 1.2"/>
+                    <path d="M14 11a5 5 0 0 0-7.1-.1l-2 2a5 5 0 0 0 7.1 7.1l1.2-1.2"/>
+                </svg>
+            </span>
+            Link
+        </a>
+
+        <a href="status.html">
+            <span class="icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M4 19V9"/>
+                    <path d="M10 19V5"/>
+                    <path d="M16 19v-7"/>
+                    <path d="M22 19V3"/>
+                </svg>
+            </span>
+            Status
+        </a>
+
+        <a href="contact.html">
+            <span class="icon">
+                <svg viewBox="0 0 24 24">
+                    <rect x="3" y="5" width="18" height="14" rx="2"/>
+                    <path d="M3 7l9 6 9-6"/>
+                </svg>
+            </span>
+            Contact
+        </a>
+
+    </nav>
+
+
+    <!-- MOBILE BUTTON -->
+
+    <button
+        class="menu-button"
+        id="menuButton"
+        aria-label="メニュー"
+        aria-expanded="false"
+    >
+
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <span class="menu-text">MENU</span>
+
+    </button>
+
+
+    <!-- MOBILE NAV -->
+
+    <div class="mobile-menu" id="mobileMenu">
+
+        <a href="index.html">
+            <span class="icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M3 11.5L12 4l9 7.5"/>
+                    <path d="M5 10.5V20h14v-9.5"/>
+                    <path d="M9 20v-6h6v6"/>
+                </svg>
+            </span>
+            Home
+        </a>
+
+        <a href="about.html">
+            <span class="icon">
+                <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="8" r="3"/>
+                    <path d="M5 21c0-3.5 3-6 7-6s7 2.5 7 6"/>
+                </svg>
+            </span>
+            About
+        </a>
+
+        <a href="projects.html">
+            <span class="icon">
+                <svg viewBox="0 0 24 24">
+                    <rect x="3" y="4" width="18" height="16" rx="2"/>
+                    <path d="M8 9l3 3-3 3"/>
+                    <path d="M13 15h4"/>
+                </svg>
+            </span>
+            Projects
+        </a>
+
+        <a href="videos.html">
+            <span class="icon">
+                <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="9"/>
+                    <path d="M10 8l6 4-6 4z"/>
+                </svg>
+            </span>
+            利用ガイド
+        </a>
+
+        <a href="news.html">
+            <span class="icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M4 5h16v14H4z"/>
+                    <path d="M7 8h10"/>
+                    <path d="M7 12h10"/>
+                    <path d="M7 16h6"/>
+                </svg>
+            </span>
+            News
+        </a>
+
+        <a href="documents.html">
+            <span class="icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M6 3h9l4 4v14H6z"/>
+                    <path d="M14 3v5h5"/>
+                    <path d="M9 13h6"/>
+                    <path d="M9 17h6"/>
+                </svg>
+            </span>
+            Documents
+        </a>
+
+        <a href="link.html">
+            <span class="icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M10 13a5 5 0 0 0 7.1.1l2-2a5 5 0 0 0-7.1-7.1l-1.2 1.2"/>
+                    <path d="M14 11a5 5 0 0 0-7.1-.1l-2 2a5 5 0 0 0 7.1 7.1l1.2-1.2"/>
+                </svg>
+            </span>
+            Link
+        </a>
+
+        <a href="status.html">
+            <span class="icon">
+                <svg viewBox="0 0 24 24">
+                    <path d="M4 19V9"/>
+                    <path d="M10 19V5"/>
+                    <path d="M16 19v-7"/>
+                    <path d="M22 19V3"/>
+                </svg>
+            </span>
+            Status
+        </a>
+
+        <a href="contact.html">
+            <span class="icon">
+                <svg viewBox="0 0 24 24">
+                    <rect x="3" y="5" width="18" height="14" rx="2"/>
+                    <path d="M3 7l9 6 9-6"/>
+                </svg>
+            </span>
+            Contact
+        </a>
+
+    </div>
 
 </header>
-<!-- 2026.09.08 -->
 
-<article class="news">
 
-<div class="title">
-NEWS
-</div>
-<!-- 2026.09.08 -->
+<main>
 
-<article class="news">
+    <div class="title">NEWS</div>
 
-<div class="date">
-2026.09.08 16:42
-</div>
 
-<h1>ホームページリニューアル 公開時間変更のお知らせ</h1>
+    <!-- 2026.09.08 16:42 -->
 
-<p>
-📢 お知らせ！
-</p>
+    <article class="news">
 
-<p>
-18:00から予定していたホームページのリニューアルですが、
-<strong>公開前の確認でちょっと不備が見つかったため、19:00に変更します！</strong>💦
-</p>
+<article class="news-item">
 
-<p>
-現在、修正作業をしています！
-</p>
+    <div class="news-date">
+        2026.09.08
+    </div>
 
-<p>
-楽しみにしてくれている皆さん、もう少しだけ待っててください🙏✨
-</p>
+    <h2>
+        ホームページリニューアル公開のお知らせ
+    </h2>
 
-<div class="news-info">
+    <div class="news-content">
 
-<p>
-<strong>変更後の公開時間：</strong>
-2026年9月8日 19:00
-</p>
+        <h3>📢 ホームページをリニューアルしました！</h3>
 
-<p>
-<strong>現在の状況：</strong>
-修正作業中
-</p>
+        <p>
+            本日、BAINARI公式ホームページのリニューアルを公開しました。
+        </p>
 
-</div>
+        <p>
+            デザインやページ構成を見直し、
+            より見やすく、使いやすいホームページを目指して
+            リニューアルしています。
+        </p>
 
-<p>
-19:00に新しいホームページを公開予定です！🎉
-</p>
+        <p>
+            今後も制作物や活動に関する情報を順次更新していきますので、
+            ぜひご覧ください！
+        </p>
 
-</article>
-<!-- 2026.09.07 -->
+        <div class="info-box">
 
-<article class="news">
+            <p>
+                <strong>公開日：</strong>2026年9月8日
+            </p>
 
-<div class="date">
-2026.09.07 23:34
-</div>
+            <p>
+                <strong>対象：</strong>BAINARI公式ホームページ
+            </p>
 
-<h1>ホームページリニューアルのお知らせ</h1>
+        </div>
 
-<p>
-皆さんにお知らせするのを忘れてました！💦
-完全にやらかしました😂
-</p>
+        <p class="thanks">
+            これからもBAINARIをよろしくお願いします！
+        </p>
 
-<p>
-<strong>2026年9月8日（火）18:00より、バイナリのホームページが生まれ変わります！✨</strong>
-</p>
-
-<p>
-デザインやページ構成を見直し、これまで以上に見やすく、
-分かりやすいホームページへリニューアルします。
-</p>
-
-<div class="news-info">
-
-<p>
-<strong>公開日時：</strong>
-2026年9月8日（火）18:00
-</p>
-
-</div>
-
-<p>
-新しくなったバイナリのホームページを、ぜひお楽しみに！🎉
-</p>
-
-</article>
-  
-<article class="news" id="oupf6t">
-
-  <div class="date">
-    2026.09.06
-  </div>
-
-  <h1>株シミュレーター 復旧のお知らせ</h1>
-
-  <p>
-    いつも株シミュレーターをご利用いただき、ありがとうございます。
-  </p>
-
-  <p>
-    先日より、株価変動サーバーのOS故障により
-    提供を停止しておりました株シミュレーターについて、
-    <strong>本日、復旧作業が完了し、サービスの提供を再開しました。</strong>
-  </p>
-
-  <p>
-    現在、通常どおりご利用いただけます。
-  </p>
-
-  <div class="news-info">
-    <p>
-      <strong>対象サービス：</strong>
-      株シミュレーター
-    </p>
-
-    <p>
-      <strong>現在の状況：</strong>
-      提供再開
-    </p>
-
-    <p>
-      <strong>障害原因：</strong>
-      株価変動サーバーのOS故障
-    </p>
-
-    <p>
-      <strong>提供停止期間：</strong>
-      2026年9月3日～2026年9月6日
-    </p>
-
-    <p>
-      <strong>復旧にかかった期間：</strong>
-      約3日間
-    </p>
-
-    <p>
-      <strong>復旧日：</strong>
-      2026年9月6日
-    </p>
-  </div>
-
-  <p>
-    今回の障害により、約3日間にわたりサービスを停止することとなり、
-    ご利用の皆様にはご不便・ご迷惑をおかけしましたことを
-    心よりお詫び申し上げます。
-  </p>
-
-  <p>
-    復旧をお待ちいただき、ありがとうございました。
-  </p>
-
-  <p>
-    今後も安定したサービスの提供に努めてまいります。
-    引き続き株シミュレーターをよろしくお願いいたします。
-  </p>
-
-  <p class="news-link">
-    <a href="https://bainarinoakaunto.github.io/kabusimyureta/kabu.html">
-      株シミュレーターを利用する
-    </a>
-  </p>
-
-</article>
-<!-- 2026.09.06 -->
-
-<article class="news">
-
-<div class="date">
-2026.09.06
-</div>
-
-<h1>株シミュレーター 復旧のめどについて</h1>
-
-<p>
-いつも株シミュレーターをご利用いただき、ありがとうございます。
-</p>
-
-<p>
-現在、株シミュレーターで使用している
-<strong>株価変動サーバーにOSの故障が発生したため</strong>、
-株シミュレーターの提供を一時停止しております。
-</p>
-
-<p>
-現在、復旧に向けた対応を進めており、
-<strong>復旧のめどが立ちました。</strong>
-</p>
-
-<p>
-現時点では、
-<strong>2026年9月10日（木）ごろの復旧を予定しております。</strong>
-</p>
-
-<p>
-なお、作業状況などにより、復旧予定日が変更となる場合があります。
-変更がありましたら、ホームページおよびLINEにて改めてお知らせいたします。
-</p>
-
-<p>
-ご利用いただいている皆様には、長らくご不便・ご迷惑をおかけしており、
-誠に申し訳ございません。
-</p>
-
-<div class="news-info">
-
-<p>
-<strong>現在の状況：</strong> 復旧作業中
-</p>
-
-<p>
-<strong>原因：</strong> 株価変動サーバーのOS故障
-</p>
-
-<p>
-<strong>復旧予定：</strong> 2026年9月10日（木）ごろ
-</p>
-
-</div>
-
-<p class="news-link">
-<a href="https://bainarinoakaunto.github.io/kabusimyureta/kabu.html">
-株シミュレーターのページはこちら
-</a>
-</p>
+    </div>
 
 </article>
 
 
-<!-- 2026.09.03 -->
+        <div class="date">2026.09.08 16:42</div>
 
-<article class="news">
+        <h1>
+            ホームページリニューアル<br>
+            公開時間変更のお知らせ
+        </h1>
 
-<div class="date">
-2026.09.03
-</div>
+        <p>
+            📢 お知らせ！
+        </p>
 
-<h1>株シミュレーター 提供停止のお知らせ</h1>
+        <p>
+            本日18:00に予定していたホームページリニューアルについて、
+            公開前の不備が確認されたため、公開時間を変更いたします。
+        </p>
 
-<p>
-現在、株シミュレーターで使用している
-<strong>株価変動サーバーにOSの故障が発生したため</strong>、
-株シミュレーターの提供を一時停止しております。
-</p>
+        <p>
+            現在、修正作業を行っています。
+            ご迷惑をおかけしますが、公開まで今しばらくお待ちください。
+        </p>
 
-<p>
-現在、復旧に向けた対応を進めておりますが、
-現時点では復旧日時は未定です。
-</p>
+        <div class="news-info">
 
-<p>
-ご利用いただいている皆様には、ご不便・ご迷惑をおかけすることとなり、
-誠に申し訳ございません。
-</p>
+            <p><strong>変更後の公開時間：</strong>2026年9月8日 19:00</p>
 
-<p>
-サービスの復旧状況および再開については、
-確認が取れ次第、ホームページにて改めてお知らせいたします。
-</p>
+            <p><strong>現在の状況：</strong>修正作業中</p>
 
-<div class="news-info">
+        </div>
 
-<p>
-<strong>現在の状況：</strong> 提供停止中
-</p>
+        <p>
+            修正が完了次第、予定どおり19:00の公開を目指します。
+        </p>
 
-<p>
-<strong>原因：</strong> 株価変動サーバーのOS故障
-</p>
-
-<p>
-<strong>復旧予定：</strong> 未定
-</p>
-
-</div>
-
-<p class="news-link">
-<a href="https://bainarinoakaunto.github.io/kabusimyureta/kabu.html">
-株シミュレーターのページはこちら
-</a>
-</p>
-
-</article>
+    </article>
 
 
-<!-- 2026.09.01 -->
+    <!-- 2026.09.07 23:34 -->
 
-<article class="news">
+    <article class="news">
 
-<div class="date">
-2026.09.01
-</div>
+        <div class="date">2026.09.07 23:34</div>
 
-<h1>るあ 活動休止のお知らせ</h1>
+        <h1>
+            ホームページリニューアルのお知らせ
+        </h1>
 
-<p>
-いつも、るあを応援していただきありがとうございます。
-</p>
+        <p>
+            ホームページリニューアルのお知らせをするのを忘れていました……！
+        </p>
 
-<p>
-このたび、るあは
-<strong>2026年9月1日より、活動を一時休止することとなりました。</strong>
-</p>
+        <p>
+            2026年9月8日18:00より、
+            ホームページをリニューアルします。
+        </p>
 
-<h2>休止する活動について</h2>
+        <p>
+            今回のリニューアルでは、デザインやページ構成などを見直し、
+            より見やすく、分かりやすいホームページを目指しています。
+        </p>
 
-<p>
-今回の活動休止に伴い、以下の活動を当面の間お休みさせていただきます。
-</p>
+        <div class="news-info">
 
-<ul>
-<li>動画・コンテンツの新規投稿</li>
-<li>ライブ配信・配信活動</li>
-<li>SNSでの通常の活動・投稿</li>
-<li>各種企画への参加</li>
-<li>イベント・その他の活動</li>
-<li>新規コンテンツの制作・公開</li>
-</ul>
+            <p>
+                <strong>公開日時：</strong>
+                2026年9月8日（火）18:00
+            </p>
 
-<h2>継続する活動について</h2>
+        </div>
 
-<p>
-一方で、活動休止期間中も
-<strong>GitHub上でのプロジェクトの更新・メンテナンス、ソースコードの修正、
-開発に関する作業などは継続して行う場合があります。</strong>
-</p>
+        <p>
+            新しくなったホームページをぜひご覧ください！
+        </p>
 
-<p>
-そのため、活動休止期間中であっても、GitHub上のプロジェクトに
-更新が行われる場合があります。
-これは通常の活動を再開したことを意味するものではありませんので、
-あらかじめご了承ください。
-</p>
-
-<h2>ファンの皆さまへ</h2>
-
-<p>
-これまで活動を続けてこられたのは、いつも応援してくださる
-ファンの皆さま、そして関係者の皆さまの支えがあったからです。
-本当にありがとうございます。
-</p>
-
-<p>
-これまでいただいたコメントやメッセージ、応援の言葉、
-そして活動を見守ってくださった時間の一つひとつが、
-活動を続ける大きな支えとなっていました。
-</p>
-
-<p>
-皆さまと一緒に過ごしてきた時間や、これまで作ってきた作品・コンテンツ、
-そしてたくさんの思い出を大切にしながら、活動を一度立ち止まって振り返り、
-今後について考える時間とさせていただきます。
-</p>
-
-<p>
-活動再開の時期や今後の活動については、決まり次第、
-当ホームページのNEWS等を通じて改めてお知らせいたします。
-</p>
-
-<p>
-突然のお知らせとなってしまい、皆さまにはご心配をおかけすることとなりますが、
-何卒ご理解いただけますと幸いです。
-</p>
-
-<p>
-これまで応援してくださった皆さま、本当にありがとうございます。
-</p>
-
-<p>
-これからも、るあを温かく見守っていただけますと幸いです。
-</p>
-
-</article>
+    </article>
 
 
-<!-- 2026.07.31 -->
+    <!-- 2026.09.06 復旧 -->
 
-<article class="news">
+    <article class="news">
 
-<div class="date">
-2026.07.31
-</div>
+        <div class="date">2026.09.06</div>
 
-<h1>LinkページとStatusページを追加しました。</h1>
+        <h1>
+            株シミュレーター 復旧のお知らせ
+        </h1>
 
-</article>
+        <p>
+            株シミュレーターをご利用いただいている皆さま、
+            お待たせしました。
+        </p>
+
+        <p>
+            株価変動サーバーのOS故障により一時的に提供を停止していましたが、
+            復旧作業が完了し、サービスの提供を再開しました。
+        </p>
+
+        <p>
+            現在は正常にご利用いただけます。
+        </p>
+
+        <div class="news-info">
+
+            <p><strong>対象サービス：</strong>株シミュレーター</p>
+
+            <p><strong>現在の状況：</strong>提供再開</p>
+
+            <p><strong>原因：</strong>株価変動サーバーのOS故障</p>
+
+            <p><strong>停止期間：</strong>2026年9月3日～2026年9月6日</p>
+
+            <p><strong>復旧期間：</strong>約3日間</p>
+
+            <p><strong>復旧日：</strong>2026年9月6日</p>
+
+        </div>
+
+        <p>
+            ご利用の皆さまにはご不便・ご迷惑をおかけしましたことを
+            お詫び申し上げます。
+        </p>
+
+        <p>
+            復旧までお待ちいただき、ありがとうございました。
+        </p>
+
+        <div class="news-link">
+
+            <a href="https://bainarinoakaunto.github.io/kabusimyureta/kabu.html">
+                株シミュレーターを利用する
+            </a>
+
+        </div>
+
+    </article>
 
 
-<!-- 2026.07.26 -->
+    <!-- 2026.09.06 復旧のめど -->
 
-<article class="news">
+    <article class="news">
 
-<div class="date">
-2026.07.26
-</div>
+        <div class="date">2026.09.06</div>
 
-<h1>BAINARI Official Website 開設</h1>
+        <h1>
+            株シミュレーター 復旧のめどについて
+        </h1>
 
-<p>
-前までホームページの公開に使用していたアカウントが
-不正アクセスされたため、新しいWEBを公開しました。
-</p>
+        <p>
+            株価変動サーバーのOS故障により、
+            株シミュレーターの提供を一時停止しています。
+        </p>
 
-</article>
+        <p>
+            現在も復旧作業を進めていますが、
+            復旧のめどが立ちましたのでお知らせします。
+        </p>
 
+        <p>
+            現時点では、
+            <strong>2026年9月10日（木）ごろ</strong>
+            の復旧を予定しています。
+        </p>
+
+        <p>
+            なお、作業状況によって予定が変更となる場合があります。
+        </p>
+
+        <div class="news-info">
+
+            <p><strong>現在の状況：</strong>復旧作業中</p>
+
+            <p><strong>原因：</strong>株価変動サーバーのOS故障</p>
+
+            <p><strong>復旧予定：</strong>2026年9月10日ごろ</p>
+
+        </div>
+
+        <div class="news-link">
+
+            <a href="https://bainarinoakaunto.github.io/kabusimyureta/kabu.html">
+                株シミュレーターのページはこちら
+            </a>
+
+        </div>
+
+    </article>
+
+
+    <!-- 2026.09.03 -->
+
+    <article class="news">
+
+        <div class="date">2026.09.03</div>
+
+        <h1>
+            株シミュレーター 提供停止のお知らせ
+        </h1>
+
+        <p>
+            株価変動サーバーのOS故障が発生したため、
+            株シミュレーターの提供を一時停止しています。
+        </p>
+
+        <p>
+            現在、復旧作業を進めています。
+        </p>
+
+        <p>
+            現時点では復旧日時は未定です。
+            復旧日時が確定しましたら、改めてお知らせします。
+        </p>
+
+        <div class="news-info">
+
+            <p><strong>現在の状況：</strong>提供停止中</p>
+
+            <p><strong>原因：</strong>株価変動サーバーのOS故障</p>
+
+            <p><strong>復旧：</strong>未定</p>
+
+        </div>
+
+        <div class="news-link">
+
+            <a href="https://bainarinoakaunto.github.io/kabusimyureta/kabu.html">
+                株シミュレーターのページはこちら
+            </a>
+
+        </div>
+
+    </article>
+
+
+    <!-- 2026.09.01 -->
+
+    <article class="news">
+
+        <div class="date">2026.09.01</div>
+
+        <h1>
+            るあ 活動休止のお知らせ
+        </h1>
+
+        <p>
+            2026年9月1日より、活動を一時休止します。
+        </p>
+
+
+        <h2>
+            休止する活動について
+        </h2>
+
+        <ul>
+
+            <li>動画・コンテンツの新規投稿</li>
+
+            <li>ライブ配信</li>
+
+            <li>通常のSNS活動・投稿</li>
+
+            <li>プロジェクトへの参加</li>
+
+            <li>イベント・その他の活動</li>
+
+            <li>新規コンテンツの制作・公開</li>
+
+        </ul>
+
+
+        <h2>
+            継続する活動について
+        </h2>
+
+        <ul>
+
+            <li>GitHubプロジェクトの更新・メンテナンス</li>
+
+            <li>ソースコードの修正</li>
+
+            <li>開発活動</li>
+
+        </ul>
+
+        <p>
+            なお、GitHub上での更新が行われている場合でも、
+            通常の活動を再開したことを意味するものではありません。
+        </p>
+
+
+        <h2>
+            ファンの皆さまへ
+        </h2>
+
+        <p>
+            これまで応援してくださった皆さま、
+            コメントやメッセージ、日頃からの応援を本当にありがとうございます。
+        </p>
+
+        <p>
+            今回の活動休止期間を、自分自身を見つめ直し、
+            これからについて考えるための時間として大切に過ごしていきます。
+        </p>
+
+        <p>
+            活動再開の時期が決まりましたら、
+            当ホームページのNEWSにてお知らせします。
+        </p>
+
+        <p>
+            ご心配・ご迷惑をおかけしますが、
+            これからも温かく見守っていただけるとうれしいです。
+        </p>
+
+        <p>
+            これまで本当にありがとうございました。
+        </p>
+
+    </article>
+
+
+    <!-- 2026.07.31 -->
+
+    <article class="news">
+
+        <div class="date">2026.07.31</div>
+
+        <h1>
+            LinkページとStatusページを追加しました。
+        </h1>
+
+        <p>
+            ホームページに新しく
+            LinkページとStatusページを追加しました。
+        </p>
+
+    </article>
+
+
+    <!-- 2026.07.26 -->
+
+    <article class="news">
+
+        <div class="date">2026.07.26</div>
+
+        <h1>
+            BAINARI Official Website 開設
+        </h1>
+
+        <p>
+            BAINARI Official Websiteを開設しました。
+        </p>
+
+        <p>
+            以前使用していたホームページアカウントが
+            不正アクセスを受けたため、新しいWebサイトを公開しました。
+        </p>
+
+        <p>
+            今後はこちらのホームページを中心に、
+            活動情報や制作物などをお知らせしていきます。
+        </p>
+
+    </article>
 
 </main>
 
+
 <footer>
-
-© BAINARI
-
+    © BAINARI
 </footer>
 
-</body>
 
+<script>
+
+const menuButton =
+    document.getElementById("menuButton");
+
+const mobileMenu =
+    document.getElementById("mobileMenu");
+
+
+menuButton.addEventListener("click", function(){
+
+    mobileMenu.classList.toggle("active");
+
+    menuButton.classList.toggle("active");
+
+    const isOpen =
+        mobileMenu.classList.contains("active");
+
+    menuButton.setAttribute(
+        "aria-expanded",
+        isOpen
+    );
+
+});
+
+
+mobileMenu
+    .querySelectorAll("a")
+    .forEach(function(link){
+
+        link.addEventListener("click", function(){
+
+            mobileMenu.classList.remove("active");
+
+            menuButton.classList.remove("active");
+
+            menuButton.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+        });
+
+    });
+
+
+document.addEventListener("click", function(event){
+
+    if(
+        !mobileMenu.contains(event.target) &&
+        !menuButton.contains(event.target)
+    ){
+
+        mobileMenu.classList.remove("active");
+
+        menuButton.classList.remove("active");
+
+        menuButton.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
+    }
+
+});
+
+</script>
+
+</body>
 </html>
