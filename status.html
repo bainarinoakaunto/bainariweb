@@ -8,100 +8,352 @@
 
 <title>バイナリ[公式] | Status</title>
 
+<link rel="icon" type="image/png" href="243101166.png">
+
 <style>
 
 *{
+    box-sizing:border-box;
     margin:0;
     padding:0;
-    box-sizing:border-box;
 }
 
 body{
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Helvetica Neue",
+        Arial,
+        "Noto Sans JP",
+        sans-serif;
+
     background:#f5f7f7;
     color:#222;
 }
 
-/* header */
+
+/* =========================
+   HEADER / NAV
+========================= */
 
 header{
-    background:#006f68;
-    padding:25px;
+    position:fixed;
+    top:0;
+    right:0;
+    width:100%;
+
+    padding:4px 15px;
+
+    z-index:1000;
+
+    display:flex;
+    justify-content:flex-end;
+    align-items:flex-start;
 }
 
 nav{
-    max-width:1200px;
-    margin:auto;
+    width:max-content;
+    max-width:calc(100vw - 30px);
+    height:58px;
+
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+
+    background:#006F68;
+
+    padding:0;
+    margin:0;
+
+    border-radius:8px;
+    overflow:hidden;
+
+    box-shadow:0 3px 12px rgba(0,0,0,.20);
 }
 
 nav a{
+    height:58px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    gap:6px;
+
+    padding:0 10px;
+
     color:white;
     text-decoration:none;
-    margin-right:25px;
+
+    font-size:13px;
+    font-weight:bold;
+
+    white-space:nowrap;
+
+    transition:.2s;
+}
+
+nav a:hover{
+    background:rgba(255,255,255,.14);
+}
+
+
+/* =========================
+   ICON
+========================= */
+
+.icon{
+    width:19px;
+    height:19px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    flex-shrink:0;
+}
+
+.icon svg{
+    width:19px;
+    height:19px;
+
+    fill:none;
+    stroke:currentColor;
+
+    stroke-width:1.8;
+
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+
+/* =========================
+   MOBILE MENU BUTTON
+========================= */
+
+.menu-button{
+    display:none;
+
+    position:absolute;
+    top:4px;
+    right:15px;
+
+    width:50px;
+    height:50px;
+
+    border:0;
+    border-radius:8px;
+
+    background:#006F68;
+    color:white;
+
+    cursor:pointer;
+
+    align-items:center;
+    justify-content:center;
+
+    flex-direction:column;
+    gap:3px;
+
+    box-shadow:0 3px 12px rgba(0,0,0,.20);
+}
+
+.hamburger{
+    width:21px;
+    height:16px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+}
+
+.hamburger span{
+    width:21px;
+    height:2px;
+
+    display:block;
+
+    background:white;
+
+    border-radius:2px;
+
+    transition:.25s;
+}
+
+.menu-text{
+    font-size:8px;
+    line-height:8px;
     font-weight:bold;
 }
 
-/* main */
+.menu-button.active .hamburger span:nth-child(1){
+    transform:translateY(7px) rotate(45deg);
+}
+
+.menu-button.active .hamburger span:nth-child(2){
+    opacity:0;
+}
+
+.menu-button.active .hamburger span:nth-child(3){
+    transform:translateY(-7px) rotate(-45deg);
+}
+
+
+/* =========================
+   MOBILE MENU
+========================= */
+
+.mobile-menu{
+    display:none;
+
+    position:absolute;
+    top:62px;
+    right:15px;
+
+    width:250px;
+    padding:5px;
+
+    background:#006F68;
+
+    border-radius:8px;
+
+    box-shadow:0 6px 20px rgba(0,0,0,.25);
+}
+
+.mobile-menu.active{
+    display:block;
+}
+
+.mobile-menu a{
+    width:100%;
+    min-height:47px;
+
+    padding:11px 14px;
+
+    display:flex;
+    align-items:center;
+
+    gap:12px;
+
+    color:white;
+    text-decoration:none;
+
+    font-size:14px;
+    font-weight:bold;
+
+    border-radius:5px;
+}
+
+.mobile-menu a:hover{
+    background:rgba(255,255,255,.14);
+}
+
+
+/* =========================
+   MAIN
+========================= */
 
 main{
     max-width:1100px;
-    margin:70px auto;
-    padding:20px;
+
+    margin:0 auto;
+
+    padding:140px 20px 70px;
 }
 
 .title{
     font-size:55px;
-    color:#006f68;
+
+    font-weight:800;
+
+    color:#006F68;
+
     margin-bottom:15px;
+
+    letter-spacing:2px;
 }
 
 .description{
     font-size:18px;
+
     margin-bottom:40px;
+
     color:#555;
+
+    line-height:1.7;
 }
 
-/* 情報 */
+
+/* =========================
+   META
+========================= */
 
 .meta{
     background:white;
+
     border-radius:20px;
+
     padding:20px;
+
     margin-bottom:30px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+
     display:flex;
+
     justify-content:space-between;
+
     flex-wrap:wrap;
+
     gap:10px;
+
     color:#555;
+
+    line-height:1.6;
 }
 
-/* status */
+
+/* =========================
+   STATUS BOX
+========================= */
 
 .status-box{
     background:white;
+
     border-radius:20px;
+
     padding:30px;
+
     margin-bottom:30px;
-    box-shadow:0 10px 30px rgba(0,0,0,0.08);
+
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
 }
 
 .status-top{
     display:flex;
+
     justify-content:space-between;
+
     align-items:center;
+
     flex-wrap:wrap;
+
     gap:10px;
 }
 
 .name{
     font-size:22px;
+
     font-weight:bold;
-    color:#006f68;
+
+    color:#006F68;
+
+    line-height:1.5;
 }
 
 .status{
     font-weight:bold;
+
     color:#16a34a;
 }
 
@@ -119,55 +371,75 @@ main{
 
 .info{
     margin-top:15px;
+
     color:#555;
 }
 
-/* footer */
 
-footer{
-    text-align:center;
-    padding:40px;
-    color:#777;
-}
-
-/* 不具合報告 */
+/* =========================
+   REPORT BOX
+========================= */
 
 .report-box{
     position:fixed;
+
     right:25px;
     bottom:25px;
+
     width:320px;
+
     background:#fff;
+
     border-radius:18px;
+
     padding:20px;
-    box-shadow:0 10px 30px rgba(0,0,0,.2);
-    border-top:5px solid #006f68;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.20);
+
+    border-top:5px solid #006F68;
+
     z-index:9999;
+
     animation:fadeIn .3s;
 }
 
 .report-box h3{
-    color:#006f68;
+    color:#006F68;
+
     margin-bottom:10px;
+
     font-size:20px;
+
+    line-height:1.4;
 }
 
 .report-box p{
     color:#555;
+
     font-size:14px;
+
     line-height:1.6;
+
     margin-bottom:15px;
 }
 
 .report-btn{
     display:block;
+
     text-align:center;
-    background:#006f68;
+
+    background:#006F68;
+
     color:#fff;
+
     text-decoration:none;
+
     padding:12px;
+
     border-radius:10px;
+
     font-weight:bold;
+
     transition:.3s;
 }
 
@@ -177,18 +449,29 @@ footer{
 
 .close-btn{
     position:absolute;
+
     top:10px;
     right:10px;
+
     border:none;
+
     background:none;
+
     font-size:20px;
+
     cursor:pointer;
+
     color:#666;
 }
 
 .close-btn:hover{
     color:#000;
 }
+
+
+/* =========================
+   ANIMATION
+========================= */
 
 @keyframes fadeIn{
 
@@ -204,25 +487,105 @@ footer{
 
 }
 
-@media(max-width:600px){
 
-    .title{
-        font-size:40px;
-    }
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    text-align:center;
+
+    padding:40px;
+
+    color:#777;
+
+    font-size:14px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1100px){
 
     nav a{
-        font-size:13px;
-        margin-right:10px;
+        padding:0 7px;
+        font-size:11px;
+    }
+
+    .icon,
+    .icon svg{
+        width:17px;
+        height:17px;
+    }
+
+}
+
+
+@media(max-width:700px){
+
+    header{
+        padding:4px 8px;
+    }
+
+    nav{
+        display:none;
+    }
+
+    .menu-button{
+        display:flex;
+        right:8px;
+    }
+
+    .mobile-menu{
+        top:62px;
+        right:8px;
+    }
+
+    main{
+        padding:105px 15px 50px;
+    }
+
+    .title{
+        font-size:42px;
+
+        margin-bottom:10px;
+    }
+
+    .description{
+        font-size:16px;
+
+        margin-bottom:30px;
+    }
+
+    .meta{
+        padding:18px;
+
+        border-radius:16px;
+
+        flex-direction:column;
+
+        gap:8px;
     }
 
     .status-box{
-        padding:20px;
+        padding:25px 20px;
+
+        border-radius:16px;
+
+        margin-bottom:20px;
+    }
+
+    .name{
+        font-size:19px;
     }
 
     .report-box{
         left:15px;
         right:15px;
         bottom:15px;
+
         width:auto;
     }
 
@@ -232,35 +595,343 @@ footer{
 
 </head>
 
+
 <body>
+
 
 <header>
 
+
+<!-- =========================
+     PC NAV
+========================= -->
+
 <nav>
 
-<a href="index.html">Home</a>
-<a href="about.html">About</a>
-<a href="projects.html">Projects</a>
-<a href="videos.html">利用ガイド</a>
-<a href="news.html">News</a>
-<a href="documents.html">Documents</a>
-<a href="link.html">Link</a>
-<a href="status.html">Status</a>
-<a href="contact.html">Contact</a>
+
+<a href="index.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M3 11.5L12 4l9 7.5"/>
+<path d="M5 10.5V20h14v-9.5"/>
+<path d="M9 20v-6h6v6"/>
+</svg>
+</span>
+
+Home
+
+</a>
+
+
+<a href="about.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<circle cx="12" cy="8" r="3"/>
+<path d="M5 21c0-3.5 3-6 7-6s7 2.5 7 6"/>
+</svg>
+</span>
+
+About
+
+</a>
+
+
+<a href="projects.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<rect x="3" y="4" width="18" height="16" rx="2"/>
+<path d="M8 9l3 3-3 3"/>
+<path d="M13 15h4"/>
+</svg>
+</span>
+
+Projects
+
+</a>
+
+
+<a href="videos.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="9"/>
+<path d="M10 8l6 4-6 4z"/>
+</svg>
+</span>
+
+利用ガイド
+
+</a>
+
+
+<a href="news.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M4 5h16v14H4z"/>
+<path d="M7 8h10"/>
+<path d="M7 12h10"/>
+<path d="M7 16h6"/>
+</svg>
+</span>
+
+News
+
+</a>
+
+
+<a href="documents.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M6 3h9l4 4v14H6z"/>
+<path d="M14 3v5h5"/>
+<path d="M9 13h6"/>
+<path d="M9 17h6"/>
+</svg>
+</span>
+
+Documents
+
+</a>
+
+
+<a href="link.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M10 13a5 5 0 0 0 7.1.1l2-2a5 5 0 0 0-7.1-7.1l-1.2 1.2"/>
+<path d="M14 11a5 5 0 0 0-7.1-.1l-2 2a5 5 0 0 0 7.1 7.1l1.2-1.2"/>
+</svg>
+</span>
+
+Link
+
+</a>
+
+
+<a href="status.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M4 19V9"/>
+<path d="M10 19V5"/>
+<path d="M16 19v-7"/>
+<path d="M22 19V3"/>
+</svg>
+</span>
+
+Status
+
+</a>
+
+
+<a href="contact.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<rect x="3" y="5" width="18" height="14" rx="2"/>
+<path d="M3 7l9 6 9-6"/>
+</svg>
+</span>
+
+Contact
+
+</a>
+
 
 </nav>
 
+
+<!-- =========================
+     MOBILE BUTTON
+========================= -->
+
+<button
+class="menu-button"
+id="menuButton"
+aria-label="メニュー"
+aria-expanded="false"
+>
+
+<div class="hamburger">
+
+<span></span>
+<span></span>
+<span></span>
+
+</div>
+
+<span class="menu-text">MENU</span>
+
+</button>
+
+
+<!-- =========================
+     MOBILE NAV
+========================= -->
+
+<div
+class="mobile-menu"
+id="mobileMenu"
+>
+
+
+<a href="index.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M3 11.5L12 4l9 7.5"/>
+<path d="M5 10.5V20h14v-9.5"/>
+<path d="M9 20v-6h6v6"/>
+</svg>
+</span>
+
+Home
+
+</a>
+
+
+<a href="about.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<circle cx="12" cy="8" r="3"/>
+<path d="M5 21c0-3.5 3-6 7-6s7 2.5 7 6"/>
+</svg>
+</span>
+
+About
+
+</a>
+
+
+<a href="projects.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<rect x="3" y="4" width="18" height="16" rx="2"/>
+<path d="M8 9l3 3-3 3"/>
+<path d="M13 15h4"/>
+</svg>
+</span>
+
+Projects
+
+</a>
+
+
+<a href="videos.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="9"/>
+<path d="M10 8l6 4-6 4z"/>
+</svg>
+</span>
+
+利用ガイド
+
+</a>
+
+
+<a href="news.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M4 5h16v14H4z"/>
+<path d="M7 8h10"/>
+<path d="M7 12h10"/>
+<path d="M7 16h6"/>
+</svg>
+</span>
+
+News
+
+</a>
+
+
+<a href="documents.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M6 3h9l4 4v14H6z"/>
+<path d="M14 3v5h5"/>
+<path d="M9 13h6"/>
+<path d="M9 17h6"/>
+</svg>
+</span>
+
+Documents
+
+</a>
+
+
+<a href="link.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M10 13a5 5 0 0 0 7.1.1l2-2a5 5 0 0 0-7.1-7.1l-1.2 1.2"/>
+<path d="M14 11a5 5 0 0 0-7.1-.1l-2 2a5 5 0 0 0 7.1 7.1l1.2-1.2"/>
+</svg>
+</span>
+
+Link
+
+</a>
+
+
+<a href="status.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M4 19V9"/>
+<path d="M10 19V5"/>
+<path d="M16 19v-7"/>
+<path d="M22 19V3"/>
+</svg>
+</span>
+
+Status
+
+</a>
+
+
+<a href="contact.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<rect x="3" y="5" width="18" height="14" rx="2"/>
+<path d="M3 7l9 6 9-6"/>
+</svg>
+</span>
+
+Contact
+
+</a>
+
+
+</div>
+
 </header>
 
+
+
 <main>
+
 
 <div class="title">
 STATUS
 </div>
 
+
 <div class="description">
 BAINARI関連サービスの稼働状況
 </div>
+
 
 <div class="meta">
 
@@ -281,7 +952,9 @@ Last Sync：
 </div>
 
 
-<!-- ブログ -->
+<!-- =========================
+     BLOG
+========================= -->
 
 <div class="status-box">
 
@@ -291,7 +964,10 @@ Last Sync：
 ブログ（ryo15542.blog.jp）
 </div>
 
-<div id="blogStatus" class="status">
+<div
+id="blogStatus"
+class="status"
+>
 読み込み中...
 </div>
 
@@ -300,7 +976,9 @@ Last Sync：
 </div>
 
 
-<!-- 株シミュレーター -->
+<!-- =========================
+     株シミュレーター
+========================= -->
 
 <div class="status-box">
 
@@ -310,7 +988,10 @@ Last Sync：
 株シミュレーター26.1
 </div>
 
-<div id="kabu" class="status">
+<div
+id="kabu"
+class="status"
+>
 読み込み中...
 </div>
 
@@ -319,7 +1000,9 @@ Last Sync：
 </div>
 
 
-<!-- ryoチューブ -->
+<!-- =========================
+     ryoチューブ
+========================= -->
 
 <div class="status-box">
 
@@ -329,7 +1012,10 @@ Last Sync：
 ryoチューブ
 </div>
 
-<div id="tubeStatus" class="status">
+<div
+id="tubeStatus"
+class="status"
+>
 読み込み中...
 </div>
 
@@ -338,7 +1024,9 @@ ryoチューブ
 </div>
 
 
-<!-- ryoタイマー -->
+<!-- =========================
+     ryoタイマー
+========================= -->
 
 <div class="status-box">
 
@@ -348,7 +1036,10 @@ ryoチューブ
 ryoタイマー
 </div>
 
-<div id="timerStatus" class="status">
+<div
+id="timerStatus"
+class="status"
+>
 読み込み中...
 </div>
 
@@ -357,7 +1048,9 @@ ryoタイマー
 </div>
 
 
-<!-- サポートサービス -->
+<!-- =========================
+     サポートサービス
+========================= -->
 
 <div class="status-box">
 
@@ -367,7 +1060,10 @@ ryoタイマー
 何でもプロジェクト各種サポートサービス
 </div>
 
-<div id="projectStatus" class="status">
+<div
+id="projectStatus"
+class="status"
+>
 読み込み中...
 </div>
 
@@ -375,7 +1071,10 @@ ryoタイマー
 
 </div>
 
+
 </main>
+
+
 
 <footer>
 
@@ -384,13 +1083,26 @@ ryoタイマー
 </footer>
 
 
-<!-- 不具合報告 -->
 
-<div id="reportBox" class="report-box">
+<!-- =========================
+     不具合報告
+========================= -->
 
-<button class="close-btn" onclick="closeReport()">✕</button>
+<div
+id="reportBox"
+class="report-box"
+>
 
-<h3>⚠️ 不具合を発見しましたか？</h3>
+<button
+class="close-btn"
+onclick="closeReport()"
+>
+✕
+</button>
+
+<h3>
+⚠️ 不具合を発見しましたか？
+</h3>
 
 <p>
 サービスに問題や表示の不具合を見つけた場合は、
@@ -400,8 +1112,9 @@ Googleフォームからご報告ください。
 <a
 href="https://forms.gle/kRhMupMydqeaiFa98"
 target="_blank"
-rel="noopener"
-class="report-btn">
+rel="noopener noreferrer"
+class="report-btn"
+>
 
 不具合を報告する
 
@@ -410,7 +1123,86 @@ class="report-btn">
 </div>
 
 
+
 <script>
+
+/* =========================
+   MOBILE MENU
+========================= */
+
+const menuButton =
+document.getElementById("menuButton");
+
+const mobileMenu =
+document.getElementById("mobileMenu");
+
+
+menuButton.addEventListener(
+    "click",
+    function(){
+
+        mobileMenu.classList.toggle("active");
+
+        menuButton.classList.toggle("active");
+
+        const isOpen =
+            mobileMenu.classList.contains("active");
+
+        menuButton.setAttribute(
+            "aria-expanded",
+            isOpen
+        );
+
+    }
+);
+
+
+mobileMenu
+    .querySelectorAll("a")
+    .forEach(function(link){
+
+        link.addEventListener(
+            "click",
+            function(){
+
+                mobileMenu.classList.remove("active");
+
+                menuButton.classList.remove("active");
+
+                menuButton.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+            }
+        );
+
+    });
+
+
+document.addEventListener(
+    "click",
+    function(event){
+
+        if(
+            !mobileMenu.contains(event.target) &&
+            !menuButton.contains(event.target)
+        ){
+
+            mobileMenu.classList.remove("active");
+
+            menuButton.classList.remove("active");
+
+            menuButton.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+        }
+
+    }
+);
+
 
 /* =========================
    稼働状況JSON
@@ -428,9 +1220,14 @@ function updateClock(){
 
     const now = new Date();
 
-    const h = String(now.getHours()).padStart(2,"0");
-    const m = String(now.getMinutes()).padStart(2,"0");
-    const s = String(now.getSeconds()).padStart(2,"0");
+    const h =
+        String(now.getHours()).padStart(2,"0");
+
+    const m =
+        String(now.getMinutes()).padStart(2,"0");
+
+    const s =
+        String(now.getSeconds()).padStart(2,"0");
 
     document.getElementById("clock").innerText =
         `${h}:${m}:${s}`;
@@ -455,11 +1252,10 @@ function setStatus(elementId,status){
         return;
     }
 
+
     element.innerText =
         status || "状態不明";
 
-
-    /* 色をリセット */
 
     element.classList.remove(
         "normal",
@@ -562,12 +1358,17 @@ async function load(){
             );
 
         }
+        else{
+
+            setStatus(
+                "blogStatus",
+                "状態不明"
+            );
+
+        }
 
 
-        /* =========================
-           株シミュレーター
-           ここが重要
-        ========================= */
+        /* 株シミュレーター */
 
         if(data.kabu){
 
@@ -597,6 +1398,14 @@ async function load(){
             );
 
         }
+        else{
+
+            setStatus(
+                "tubeStatus",
+                "状態不明"
+            );
+
+        }
 
 
         /* ryoタイマー */
@@ -606,6 +1415,14 @@ async function load(){
             setStatus(
                 "timerStatus",
                 data.timer.status
+            );
+
+        }
+        else{
+
+            setStatus(
+                "timerStatus",
+                "状態不明"
             );
 
         }
@@ -621,6 +1438,14 @@ async function load(){
             );
 
         }
+        else{
+
+            setStatus(
+                "projectStatus",
+                "状態不明"
+            );
+
+        }
 
 
         /* 最終同期時刻 */
@@ -630,8 +1455,8 @@ async function load(){
                 "ja-JP"
             );
 
-
     }
+
 
     catch(e){
 
@@ -648,6 +1473,32 @@ async function load(){
         document.getElementById("sync").innerText =
             "取得失敗";
 
+
+        setStatus(
+            "blogStatus",
+            "状態不明"
+        );
+
+        setStatus(
+            "kabu",
+            "状態不明"
+        );
+
+        setStatus(
+            "tubeStatus",
+            "状態不明"
+        );
+
+        setStatus(
+            "timerStatus",
+            "状態不明"
+        );
+
+        setStatus(
+            "projectStatus",
+            "状態不明"
+        );
+
     }
 
 }
@@ -660,7 +1511,10 @@ load();
 
 /* 5秒ごとに更新 */
 
-setInterval(load,5000);
+setInterval(
+    load,
+    5000
+);
 
 
 /* =========================
@@ -676,6 +1530,7 @@ function closeReport(){
 }
 
 </script>
+
 
 </body>
 
