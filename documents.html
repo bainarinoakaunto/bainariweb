@@ -8,166 +8,422 @@
 
 <title>バイナリ[公式] | Documents</title>
 
+<link rel="icon" type="image/png" href="243101166.png">
 
 <style>
 
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
-
 
 body{
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Helvetica Neue",
+        Arial,
+        "Noto Sans JP",
+        sans-serif;
 
-font-family:-apple-system,BlinkMacSystemFont,
-"Segoe UI",sans-serif;
-
-background:#f5f7f7;
-
-color:#222;
-
+    background:#f5f7f7;
+    color:#222;
 }
 
 
+/* =========================
+   HEADER / NAV
+========================= */
 
 header{
+    position:fixed;
+    top:0;
+    right:0;
+    width:100%;
 
-background:#006f68;
+    padding:4px 15px;
 
-padding:25px;
+    z-index:1000;
 
+    display:flex;
+    justify-content:flex-end;
+    align-items:flex-start;
 }
-
 
 nav{
+    width:max-content;
+    max-width:calc(100vw - 30px);
+    height:58px;
 
-max-width:1200px;
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
 
-margin:auto;
+    background:#006F68;
 
+    padding:0;
+    margin:0;
+
+    border-radius:8px;
+    overflow:hidden;
+
+    box-shadow:0 3px 12px rgba(0,0,0,.20);
 }
-
 
 nav a{
+    height:58px;
 
-color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
 
-text-decoration:none;
+    gap:6px;
 
-margin-right:25px;
+    padding:0 10px;
 
-font-weight:bold;
+    color:white;
+    text-decoration:none;
 
+    font-size:13px;
+    font-weight:bold;
+
+    white-space:nowrap;
+
+    transition:.2s;
+}
+
+nav a:hover{
+    background:rgba(255,255,255,.14);
 }
 
 
+/* =========================
+   ICON
+========================= */
+
+.icon{
+    width:19px;
+    height:19px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    flex-shrink:0;
+}
+
+.icon svg{
+    width:19px;
+    height:19px;
+
+    fill:none;
+
+    stroke:currentColor;
+
+    stroke-width:1.8;
+
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
 
 
+/* =========================
+   MOBILE MENU BUTTON
+========================= */
+
+.menu-button{
+    display:none;
+
+    position:absolute;
+
+    top:4px;
+    right:15px;
+
+    width:50px;
+    height:50px;
+
+    border:0;
+    border-radius:8px;
+
+    background:#006F68;
+    color:white;
+
+    cursor:pointer;
+
+    align-items:center;
+    justify-content:center;
+
+    flex-direction:column;
+
+    gap:3px;
+
+    box-shadow:0 3px 12px rgba(0,0,0,.20);
+}
+
+.hamburger{
+    width:21px;
+    height:16px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:space-between;
+}
+
+.hamburger span{
+    width:21px;
+    height:2px;
+
+    display:block;
+
+    background:white;
+
+    border-radius:2px;
+
+    transition:.25s;
+}
+
+.menu-text{
+    font-size:8px;
+    line-height:8px;
+    font-weight:bold;
+}
+
+
+.menu-button.active .hamburger span:nth-child(1){
+    transform:translateY(7px) rotate(45deg);
+}
+
+.menu-button.active .hamburger span:nth-child(2){
+    opacity:0;
+}
+
+.menu-button.active .hamburger span:nth-child(3){
+    transform:translateY(-7px) rotate(-45deg);
+}
+
+
+/* =========================
+   MOBILE MENU
+========================= */
+
+.mobile-menu{
+    display:none;
+
+    position:absolute;
+
+    top:62px;
+    right:15px;
+
+    width:250px;
+
+    padding:5px;
+
+    background:#006F68;
+
+    border-radius:8px;
+
+    box-shadow:0 6px 20px rgba(0,0,0,.25);
+}
+
+.mobile-menu.active{
+    display:block;
+}
+
+.mobile-menu a{
+    width:100%;
+    min-height:47px;
+
+    padding:11px 14px;
+
+    display:flex;
+    align-items:center;
+
+    gap:12px;
+
+    color:white;
+    text-decoration:none;
+
+    font-size:14px;
+    font-weight:bold;
+
+    border-radius:5px;
+}
+
+.mobile-menu a:hover{
+    background:rgba(255,255,255,.14);
+}
+
+
+/* =========================
+   MAIN
+========================= */
 
 main{
+    max-width:1100px;
 
-max-width:1100px;
+    margin:0 auto;
 
-margin:70px auto;
-
-padding:20px;
-
+    padding:140px 20px 70px;
 }
-
-
 
 .title{
+    font-size:55px;
 
-font-size:55px;
+    font-weight:800;
 
-color:#006f68;
+    color:#006F68;
 
-margin-bottom:40px;
+    margin-bottom:40px;
 
+    letter-spacing:2px;
 }
 
 
-
-
+/* =========================
+   DOCUMENT
+========================= */
 
 .document{
+    background:white;
 
-background:white;
+    padding:35px;
 
-padding:30px;
+    border-radius:20px;
 
-border-radius:20px;
+    margin-bottom:25px;
 
-margin-bottom:25px;
-
-box-shadow:0 10px 30px rgba(0,0,0,0.08);
-
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
 }
-
-
 
 .document h2{
+    color:#006F68;
 
-color:#006f68;
+    font-size:28px;
 
-margin-bottom:15px;
-
+    margin-bottom:15px;
 }
-
-
 
 .document p{
+    font-size:18px;
 
-font-size:18px;
+    line-height:1.8;
 
-line-height:1.8;
-
+    margin-bottom:15px;
 }
 
 
-
+/* =========================
+   PDF BUTTON
+========================= */
 
 .pdf-button{
+    display:inline-block;
 
-display:inline-block;
+    margin-top:20px;
 
-margin-top:20px;
+    background:#079C94;
 
-background:#079c94;
+    color:white;
 
-color:white;
+    padding:12px 35px;
 
-padding:12px 35px;
+    border-radius:25px;
 
-border-radius:25px;
+    text-decoration:none;
 
-text-decoration:none;
+    font-weight:bold;
 
+    transition:.2s;
 }
-
-
 
 .pdf-button:hover{
-
-background:#006f68;
-
+    background:#006F68;
 }
 
 
-
-
+/* =========================
+   FOOTER
+========================= */
 
 footer{
+    text-align:center;
 
-text-align:center;
+    padding:40px;
 
-padding:40px;
+    color:#777;
 
-color:#777;
+    font-size:14px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1100px){
+
+    nav a{
+        padding:0 7px;
+        font-size:11px;
+    }
+
+    .icon,
+    .icon svg{
+        width:17px;
+        height:17px;
+    }
 
 }
 
+
+@media(max-width:700px){
+
+    header{
+        padding:4px 8px;
+    }
+
+    nav{
+        display:none;
+    }
+
+    .menu-button{
+        display:flex;
+        right:8px;
+    }
+
+    .mobile-menu{
+        top:62px;
+        right:8px;
+    }
+
+    main{
+        padding:105px 15px 50px;
+    }
+
+    .title{
+        font-size:42px;
+
+        margin-bottom:30px;
+    }
+
+    .document{
+        padding:25px 20px;
+
+        border-radius:16px;
+    }
+
+    .document h2{
+        font-size:24px;
+    }
+
+    .document p{
+        font-size:16px;
+    }
+
+}
 
 </style>
 
@@ -177,88 +433,359 @@ color:#777;
 <body>
 
 
-
 <header>
 
 
+<!-- =========================
+     PC NAV
+========================= -->
+
 <nav>
 
-<a href="index.html">Home</a>
 
-<a href="about.html">About</a>
+<a href="index.html">
 
-<a href="projects.html">Projects</a>
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M3 11.5L12 4l9 7.5"/>
+<path d="M5 10.5V20h14v-9.5"/>
+<path d="M9 20v-6h6v6"/>
+</svg>
+</span>
 
-<a href="videos.html">利用ガイド</a>
+Home
 
-<a href="news.html">News</a>
+</a>
 
-<a href="documents.html">Documents</a>
-<a href="link.html">Link</a>
-<a href="status.html">Status</a>
-<a href="contact.html">Contact</a>
+
+<a href="about.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<circle cx="12" cy="8" r="3"/>
+<path d="M5 21c0-3.5 3-6 7-6s7 2.5 7 6"/>
+</svg>
+</span>
+
+About
+
+</a>
+
+
+<a href="projects.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<rect x="3" y="4" width="18" height="16" rx="2"/>
+<path d="M8 9l3 3-3 3"/>
+<path d="M13 15h4"/>
+</svg>
+</span>
+
+Projects
+
+</a>
+
+
+<a href="videos.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="9"/>
+<path d="M10 8l6 4-6 4z"/>
+</svg>
+</span>
+
+利用ガイド
+
+</a>
+
+
+<a href="news.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M4 5h16v14H4z"/>
+<path d="M7 8h10"/>
+<path d="M7 12h10"/>
+<path d="M7 16h6"/>
+</svg>
+</span>
+
+News
+
+</a>
+
+
+<a href="documents.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M6 3h9l4 4v14H6z"/>
+<path d="M14 3v5h5"/>
+<path d="M9 13h6"/>
+<path d="M9 17h6"/>
+</svg>
+</span>
+
+Documents
+
+</a>
+
+
+<a href="link.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M10 13a5 5 0 0 0 7.1.1l2-2a5 5 0 0 0-7.1-7.1l-1.2 1.2"/>
+<path d="M14 11a5 5 0 0 0-7.1-.1l-2 2a5 5 0 0 0 7.1 7.1l1.2-1.2"/>
+</svg>
+</span>
+
+Link
+
+</a>
+
+
+<a href="status.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M4 19V9"/>
+<path d="M10 19V5"/>
+<path d="M16 19v-7"/>
+<path d="M22 19V3"/>
+</svg>
+</span>
+
+Status
+
+</a>
+
+
+<a href="contact.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<rect x="3" y="5" width="18" height="14" rx="2"/>
+<path d="M3 7l9 6 9-6"/>
+</svg>
+</span>
+
+Contact
+
+</a>
+
 
 </nav>
 
 
-</header>
+<!-- =========================
+     MOBILE BUTTON
+========================= -->
 
+<button
+class="menu-button"
+id="menuButton"
+aria-label="メニュー"
+aria-expanded="false"
+>
 
+<div class="hamburger">
 
-
-
-<main>
-
-
-<div class="title">
-
-DOCUMENTS
+<span></span>
+<span></span>
+<span></span>
 
 </div>
 
+<span class="menu-text">MENU</span>
+
+</button>
 
 
+<!-- =========================
+     MOBILE NAV
+========================= -->
+
+<div class="mobile-menu" id="mobileMenu">
 
 
-<div class="document">
+<a href="index.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M3 11.5L12 4l9 7.5"/>
+<path d="M5 10.5V20h14v-9.5"/>
+<path d="M9 20v-6h6v6"/>
+</svg>
+</span>
+
+Home
+
+</a>
 
 
-<h2>
-ありません
-</h2>
+<a href="about.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<circle cx="12" cy="8" r="3"/>
+<path d="M5 21c0-3.5 3-6 7-6s7 2.5 7 6"/>
+</svg>
+</span>
+
+About
+
+</a>
 
 
-<p>
+<a href="projects.html">
 
-BAINARIの活動内容や制作について
-紹介する場所です。
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<rect x="3" y="4" width="18" height="16" rx="2"/>
+<path d="M8 9l3 3-3 3"/>
+<path d="M13 15h4"/>
+</svg>
+</span>
 
-</p>
+Projects
+
+</a>
 
 
-<a class="pdf-button"
-href=""
-target="_blank">
+<a href="videos.html">
 
-PDFを見る（動作しません）
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="9"/>
+<path d="M10 8l6 4-6 4z"/>
+</svg>
+</span>
+
+利用ガイド
+
+</a>
+
+
+<a href="news.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M4 5h16v14H4z"/>
+<path d="M7 8h10"/>
+<path d="M7 12h10"/>
+<path d="M7 16h6"/>
+</svg>
+</span>
+
+News
+
+</a>
+
+
+<a href="documents.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M6 3h9l4 4v14H6z"/>
+<path d="M14 3v5h5"/>
+<path d="M9 13h6"/>
+<path d="M9 17h6"/>
+</svg>
+</span>
+
+Documents
+
+</a>
+
+
+<a href="link.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M10 13a5 5 0 0 0 7.1.1l2-2a5 5 0 0 0-7.1-7.1l-1.2 1.2"/>
+<path d="M14 11a5 5 0 0 0-7.1-.1l-2 2a5 5 0 0 0 7.1 7.1l1.2-1.2"/>
+</svg>
+</span>
+
+Link
+
+</a>
+
+
+<a href="status.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M4 19V9"/>
+<path d="M10 19V5"/>
+<path d="M16 19v-7"/>
+<path d="M22 19V3"/>
+</svg>
+</span>
+
+Status
+
+</a>
+
+
+<a href="contact.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<rect x="3" y="5" width="18" height="14" rx="2"/>
+<path d="M3 7l9 6 9-6"/>
+</svg>
+</span>
+
+Contact
 
 </a>
 
 
 </div>
 
+</header>
 
 
 
+<!-- =========================
+     MAIN
+========================= -->
+
+<main>
 
 
+<div class="title">
+DOCUMENTS
+</div>
 
 
+<div class="document">
+
+<h2>
+ありません
+</h2>
+
+<p>
+BAINARIの活動内容や制作について
+紹介する場所です。
+</p>
+
+<a
+class="pdf-button"
+href=""
+target="_blank"
+>
+PDFを見る（動作しません）
+</a>
+
+</div>
 
 
 </main>
-
-
 
 
 
@@ -268,6 +795,75 @@ PDFを見る（動作しません）
 
 </footer>
 
+
+
+<script>
+
+const menuButton =
+document.getElementById("menuButton");
+
+const mobileMenu =
+document.getElementById("mobileMenu");
+
+
+menuButton.addEventListener("click",function(){
+
+mobileMenu.classList.toggle("active");
+
+menuButton.classList.toggle("active");
+
+const isOpen =
+mobileMenu.classList.contains("active");
+
+menuButton.setAttribute(
+"aria-expanded",
+isOpen
+);
+
+});
+
+
+mobileMenu
+.querySelectorAll("a")
+.forEach(function(link){
+
+link.addEventListener("click",function(){
+
+mobileMenu.classList.remove("active");
+
+menuButton.classList.remove("active");
+
+menuButton.setAttribute(
+"aria-expanded",
+"false"
+);
+
+});
+
+});
+
+
+document.addEventListener("click",function(event){
+
+if(
+!mobileMenu.contains(event.target) &&
+!menuButton.contains(event.target)
+){
+
+mobileMenu.classList.remove("active");
+
+menuButton.classList.remove("active");
+
+menuButton.setAttribute(
+"aria-expanded",
+"false"
+);
+
+}
+
+});
+
+</script>
 
 
 </body>
