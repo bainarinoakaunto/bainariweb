@@ -24,7 +24,7 @@ body{
 }
 
 /* =========================
-   HEADER / NAV
+   HEADER
 ========================= */
 
 header{
@@ -47,8 +47,6 @@ nav{
     align-items:center;
     justify-content:flex-end;
     background:#006F68;
-    padding:0;
-    margin:0;
     border-radius:8px;
     overflow:hidden;
     box-shadow:0 3px 12px rgba(0,0,0,.20);
@@ -97,7 +95,7 @@ nav a:hover{
 }
 
 /* =========================
-   MOBILE MENU BUTTON
+   MOBILE BUTTON
 ========================= */
 
 .menu-button{
@@ -216,7 +214,7 @@ main{
 }
 
 /* =========================
-   Q&A LIST
+   Q&A
 ========================= */
 
 .qa-list{
@@ -225,17 +223,16 @@ main{
     gap:0;
 }
 
-/* 1件のQ&A */
-
 .qa-item{
     background:white;
-    padding:18px 5px;
+    padding:20px 22px;
     border-bottom:1px solid #ddd;
-    box-shadow:none;
-    border-radius:0;
+    transition:.2s;
 }
 
-/* 質問リンク */
+.qa-item:hover{
+    background:#fafdfd;
+}
 
 .qa-link{
     display:block;
@@ -244,45 +241,39 @@ main{
     cursor:pointer;
 }
 
-.qa-link:hover .question{
-    color:#006F68;
-}
-
-/* 質問 */
-
 .question{
-    color:#222;
-    font-size:16px;
-    font-weight:400;
+    font-size:17px;
+    font-weight:600;
     line-height:1.6;
-    margin-bottom:6px;
-
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
-
-    transition:.2s;
 }
 
 .question::before{
-    content:"";
-    margin-right:0;
+    content:"Q.";
+    color:#006F68;
+    font-weight:700;
+    margin-right:8px;
 }
 
-/* 日付 */
+.from{
+    margin-top:7px;
+    color:#555;
+    font-size:13px;
+}
 
-.answer-date{
-    margin:0;
-    padding:0;
-    border:0;
-    color:#777;
-    font-size:14px;
+.from::before{
+    content:"From ";
+    color:#006F68;
     font-weight:bold;
 }
 
-/* =========================
-   回答表示
-========================= */
+.answer-date{
+    margin-top:3px;
+    color:#888;
+    font-size:13px;
+}
 
 .answer-area{
     display:none;
@@ -296,7 +287,7 @@ main{
 }
 
 .answer{
-    font-size:17px;
+    font-size:16px;
     line-height:1.8;
     white-space:pre-wrap;
     overflow-wrap:anywhere;
@@ -352,14 +343,9 @@ main{
     font-weight:bold;
     cursor:pointer;
     box-shadow:0 3px 10px rgba(0,0,0,.08);
-    transition:.2s;
 }
 
-.pagination button:hover{
-    background:#006F68;
-    color:white;
-}
-
+.pagination button:hover,
 .pagination button.active{
     background:#006F68;
     color:white;
@@ -378,7 +364,7 @@ main{
 }
 
 /* =========================
-   QUESTION FORM
+   FORM
 ========================= */
 
 .form-box{
@@ -473,7 +459,6 @@ footer{
 
     .title{
         font-size:42px;
-        margin-bottom:10px;
     }
 
     .description{
@@ -482,19 +467,23 @@ footer{
     }
 
     .qa-item{
-        padding:18px 5px;
+        padding:18px 8px;
     }
 
     .question{
         font-size:15px;
     }
 
-    .answer{
-        font-size:16px;
+    .from{
+        font-size:12px;
     }
 
     .answer-date{
-        font-size:13px;
+        font-size:12px;
+    }
+
+    .answer{
+        font-size:16px;
     }
 
     .pagination{
@@ -511,7 +500,6 @@ footer{
 
     .form-box{
         padding:25px 18px;
-        border-radius:16px;
     }
 
     footer{
@@ -520,12 +508,9 @@ footer{
 }
 
 </style>
-
 </head>
 
-
 <body>
-
 
 <header>
 
@@ -619,7 +604,7 @@ Link
 Status
 </a>
 
-<a id="4g8oma" href="qa">
+<a href="qa">
 <span class="icon">
 <svg viewBox="0 0 24 24">
 <path d="M4 5h16v12H4z"/>
@@ -732,7 +717,7 @@ Documents
 <a href="link">
 <span class="icon">
 <svg viewBox="0 0 24 24">
-<path d="M10 13a5 5 0 0 0 7.1.1l2-2a5 5 0 0 0-7.1-7.1l-1.2 1.2"/>
+<path d="M10 13a5 5 0 0 0 7.1.1l-2 2a5 5 0 0 0 7.1 7.1l1.2-1.2"/>
 <path d="M14 11a5 5 0 0 0-7.1-.1l-2 2a5 5 0 0 0 7.1 7.1l1.2-1.2"/>
 </svg>
 </span>
@@ -785,7 +770,7 @@ Q&amp;A
 </div>
 
 <div class="description">
-皆さまからいただいた質問と回答を掲載しています。
+ファンの皆さまからいただいた質問と回答を掲載しています。
 </div>
 
 
@@ -844,61 +829,69 @@ const mobileMenu =
     document.getElementById("mobileMenu");
 
 
-menuButton.addEventListener("click",function(){
+menuButton.addEventListener(
+    "click",
+    function(){
 
-    mobileMenu.classList.toggle("active");
-    menuButton.classList.toggle("active");
-
-    const isOpen =
-        mobileMenu.classList.contains("active");
-
-    menuButton.setAttribute(
-        "aria-expanded",
-        isOpen
-    );
-
-});
-
-
-mobileMenu.querySelectorAll("a").forEach(function(link){
-
-    link.addEventListener("click",function(){
-
-        mobileMenu.classList.remove("active");
-        menuButton.classList.remove("active");
+        mobileMenu.classList.toggle("active");
+        menuButton.classList.toggle("active");
 
         menuButton.setAttribute(
             "aria-expanded",
-            "false"
-        );
-
-    });
-
-});
-
-
-document.addEventListener("click",function(event){
-
-    if(
-        !mobileMenu.contains(event.target) &&
-        !menuButton.contains(event.target)
-    ){
-
-        mobileMenu.classList.remove("active");
-        menuButton.classList.remove("active");
-
-        menuButton.setAttribute(
-            "aria-expanded",
-            "false"
+            mobileMenu.classList.contains("active")
         );
 
     }
+);
 
-});
+
+mobileMenu.querySelectorAll("a").forEach(
+    function(link){
+
+        link.addEventListener(
+            "click",
+            function(){
+
+                mobileMenu.classList.remove("active");
+                menuButton.classList.remove("active");
+
+                menuButton.setAttribute(
+                    "aria-expanded",
+                    "false"
+                );
+
+            }
+        );
+
+    }
+);
+
+
+document.addEventListener(
+    "click",
+    function(event){
+
+        if(
+            !mobileMenu.contains(event.target) &&
+            !menuButton.contains(event.target)
+        ){
+
+            mobileMenu.classList.remove("active");
+            menuButton.classList.remove("active");
+
+            menuButton.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+        }
+
+    }
+);
 
 
 /* =========================
-   Q&A
+   Q&A SETTINGS
 ========================= */
 
 const QA_JSON_URL = "./qa.json";
@@ -908,13 +901,17 @@ const QA_JSON_URL = "./qa.json";
  */
 const ITEMS_PER_PAGE = 1;
 
-let qaData = [];
 
+/* =========================
+   DATA
+========================= */
+
+let qaData = [];
 let currentPage = 1;
 
 
 /* =========================
-   HTML ESCAPE
+   ESCAPE
 ========================= */
 
 function escapeHTML(value){
@@ -975,20 +972,40 @@ function getAnswer(item){
 
 
 /* =========================
+   FROM
+========================= */
+
+function getFrom(item){
+
+    return (
+        item.from ??
+        item.From ??
+        item.FROM ??
+        item.sender ??
+        item.name ??
+        item.user ??
+        item.questioner ??
+        item["質問者"] ??
+        item["投稿者"] ??
+        ""
+    );
+
+}
+
+
+/* =========================
    DATE
 ========================= */
 
 function getDate(item){
 
     return (
-        item.questionDate ??
-        item.createdAt ??
-        item.timestamp ??
-        item.datetime ??
-        item.date ??
         item.answerDate ??
         item.answeredAt ??
-        item["質問日時"] ??
+        item.datetime ??
+        item.date ??
+        item.timestamp ??
+        item.createdAt ??
         item["回答日時"] ??
         item["回答日"] ??
         item["日時"] ??
@@ -1099,18 +1116,11 @@ async function loadQA(){
             await response.json();
 
 
-        /*
-         * 配列形式
-         */
         if(Array.isArray(data)){
 
             qaData = data;
 
         }
-
-        /*
-         * {"qa":[...]}
-         */
         else if(
             data &&
             Array.isArray(data.qa)
@@ -1119,10 +1129,6 @@ async function loadQA(){
             qaData = data.qa;
 
         }
-
-        /*
-         * {"questions":[...]}
-         */
         else if(
             data &&
             Array.isArray(data.questions)
@@ -1131,7 +1137,6 @@ async function loadQA(){
             qaData = data.questions;
 
         }
-
         else{
 
             throw new Error(
@@ -1141,36 +1146,36 @@ async function loadQA(){
         }
 
 
-        /*
-         * 空の質問を除外
-         */
-
         qaData =
-            qaData.filter(function(item){
+            qaData.filter(
+                function(item){
 
-                return (
-                    item &&
-                    typeof item === "object" &&
-                    String(
-                        getQuestion(item)
-                    ).trim() !== ""
-                );
+                    return (
+                        item &&
+                        typeof item === "object" &&
+                        String(
+                            getQuestion(item)
+                        ).trim() !== ""
+                    );
 
-            });
+                }
+            );
 
 
         /*
          * 新しい順
          */
 
-        qaData.sort(function(a,b){
+        qaData.sort(
+            function(a,b){
 
-            return (
-                getDateValue(b) -
-                getDateValue(a)
-            );
+                return (
+                    getDateValue(b) -
+                    getDateValue(a)
+                );
 
-        });
+            }
+        );
 
 
         currentPage = 1;
@@ -1178,7 +1183,6 @@ async function loadQA(){
         renderQA();
 
     }
-
     catch(error){
 
         console.error(
@@ -1223,7 +1227,6 @@ function renderQA(){
 
 
     list.innerHTML = "";
-
     pagination.innerHTML = "";
 
 
@@ -1242,15 +1245,17 @@ function renderQA(){
     }
 
 
-    /*
-     * 1ページ = 1件
-     */
-
     const totalPages =
-        qaData.length;
+        Math.ceil(
+            qaData.length /
+            ITEMS_PER_PAGE
+        );
 
 
-    if(currentPage > totalPages){
+    if(
+        currentPage >
+        totalPages
+    ){
 
         currentPage =
             totalPages;
@@ -1258,97 +1263,115 @@ function renderQA(){
     }
 
 
-    const item =
-        qaData[currentPage - 1];
+    const start =
+        (currentPage - 1) *
+        ITEMS_PER_PAGE;
 
 
-    if(!item){
-        return;
-    }
-
-
-    const question =
-        getQuestion(item);
-
-    const answer =
-        getAnswer(item);
-
-    const date =
-        getDate(item);
-
-
-    /* =========================
-       Q&A ITEM
-    ========================= */
-
-    const article =
-        document.createElement("article");
-
-    article.className =
-        "qa-item";
-
-
-    article.innerHTML = `
-
-        <a
-            href="javascript:void(0)"
-            class="qa-link"
-            aria-expanded="false">
-
-            <div class="question">
-                ${escapeHTML(question)}
-            </div>
-
-            <div class="answer-date">
-                ${formatDate(date)}
-            </div>
-
-        </a>
-
-        <div class="answer-area">
-
-            <div class="answer">
-                ${
-                    answer
-                    ? escapeHTML(answer)
-                    : "回答がまだありません"
-                }
-            </div>
-
-        </div>
-
-    `;
-
-
-    /* =========================
-       CLICK
-    ========================= */
-
-    const link =
-        article.querySelector(
-            ".qa-link"
+    const pageItems =
+        qaData.slice(
+            start,
+            start + ITEMS_PER_PAGE
         );
 
 
-    link.addEventListener(
-        "click",
-        function(){
+    pageItems.forEach(
+        function(item){
 
-            const isOpen =
-                article.classList.toggle(
-                    "open"
+            const question =
+                getQuestion(item);
+
+            const answer =
+                getAnswer(item);
+
+            const from =
+                getFrom(item);
+
+            const date =
+                getDate(item);
+
+
+            const article =
+                document.createElement(
+                    "article"
                 );
 
-            link.setAttribute(
-                "aria-expanded",
-                isOpen
+            article.className =
+                "qa-item";
+
+
+            article.innerHTML = `
+
+                <a
+                    href="javascript:void(0)"
+                    class="qa-link"
+                    aria-expanded="false">
+
+                    <div class="question">
+                        ${escapeHTML(question)}
+                    </div>
+
+                    ${
+                        from
+                        ? `
+                        <div class="from">
+                            ${escapeHTML(from)}
+                        </div>
+                        `
+                        : ""
+                    }
+
+                    <div class="answer-date">
+                        ${formatDate(date)}
+                    </div>
+
+                </a>
+
+                <div class="answer-area">
+
+                    <div class="answer">
+                        ${
+                            answer
+                            ? escapeHTML(answer)
+                            : "回答がまだありません"
+                        }
+                    </div>
+
+                </div>
+
+            `;
+
+
+            const link =
+                article.querySelector(
+                    ".qa-link"
+                );
+
+
+            link.addEventListener(
+                "click",
+                function(){
+
+                    const isOpen =
+                        article.classList.toggle(
+                            "open"
+                        );
+
+                    link.setAttribute(
+                        "aria-expanded",
+                        isOpen
+                    );
+
+                }
+            );
+
+
+            list.appendChild(
+                article
             );
 
         }
     );
-
-
-    list.appendChild(article);
 
 
     /* =========================
@@ -1363,11 +1386,13 @@ function renderQA(){
 
 
     /* =========================
-       PREVIOUS
+       PREV
     ========================= */
 
     const prev =
-        document.createElement("button");
+        document.createElement(
+            "button"
+        );
 
     prev.textContent =
         "← 前へ";
@@ -1380,7 +1405,9 @@ function renderQA(){
         "click",
         function(){
 
-            if(currentPage <= 1){
+            if(
+                currentPage <= 1
+            ){
                 return;
             }
 
@@ -1417,14 +1444,12 @@ function renderQA(){
                 "button"
             );
 
-
         button.textContent =
             page;
 
 
         if(
-            page ===
-            currentPage
+            page === currentPage
         ){
 
             button.classList.add(
@@ -1464,7 +1489,9 @@ function renderQA(){
     ========================= */
 
     const next =
-        document.createElement("button");
+        document.createElement(
+            "button"
+        );
 
     next.textContent =
         "次へ →";
@@ -1521,7 +1548,6 @@ setInterval(
 );
 
 </script>
-
 
 </body>
 </html>
