@@ -222,33 +222,84 @@ main{
 .qa-list{
     display:flex;
     flex-direction:column;
-    gap:20px;
+    gap:0;
 }
+
+/* 1件のQ&A */
 
 .qa-item{
     background:white;
-    padding:28px 30px;
-    border-radius:18px;
-    box-shadow:0 8px 25px rgba(0,0,0,.07);
+    padding:18px 5px;
+    border-bottom:1px solid #ddd;
+    box-shadow:none;
+    border-radius:0;
 }
 
-.question{
+/* 質問リンク */
+
+.qa-link{
+    display:block;
+    color:#222;
+    text-decoration:none;
+    cursor:pointer;
+}
+
+.qa-link:hover .question{
     color:#006F68;
-    font-size:20px;
-    font-weight:700;
+}
+
+/* 質問 */
+
+.question{
+    color:#222;
+    font-size:16px;
+    font-weight:400;
     line-height:1.6;
-    margin-bottom:15px;
+    margin-bottom:6px;
+
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+
+    transition:.2s;
 }
 
 .question::before{
-    content:"Q.";
-    margin-right:8px;
+    content:"";
+    margin-right:0;
+}
+
+/* 日付 */
+
+.answer-date{
+    margin:0;
+    padding:0;
+    border:0;
+    color:#777;
+    font-size:14px;
+    font-weight:bold;
+}
+
+/* =========================
+   回答表示
+========================= */
+
+.answer-area{
+    display:none;
+    margin-top:18px;
+    padding-top:16px;
+    border-top:1px solid #e5e5e5;
+}
+
+.qa-item.open .answer-area{
+    display:block;
 }
 
 .answer{
     font-size:17px;
     line-height:1.8;
     white-space:pre-wrap;
+    overflow-wrap:anywhere;
 }
 
 .answer::before{
@@ -256,14 +307,6 @@ main{
     color:#006F68;
     font-weight:700;
     margin-right:8px;
-}
-
-.answer-date{
-    margin-top:15px;
-    padding-top:12px;
-    border-top:1px solid #e5e5e5;
-    color:#888;
-    font-size:13px;
 }
 
 /* =========================
@@ -439,16 +482,19 @@ footer{
     }
 
     .qa-item{
-        padding:23px 18px;
-        border-radius:16px;
+        padding:18px 5px;
     }
 
     .question{
-        font-size:18px;
+        font-size:15px;
     }
 
     .answer{
         font-size:16px;
+    }
+
+    .answer-date{
+        font-size:13px;
     }
 
     .pagination{
@@ -857,7 +903,10 @@ document.addEventListener("click",function(event){
 
 const QA_JSON_URL = "./qa.json";
 
-const ITEMS_PER_PAGE = 5;
+/*
+ * 1ページにつき1件
+ */
+const ITEMS_PER_PAGE = 1;
 
 let qaData = [];
 
@@ -888,7 +937,7 @@ function escapeHTML(value){
 
 
 /* =========================
-   GET QUESTION
+   QUESTION
 ========================= */
 
 function getQuestion(item){
@@ -907,7 +956,7 @@ function getQuestion(item){
 
 
 /* =========================
-   GET ANSWER
+   ANSWER
 ========================= */
 
 function getAnswer(item){
@@ -926,18 +975,20 @@ function getAnswer(item){
 
 
 /* =========================
-   GET DATE
+   DATE
 ========================= */
 
 function getDate(item){
 
     return (
-        item.answerDate ??
-        item.answeredAt ??
+        item.questionDate ??
+        item.createdAt ??
+        item.timestamp ??
         item.datetime ??
         item.date ??
-        item.timestamp ??
-        item.createdAt ??
+        item.answerDate ??
+        item.answeredAt ??
+        item["質問日時"] ??
         item["回答日時"] ??
         item["回答日"] ??
         item["日時"] ??
@@ -953,14 +1004,15 @@ function getDate(item){
 
 function getDateValue(item){
 
-    const date = getDate(item);
+    const value =
+        getDate(item);
 
-    if(!date){
+    if(!value){
         return 0;
     }
 
     const time =
-        new Date(date).getTime();
+        new Date(value).getTime();
 
     return Number.isNaN(time)
         ? 0
@@ -976,7 +1028,7 @@ function getDateValue(item){
 function formatDate(value){
 
     if(!value){
-        return "回答日時：未設定";
+        return "";
     }
 
     const date =
@@ -984,29 +1036,23 @@ function formatDate(value){
 
     if(Number.isNaN(date.getTime())){
 
-        return "回答日時：" +
-            escapeHTML(value);
+        return escapeHTML(
+            String(value)
+        );
 
     }
 
-    return "回答日時：" +
+    return (
         date.getFullYear() +
-        "/" +
+        "." +
         String(
             date.getMonth() + 1
         ).padStart(2,"0") +
-        "/" +
+        "." +
         String(
             date.getDate()
-        ).padStart(2,"0") +
-        " " +
-        String(
-            date.getHours()
-        ).padStart(2,"0") +
-        ":" +
-        String(
-            date.getMinutes()
-        ).padStart(2,"0");
+        ).padStart(2,"0")
+    );
 
 }
 
@@ -1028,14 +1074,15 @@ async function loadQA(){
 
     try{
 
-        const response = await fetch(
-            QA_JSON_URL +
-            "?t=" +
-            Date.now(),
-            {
-                cache:"no-store"
-            }
-        );
+        const response =
+            await fetch(
+                QA_JSON_URL +
+                "?t=" +
+                Date.now(),
+                {
+                    cache:"no-store"
+                }
+            );
 
 
         if(!response.ok){
@@ -1053,25 +1100,17 @@ async function loadQA(){
 
 
         /*
-         * 対応形式
-         *
-         * [
-         *   {...},
-         *   {...}
-         * ]
-         *
-         * または
-         *
-         * {
-         *   "qa":[...]
-         * }
+         * 配列形式
          */
-
         if(Array.isArray(data)){
 
             qaData = data;
 
         }
+
+        /*
+         * {"qa":[...]}
+         */
         else if(
             data &&
             Array.isArray(data.qa)
@@ -1080,6 +1119,10 @@ async function loadQA(){
             qaData = data.qa;
 
         }
+
+        /*
+         * {"questions":[...]}
+         */
         else if(
             data &&
             Array.isArray(data.questions)
@@ -1088,6 +1131,7 @@ async function loadQA(){
             qaData = data.questions;
 
         }
+
         else{
 
             throw new Error(
@@ -1098,7 +1142,25 @@ async function loadQA(){
 
 
         /*
-         * 新しい回答日時順
+         * 空の質問を除外
+         */
+
+        qaData =
+            qaData.filter(function(item){
+
+                return (
+                    item &&
+                    typeof item === "object" &&
+                    String(
+                        getQuestion(item)
+                    ).trim() !== ""
+                );
+
+            });
+
+
+        /*
+         * 新しい順
          */
 
         qaData.sort(function(a,b){
@@ -1124,14 +1186,12 @@ async function loadQA(){
             error
         );
 
-
         list.innerHTML = `
             <div class="message error">
                 Q&amp;Aを読み込めませんでした。<br>
-                時間をおいて再度アクセスしてください。
+                JSONファイルが正しく配置されているか確認してください。
             </div>
         `;
-
 
         document.getElementById(
             "pagination"
@@ -1182,73 +1242,113 @@ function renderQA(){
     }
 
 
+    /*
+     * 1ページ = 1件
+     */
+
     const totalPages =
-        Math.ceil(
-            qaData.length /
-            ITEMS_PER_PAGE
-        );
+        qaData.length;
 
 
     if(currentPage > totalPages){
 
-        currentPage = totalPages;
+        currentPage =
+            totalPages;
 
     }
 
 
-    const start =
-        (currentPage - 1) *
-        ITEMS_PER_PAGE;
+    const item =
+        qaData[currentPage - 1];
 
 
-    const end =
-        start +
-        ITEMS_PER_PAGE;
+    if(!item){
+        return;
+    }
 
 
-    const pageItems =
-        qaData.slice(start,end);
+    const question =
+        getQuestion(item);
+
+    const answer =
+        getAnswer(item);
+
+    const date =
+        getDate(item);
 
 
-    pageItems.forEach(function(item){
+    /* =========================
+       Q&A ITEM
+    ========================= */
 
-        const question =
-            getQuestion(item);
+    const article =
+        document.createElement("article");
 
-        const answer =
-            getAnswer(item);
-
-        const date =
-            getDate(item);
-
-
-        const article =
-            document.createElement("article");
-
-        article.className =
-            "qa-item";
+    article.className =
+        "qa-item";
 
 
-        article.innerHTML = `
+    article.innerHTML = `
+
+        <a
+            href="javascript:void(0)"
+            class="qa-link"
+            aria-expanded="false">
 
             <div class="question">
                 ${escapeHTML(question)}
-            </div>
-
-            <div class="answer">
-                ${escapeHTML(answer)}
             </div>
 
             <div class="answer-date">
                 ${formatDate(date)}
             </div>
 
-        `;
+        </a>
+
+        <div class="answer-area">
+
+            <div class="answer">
+                ${
+                    answer
+                    ? escapeHTML(answer)
+                    : "回答がまだありません"
+                }
+            </div>
+
+        </div>
+
+    `;
 
 
-        list.appendChild(article);
+    /* =========================
+       CLICK
+    ========================= */
 
-    });
+    const link =
+        article.querySelector(
+            ".qa-link"
+        );
+
+
+    link.addEventListener(
+        "click",
+        function(){
+
+            const isOpen =
+                article.classList.toggle(
+                    "open"
+                );
+
+            link.setAttribute(
+                "aria-expanded",
+                isOpen
+            );
+
+        }
+    );
+
+
+    list.appendChild(article);
 
 
     /* =========================
@@ -1280,28 +1380,30 @@ function renderQA(){
         "click",
         function(){
 
-            if(currentPage > 1){
-
-                currentPage--;
-
-                renderQA();
-
-                window.scrollTo({
-                    top:0,
-                    behavior:"smooth"
-                });
-
+            if(currentPage <= 1){
+                return;
             }
+
+            currentPage--;
+
+            renderQA();
+
+            window.scrollTo({
+                top:0,
+                behavior:"smooth"
+            });
 
         }
     );
 
 
-    pagination.appendChild(prev);
+    pagination.appendChild(
+        prev
+    );
 
 
     /* =========================
-       PAGE NUMBER
+       PAGE NUMBERS
     ========================= */
 
     for(
@@ -1311,14 +1413,19 @@ function renderQA(){
     ){
 
         const button =
-            document.createElement("button");
+            document.createElement(
+                "button"
+            );
 
 
         button.textContent =
             page;
 
 
-        if(page === currentPage){
+        if(
+            page ===
+            currentPage
+        ){
 
             button.classList.add(
                 "active"
@@ -1345,7 +1452,9 @@ function renderQA(){
         );
 
 
-        pagination.appendChild(button);
+        pagination.appendChild(
+            button
+        );
 
     }
 
@@ -1369,26 +1478,28 @@ function renderQA(){
         function(){
 
             if(
-                currentPage <
+                currentPage >=
                 totalPages
             ){
-
-                currentPage++;
-
-                renderQA();
-
-                window.scrollTo({
-                    top:0,
-                    behavior:"smooth"
-                });
-
+                return;
             }
+
+            currentPage++;
+
+            renderQA();
+
+            window.scrollTo({
+                top:0,
+                behavior:"smooth"
+            });
 
         }
     );
 
 
-    pagination.appendChild(next);
+    pagination.appendChild(
+        next
+    );
 
 }
 
@@ -1398,6 +1509,16 @@ function renderQA(){
 ========================= */
 
 loadQA();
+
+
+/*
+ * 30秒ごとにJSONを再取得
+ */
+
+setInterval(
+    loadQA,
+    30000
+);
 
 </script>
 
