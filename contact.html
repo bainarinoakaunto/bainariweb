@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -16,6 +17,10 @@
     box-sizing:border-box;
     margin:0;
     padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
 }
 
 body{
@@ -90,11 +95,26 @@ nav a{
 
     white-space:nowrap;
 
-    transition:.2s;
+    transition:
+        background .2s ease,
+        transform .2s ease;
 }
 
 nav a:hover{
     background:rgba(255,255,255,.14);
+}
+
+nav a:active{
+    transform:scale(.97);
+}
+
+
+/* =========================
+   CURRENT PAGE
+========================= */
+
+nav a.current{
+    background:rgba(255,255,255,.18);
 }
 
 
@@ -156,6 +176,8 @@ nav a:hover{
     gap:3px;
 
     box-shadow:0 3px 12px rgba(0,0,0,.20);
+
+    -webkit-tap-highlight-color:transparent;
 }
 
 .hamburger{
@@ -177,7 +199,9 @@ nav a:hover{
 
     border-radius:2px;
 
-    transition:.25s;
+    transition:
+        transform .25s ease,
+        opacity .2s ease;
 }
 
 .menu-text{
@@ -218,10 +242,13 @@ nav a:hover{
     border-radius:8px;
 
     box-shadow:0 6px 20px rgba(0,0,0,.25);
+
+    transform-origin:top right;
 }
 
 .mobile-menu.active{
     display:block;
+    animation:menuOpen .2s ease;
 }
 
 .mobile-menu a{
@@ -242,10 +269,30 @@ nav a:hover{
     font-weight:bold;
 
     border-radius:5px;
+
+    transition:background .2s ease;
 }
 
 .mobile-menu a:hover{
     background:rgba(255,255,255,.14);
+}
+
+.mobile-menu a.current{
+    background:rgba(255,255,255,.18);
+}
+
+@keyframes menuOpen{
+
+    from{
+        opacity:0;
+        transform:translateY(-5px) scale(.97);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+
 }
 
 
@@ -285,206 +332,66 @@ main{
 
 
 /* =========================
-   META
+   CONTACT BOX
 ========================= */
 
-.meta{
-    background:white;
+.contact-box{
+    background:#fff;
 
     border-radius:20px;
 
-    padding:20px;
-
-    margin-bottom:30px;
-
-    box-shadow:0 5px 20px rgba(0,0,0,.08);
-
-    display:flex;
-
-    justify-content:space-between;
-
-    flex-wrap:wrap;
-
-    gap:10px;
-
-    color:#555;
-
-    line-height:1.6;
-}
-
-
-/* =========================
-   STATUS BOX
-========================= */
-
-.status-box{
-    background:white;
-
-    border-radius:20px;
-
-    padding:30px;
-
-    margin-bottom:30px;
+    padding:35px;
 
     box-shadow:0 5px 20px rgba(0,0,0,.08);
 }
 
-.status-top{
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    flex-wrap:wrap;
-
-    gap:10px;
-}
-
-.name{
-    font-size:22px;
-
-    font-weight:bold;
-
+.contact-box h2{
     color:#006F68;
+
+    font-size:28px;
+
+    margin-bottom:15px;
 
     line-height:1.5;
 }
 
-.status{
-    font-weight:bold;
-
-    color:#16a34a;
-}
-
-.status.normal{
-    color:#16a34a;
-}
-
-.status.warning{
-    color:#d97706;
-}
-
-.status.error{
-    color:#dc2626;
-}
-
-.info{
-    margin-top:15px;
-
+.contact-box p{
     color:#555;
-}
 
+    font-size:16px;
 
-/* =========================
-   REPORT BOX
-========================= */
-
-.report-box{
-    position:fixed;
-
-    right:25px;
-    bottom:25px;
-
-    width:320px;
-
-    background:#fff;
-
-    border-radius:18px;
-
-    padding:20px;
-
-    box-shadow:0 10px 30px rgba(0,0,0,.20);
-
-    border-top:5px solid #006F68;
-
-    z-index:9999;
-
-    animation:fadeIn .3s;
-}
-
-.report-box h3{
-    color:#006F68;
+    line-height:1.8;
 
     margin-bottom:10px;
-
-    font-size:20px;
-
-    line-height:1.4;
 }
 
-.report-box p{
-    color:#555;
+.contact-box h4{
+    color:#d97706;
 
     font-size:14px;
 
-    line-height:1.6;
+    line-height:1.7;
 
-    margin-bottom:15px;
-}
-
-.report-btn{
-    display:block;
-
-    text-align:center;
-
-    background:#006F68;
-
-    color:#fff;
-
-    text-decoration:none;
-
-    padding:12px;
-
-    border-radius:10px;
-
-    font-weight:bold;
-
-    transition:.3s;
-}
-
-.report-btn:hover{
-    background:#00524d;
-}
-
-.close-btn{
-    position:absolute;
-
-    top:10px;
-    right:10px;
-
-    border:none;
-
-    background:none;
-
-    font-size:20px;
-
-    cursor:pointer;
-
-    color:#666;
-}
-
-.close-btn:hover{
-    color:#000;
+    margin-bottom:25px;
 }
 
 
 /* =========================
-   ANIMATION
+   GOOGLE FORM
 ========================= */
 
-@keyframes fadeIn{
+.form{
+    display:block;
 
-    from{
-        opacity:0;
-        transform:translateY(20px);
-    }
+    width:100%;
 
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+    min-height:900px;
 
+    border:0;
+
+    border-radius:12px;
+
+    background:#fff;
 }
 
 
@@ -541,6 +448,10 @@ footer{
     .mobile-menu{
         top:62px;
         right:8px;
+
+        width:250px;
+
+        max-width:calc(100vw - 16px);
     }
 
     main{
@@ -559,34 +470,53 @@ footer{
         margin-bottom:30px;
     }
 
-    .meta{
-        padding:18px;
-
-        border-radius:16px;
-
-        flex-direction:column;
-
-        gap:8px;
-    }
-
-    .status-box{
+    .contact-box{
         padding:25px 20px;
 
         border-radius:16px;
+    }
+
+    .contact-box h2{
+        font-size:23px;
+    }
+
+    .contact-box p{
+        font-size:15px;
+    }
+
+    .contact-box h4{
+        font-size:13px;
 
         margin-bottom:20px;
     }
 
-    .name{
-        font-size:19px;
+    .form{
+        min-height:1000px;
+
+        margin-left:-5px;
+
+        width:calc(100% + 10px);
     }
 
-    .report-box{
-        left:15px;
-        right:15px;
-        bottom:15px;
+}
 
-        width:auto;
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media(max-width:380px){
+
+    .mobile-menu{
+        width:calc(100vw - 16px);
+    }
+
+    .title{
+        font-size:36px;
+    }
+
+    .contact-box{
+        padding:22px 16px;
     }
 
 }
@@ -745,7 +675,7 @@ Q&amp;A
 </a>
 
 
-<a href="contact">
+<a href="contact" class="current">
 
 <span class="icon">
 <svg viewBox="0 0 24 24">
@@ -770,7 +700,8 @@ Contact
     class="menu-button"
     id="menuButton"
     aria-label="メニュー"
-    aria-expanded="false">
+    aria-expanded="false"
+    type="button">
 
     <span class="hamburger">
 
@@ -932,7 +863,7 @@ Q&amp;A
 </a>
 
 
-<a href="contact">
+<a href="contact" class="current">
 
 <span class="icon">
 <svg viewBox="0 0 24 24">
@@ -971,14 +902,17 @@ BAINARIへのご質問・ご意見・お問い合わせは、
 </p>
 
 <h4>
-※ラインは個別対応出来ません。ご了承ください。
+※LINEは個別対応できません。ご了承ください。
 </h4>
+
 
 <iframe
     class="form"
     src="https://docs.google.com/forms/d/e/1FAIpQLSdBnkiE4LR3LHIt72-LibEUVVjJISLXa2_IbmGOtWML3My13w/viewform?embedded=true"
-    title="BAINARI お問い合わせフォーム">
+    title="BAINARI お問い合わせフォーム"
+    loading="lazy">
 </iframe>
+
 
 </div>
 
@@ -990,10 +924,15 @@ BAINARIへのご質問・ご意見・お問い合わせは、
 </footer>
 
 
-<script id="dym8mr">
+<script>
 
 const menuButton = document.getElementById("menuButton");
 const mobileMenu = document.getElementById("mobileMenu");
+
+
+/* =========================
+   MENU OPEN / CLOSE
+========================= */
 
 menuButton.addEventListener("click", function(){
 
@@ -1002,10 +941,17 @@ menuButton.addEventListener("click", function(){
 
     const isOpen = mobileMenu.classList.contains("active");
 
-    menuButton.setAttribute("aria-expanded", isOpen);
+    menuButton.setAttribute(
+        "aria-expanded",
+        isOpen ? "true" : "false"
+    );
 
 });
 
+
+/* =========================
+   CLOSE AFTER LINK CLICK
+========================= */
 
 mobileMenu.querySelectorAll("a").forEach(function(link){
 
@@ -1014,12 +960,19 @@ mobileMenu.querySelectorAll("a").forEach(function(link){
         mobileMenu.classList.remove("active");
         menuButton.classList.remove("active");
 
-        menuButton.setAttribute("aria-expanded", "false");
+        menuButton.setAttribute(
+            "aria-expanded",
+            "false"
+        );
 
     });
 
 });
 
+
+/* =========================
+   CLOSE WHEN CLICKING OUTSIDE
+========================= */
 
 document.addEventListener("click", function(event){
 
@@ -1031,7 +984,31 @@ document.addEventListener("click", function(event){
         mobileMenu.classList.remove("active");
         menuButton.classList.remove("active");
 
-        menuButton.setAttribute("aria-expanded", "false");
+        menuButton.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
+    }
+
+});
+
+
+/* =========================
+   ESC KEY
+========================= */
+
+document.addEventListener("keydown", function(event){
+
+    if(event.key === "Escape"){
+
+        mobileMenu.classList.remove("active");
+        menuButton.classList.remove("active");
+
+        menuButton.setAttribute(
+            "aria-expanded",
+            "false"
+        );
 
     }
 
@@ -1042,3 +1019,4 @@ document.addEventListener("click", function(event){
 
 </body>
 </html>
+```
