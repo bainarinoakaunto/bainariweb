@@ -8,7 +8,6 @@
 
 <title>バイナリ[公式] | home</title>
 
-
 <link rel="icon" type="image/png" href="243101166.png">
 
 <style>
@@ -63,7 +62,6 @@ header{
 
 /* =========================
    PC MENU BAR
-   メニュー幅だけにする
 ========================= */
 
 nav{
@@ -198,7 +196,9 @@ nav a:hover{
     height:16px;
 
     display:flex;
+
     flex-direction:column;
+
     justify-content:space-between;
 }
 
@@ -229,20 +229,17 @@ nav a:hover{
    HAMBURGER ACTIVE
 ========================= */
 
-.menu-button.active
-.hamburger span:nth-child(1){
+.menu-button.active .hamburger span:nth-child(1){
     transform:
         translateY(7px)
         rotate(45deg);
 }
 
-.menu-button.active
-.hamburger span:nth-child(2){
+.menu-button.active .hamburger span:nth-child(2){
     opacity:0;
 }
 
-.menu-button.active
-.hamburger span:nth-child(3){
+.menu-button.active .hamburger span:nth-child(3){
     transform:
         translateY(-7px)
         rotate(-45deg);
@@ -323,23 +320,32 @@ nav a:hover{
     position:relative;
 
     overflow:hidden;
+
+    isolation:isolate;
 }
 
 
 /* =========================
-   BACKGROUND VIDEO
+   YOUTUBE BACKGROUND
 ========================= */
 
 .bg-video{
     position:absolute;
 
-    width:100%;
-    height:100%;
+    top:50%;
+    left:50%;
 
-    object-fit:cover;
+    width:100vw;
+    height:56.25vw;
 
-    top:0;
-    left:0;
+    min-width:177.78vh;
+    min-height:100vh;
+
+    transform:translate(-50%,-50%);
+
+    border:0;
+
+    pointer-events:none;
 
     z-index:-2;
 }
@@ -354,15 +360,13 @@ nav a:hover{
 
     position:absolute;
 
-    width:100%;
-    height:100%;
-
-    top:0;
-    left:0;
+    inset:0;
 
     background:rgba(0,0,0,.45);
 
     z-index:-1;
+
+    pointer-events:none;
 }
 
 
@@ -372,6 +376,10 @@ nav a:hover{
 
 .content{
     padding:80px 20px 20px;
+
+    position:relative;
+
+    z-index:1;
 }
 
 
@@ -564,7 +572,6 @@ footer{
 
     .menu-button{
         display:flex;
-
         right:8px;
     }
 
@@ -630,7 +637,6 @@ footer{
 
 <!-- =========================
      PC MENU
-     ※内容・リンク先は変更なし
 ========================= -->
 
 <nav>
@@ -800,11 +806,9 @@ Contact
     aria-expanded="false">
 
     <span class="hamburger">
-
         <span></span>
         <span></span>
         <span></span>
-
     </span>
 
     <span class="menu-text">
@@ -975,9 +979,7 @@ Contact
 
 </div>
 
-
 </header>
-
 
 
 <!-- =========================
@@ -987,18 +989,19 @@ Contact
 <section class="hero">
 
 
-<video
+<!-- =========================
+     YOUTUBE BACKGROUND VIDEO
+========================= -->
+
+<iframe
     class="bg-video"
-    autoplay
-    muted
-    loop
-    playsinline>
-
-<source
-    src="https://bainarinoakaunto.github.io/2681/%E3%83%9B%E3%83%BC%E3%83%A0.MP4"
-    type="video/mp4">
-
-</video>
+    src="https://www.youtube.com/embed/eGBwwm3FhZ0?autoplay=1&amp;mute=1&amp;loop=1&amp;playlist=eGBwwm3FhZ0&amp;controls=0&amp;rel=0&amp;playsinline=1"
+    title="YouTube video player"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    referrerpolicy="strict-origin-when-cross-origin"
+    allowfullscreen>
+</iframe>
 
 
 <div class="content">
@@ -1023,7 +1026,6 @@ About BAINARI
 
 
 </div>
-
 
 </section>
 
@@ -1067,12 +1069,6 @@ CURRENT DEVELOPMENT WORKS
 
 
 <!-- =========================
-     WORK DATA
-========================= -->
-
-
-
-<!-- =========================
      FOOTER
 ========================= -->
 
@@ -1084,12 +1080,6 @@ CURRENT DEVELOPMENT WORKS
 
 
 <script>
-
-/* =========================
-   開発作品数
-========================= */
-
-
 
 /* =========================
    ハンバーガーメニュー
@@ -1180,5 +1170,4 @@ document.addEventListener(
 
 
 </body>
-
 </html>
