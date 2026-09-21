@@ -5,34 +5,29 @@
 
 <meta charset="UTF-8">
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>404 | BINARY</title>
 
 <meta
     name="description"
     content="お探しのページは見つかりませんでした。"
-/>
-
-<link
-    rel="icon"
-    type="image/png"
-    href="243101166.png"
 >
 
-<style>
+<link rel="icon" type="image/png" href="243101166.png">
 
-/* =========================
-   RESET
-========================= */
+<style>
 
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
+}
+
+html,
+body{
+    width:100%;
+    min-height:100%;
 }
 
 html{
@@ -57,22 +52,19 @@ body{
             rgba(255,85,145,.18),
             transparent 28%
         ),
-
         radial-gradient(
             circle at 90% 20%,
             rgba(0,200,240,.18),
             transparent 28%
         ),
-
         radial-gradient(
             circle at 20% 90%,
             rgba(255,190,55,.18),
             transparent 28%
         ),
+        #fff;
 
-        #ffffff;
-
-    overflow:hidden;
+    overflow-x:hidden;
 }
 
 
@@ -87,22 +79,22 @@ header{
     left:0;
 
     width:100%;
-    height:74px;
+
+    height:clamp(60px, 8vh, 78px);
+
+    padding:
+        0 clamp(18px, 6vw, 80px);
 
     display:flex;
+
     align-items:center;
+
     justify-content:space-between;
 
-    padding:0 6%;
+    background:rgba(255,255,255,.8);
 
-    background:
-        rgba(255,255,255,.78);
-
-    backdrop-filter:
-        blur(18px);
-
-    -webkit-backdrop-filter:
-        blur(18px);
+    backdrop-filter:blur(18px);
+    -webkit-backdrop-filter:blur(18px);
 
     border-bottom:
         1px solid
@@ -111,10 +103,12 @@ header{
     z-index:100;
 }
 
+
 .logo{
     text-decoration:none;
 
-    font-size:23px;
+    font-size:
+        clamp(19px, 2vw, 25px);
 
     font-weight:1000;
 
@@ -129,14 +123,15 @@ header{
         );
 
     -webkit-background-clip:text;
-
     background-clip:text;
 
     color:transparent;
 }
 
+
 .header-label{
-    font-size:12px;
+    font-size:
+        clamp(9px, 1vw, 12px);
 
     font-weight:900;
 
@@ -151,124 +146,28 @@ header{
 ========================= */
 
 main{
+    width:100%;
+
     min-height:100vh;
+    min-height:100svh;
 
     display:flex;
 
     align-items:center;
-
     justify-content:center;
 
     position:relative;
 
     padding:
-        100px 20px 60px;
-
-    text-align:center;
+        calc(
+            clamp(60px, 8vh, 78px)
+            +
+            clamp(25px, 5vh, 60px)
+        )
+        clamp(15px, 5vw, 60px)
+        clamp(70px, 10vh, 110px);
 
     overflow:hidden;
-}
-
-
-/* =========================
-   FLOATING SHAPES
-========================= */
-
-.shape{
-    position:absolute;
-
-    border-radius:50%;
-
-    z-index:0;
-
-    animation:
-        float 7s
-        ease-in-out
-        infinite;
-}
-
-.shape.one{
-    width:190px;
-    height:190px;
-
-    left:5%;
-    top:17%;
-
-    background:#ff77aa;
-
-    opacity:.75;
-}
-
-.shape.two{
-    width:130px;
-    height:130px;
-
-    right:8%;
-    top:25%;
-
-    background:#00cbea;
-
-    opacity:.7;
-
-    animation-delay:1s;
-}
-
-.shape.three{
-    width:150px;
-    height:150px;
-
-    left:13%;
-    bottom:5%;
-
-    background:#ffc44d;
-
-    opacity:.7;
-
-    animation-delay:2s;
-}
-
-.shape.four{
-    width:95px;
-    height:95px;
-
-    right:14%;
-    bottom:14%;
-
-    background:#765cff;
-
-    opacity:.65;
-
-    animation-delay:3s;
-}
-
-.shape.five{
-    width:55px;
-    height:55px;
-
-    left:45%;
-    top:16%;
-
-    background:#35c98b;
-
-    opacity:.65;
-
-    animation-delay:1.5s;
-}
-
-@keyframes float{
-
-    0%,
-    100%{
-        transform:
-            translateY(0)
-            rotate(0deg);
-    }
-
-    50%{
-        transform:
-            translateY(-22px)
-            rotate(8deg);
-    }
 }
 
 
@@ -277,18 +176,21 @@ main{
 ========================= */
 
 .error-content{
+    width:100%;
+
+    max-width:
+        clamp(600px, 75vw, 1000px);
+
     position:relative;
 
     z-index:2;
 
-    width:100%;
-
-    max-width:900px;
+    text-align:center;
 
     animation:
-        appear .8s
-        ease both;
+        appear .8s ease both;
 }
+
 
 @keyframes appear{
 
@@ -307,6 +209,7 @@ main{
             translateY(0)
             scale(1);
     }
+
 }
 
 
@@ -318,13 +221,16 @@ main{
     display:inline-flex;
 
     align-items:center;
+    justify-content:center;
 
     gap:8px;
 
     padding:
-        10px 18px;
+        clamp(8px, 1vw, 11px)
+        clamp(14px, 2vw, 20px);
 
-    margin-bottom:25px;
+    margin-bottom:
+        clamp(16px, 3vh, 28px);
 
     border-radius:999px;
 
@@ -338,7 +244,8 @@ main{
 
     color:#765cff;
 
-    font-size:13px;
+    font-size:
+        clamp(10px, 1.2vw, 14px);
 
     font-weight:1000;
 
@@ -355,43 +262,52 @@ main{
 .error-number{
     font-size:
         clamp(
-            130px,
-            25vw,
-            290px
+            110px,
+            min(28vw, 32vh),
+            300px
         );
 
     line-height:.78;
 
     font-weight:1000;
 
-    letter-spacing:-18px;
+    letter-spacing:
+        clamp(-14px, -1.2vw, -7px);
 
     color:#fff;
 
     -webkit-text-stroke:
-        4px #765cff;
+        clamp(2px, .35vw, 4px)
+        #765cff;
 
     text-shadow:
-        12px 12px 0 #ff5b99,
-        24px 24px 0 rgba(0,200,240,.32);
+
+        clamp(7px, 1vw, 13px)
+        clamp(7px, 1vw, 13px)
+        0
+        #ff5b99,
+
+        clamp(14px, 2vw, 26px)
+        clamp(14px, 2vw, 26px)
+        0
+        rgba(0,200,240,.32);
 
     user-select:none;
 }
 
 
 /* =========================
-   TEXT
+   TITLE
 ========================= */
 
 .error-title{
-    margin-top:55px;
+    margin-top:
+        clamp(30px, 5vh, 60px);
 
     font-size:
-        clamp(
-            25px,
-            5vw,
-            48px
-        );
+        clamp(23px, 4vw, 48px);
+
+    line-height:1.25;
 
     font-weight:1000;
 
@@ -404,28 +320,36 @@ main{
         );
 
     -webkit-background-clip:text;
-
     background-clip:text;
 
     color:transparent;
 }
 
-.error-description{
-    margin:
-        18px auto 0;
 
-    max-width:620px;
+/* =========================
+   DESCRIPTION
+========================= */
+
+.error-description{
+    width:100%;
+
+    max-width:650px;
+
+    margin:
+        clamp(12px, 2vh, 22px)
+        auto 0;
 
     color:#666;
 
-    font-size:16px;
+    font-size:
+        clamp(13px, 1.5vw, 17px);
 
     line-height:1.9;
 }
 
 
 /* =========================
-   PATH
+   CURRENT PATH
 ========================= */
 
 .current-path{
@@ -433,10 +357,10 @@ main{
 
     max-width:90%;
 
-    margin-top:20px;
+    margin-top:
+        clamp(14px, 2vh, 22px);
 
-    padding:
-        9px 15px;
+    padding:8px 14px;
 
     border-radius:10px;
 
@@ -449,7 +373,8 @@ main{
         Consolas,
         monospace;
 
-    font-size:12px;
+    font-size:
+        clamp(9px, 1vw, 12px);
 
     overflow:hidden;
 
@@ -466,48 +391,56 @@ main{
 .buttons{
     display:flex;
 
-    justify-content:center;
-
     align-items:center;
+    justify-content:center;
 
     flex-wrap:wrap;
 
-    gap:14px;
+    gap:
+        clamp(9px, 1.5vw, 15px);
 
-    margin-top:35px;
+    margin-top:
+        clamp(22px, 4vh, 38px);
 }
+
 
 .button{
     display:inline-flex;
 
     align-items:center;
-
     justify-content:center;
 
-    min-width:205px;
+    min-width:
+        clamp(170px, 18vw, 220px);
 
-    padding:
-        16px 25px;
+    min-height:
+        clamp(46px, 6vh, 58px);
+
+    padding:12px 20px;
 
     border-radius:999px;
 
     text-decoration:none;
 
-    font-size:15px;
+    font-size:
+        clamp(12px, 1.2vw, 15px);
 
     font-weight:1000;
 
     transition:
         transform .25s ease,
         box-shadow .25s ease,
-        background .25s ease;
+        border-color .25s ease,
+        color .25s ease;
 }
+
 
 .button:hover{
     transform:
         translateY(-4px)
         scale(1.03);
 }
+
 
 .button.primary{
     color:#fff;
@@ -525,11 +458,6 @@ main{
         rgba(118,92,255,.22);
 }
 
-.button.primary:hover{
-    box-shadow:
-        0 20px 45px
-        rgba(118,92,255,.3);
-}
 
 .button.secondary{
     color:#555;
@@ -538,17 +466,156 @@ main{
 
     border:
         2px solid
-        #eeeeee;
+        #eee;
 
     box-shadow:
         0 8px 25px
         rgba(0,0,0,.05);
 }
 
-.button.secondary:hover{
-    border-color:#765cff;
 
+.button.secondary:hover{
     color:#765cff;
+
+    border-color:#765cff;
+}
+
+
+/* =========================
+   FLOATING SHAPES
+========================= */
+
+.shape{
+    position:absolute;
+
+    border-radius:50%;
+
+    z-index:0;
+
+    animation:
+        float 7s ease-in-out infinite;
+}
+
+
+.shape.one{
+    width:
+        clamp(80px, 13vw, 190px);
+
+    height:
+        clamp(80px, 13vw, 190px);
+
+    left:
+        clamp(-30px, 4vw, 70px);
+
+    top:
+        clamp(100px, 18vh, 190px);
+
+    background:#ff77aa;
+
+    opacity:.7;
+}
+
+
+.shape.two{
+    width:
+        clamp(60px, 9vw, 135px);
+
+    height:
+        clamp(60px, 9vw, 135px);
+
+    right:
+        clamp(-20px, 5vw, 100px);
+
+    top:
+        clamp(120px, 25vh, 260px);
+
+    background:#00cbea;
+
+    opacity:.7;
+
+    animation-delay:1s;
+}
+
+
+.shape.three{
+    width:
+        clamp(70px, 11vw, 155px);
+
+    height:
+        clamp(70px, 11vw, 155px);
+
+    left:
+        clamp(-20px, 10vw, 170px);
+
+    bottom:
+        clamp(30px, 8vh, 100px);
+
+    background:#ffc44d;
+
+    opacity:.7;
+
+    animation-delay:2s;
+}
+
+
+.shape.four{
+    width:
+        clamp(55px, 7vw, 100px);
+
+    height:
+        clamp(55px, 7vw, 100px);
+
+    right:
+        clamp(-15px, 12vw, 180px);
+
+    bottom:
+        clamp(60px, 15vh, 170px);
+
+    background:#765cff;
+
+    opacity:.65;
+
+    animation-delay:3s;
+}
+
+
+.shape.five{
+    width:
+        clamp(30px, 4vw, 60px);
+
+    height:
+        clamp(30px, 4vw, 60px);
+
+    left:45%;
+
+    top:
+        clamp(90px, 14vh, 160px);
+
+    background:#35c98b;
+
+    opacity:.6;
+
+    animation-delay:1.5s;
+}
+
+
+@keyframes float{
+
+    0%,
+    100%{
+        transform:
+            translateY(0)
+            rotate(0deg);
+    }
+
+    50%{
+        transform:
+            translateY(
+                clamp(-10px, -2vh, -22px)
+            )
+            rotate(8deg);
+    }
+
 }
 
 
@@ -565,21 +632,71 @@ footer{
     width:100%;
 
     padding:
-        18px 20px;
+        clamp(10px, 2vh, 18px)
+        20px;
 
     text-align:center;
 
     color:#aaa;
 
-    font-size:12px;
+    font-size:
+        clamp(9px, 1vw, 12px);
 
     z-index:10;
 }
 
+
 footer strong{
     color:#555;
 
-    font-size:13px;
+    font-size:
+        clamp(11px, 1.1vw, 14px);
+}
+
+
+/* =========================
+   LOW SCREEN
+========================= */
+
+@media(
+    max-height:700px
+)
+and
+(
+    min-width:701px
+){
+
+    main{
+        padding-top:90px;
+        padding-bottom:60px;
+    }
+
+    .badge{
+        margin-bottom:12px;
+    }
+
+    .error-number{
+        font-size:
+            min(23vw, 190px);
+    }
+
+    .error-title{
+        margin-top:25px;
+    }
+
+    .error-description{
+        margin-top:10px;
+        line-height:1.6;
+    }
+
+    .current-path{
+        margin-top:10px;
+    }
+
+    .buttons{
+        margin-top:18px;
+    }
+
 }
 
 
@@ -592,24 +709,21 @@ footer strong{
     header{
         height:62px;
 
-        padding:
-            0 20px;
+        padding:0 20px;
     }
 
-    .header-label{
-        font-size:10px;
-    }
 
     main{
         padding:
-            90px 18px 70px;
+            90px 18px 80px;
     }
+
 
     .error-number{
         font-size:
             clamp(
-                105px,
-                32vw,
+                100px,
+                31vw,
                 190px
             );
 
@@ -620,16 +734,21 @@ footer strong{
 
         text-shadow:
             7px 7px 0 #ff5b99,
-            14px 14px 0 rgba(0,200,240,.3);
+            14px 14px 0
+            rgba(0,200,240,.3);
     }
 
+
     .error-title{
-        margin-top:42px;
+        margin-top:40px;
     }
+
 
     .error-description{
         font-size:14px;
+        line-height:1.8;
     }
+
 
     .buttons{
         flex-direction:column;
@@ -637,43 +756,36 @@ footer strong{
         width:100%;
     }
 
+
     .button{
         width:100%;
 
-        max-width:320px;
+        max-width:330px;
     }
 
-    .shape.one{
-        width:100px;
-        height:100px;
+}
 
-        left:-20px;
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media(max-width:380px){
+
+    .error-number{
+        font-size:100px;
     }
 
-    .shape.two{
-        width:75px;
-        height:75px;
-
-        right:-15px;
+    .error-title{
+        font-size:22px;
     }
 
-    .shape.three{
-        width:90px;
-        height:90px;
-
-        left:-15px;
+    .error-description{
+        font-size:13px;
     }
 
-    .shape.four{
-        width:65px;
-        height:65px;
-
-        right:-10px;
-    }
-
-    .shape.five{
-        width:40px;
-        height:40px;
+    .button{
+        min-height:44px;
     }
 
 }
@@ -683,9 +795,7 @@ footer strong{
    REDUCED MOTION
 ========================= */
 
-@media(
-    prefers-reduced-motion:reduce
-){
+@media(prefers-reduced-motion:reduce){
 
     *,
     *::before,
@@ -696,6 +806,7 @@ footer strong{
 
         scroll-behavior:auto !important;
     }
+
 }
 
 </style>
@@ -706,12 +817,10 @@ footer strong{
 <body>
 
 
-<!-- HEADER -->
-
 <header>
 
     <a
-        href="/"
+        href="index.html"
         class="logo"
     >
         BINARY
@@ -724,12 +833,7 @@ footer strong{
 </header>
 
 
-<!-- MAIN -->
-
 <main>
-
-
-    <!-- FLOATING SHAPES -->
 
     <div class="shape one"></div>
 
@@ -742,10 +846,7 @@ footer strong{
     <div class="shape five"></div>
 
 
-    <!-- ERROR CONTENT -->
-
     <div class="error-content">
-
 
         <div class="badge">
             ⚠️ PAGE NOT FOUND
@@ -770,8 +871,7 @@ footer strong{
 
             <br>
 
-            もう一度確認するか、
-            下のボタンから移動してください。
+            下のボタンから別のページへ移動できます。
 
         </p>
 
@@ -784,24 +884,39 @@ footer strong{
         </div>
 
 
-        <!-- BUTTONS -->
-
         <div class="buttons">
 
+
+            <!-- ホーム -->
+
             <a
-                href="/"
+                href="index.html"
                 class="button primary"
             >
                 🏠 ホームに戻る
             </a>
 
 
+            <!-- 企画募集 -->
+
+            <a
+                href="kikaku.html"
+                class="button secondary"
+            >
+                💡 企画募集
+            </a>
+
+
+            <!-- 前のページ -->
+
             <a
                 href="javascript:history.back()"
                 class="button secondary"
+                id="backButton"
             >
                 ← 前のページへ
             </a>
+
 
         </div>
 
@@ -809,8 +924,6 @@ footer strong{
 
 </main>
 
-
-<!-- FOOTER -->
 
 <footer>
 
@@ -827,7 +940,9 @@ footer strong{
 
 <script>
 
-/* 現在のURLを表示 */
+/* =========================
+   現在のURL
+========================= */
 
 const path =
     document.getElementById("currentPath");
@@ -842,13 +957,12 @@ if(path){
 }
 
 
-/* 履歴がない場合は
-   前のページボタンを無効化 */
+/* =========================
+   戻るボタン
+========================= */
 
 const backButton =
-    document.querySelector(
-        'a[href="javascript:history.back()"]'
-    );
+    document.getElementById("backButton");
 
 if(backButton){
 
@@ -857,15 +971,14 @@ if(backButton){
         window.history.length <= 1
     ){
 
-        backButton.style.opacity = ".5";
-
         backButton.addEventListener(
             "click",
             function(event){
 
                 event.preventDefault();
 
-                window.location.href = "/";
+                window.location.href =
+                    "index.html";
 
             }
         );
