@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>BINARY PROJECT LAB | 企画募集</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Noto Sans JP",
+        "Yu Gothic",
+        sans-serif;
+    color:#252533;
+    background:
+        radial-gradient(circle at 10% 10%, rgba(255,95,150,.18), transparent 25%),
+        radial-gradient(circle at 90% 20%, rgba(0,210,255,.18), transparent 25%),
+        radial-gradient(circle at 20% 80%, rgba(255,190,60,.18), transparent 25%),
+        #fff;
+    overflow-x:hidden;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:72px;
+    z-index:1000;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 6%;
+
+    background:rgba(255,255,255,.82);
+    backdrop-filter:blur(18px);
+
+    border-bottom:1px solid rgba(0,0,0,.06);
+}
+
+.logo{
+    font-size:22px;
+    font-weight:900;
+    letter-spacing:-1px;
+
+    background:linear-gradient(
+        90deg,
+        #ff4f91,
+        #775cff,
+        #00bfe9
+    );
+
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+nav{
+    display:flex;
+    gap:28px;
+}
+
+nav a{
+    text-decoration:none;
+    color:#444;
+    font-size:14px;
+    font-weight:700;
+}
+
+nav a:hover{
+    color:#775cff;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+    min-height:760px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    text-align:center;
+
+    padding:120px 20px 80px;
+
+    position:relative;
+    overflow:hidden;
+}
+
+.hero-inner{
+    position:relative;
+    z-index:2;
+    max-width:900px;
+}
+
+.hero-small{
+    display:inline-block;
+
+    padding:9px 18px;
+    margin-bottom:24px;
+
+    border-radius:999px;
+
+    background:linear-gradient(
+        90deg,
+        #fff0f6,
+        #f1efff,
+        #eafaff
+    );
+
+    font-size:13px;
+    font-weight:800;
+}
+
+.hero h1{
+    font-size:clamp(60px,11vw,150px);
+    line-height:.88;
+    letter-spacing:-7px;
+    font-weight:1000;
+
+    color:#fff;
+
+    -webkit-text-stroke:2px #775cff;
+
+    text-shadow:
+        5px 5px 0 #ff5b99,
+        10px 10px 0 rgba(0,190,235,.35);
+}
+
+.hero h2{
+    margin-top:25px;
+
+    font-size:clamp(20px,3vw,38px);
+    font-weight:900;
+
+    background:linear-gradient(
+        90deg,
+        #ff4f91,
+        #775cff,
+        #00bfe9
+    );
+
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+.hero p{
+    margin:25px auto 0;
+    max-width:650px;
+
+    line-height:1.9;
+    color:#666;
+}
+
+.hero-button{
+    display:inline-block;
+
+    margin-top:35px;
+    padding:17px 30px;
+
+    border-radius:999px;
+
+    background:linear-gradient(
+        90deg,
+        #ff4f91,
+        #775cff,
+        #00bfe9
+    );
+
+    color:white;
+    text-decoration:none;
+
+    font-weight:900;
+
+    box-shadow:
+        0 12px 35px rgba(119,92,255,.25);
+
+    transition:.25s;
+}
+
+.hero-button:hover{
+    transform:translateY(-4px) scale(1.03);
+}
+
+/* floating circles */
+
+.circle{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(1px);
+    opacity:.65;
+}
+
+.circle.one{
+    width:150px;
+    height:150px;
+    background:#ff76aa;
+    top:20%;
+    left:5%;
+}
+
+.circle.two{
+    width:110px;
+    height:110px;
+    background:#00cbea;
+    top:30%;
+    right:8%;
+}
+
+.circle.three{
+    width:180px;
+    height:180px;
+    background:#ffc44d;
+    bottom:5%;
+    left:15%;
+}
+
+/* =========================
+   MARQUEE
+========================= */
+
+.marquee{
+    overflow:hidden;
+    white-space:nowrap;
+
+    padding:18px 0;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff5a99,
+            #775cff,
+            #00cbea,
+            #ffbd42
+        );
+
+    color:white;
+    font-weight:900;
+}
+
+.marquee-track{
+    display:inline-block;
+    animation:marquee 18s linear infinite;
+}
+
+.marquee span{
+    margin:0 35px;
+}
+
+@keyframes marquee{
+    from{
+        transform:translateX(0);
+    }
+
+    to{
+        transform:translateX(-50%);
+    }
+}
+
+/* =========================
+   SECTION
+========================= */
+
+section{
+    padding:100px 6%;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:55px;
+}
+
+.section-title small{
+    display:block;
+    margin-bottom:10px;
+
+    color:#775cff;
+    font-weight:900;
+}
+
+.section-title h2{
+    font-size:clamp(32px,5vw,55px);
+    font-weight:1000;
+}
+
+/* =========================
+   CONCEPT
+========================= */
+
+.concept{
+    max-width:900px;
+    margin:auto;
+    text-align:center;
+}
+
+.concept p{
+    font-size:18px;
+    line-height:2;
+    color:#555;
+}
+
+/* =========================
+   CATEGORY
+========================= */
+
+.categories{
+    max-width:1200px;
+    margin:auto;
+
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:22px;
+}
+
+.category{
+    padding:35px;
+
+    border-radius:28px;
+
+    background:white;
+
+    box-shadow:
+        0 15px 45px rgba(0,0,0,.07);
+
+    transition:.25s;
+
+    border-top:7px solid;
+}
+
+.category:hover{
+    transform:translateY(-7px);
+}
+
+.category:nth-child(1){
+    border-color:#ff568f;
+}
+
+.category:nth-child(2){
+    border-color:#7567ff;
+}
+
+.category:nth-child(3){
+    border-color:#00bfe9;
+}
+
+.category:nth-child(4){
+    border-color:#ffb53d;
+}
+
+.category:nth-child(5){
+    border-color:#35c98b;
+}
+
+.category:nth-child(6){
+    border-color:#ff6b55;
+}
+
+.category-icon{
+    font-size:42px;
+    margin-bottom:18px;
+}
+
+.category h3{
+    margin-bottom:10px;
+    font-size:22px;
+}
+
+.category p{
+    color:#777;
+    line-height:1.7;
+}
+
+/* =========================
+   FLOW
+========================= */
+
+.flow{
+    max-width:1100px;
+    margin:auto;
+
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.flow-item{
+    padding:30px 20px;
+    border-radius:25px;
+    text-align:center;
+}
+
+.flow-item:nth-child(1){
+    background:#fff0f6;
+}
+
+.flow-item:nth-child(2){
+    background:#f0efff;
+}
+
+.flow-item:nth-child(3){
+    background:#e9fbff;
+}
+
+.flow-item:nth-child(4){
+    background:#fff8e8;
+}
+
+.flow-number{
+    font-size:30px;
+    font-weight:1000;
+}
+
+.flow-item h3{
+    margin:12px 0 8px;
+}
+
+.flow-item p{
+    font-size:14px;
+    line-height:1.7;
+    color:#666;
+}
+
+/* =========================
+   FORM SECTION
+========================= */
+
+.form-section{
+    position:relative;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff0f6,
+            #f1efff,
+            #e9fbff
+        );
+}
+
+.form-box{
+    max-width:850px;
+    margin:auto;
+
+    padding:45px;
+
+    background:white;
+
+    border-radius:35px;
+
+    box-shadow:
+        0 25px 70px rgba(80,60,150,.15);
+}
+
+.form-message{
+    margin-bottom:30px;
+    text-align:center;
+}
+
+.form-message h3{
+    font-size:30px;
+    margin-bottom:12px;
+}
+
+.form-message p{
+    color:#777;
+    line-height:1.8;
+}
+
+.form-group{
+    margin-bottom:22px;
+}
+
+.form-group label{
+    display:block;
+    margin-bottom:8px;
+
+    font-weight:900;
+}
+
+.form-group label span{
+    color:#ff4f91;
+    font-size:12px;
+    margin-left:5px;
+}
+
+input,
+textarea,
+select{
+    width:100%;
+
+    padding:15px 17px;
+
+    border:2px solid #eee;
+    border-radius:16px;
+
+    font-size:15px;
+    font-family:inherit;
+
+    outline:none;
+
+    background:#fafafa;
+
+    transition:.2s;
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+    border-color:#775cff;
+    background:white;
+
+    box-shadow:
+        0 0 0 4px rgba(119,92,255,.08);
+}
+
+textarea{
+    min-height:160px;
+    resize:vertical;
+}
+
+.submit-button{
+    width:100%;
+
+    border:none;
+
+    padding:18px;
+
+    border-radius:999px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ff4f91,
+            #775cff,
+            #00bfe9
+        );
+
+    color:white;
+
+    font-size:17px;
+    font-weight:1000;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 15px 35px rgba(119,92,255,.22);
+
+    transition:.25s;
+}
+
+.submit-button:hover{
+    transform:translateY(-3px);
+}
+
+.note{
+    margin-top:18px;
+    text-align:center;
+
+    color:#999;
+    font-size:12px;
+}
+
+/* =========================
+   SUCCESS
+========================= */
+
+.success{
+    display:none;
+
+    text-align:center;
+
+    padding:50px 20px;
+}
+
+.success-icon{
+    font-size:70px;
+    margin-bottom:20px;
+}
+
+.success h3{
+    font-size:34px;
+    margin-bottom:12px;
+}
+
+.success p{
+    color:#666;
+    line-height:1.8;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    padding:55px 20px;
+
+    text-align:center;
+
+    background:#fafafa;
+
+    color:#888;
+
+    font-size:13px;
+}
+
+footer strong{
+    color:#333;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:800px){
+
+    header{
+        height:62px;
+        padding:0 20px;
+    }
+
+    nav{
+        display:none;
+    }
+
+    .hero{
+        min-height:680px;
+    }
+
+    .hero h1{
+        letter-spacing:-4px;
+        -webkit-text-stroke:1.5px #775cff;
+    }
+
+    .circle.one{
+        width:90px;
+        height:90px;
+    }
+
+    .circle.two{
+        width:70px;
+        height:70px;
+    }
+
+    .circle.three{
+        width:100px;
+        height:100px;
+    }
+
+    section{
+        padding:75px 20px;
+    }
+
+    .categories{
+        grid-template-columns:1fr;
+    }
+
+    .flow{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .form-box{
+        padding:28px 20px;
+        border-radius:25px;
+    }
+
+}
+
+@media(max-width:500px){
+
+    .flow{
+        grid-template-columns:1fr;
+    }
+
+    .hero p{
+        font-size:14px;
+    }
+
+    .hero-button{
+        padding:15px 25px;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        BINARY PROJECT LAB
+    </div>
+
+    <nav>
+        <a href="#about">どんな企画？</a>
+        <a href="#category">ジャンル</a>
+        <a href="#flow">流れ</a>
+        <a href="#form">応募する</a>
+    </nav>
+
+</header>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="circle one"></div>
+    <div class="circle two"></div>
+    <div class="circle three"></div>
+
+    <div class="hero-inner">
+
+        <div class="hero-small">
+            💡 企画募集中！
+        </div>
+
+        <h1>
+            PROJECT
+        </h1>
+
+        <h2>
+            「これやってみたい！」を送ろう。
+        </h2>
+
+        <p>
+            動画でも、ゲームでも、Webでも、イベントでもOK！<br>
+            「なんか面白そう！」くらいのアイデアでも大歓迎。<br>
+            まだ何も決まってなくても、気軽に送ってみてね🙌
+        </p>
+
+        <a href="#form" class="hero-button">
+            これやってみたい！ →
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- MARQUEE -->
+
+<div class="marquee">
+
+    <div class="marquee-track">
+
+        <span>💡 YOUR IDEA</span>
+        <span>🎬 VIDEO</span>
+        <span>🎮 GAME</span>
+        <span>🌐 WEB</span>
+        <span>🎉 EVENT</span>
+        <span>🤝 COLLAB</span>
+        <span>✨ LET'S MAKE IT!</span>
+
+        <span>💡 YOUR IDEA</span>
+        <span>🎬 VIDEO</span>
+        <span>🎮 GAME</span>
+        <span>🌐 WEB</span>
+        <span>🎉 EVENT</span>
+        <span>🤝 COLLAB</span>
+        <span>✨ LET'S MAKE IT!</span>
+
+    </div>
+
+</div>
+
+
+<!-- ABOUT -->
+
+<section id="about">
+
+    <div class="section-title">
+
+        <small>ABOUT</small>
+
+        <h2>
+            気軽に送ってね！
+        </h2>
+
+    </div>
+
+    <div class="concept">
+
+        <p>
+            「こんな動画やってみたい！」<br>
+            「こんなゲームあったら面白そう！」<br>
+            「これ、企画にしたら楽しそう！」<br><br>
+
+            ……みたいな感じで、思いついたことをそのまま送ってOK！🙌
+            <br><br>
+
+            まだ細かいところまで決まってなくても全然大丈夫。<br>
+            「なんとなくこんな感じ！」でも大歓迎です。
+            <br><br>
+
+            思いついたら、とりあえず送ってみてね！
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- CATEGORY -->
+
+<section id="category">
+
+    <div class="section-title">
+
+        <small>WHAT CAN YOU SEND?</small>
+
+        <h2>
+            こんなのもOK！
+        </h2>
+
+    </div>
+
+
+    <div class="categories">
+
+        <div class="category">
+
+            <div class="category-icon">🎬</div>
+
+            <h3>動画</h3>
+
+            <p>
+                YouTubeやショート動画など、
+                「こんな動画見たい！」を送ってみよう！
+            </p>
+
+        </div>
+
+
+        <div class="category">
+
+            <div class="category-icon">🎮</div>
+
+            <h3>ゲーム</h3>
+
+            <p>
+                ゲーム企画やミニゲームなど、
+                面白そうなアイデア大歓迎！
+            </p>
+
+        </div>
+
+
+        <div class="category">
+
+            <div class="category-icon">🌐</div>
+
+            <h3>Web</h3>
+
+            <p>
+                WebサイトやWebコンテンツなど、
+                「こんなの作りたい！」もOK。
+            </p>
+
+        </div>
+
+
+        <div class="category">
+
+            <div class="category-icon">🎉</div>
+
+            <h3>イベント</h3>
+
+            <p>
+                オンライン・オフライン問わず、
+                楽しそうなイベント案を募集中！
+            </p>
+
+        </div>
+
+
+        <div class="category">
+
+            <div class="category-icon">🤝</div>
+
+            <h3>コラボ</h3>
+
+            <p>
+                「この人と一緒にやったら面白そう！」
+                みたいなアイデアもぜひ！
+            </p>
+
+        </div>
+
+
+        <div class="category">
+
+            <div class="category-icon">✨</div>
+
+            <h3>その他</h3>
+
+            <p>
+                ジャンルなんて決まってなくてもOK。
+                面白そうならなんでも送ってみて！
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FLOW -->
+
+<section id="flow">
+
+    <div class="section-title">
+
+        <small>HOW IT WORKS</small>
+
+        <h2>
+            送ったあとは？
+        </h2>
+
+    </div>
+
+
+    <div class="flow">
+
+        <div class="flow-item">
+
+            <div class="flow-number">01</div>
+
+            <h3>思いつく💡</h3>
+
+            <p>
+                「これやりたい！」を思いついたらOK。
+            </p>
+
+        </div>
+
+
+        <div class="flow-item">
+
+            <div class="flow-number">02</div>
+
+            <h3>送る📨</h3>
+
+            <p>
+                下のフォームから気軽に送ってね。
+            </p>
+
+        </div>
+
+
+        <div class="flow-item">
+
+            <div class="flow-number">03</div>
+
+            <h3>チェック👀</h3>
+
+            <p>
+                送ってもらった企画を確認します。
+            </p>
+
+        </div>
+
+
+        <div class="flow-item">
+
+            <div class="flow-number">04</div>
+
+            <h3>企画化！？🚀</h3>
+
+            <p>
+                面白そうな企画は実際に動き出すかも！
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FORM -->
+
+<section id="form" class="form-section">
+
+    <div class="section-title">
+
+        <small>SUBMIT YOUR IDEA</small>
+
+        <h2>
+            さっそく送ってみる！
+        </h2>
+
+    </div>
+
+
+    <div class="form-box">
+
+        <div id="formArea">
+
+            <div class="form-message">
+
+                <h3>
+                    💡 企画を教えて！
+                </h3>
+
+                <p>
+                    かっちり書かなくても大丈夫！<br>
+                    思いついたことを気軽に書いてね。
+                </p>
+
+            </div>
+
+
+            <form
+                id="projectForm"
+                action="https://docs.google.com/forms/d/e/1FAIpQLScB4uvIfrACrNFcQMks9STGJp3i2zWMGFQxS_bQ0OfqN2Ba9w/formResponse"
+                method="POST"
+                target="hiddenFrame"
+                onsubmit="submitForm(event)"
+            >
+
+                <div class="form-group">
+
+                    <label>
+                        お名前
+                        <span>必須</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        name="entry.1618085851"
+                        placeholder="名前を入力してね"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        ニックネーム
+                        <span>必須</span>
+                    </label>
+
+                    <input
+                        type="text"
+                        name="entry.2072503256"
+                        placeholder="呼ばれたい名前とか！"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        SNSアカウント
+                        <span>必須</span>
+                    </label>
+
+                    <input
+                        type="url"
+                        name="entry.1460802834"
+                        placeholder="https://..."
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        企画の内容
+                    </label>
+
+                    <textarea
+                        name="entry.774403915"
+                        placeholder="「こんなことやりたい！」を自由に書いてね！&#10;&#10;まだ決まってないところがあっても大丈夫🙆"
+                    ></textarea>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="submit-button"
+                >
+                    🚀 これやってみたい！送信する
+                </button>
+
+                <div class="note">
+                    ※送信すると企画募集フォームへ回答が送信されます。
+                </div>
+
+            </form>
+
+        </div>
+
+
+        <div id="success" class="success">
+
+            <div class="success-icon">
+                🎉
+            </div>
+
+            <h3>
+                送信できたよ！
+            </h3>
+
+            <p>
+                企画を送ってくれてありがとう！<br>
+                面白い企画になるといいね🙌
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- HIDDEN FRAME -->
+
+<iframe
+    name="hiddenFrame"
+    id="hiddenFrame"
+    style="display:none;"
+></iframe>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <strong>BINARY PROJECT LAB</strong>
+
+    <br><br>
+
+    思いついたら、とりあえず送ってみよう。💡
+
+    <br><br>
+
+    © BINARY / るあ
+
+</footer>
+
+
+<script>
+
+function submitForm(event){
+
+    event.preventDefault();
+
+    const form = document.getElementById("projectForm");
+    const formArea = document.getElementById("formArea");
+    const success = document.getElementById("success");
+
+    const button = form.querySelector(".submit-button");
+
+    button.disabled = true;
+
+    button.textContent = "送信中… 🚀";
+
+    /*
+     * Google Formsへ送信
+     */
+    form.submit();
+
+    /*
+     * 送信完了表示
+     */
+    setTimeout(function(){
+
+        formArea.style.display = "none";
+
+        success.style.display = "block";
+
+        window.scrollTo({
+            top: document.getElementById("form").offsetTop - 70,
+            behavior: "smooth"
+        });
+
+    },1200);
+
+}
+
+</script>
+
+</body>
+</html>
