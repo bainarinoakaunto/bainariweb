@@ -1,0 +1,1527 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>HALLOWEEN JACK | るあ・バイナリTechLABO</title>
+
+<meta name="description"
+content="るあ・バイナリTechLABO史上最大級のハロウィンイベント。現在企画進行中。">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap');
+
+:root{
+    --orange:#ff5a00;
+    --orange2:#ff8a00;
+    --black:#050505;
+    --gray:#999;
+    --white:#f5f5f5;
+}
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:var(--black);
+    color:var(--white);
+    font-family:"Inter","Noto Sans JP",sans-serif;
+    overflow-x:hidden;
+}
+
+/* ===== ノイズ ===== */
+
+.grain{
+    position:fixed;
+    inset:0;
+    z-index:1000;
+    pointer-events:none;
+    opacity:.045;
+
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ===== オープニング ===== */
+
+#intro{
+    position:fixed;
+    inset:0;
+    z-index:9999;
+
+    background:#000;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    transition:
+        opacity 1s ease,
+        visibility 1s ease;
+}
+
+#intro.hide{
+    opacity:0;
+    visibility:hidden;
+}
+
+.intro-box{
+    width:min(900px,90%);
+    font-family:monospace;
+}
+
+.intro-line{
+    color:#777;
+    font-size:13px;
+    margin:10px 0;
+    opacity:0;
+    transition:.4s;
+}
+
+.intro-line.show{
+    opacity:1;
+}
+
+.intro-line.orange{
+    color:var(--orange);
+}
+
+.intro-title{
+    margin-top:35px;
+
+    font-family:"Inter",sans-serif;
+    font-size:clamp(50px,12vw,145px);
+    line-height:.8;
+
+    letter-spacing:-7px;
+    font-weight:900;
+
+    opacity:0;
+    transform:scale(1.08);
+
+    transition:
+        opacity .6s,
+        transform .8s;
+}
+
+.intro-title.show{
+    opacity:1;
+    transform:scale(1);
+}
+
+.intro-title span{
+    color:var(--orange);
+}
+
+/* ===== 上部警告 ===== */
+
+.alert{
+    position:relative;
+    z-index:50;
+
+    width:100%;
+    padding:11px 20px;
+
+    text-align:center;
+
+    background:var(--orange);
+    color:#000;
+
+    font-family:monospace;
+    font-size:12px;
+    font-weight:900;
+
+    letter-spacing:2px;
+}
+
+.alert span{
+    animation:blink 1.2s infinite;
+}
+
+@keyframes blink{
+    0%,100%{opacity:1}
+    50%{opacity:.4}
+}
+
+/* ===== NAV ===== */
+
+nav{
+    position:absolute;
+    top:42px;
+    left:0;
+
+    width:100%;
+
+    z-index:40;
+
+    padding:27px 5%;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-size:14px;
+    font-weight:900;
+    letter-spacing:2px;
+}
+
+.logo span{
+    color:var(--orange);
+}
+
+.nav-links{
+    display:flex;
+    gap:30px;
+}
+
+.nav-links a{
+    color:#999;
+    text-decoration:none;
+
+    font-size:11px;
+    font-weight:700;
+
+    letter-spacing:2px;
+
+    transition:.25s;
+}
+
+.nav-links a:hover{
+    color:#fff;
+}
+
+/* ===== HERO ===== */
+
+.hero{
+    min-height:100vh;
+
+    position:relative;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    overflow:hidden;
+
+    padding:150px 25px 100px;
+}
+
+.hero-bg{
+    position:absolute;
+    inset:-20%;
+
+    background:
+        radial-gradient(
+            circle at 50% 45%,
+            rgba(255,90,0,.2),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 20% 80%,
+            rgba(255,60,0,.08),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 80% 20%,
+            rgba(130,0,255,.08),
+            transparent 30%
+        );
+
+    animation:bgMove 12s ease-in-out infinite alternate;
+}
+
+@keyframes bgMove{
+    from{transform:scale(1)}
+    to{transform:scale(1.08)}
+}
+
+/* ===== 円 ===== */
+
+.orbit{
+    position:absolute;
+
+    width:min(75vw,900px);
+    aspect-ratio:1;
+
+    border:
+        1px solid
+        rgba(255,90,0,.13);
+
+    border-radius:50%;
+
+    animation:rotate 30s linear infinite;
+}
+
+.orbit::before{
+    content:"";
+
+    position:absolute;
+    inset:8%;
+
+    border:
+        1px dashed
+        rgba(255,255,255,.07);
+
+    border-radius:50%;
+}
+
+.orbit::after{
+    content:"";
+
+    position:absolute;
+    inset:20%;
+
+    border:
+        1px solid
+        rgba(255,255,255,.04);
+
+    border-radius:50%;
+}
+
+@keyframes rotate{
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+/* ===== パンプキン ===== */
+
+.pumpkin{
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    font-size:clamp(170px,30vw,430px);
+
+    opacity:.08;
+
+    filter:
+        drop-shadow(
+            0 0 70px
+            rgba(255,90,0,.7)
+        );
+
+    animation:pumpkinFloat 5s ease-in-out infinite;
+}
+
+@keyframes pumpkinFloat{
+    0%,100%{
+        transform:
+            translate(-50%,-50%)
+            rotate(-2deg);
+    }
+
+    50%{
+        transform:
+            translate(-50%,-54%)
+            rotate(2deg);
+    }
+}
+
+/* ===== HERO CONTENT ===== */
+
+.hero-content{
+    position:relative;
+    z-index:5;
+
+    width:100%;
+    max-width:1200px;
+
+    text-align:center;
+}
+
+.hero-label{
+    color:var(--orange);
+
+    font-family:monospace;
+
+    font-size:12px;
+
+    letter-spacing:6px;
+
+    margin-bottom:25px;
+}
+
+.hero h1{
+    font-size:clamp(60px,14vw,180px);
+
+    line-height:.78;
+
+    letter-spacing:-9px;
+
+    font-weight:900;
+
+    text-transform:uppercase;
+
+    text-shadow:
+        0 0 20px rgba(255,90,0,.45),
+        0 0 100px rgba(255,90,0,.15);
+}
+
+.hero h1 span{
+    color:var(--orange);
+}
+
+.hero-sub{
+    margin-top:42px;
+
+    font-size:clamp(17px,2.5vw,28px);
+
+    font-weight:800;
+
+    letter-spacing:2px;
+}
+
+.hero-desc{
+    max-width:650px;
+
+    margin:23px auto 0;
+
+    color:#999;
+
+    font-size:14px;
+
+    line-height:2;
+}
+
+.system{
+    width:max-content;
+    max-width:100%;
+
+    margin:32px auto 0;
+
+    padding:12px 18px;
+
+    border:
+        1px solid
+        rgba(255,90,0,.4);
+
+    background:
+        rgba(255,90,0,.045);
+
+    color:#ffad7b;
+
+    font-family:monospace;
+
+    font-size:12px;
+
+    letter-spacing:1px;
+}
+
+.hero-scroll{
+    position:absolute;
+
+    bottom:35px;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    color:#555;
+
+    font-family:monospace;
+
+    font-size:10px;
+
+    letter-spacing:3px;
+}
+
+.hero-scroll::after{
+    content:"";
+
+    display:block;
+
+    width:1px;
+    height:45px;
+
+    margin:10px auto 0;
+
+    background:linear-gradient(#555,transparent);
+}
+
+/* ===== セクション ===== */
+
+section{
+    position:relative;
+
+    padding:130px 25px;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.08);
+}
+
+.container{
+    width:100%;
+    max-width:1050px;
+    margin:auto;
+}
+
+.section-label{
+    color:var(--orange);
+
+    font-size:11px;
+    font-weight:900;
+
+    letter-spacing:4px;
+
+    margin-bottom:20px;
+}
+
+.section-title{
+    font-size:clamp(38px,7vw,75px);
+
+    line-height:1;
+
+    letter-spacing:-3px;
+
+    margin-bottom:28px;
+}
+
+.section-title span{
+    color:var(--orange);
+}
+
+.section-text{
+    max-width:750px;
+
+    color:#999;
+
+    line-height:2;
+
+    font-size:15px;
+}
+
+/* ===== EVENT CARDS ===== */
+
+.event-grid{
+    margin-top:55px;
+
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+
+    gap:18px;
+}
+
+.card{
+    min-height:230px;
+
+    padding:32px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.1);
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.035),
+            rgba(255,255,255,.01)
+        );
+
+    position:relative;
+
+    overflow:hidden;
+
+    transition:
+        transform .35s,
+        border-color .35s;
+}
+
+.card::before{
+    content:"";
+
+    position:absolute;
+
+    width:120px;
+    height:120px;
+
+    right:-50px;
+    bottom:-50px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,90,0,.18),
+            transparent 70%
+        );
+}
+
+.card:hover{
+    transform:translateY(-8px);
+
+    border-color:
+        rgba(255,90,0,.55);
+}
+
+.card-number{
+    font-family:monospace;
+
+    color:#555;
+
+    font-size:11px;
+
+    margin-bottom:35px;
+}
+
+.card-icon{
+    font-size:42px;
+
+    margin-bottom:20px;
+}
+
+.card h3{
+    font-size:20px;
+
+    margin-bottom:12px;
+}
+
+.card p{
+    color:#888;
+
+    font-size:13px;
+
+    line-height:1.9;
+}
+
+/* ===== 公開情報 ===== */
+
+.info{
+    margin-top:50px;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.1);
+}
+
+.info-row{
+    display:flex;
+
+    justify-content:space-between;
+    align-items:center;
+
+    gap:30px;
+
+    padding:23px 5px;
+
+    border-bottom:
+        1px solid
+        rgba(255,255,255,.08);
+}
+
+.info-row dt{
+    color:#777;
+
+    font-size:13px;
+}
+
+.info-row dd{
+    font-size:14px;
+    font-weight:800;
+
+    text-align:right;
+}
+
+.pending{
+    color:var(--orange);
+}
+
+/* ===== JACK SECTION ===== */
+
+.jack{
+    min-height:75vh;
+
+    display:flex;
+    align-items:center;
+
+    text-align:center;
+
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(255,90,0,.1),
+            transparent 55%
+        );
+}
+
+.jack-content{
+    width:100%;
+}
+
+.jack-title{
+    font-size:clamp(55px,11vw,135px);
+
+    line-height:.8;
+
+    letter-spacing:-6px;
+
+    font-weight:900;
+}
+
+.jack-title span{
+    color:var(--orange);
+}
+
+.jack-copy{
+    max-width:700px;
+
+    margin:35px auto 0;
+
+    color:#999;
+
+    line-height:2;
+}
+
+/* ===== COMING SOON ===== */
+
+.coming{
+    position:relative;
+
+    overflow:hidden;
+}
+
+.coming::before{
+    content:"COMING SOON";
+
+    position:absolute;
+
+    right:-100px;
+    top:50%;
+
+    transform:
+        translateY(-50%)
+        rotate(-90deg);
+
+    color:
+        rgba(255,255,255,.025);
+
+    font-size:120px;
+    font-weight:900;
+}
+
+.coming-box{
+    margin-top:50px;
+
+    padding:45px 30px;
+
+    border:
+        1px solid
+        rgba(255,90,0,.3);
+
+    background:
+        rgba(255,90,0,.035);
+
+    text-align:center;
+}
+
+.coming-box .big{
+    font-size:
+        clamp(40px,8vw,90px);
+
+    font-weight:900;
+
+    letter-spacing:5px;
+
+    color:#fff;
+}
+
+.coming-box p{
+    margin-top:15px;
+
+    color:#777;
+
+    font-family:monospace;
+
+    font-size:12px;
+
+    letter-spacing:2px;
+}
+
+/* ===== FOOTER ===== */
+
+footer{
+    padding:55px 20px;
+
+    border-top:
+        1px solid
+        rgba(255,255,255,.08);
+
+    text-align:center;
+
+    color:#555;
+
+    font-size:11px;
+
+    line-height:2;
+}
+
+footer strong{
+    color:#aaa;
+}
+
+/* ===== パーティクル ===== */
+
+.particle{
+    position:absolute;
+
+    width:2px;
+    height:2px;
+
+    background:#ff6500;
+
+    border-radius:50%;
+
+    opacity:.35;
+
+    animation:particleFloat linear infinite;
+}
+
+@keyframes particleFloat{
+    from{
+        transform:translateY(100vh);
+        opacity:0;
+    }
+
+    20%{
+        opacity:.4;
+    }
+
+    80%{
+        opacity:.2;
+    }
+
+    to{
+        transform:translateY(-20vh);
+        opacity:0;
+    }
+}
+
+/* ===== MOBILE ===== */
+
+@media(max-width:750px){
+
+    .nav-links{
+        display:none;
+    }
+
+    nav{
+        padding:20px;
+    }
+
+    .hero{
+        padding:
+            130px 18px
+            90px;
+    }
+
+    .hero h1{
+        letter-spacing:-4px;
+    }
+
+    .event-grid{
+        grid-template-columns:1fr;
+    }
+
+    section{
+        padding:
+            90px 20px;
+    }
+
+    .info-row{
+        flex-direction:column;
+        align-items:flex-start;
+
+        gap:8px;
+    }
+
+    .info-row dd{
+        text-align:left;
+    }
+
+    .orbit{
+        width:120vw;
+    }
+
+    .coming::before{
+        display:none;
+    }
+}
+
+
+/* =========================
+   ACCESS RECORD NOTICE
+   ========================= */
+.access-consent{
+    position:fixed;
+    left:0;
+    right:0;
+    bottom:0;
+    z-index:99999;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:18px;
+    padding:14px 20px;
+    background:rgba(0,0,0,.92);
+    color:#fff;
+    box-shadow:0 -3px 15px rgba(0,0,0,.25);
+}
+.access-consent-text{font-size:12px;line-height:1.6;}
+.access-consent button{
+    flex-shrink:0;
+    padding:9px 24px;
+    border:0;
+    border-radius:20px;
+    background:#fff;
+    color:#006F68;
+    font-size:13px;
+    font-weight:bold;
+    cursor:pointer;
+}
+.access-consent button:hover{opacity:.85;}
+@media(max-width:700px){
+    .access-consent{gap:10px;padding:10px 12px;}
+    .access-consent-text{font-size:10px;}
+    .access-consent button{padding:8px 18px;font-size:12px;}
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- ノイズ -->
+<div class="grain"></div>
+
+
+<!-- オープニング -->
+
+<div id="intro">
+
+    <div class="intro-box">
+
+        <div class="intro-line" id="line1">
+            &gt; CONNECTING TO BINARY TECHLABO...
+        </div>
+
+        <div class="intro-line" id="line2">
+            &gt; VERIFYING EVENT DATA...
+        </div>
+
+        <div class="intro-line orange" id="line3">
+            &gt; WARNING : UNAUTHORIZED HALLOWEEN MODE
+        </div>
+
+        <div class="intro-line orange" id="line4">
+            &gt; SYSTEM OVERRIDE DETECTED
+        </div>
+
+        <div class="intro-title" id="introTitle">
+            HALLOWEEN<br>
+            <span>JACK</span>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- 警告 -->
+
+<div class="alert">
+    <span>⚠</span>
+    HALLOWEEN JACK ACTIVATED — SPECIAL EVENT SITE
+    <span>⚠</span>
+</div>
+
+
+<!-- NAV -->
+
+<nav>
+
+    <div class="logo">
+        RUA / <span>BTL</span>
+    </div>
+
+    <div class="nav-links">
+        <a href="#event">EVENT</a>
+        <a href="#info">INFO</a>
+        <a href="#jack">JACK</a>
+        <a href="#coming">COMING SOON</a>
+    </div>
+
+</nav>
+
+
+<!-- HERO -->
+
+<header class="hero">
+
+    <div class="hero-bg"></div>
+
+    <div class="orbit"></div>
+
+    <div class="pumpkin">
+        🎃
+    </div>
+
+    <div id="particles"></div>
+
+    <div class="hero-content">
+
+        <div class="hero-label">
+            RUA × BINARY TECHLABO
+        </div>
+
+        <h1>
+            HALLOWEEN<br>
+            <span>JACK</span>
+        </h1>
+
+        <div class="hero-sub">
+            るあ・バイナリTechLABO史上最大級
+        </div>
+
+        <p class="hero-desc">
+            現在企画中のハロウィン特別イベント。<br>
+            いつものホームページも、
+            このイベントのために特別仕様へ。
+        </p>
+
+        <div class="system">
+            &gt; EVENT STATUS : PLANNING...
+        </div>
+
+    </div>
+
+    <div class="hero-scroll">
+        SCROLL TO ENTER
+    </div>
+
+</header>
+
+
+<!-- EVENT -->
+
+<section id="event">
+
+    <div class="container">
+
+        <div class="section-label">
+            01 / EVENT
+        </div>
+
+        <h2 class="section-title">
+            このハロウィン、<br>
+            <span>何かが起こる。</span>
+        </h2>
+
+        <p class="section-text">
+            るあ・バイナリTechLABOが現在企画している、
+            ハロウィンの特別イベントです。
+            現時点では詳細を一部のみ公開しています。
+        </p>
+
+
+        <div class="event-grid">
+
+            <article class="card">
+
+                <div class="card-number">
+                    EVENT_001
+                </div>
+
+                <div class="card-icon">
+                    🎃
+                </div>
+
+                <h3>
+                    HALLOWEEN
+                </h3>
+
+                <p>
+                    今回のテーマはハロウィン。
+                    特別なイベントとして現在企画が進められています。
+                </p>
+
+            </article>
+
+
+            <article class="card">
+
+                <div class="card-number">
+                    EVENT_002
+                </div>
+
+                <div class="card-icon">
+                    💻
+                </div>
+
+                <h3>
+                    WEBSITE JACK
+                </h3>
+
+                <p>
+                    イベントに合わせて、
+                    ホームページも特別仕様に。
+                </p>
+
+            </article>
+
+
+            <article class="card">
+
+                <div class="card-number">
+                    EVENT_003
+                </div>
+
+                <div class="card-icon">
+                    👻
+                </div>
+
+                <h3>
+                    SECRET
+                </h3>
+
+                <p>
+                    詳細はまだ公開されていません。
+                    今後の発表をお待ちください。
+                </p>
+
+            </article>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- 公開情報 -->
+
+<section id="info">
+
+    <div class="container">
+
+        <div class="section-label">
+            02 / INFORMATION
+        </div>
+
+        <h2 class="section-title">
+            現在の<br>
+            <span>公開情報</span>
+        </h2>
+
+        <p class="section-text">
+            現時点で正式に公開されている情報のみを掲載しています。
+            未発表の情報については、今後の正式発表をご確認ください。
+        </p>
+
+
+        <dl class="info">
+
+            <div class="info-row">
+                <dt>イベント</dt>
+                <dd>
+                    ハロウィンイベント
+                </dd>
+            </div>
+
+            <div class="info-row">
+                <dt>企画</dt>
+                <dd>
+                    るあ・バイナリTechLABO
+                </dd>
+            </div>
+
+            <div class="info-row">
+                <dt>規模</dt>
+                <dd>
+                    史上最大級
+                </dd>
+            </div>
+
+            <div class="info-row">
+                <dt>現在の状況</dt>
+                <dd class="pending">
+                    企画中
+                </dd>
+            </div>
+
+            <div class="info-row">
+                <dt>開催日時</dt>
+                <dd class="pending">
+                    COMING SOON
+                </dd>
+            </div>
+
+            <div class="info-row">
+                <dt>イベント内容</dt>
+                <dd class="pending">
+                    COMING SOON
+                </dd>
+            </div>
+
+            <div class="info-row">
+                <dt>参加方法</dt>
+                <dd class="pending">
+                    COMING SOON
+                </dd>
+            </div>
+
+        </dl>
+
+    </div>
+
+</section>
+
+
+<!-- JACK -->
+
+<section class="jack" id="jack">
+
+    <div class="jack-content">
+
+        <div class="section-label">
+            03 / WEBSITE JACK
+        </div>
+
+        <div class="jack-title">
+            THIS SITE<br>
+            IS <span>JACKED.</span>
+        </div>
+
+        <p class="jack-copy">
+            ハロウィンイベントに合わせた
+            特別なホームページジャック企画。<br>
+            普段のホームページとは違う、
+            期間限定の世界観をお楽しみください。
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- COMING SOON -->
+
+<section class="coming" id="coming">
+
+    <div class="container">
+
+        <div class="section-label">
+            04 / CLASSIFIED
+        </div>
+
+        <h2 class="section-title">
+            まだ、<br>
+            <span>何も終わっていない。</span>
+        </h2>
+
+        <p class="section-text">
+            イベントの詳細は今後順次公開予定です。
+            新しい情報が公開されるまで、しばらくお待ちください。
+        </p>
+
+
+        <div class="coming-box">
+
+            <div class="big">
+                COMING SOON
+            </div>
+
+            <p>
+                EVENT DATA IS CURRENTLY CLASSIFIED
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <strong>
+        るあ・バイナリTechLABO
+    </strong>
+
+    <br>
+
+    HALLOWEEN JACK EVENT SITE
+
+    <br><br>
+
+    © るあ・バイナリTechLABO
+
+</footer>
+
+
+<script>
+
+/* =========================================
+   オープニング演出
+========================================= */
+
+const lines = [
+    document.getElementById("line1"),
+    document.getElementById("line2"),
+    document.getElementById("line3"),
+    document.getElementById("line4")
+];
+
+const introTitle =
+    document.getElementById("introTitle");
+
+const intro =
+    document.getElementById("intro");
+
+let delay = 300;
+
+lines.forEach((line,index)=>{
+
+    setTimeout(()=>{
+        line.classList.add("show");
+    },delay + index * 450);
+
+});
+
+setTimeout(()=>{
+    introTitle.classList.add("show");
+},2200);
+
+setTimeout(()=>{
+    intro.classList.add("hide");
+},3600);
+
+
+/* =========================================
+   パーティクル
+========================================= */
+
+const particleContainer =
+    document.getElementById("particles");
+
+for(let i=0;i<35;i++){
+
+    const particle =
+        document.createElement("div");
+
+    particle.className="particle";
+
+    particle.style.left =
+        Math.random()*100 + "%";
+
+    particle.style.animationDuration =
+        (7 + Math.random()*12) + "s";
+
+    particle.style.animationDelay =
+        (-Math.random()*15) + "s";
+
+    particle.style.opacity =
+        (0.1 + Math.random()*0.4);
+
+    particleContainer.appendChild(particle);
+}
+
+
+/* =========================================
+   マウスパララックス
+========================================= */
+
+const hero =
+    document.querySelector(".hero");
+
+const heroBg =
+    document.querySelector(".hero-bg");
+
+const orbit =
+    document.querySelector(".orbit");
+
+const pumpkin =
+    document.querySelector(".pumpkin");
+
+window.addEventListener("mousemove",(e)=>{
+
+    if(window.innerWidth < 750) return;
+
+    const x =
+        (e.clientX / window.innerWidth - .5);
+
+    const y =
+        (e.clientY / window.innerHeight - .5);
+
+    heroBg.style.transform =
+        `translate(${x*15}px,${y*15}px) scale(1.05)`;
+
+    orbit.style.transform =
+        `translate(${x*10}px,${y*10}px)`;
+
+    pumpkin.style.marginLeft =
+        `${x*18}px`;
+
+    pumpkin.style.marginTop =
+        `${y*18}px`;
+});
+
+
+/* =========================================
+   スクロールでセクション演出
+========================================= */
+
+const observer =
+    new IntersectionObserver(
+        entries=>{
+            entries.forEach(entry=>{
+
+                if(entry.isIntersecting){
+
+                    entry.target.style.opacity="1";
+                    entry.target.style.transform=
+                        "translateY(0)";
+
+                }
+
+            });
+        },
+        {
+            threshold:.12
+        }
+    );
+
+document
+    .querySelectorAll(
+        ".card,.section-title,.section-text,.info-row,.coming-box"
+    )
+    .forEach(el=>{
+
+        el.style.opacity="0";
+        el.style.transform="translateY(30px)";
+        el.style.transition=
+            "opacity .8s ease, transform .8s ease";
+
+        observer.observe(el);
+
+    });
+
+</script>
+
+
+<!-- ACCESS RECORD NOTICE -->
+<div class="access-consent" id="accessConsent">
+    <div class="access-consent-text">
+        このサイトでは、アクセス日時・ページURL・端末・OS・ブラウザ等のアクセス情報を記録しています。
+    </div>
+    <button type="button" id="accessConsentButton" aria-label="アクセス記録のお知らせを閉じる">OK</button>
+</div>
+
+
+<script>
+/* =========================
+   ACCESS RECORD + NOTICE
+   ========================= */
+(function(){
+    const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSccfR4g1Ytnzr0aLv31R3NkjUWRmaaD6YwQnjNYF0d60Uexmg/formResponse";
+
+    function getDevice(){
+        const w=window.innerWidth;
+        if(w<=700) return "スマートフォン";
+        if(w<=1100) return "タブレット";
+        return "PC";
+    }
+    function getOS(){
+        const ua=navigator.userAgent;
+        if(/Android/i.test(ua)) return "Android";
+        if(/iPhone|iPad|iPod/i.test(ua)) return "iOS / iPadOS";
+        if(/Windows/i.test(ua)) return "Windows";
+        if(/Mac OS X/i.test(ua)) return "macOS";
+        if(/CrOS/i.test(ua)) return "ChromeOS";
+        if(/Linux/i.test(ua)) return "Linux";
+        return "その他 / 不明";
+    }
+    function getBrowser(){
+        const ua=navigator.userAgent;
+        if(/Edg\//i.test(ua)) return "Microsoft Edge";
+        if(/OPR\//i.test(ua)) return "Opera";
+        if(/Chrome\//i.test(ua) && !/Edg\//i.test(ua)) return "Google Chrome";
+        if(/Firefox\//i.test(ua)) return "Firefox";
+        if(/Safari\//i.test(ua) && !/Chrome\//i.test(ua)) return "Safari";
+        return "その他 / 不明";
+    }
+
+    function sendAccessLog(){
+        const now=new Date();
+        const params=new URLSearchParams();
+        params.set("entry.1390942320", now.toLocaleString("ja-JP", {timeZone:"Asia/Tokyo"}));
+        params.set("entry.600562719", location.href);
+        params.set("entry.32786128", document.title);
+        params.set("entry.318452337", getDevice());
+        params.set("entry.1152326462", getOS());
+        params.set("entry.777710718", getBrowser());
+
+        // Hidden iframe + form submit: Google Formsの送信を確実に行う
+        const iframe=document.createElement("iframe");
+        iframe.name="accessLogFrame_"+Date.now();
+        iframe.style.display="none";
+        document.body.appendChild(iframe);
+
+        const form=document.createElement("form");
+        form.method="GET";
+        form.action=FORM_URL;
+        form.target=iframe.name;
+        form.style.display="none";
+
+        params.forEach((value,key)=>{
+            const input=document.createElement("input");
+            input.type="hidden";
+            input.name=key;
+            input.value=value;
+            form.appendChild(input);
+        });
+        document.body.appendChild(form);
+        form.submit();
+    }
+
+    function setupNotice(){
+        const notice=document.getElementById("accessConsent");
+        const button=document.getElementById("accessConsentButton");
+        if(!notice || !button) return;
+        button.addEventListener("click", function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            notice.remove();
+            try{ sessionStorage.setItem("accessNoticeAccepted","1"); }catch(e){}
+        });
+        try{
+            if(sessionStorage.getItem("accessNoticeAccepted")==="1") notice.remove();
+        }catch(e){}
+    }
+
+    function start(){
+        setupNotice();
+        sendAccessLog();
+    }
+    if(document.readyState==="loading"){
+        document.addEventListener("DOMContentLoaded", start, {once:true});
+    }else{
+        start();
+    }
+})();
+</script>
+
+</body>
+</html>
