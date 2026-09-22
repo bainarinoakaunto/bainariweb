@@ -620,6 +620,68 @@ footer{
 
 }
 
+
+/* =========================
+   ACCESS RECORD NOTICE
+   ========================= */
+
+.access-consent{
+    position:fixed;
+    left:0;
+    right:0;
+    bottom:0;
+    z-index:99999;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:18px;
+
+    padding:14px 20px;
+
+    background:rgba(0,0,0,.92);
+    color:#fff;
+
+    box-shadow:0 -3px 15px rgba(0,0,0,.25);
+}
+
+.access-consent-text{
+    font-size:12px;
+    line-height:1.6;
+}
+
+.access-consent button{
+    flex-shrink:0;
+    padding:9px 24px;
+    border:0;
+    border-radius:20px;
+    background:#fff;
+    color:#006F68;
+    font-size:13px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.access-consent button:hover{
+    opacity:.85;
+}
+
+@media(max-width:700px){
+    .access-consent{
+        gap:10px;
+        padding:10px 12px;
+    }
+
+    .access-consent-text{
+        font-size:10px;
+    }
+
+    .access-consent button{
+        padding:8px 18px;
+        font-size:12px;
+    }
+}
+
 </style>
 
 </head>
@@ -1168,6 +1230,47 @@ document.addEventListener(
 
 </script>
 
+
+
+<!-- ACCESS RECORD NOTICE -->
+<div class="access-consent" id="accessConsent">
+    <div class="access-consent-text">
+        このサイトでは、アクセス日時・ページURL・端末・OS・ブラウザ等の
+        アクセス情報を記録しています。
+    </div>
+    <button
+        type="button"
+        id="accessConsentButton"
+        aria-label="アクセス記録のお知らせを閉じる">
+        OK
+    </button>
+</div>
+
+
+/* =========================
+   ACCESS RECORD NOTICE CLOSE
+   ========================= */
+
+(function(){
+    const notice = document.getElementById("accessConsent");
+    const button = document.getElementById("accessConsentButton");
+
+    if(!notice || !button) return;
+
+    button.addEventListener("click", function(){
+        notice.style.display = "none";
+
+        try{
+            sessionStorage.setItem("accessNoticeAccepted", "1");
+        }catch(e){}
+    });
+
+    try{
+        if(sessionStorage.getItem("accessNoticeAccepted") === "1"){
+            notice.style.display = "none";
+        }
+    }catch(e){}
+})();
 
 </body>
 </html>
