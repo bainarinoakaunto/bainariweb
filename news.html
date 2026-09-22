@@ -1,0 +1,1482 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>るあ（バイナリ）[公式] | NEWS</title>
+
+<link rel="icon" type="image/png" href="243101166.png">
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Helvetica Neue",
+        Arial,
+        "Noto Sans JP",
+        sans-serif;
+    background:#f5f7f7;
+    color:#222;
+}
+
+/* =========================
+   HEADER / NAV
+========================= */
+
+header{
+    position:fixed;
+    top:0;
+    right:0;
+    width:100%;
+    padding:4px 15px;
+    z-index:1000;
+
+    display:flex;
+    justify-content:flex-end;
+    align-items:flex-start;
+}
+
+nav{
+    width:max-content;
+    max-width:calc(100vw - 30px);
+    height:58px;
+
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+
+    background:#006F68;
+    padding:0;
+    margin:0;
+
+    border-radius:8px;
+    overflow:hidden;
+
+    box-shadow:0 3px 12px rgba(0,0,0,.20);
+}
+
+nav a{
+    height:58px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    gap:6px;
+    padding:0 10px;
+
+    color:white;
+    text-decoration:none;
+
+    font-size:13px;
+    font-weight:bold;
+    white-space:nowrap;
+
+    transition:.2s;
+}
+
+nav a:hover{
+    background:rgba(255,255,255,.14);
+}
+
+.icon{
+    width:19px;
+    height:19px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    flex-shrink:0;
+}
+
+.icon svg{
+    width:19px;
+    height:19px;
+
+    fill:none;
+    stroke:currentColor;
+    stroke-width:1.8;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+/* =========================
+   MOBILE MENU BUTTON
+========================= */
+
+.menu-button{
+    display:none;
+
+    position:absolute;
+    top:4px;
+    right:15px;
+
+    width:50px;
+    height:50px;
+
+    border:0;
+    border-radius:8px;
+
+    background:#006F68;
+    color:white;
+
+    cursor:pointer;
+
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    gap:3px;
+
+    box-shadow:0 3px 12px rgba(0,0,0,.20);
+}
+
+.hamburger{
+    width:21px;
+    height:16px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+}
+
+.hamburger span{
+    width:21px;
+    height:2px;
+
+    display:block;
+
+    background:white;
+    border-radius:2px;
+
+    transition:.25s;
+}
+
+.menu-text{
+    font-size:8px;
+    line-height:8px;
+    font-weight:bold;
+}
+
+.menu-button.active .hamburger span:nth-child(1){
+    transform:translateY(7px) rotate(45deg);
+}
+
+.menu-button.active .hamburger span:nth-child(2){
+    opacity:0;
+}
+
+.menu-button.active .hamburger span:nth-child(3){
+    transform:translateY(-7px) rotate(-45deg);
+}
+
+/* =========================
+   MOBILE MENU
+========================= */
+
+.mobile-menu{
+    display:none;
+
+    position:absolute;
+    top:62px;
+    right:15px;
+
+    width:250px;
+    padding:5px;
+
+    background:#006F68;
+
+    border-radius:8px;
+
+    box-shadow:0 6px 20px rgba(0,0,0,.25);
+}
+
+.mobile-menu.active{
+    display:block;
+}
+
+.mobile-menu a{
+    width:100%;
+    min-height:47px;
+
+    padding:11px 14px;
+
+    display:flex;
+    align-items:center;
+
+    gap:12px;
+
+    color:white;
+    text-decoration:none;
+
+    font-size:14px;
+    font-weight:bold;
+
+    border-radius:5px;
+}
+
+.mobile-menu a:hover{
+    background:rgba(255,255,255,.14);
+}
+
+/* =========================
+   MAIN
+========================= */
+
+main{
+    max-width:1100px;
+    margin:0 auto;
+
+    padding:140px 20px 70px;
+}
+
+.title{
+    font-size:55px;
+    font-weight:800;
+
+    color:#006F68;
+
+    margin-bottom:40px;
+
+    letter-spacing:2px;
+}
+
+/* =========================
+   NEWS
+========================= */
+
+.news{
+    background:white;
+
+    padding:35px;
+
+    border-radius:20px;
+
+    margin-bottom:30px;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+
+.date{
+    color:#079C94;
+
+    font-size:15px;
+    font-weight:bold;
+
+    margin-bottom:8px;
+}
+
+.news h1{
+    color:#006F68;
+
+    font-size:30px;
+
+    margin:15px 0 20px;
+
+    line-height:1.5;
+}
+
+.news h2{
+    color:#006F68;
+
+    font-size:21px;
+
+    margin:25px 0 15px;
+}
+
+.news h3{
+    color:#006F68;
+
+    font-size:22px;
+
+    margin-bottom:15px;
+
+    line-height:1.5;
+}
+
+.news p{
+    font-size:18px;
+
+    line-height:1.8;
+
+    margin-bottom:15px;
+}
+
+.news ul{
+    margin:10px 0 20px 25px;
+
+    font-size:18px;
+
+    line-height:1.8;
+}
+
+.news-info{
+    background:#f0f8f7;
+
+    border-left:5px solid #079C94;
+
+    padding:15px 20px;
+
+    margin-top:25px;
+
+    border-radius:10px;
+}
+
+.news-info p{
+    margin-bottom:5px;
+}
+
+.news-link{
+    margin-top:20px;
+}
+
+.news-link a{
+    display:inline-block;
+
+    padding:10px 25px;
+
+    background:#079C94;
+    color:white;
+
+    border-radius:25px;
+
+    text-decoration:none;
+
+    font-weight:bold;
+
+    transition:.2s;
+}
+
+.news-link a:hover{
+    background:#006F68;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    text-align:center;
+
+    padding:40px;
+
+    color:#777;
+
+    font-size:14px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1100px){
+
+    nav a{
+        padding:0 7px;
+        font-size:11px;
+    }
+
+    .icon,
+    .icon svg{
+        width:17px;
+        height:17px;
+    }
+
+}
+
+@media(max-width:700px){
+
+    header{
+        padding:4px 8px;
+    }
+
+    nav{
+        display:none;
+    }
+
+    .menu-button{
+        display:flex;
+        right:8px;
+    }
+
+    .mobile-menu{
+        top:62px;
+        right:8px;
+    }
+
+    main{
+        padding:105px 15px 50px;
+    }
+
+    .title{
+        font-size:42px;
+        margin-bottom:30px;
+    }
+
+    .news{
+        padding:25px 20px;
+        border-radius:16px;
+        margin-bottom:20px;
+    }
+
+    .news h1{
+        font-size:25px;
+    }
+
+    .news h2{
+        font-size:19px;
+    }
+
+    .news h3{
+        font-size:20px;
+    }
+
+    .news p,
+    .news ul{
+        font-size:16px;
+    }
+
+}
+
+
+
+/* =========================
+   ACCESS RECORD NOTICE
+   ========================= */
+.access-consent{
+    position:fixed;
+    left:0;
+    right:0;
+    bottom:0;
+    z-index:99999;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:18px;
+    padding:14px 20px;
+    background:rgba(0,0,0,.92);
+    color:#fff;
+    box-shadow:0 -3px 15px rgba(0,0,0,.25);
+}
+.access-consent-text{font-size:12px;line-height:1.6;}
+.access-consent button{
+    flex-shrink:0;
+    padding:9px 24px;
+    border:0;
+    border-radius:20px;
+    background:#fff;
+    color:#006F68;
+    font-size:13px;
+    font-weight:bold;
+    cursor:pointer;
+}
+.access-consent button:hover{opacity:.85;}
+@media(max-width:700px){
+    .access-consent{gap:10px;padding:10px 12px;}
+    .access-consent-text{font-size:10px;}
+    .access-consent button{padding:8px 18px;font-size:12px;}
+}
+
+</style>
+</head>
+
+
+<body>
+
+<header>
+
+    <!-- PC NAV -->
+<nav>
+
+
+<a href="index.html">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M3 11.5L12 4l9 7.5"/>
+<path d="M5 10.5V20h14v-9.5"/>
+<path d="M9 20v-6h6v6"/>
+</svg>
+</span>
+
+Home
+
+</a>
+
+
+<a href="about">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<circle cx="12" cy="8" r="3"/>
+<path d="M5 21c0-3.5 3-6 7-6s7 2.5 7 6"/>
+</svg>
+</span>
+
+About
+
+</a>
+
+
+<a href="projects">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<rect x="3" y="4" width="18" height="16" rx="2"/>
+<path d="M8 9l3 3-3 3"/>
+<path d="M13 15h4"/>
+</svg>
+</span>
+
+Projects
+
+</a>
+
+
+<a href="videos">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="9"/>
+<path d="M10 8l6 4-6 4z"/>
+</svg>
+</span>
+
+License
+
+</a>
+
+
+<a href="news">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M4 5h16v14H4z"/>
+<path d="M7 8h10"/>
+<path d="M7 12h10"/>
+<path d="M7 16h6"/>
+</svg>
+</span>
+
+News
+
+</a>
+
+
+<a href="documents">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M6 3h9l4 4v14H6z"/>
+<path d="M14 3v5h5"/>
+<path d="M9 13h6"/>
+<path d="M9 17h6"/>
+</svg>
+</span>
+
+Documents
+
+</a>
+
+
+<a href="link">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M10 13a5 5 0 0 0 7.1.1l2-2a5 5 0 0 0-7.1-7.1l-1.2 1.2"/>
+<path d="M14 11a5 5 0 0 0-7.1-.1l-2 2a5 5 0 0 0 7.1 7.1l1.2-1.2"/>
+</svg>
+</span>
+
+Link
+
+</a>
+
+
+<a href="status">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M4 19V9"/>
+<path d="M10 19V5"/>
+<path d="M16 19v-7"/>
+<path d="M22 19V3"/>
+</svg>
+</span>
+
+Status
+
+</a>
+
+
+<a href="qa">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M4 5h16v12H4z"/>
+<path d="M8 9h8"/>
+<path d="M8 13h5"/>
+<path d="M7 17l-2 4 5-4"/>
+</svg>
+</span>
+
+Q&amp;A
+
+</a>
+
+
+<a href="contact">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<rect x="3" y="5" width="18" height="14" rx="2"/>
+<path d="M3 7l9 6 9-6"/>
+</svg>
+</span>
+
+Contact
+
+</a>
+
+
+</nav>
+
+
+<!-- =========================
+     MOBILE BUTTON
+========================= -->
+
+<button
+    class="menu-button"
+    id="menuButton"
+    aria-label="メニュー"
+    aria-expanded="false">
+
+    <span class="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+    </span>
+
+    <span class="menu-text">
+        MENU
+    </span>
+
+</button>
+
+
+<!-- =========================
+     MOBILE MENU
+========================= -->
+
+<div
+    class="mobile-menu"
+    id="mobileMenu">
+
+
+<a href="index">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M3 11.5L12 4l9 7.5"/>
+<path d="M5 10.5V20h14v-9.5"/>
+<path d="M9 20v-6h6v6"/>
+</svg>
+</span>
+
+Home
+
+</a>
+
+
+<a href="about">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<circle cx="12" cy="8" r="3"/>
+<path d="M5 21c0-3.5 3-6 7-6s7 2.5 7 6"/>
+</svg>
+</span>
+
+About
+
+</a>
+
+
+<a href="projects">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<rect x="3" y="4" width="18" height="16" rx="2"/>
+<path d="M8 9l3 3-3 3"/>
+<path d="M13 15h4"/>
+</svg>
+</span>
+
+Projects
+
+</a>
+
+
+<a href="videos">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="9"/>
+<path d="M10 8l6 4-6 4z"/>
+</svg>
+</span>
+
+License
+
+</a>
+
+
+<a href="news">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M4 5h16v14H4z"/>
+<path d="M7 8h10"/>
+<path d="M7 12h10"/>
+<path d="M7 16h6"/>
+</svg>
+</span>
+
+News
+
+</a>
+
+
+<a href="documents">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M6 3h9l4 4v14H6z"/>
+<path d="M14 3v5h5"/>
+<path d="M9 13h6"/>
+<path d="M9 17h6"/>
+</svg>
+</span>
+
+Documents
+
+</a>
+
+
+<a href="link">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M10 13a5 5 0 0 0 7.1.1l2-2a5 5 0 0 0-7.1-7.1l-1.2 1.2"/>
+<path d="M14 11a5 5 0 0 0-7.1-.1l-2 2a5 5 0 0 0 7.1 7.1l1.2-1.2"/>
+</svg>
+</span>
+
+Link
+
+</a>
+
+
+<a href="status">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M4 19V9"/>
+<path d="M10 19V5"/>
+<path d="M16 19v-7"/>
+<path d="M22 19V3"/>
+</svg>
+</span>
+
+Status
+
+</a>
+
+
+<a href="qa">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M4 5h16v12H4z"/>
+<path d="M8 9h8"/>
+<path d="M8 13h5"/>
+<path d="M7 17l-2 4 5-4"/>
+</svg>
+</span>
+
+Q&amp;A
+
+</a>
+
+
+<a href="contact">
+
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<rect x="3" y="5" width="18" height="14" rx="2"/>
+<path d="M3 7l9 6 9-6"/>
+</svg>
+</span>
+
+Contact
+
+</a>
+
+
+</div>
+
+</header>
+<main>
+
+    <div class="title">NEWS</div>
+<article class="news">
+
+    <div class="date">2026.09.16</div>
+
+    <h1>
+        著作物・コードの利用について（再度のご案内）
+    </h1>
+
+    <p>
+        るあ（バイナリ）が制作・公開している著作物・コード等の利用について、
+        改めてご案内します。
+    </p>
+
+    <p>
+        文章・画像・デザイン・コード等を利用する場合は、
+        必ず利用条件をご確認ください。
+    </p>
+
+    <p>
+        承認を受けずに利用条件に反する形で公開してしまった場合は、
+        公開後7日以内を目安にご連絡ください。
+    </p>
+
+    <p>
+        また、利用条件に反する使用が続くようであれば、
+        必要に応じて対応を行う場合があります。
+    </p>
+
+    <div class="news-info">
+        <p>
+            <strong>掲載日：</strong>
+            2026年9月16日
+        </p>
+    </div>
+
+    <p>
+        ご理解とご協力をお願いいたします。
+    </p>
+
+</article>
+
+    <!-- 2026.09.08 16:42 -->
+
+    <article class="news">
+
+        <article class="news-item">
+
+            <div class="news-date">
+                2026.09.08
+            </div>
+
+            <h2>
+                ホームページリニューアル公開のお知らせ
+            </h2>
+
+            <div class="news-content">
+
+                <h3>📢 ホームページをリニューアルしました！</h3>
+
+                <p>
+                    本日、BAINARI公式ホームページのリニューアルを公開しました。
+                </p>
+
+                <p>
+                    デザインやページ構成を見直し、
+                    より見やすく、使いやすいホームページを目指して
+                    リニューアルしています。
+                    (背景動画は準備ができ次第更新します。)
+                </p>
+
+                <p>
+                    今後も制作物や活動に関する情報を順次更新していきますので、
+                    ぜひご覧ください！
+                </p>
+
+                <div class="info-box">
+
+                    <p>
+                        <strong>公開日：</strong>2026年9月8日
+                    </p>
+
+                    <p>
+                        <strong>対象：</strong>BAINARI公式ホームページ
+                    </p>
+
+                </div>
+
+                <p class="thanks">
+                    これからもBAINARIをよろしくお願いします！
+                </p>
+
+            </div>
+
+        </article>
+
+
+        <div class="date">2026.09.08 16:42</div>
+
+        <h1>
+            ホームページリニューアル<br>
+            公開時間変更のお知らせ
+        </h1>
+
+        <p>
+            📢 お知らせ！
+        </p>
+
+        <p>
+            本日18:00に予定していたホームページリニューアルについて、
+            公開前の不備が確認されたため、公開時間を変更いたします。
+        </p>
+
+        <p>
+            現在、修正作業を行っています。
+            ご迷惑をおかけしますが、公開まで今しばらくお待ちください。
+        </p>
+
+        <div class="news-info">
+
+            <p><strong>変更後の公開時間：</strong>2026年9月8日 19:00</p>
+
+            <p><strong>現在の状況：</strong>修正作業中</p>
+
+        </div>
+
+        <p>
+            修正が完了次第、予定どおり19:00の公開を目指します。
+        </p>
+
+    </article>
+
+
+    <!-- 2026.09.07 23:34 -->
+
+    <article class="news">
+
+        <div class="date">2026.09.07 23:34</div>
+
+        <h1>
+            ホームページリニューアルのお知らせ
+        </h1>
+
+        <p>
+            ホームページリニューアルのお知らせをするのを忘れていました……！
+        </p>
+
+        <p>
+            2026年9月8日18:00より、
+            ホームページをリニューアルします。
+        </p>
+
+        <p>
+            今回のリニューアルでは、デザインやページ構成などを見直し、
+            より見やすく、分かりやすいホームページを目指しています。
+        </p>
+
+        <div class="news-info">
+
+            <p>
+                <strong>公開日時：</strong>
+                2026年9月8日（火）18:00
+            </p>
+
+        </div>
+
+        <p>
+            新しくなったホームページをぜひご覧ください！
+        </p>
+
+    </article>
+
+
+    <!-- 2026.09.06 復旧 -->
+
+    <article class="news">
+
+        <div class="date">2026.09.06</div>
+
+        <h1>
+            株シミュレーター 復旧のお知らせ
+        </h1>
+
+        <p>
+            株シミュレーターをご利用いただいている皆さま、
+            お待たせしました。
+        </p>
+
+        <p>
+            株価変動サーバーのOS故障により一時的に提供を停止していましたが、
+            復旧作業が完了し、サービスの提供を再開しました。
+        </p>
+
+        <p>
+            現在は正常にご利用いただけます。
+        </p>
+
+        <div class="news-info">
+
+            <p><strong>対象サービス：</strong>株シミュレーター</p>
+
+            <p><strong>現在の状況：</strong>提供再開</p>
+
+            <p><strong>原因：</strong>株価変動サーバーのOS故障</p>
+
+            <p><strong>停止期間：</strong>2026年9月3日～2026年9月6日</p>
+
+            <p><strong>復旧期間：</strong>約3日間</p>
+
+            <p><strong>復旧日：</strong>2026年9月6日</p>
+
+        </div>
+
+        <p>
+            ご利用の皆さまにはご不便・ご迷惑をおかけしましたことを
+            お詫び申し上げます。
+        </p>
+
+        <p>
+            復旧までお待ちいただき、ありがとうございました。
+        </p>
+
+        <div class="news-link">
+
+            <a href="https://bainarinoakaunto.github.io/kabusimyureta/kabu.html">
+                株シミュレーターを利用する
+            </a>
+
+        </div>
+
+    </article>
+
+
+    <!-- 2026.09.06 復旧のめど -->
+
+    <article class="news">
+
+        <div class="date">2026.09.06</div>
+
+        <h1>
+            株シミュレーター 復旧のめどについて
+        </h1>
+
+        <p>
+            株価変動サーバーのOS故障により、
+            株シミュレーターの提供を一時停止しています。
+        </p>
+
+        <p>
+            現在も復旧作業を進めていますが、
+            復旧のめどが立ちましたのでお知らせします。
+        </p>
+
+        <p>
+            現時点では、
+            <strong>2026年9月10日（木）ごろ</strong>
+            の復旧を予定しています。
+        </p>
+
+        <p>
+            なお、作業状況によって予定が変更となる場合があります。
+        </p>
+
+        <div class="news-info">
+
+            <p><strong>現在の状況：</strong>復旧作業中</p>
+
+            <p><strong>原因：</strong>株価変動サーバーのOS故障</p>
+
+            <p><strong>復旧予定：</strong>2026年9月10日ごろ</p>
+
+        </div>
+
+        <div class="news-link">
+
+            <a href="https://bainarinoakaunto.github.io/kabusimyureta/kabu.html">
+                株シミュレーターのページはこちら
+            </a>
+
+        </div>
+
+    </article>
+
+
+    <!-- 2026.09.03 -->
+
+    <article class="news">
+
+        <div class="date">2026.09.03</div>
+
+        <h1>
+            株シミュレーター 提供停止のお知らせ
+        </h1>
+
+        <p>
+            株価変動サーバーのOS故障が発生したため、
+            株シミュレーターの提供を一時停止しています。
+        </p>
+
+        <p>
+            現在、復旧作業を進めています。
+        </p>
+
+        <p>
+            現時点では復旧日時は未定です。
+            復旧日時が確定しましたら、改めてお知らせします。
+        </p>
+
+        <div class="news-info">
+
+            <p><strong>現在の状況：</strong>提供停止中</p>
+
+            <p><strong>原因：</strong>株価変動サーバーのOS故障</p>
+
+            <p><strong>復旧：</strong>未定</p>
+
+        </div>
+
+        <div class="news-link">
+
+            <a href="https://bainarinoakaunto.github.io/kabusimyureta/kabu.html">
+                株シミュレーターのページはこちら
+            </a>
+
+        </div>
+
+    </article>
+
+
+    <!-- 2026.09.01 -->
+
+    <article class="news">
+
+        <div class="date">2026.09.01</div>
+
+        <h1>
+            るあ 活動休止のお知らせ
+        </h1>
+
+        <p>
+            2026年9月1日より、活動を一時休止します。
+        </p>
+
+
+        <h2>
+            休止する活動について
+        </h2>
+
+        <ul>
+
+            <li>動画・コンテンツの新規投稿</li>
+
+            <li>ライブ配信</li>
+
+            <li>通常のSNS活動・投稿</li>
+
+            <li>プロジェクトへの参加</li>
+
+            <li>イベント・その他の活動</li>
+
+            <li>新規コンテンツの制作・公開</li>
+
+        </ul>
+
+
+        <h2>
+            継続する活動について
+        </h2>
+
+        <ul>
+
+            <li>GitHubプロジェクトの更新・メンテナンス</li>
+
+            <li>ソースコードの修正</li>
+
+            <li>開発活動</li>
+
+        </ul>
+
+        <p>
+            なお、GitHub上での更新が行われている場合でも、
+            通常の活動を再開したことを意味するものではありません。
+        </p>
+
+
+        <h2>
+            ファンの皆さまへ
+        </h2>
+
+        <p>
+            これまで応援してくださった皆さま、
+            コメントやメッセージ、日頃からの応援を本当にありがとうございます。
+        </p>
+
+        <p>
+            今回の活動休止期間を、自分自身を見つめ直し、
+            これからについて考えるための時間として大切に過ごしていきます。
+        </p>
+
+        <p>
+            活動再開の時期が決まりましたら、
+            当ホームページのNEWSにてお知らせします。
+        </p>
+
+        <p>
+            ご心配・ご迷惑をおかけしますが、
+            これからも温かく見守っていただけるとうれしいです。
+        </p>
+
+        <p>
+            これまで本当にありがとうございました。
+        </p>
+
+    </article>
+
+
+    <!-- 2026.07.31 -->
+
+    <article class="news">
+
+        <div class="date">2026.07.31</div>
+
+        <h1>
+            LinkページとStatusページを追加しました。
+        </h1>
+
+        <p>
+            ホームページに新しく
+            LinkページとStatusページを追加しました。
+        </p>
+
+    </article>
+
+
+    <!-- 2026.07.26 -->
+
+    <article class="news">
+
+        <div class="date">2026.07.26</div>
+
+        <h1>
+            BAINARI Official Website 開設
+        </h1>
+
+        <p>
+            BAINARI Official Websiteを開設しました。
+        </p>
+
+        <p>
+            以前使用していたホームページアカウントが
+            不正アクセスを受けたため、新しいWebサイトを公開しました。
+        </p>
+
+        <p>
+            今後はこちらのホームページを中心に、
+            活動情報や制作物などをお知らせしていきます。
+        </p>
+
+    </article>
+
+</main>
+
+
+<footer>
+    © BAINARI
+</footer>
+
+
+<script>
+
+const menuButton =
+    document.getElementById("menuButton");
+
+const mobileMenu =
+    document.getElementById("mobileMenu");
+
+
+menuButton.addEventListener("click", function(){
+
+    mobileMenu.classList.toggle("active");
+
+    menuButton.classList.toggle("active");
+
+    const isOpen =
+        mobileMenu.classList.contains("active");
+
+    menuButton.setAttribute(
+        "aria-expanded",
+        isOpen
+    );
+
+});
+
+
+mobileMenu
+    .querySelectorAll("a")
+    .forEach(function(link){
+
+        link.addEventListener("click", function(){
+
+            mobileMenu.classList.remove("active");
+
+            menuButton.classList.remove("active");
+
+            menuButton.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+        });
+
+    });
+
+
+document.addEventListener("click", function(event){
+
+    if(
+        !mobileMenu.contains(event.target) &&
+        !menuButton.contains(event.target)
+    ){
+
+        mobileMenu.classList.remove("active");
+
+        menuButton.classList.remove("active");
+
+        menuButton.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
+    }
+
+});
+
+</script>
+
+
+<!-- ACCESS RECORD NOTICE -->
+<div class="access-consent" id="accessConsent">
+    <div class="access-consent-text">
+        このサイトでは、アクセス日時・ページURL・端末・OS・ブラウザ等のアクセス情報を記録しています。
+    </div>
+    <button type="button" id="accessConsentButton" aria-label="アクセス記録のお知らせを閉じる">OK</button>
+</div>
+
+
+<script>
+/* =========================
+   ACCESS RECORD + NOTICE
+   ========================= */
+(function(){
+    const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSccfR4g1Ytnzr0aLv31R3NkjUWRmaaD6YwQnjNYF0d60Uexmg/formResponse";
+
+    function getDevice(){
+        const w=window.innerWidth;
+        if(w<=700) return "スマートフォン";
+        if(w<=1100) return "タブレット";
+        return "PC";
+    }
+    function getOS(){
+        const ua=navigator.userAgent;
+        if(/Android/i.test(ua)) return "Android";
+        if(/iPhone|iPad|iPod/i.test(ua)) return "iOS / iPadOS";
+        if(/Windows/i.test(ua)) return "Windows";
+        if(/Mac OS X/i.test(ua)) return "macOS";
+        if(/CrOS/i.test(ua)) return "ChromeOS";
+        if(/Linux/i.test(ua)) return "Linux";
+        return "その他 / 不明";
+    }
+    function getBrowser(){
+        const ua=navigator.userAgent;
+        if(/Edg\//i.test(ua)) return "Microsoft Edge";
+        if(/OPR\//i.test(ua)) return "Opera";
+        if(/Chrome\//i.test(ua) && !/Edg\//i.test(ua)) return "Google Chrome";
+        if(/Firefox\//i.test(ua)) return "Firefox";
+        if(/Safari\//i.test(ua) && !/Chrome\//i.test(ua)) return "Safari";
+        return "その他 / 不明";
+    }
+
+    function sendAccessLog(){
+        const now=new Date();
+        const params=new URLSearchParams();
+        params.set("entry.1390942320", now.toLocaleString("ja-JP", {timeZone:"Asia/Tokyo"}));
+        params.set("entry.600562719", location.href);
+        params.set("entry.32786128", document.title);
+        params.set("entry.318452337", getDevice());
+        params.set("entry.1152326462", getOS());
+        params.set("entry.777710718", getBrowser());
+
+        // Hidden iframe + form submit: Google Formsの送信を確実に行う
+        const iframe=document.createElement("iframe");
+        iframe.name="accessLogFrame_"+Date.now();
+        iframe.style.display="none";
+        document.body.appendChild(iframe);
+
+        const form=document.createElement("form");
+        form.method="GET";
+        form.action=FORM_URL;
+        form.target=iframe.name;
+        form.style.display="none";
+
+        params.forEach((value,key)=>{
+            const input=document.createElement("input");
+            input.type="hidden";
+            input.name=key;
+            input.value=value;
+            form.appendChild(input);
+        });
+        document.body.appendChild(form);
+        form.submit();
+    }
+
+    function setupNotice(){
+        const notice=document.getElementById("accessConsent");
+        const button=document.getElementById("accessConsentButton");
+        if(!notice || !button) return;
+        button.addEventListener("click", function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            notice.remove();
+            try{ sessionStorage.setItem("accessNoticeAccepted","1"); }catch(e){}
+        });
+        try{
+            if(sessionStorage.getItem("accessNoticeAccepted")==="1") notice.remove();
+        }catch(e){}
+    }
+
+    function start(){
+        setupNotice();
+        sendAccessLog();
+    }
+    if(document.readyState==="loading"){
+        document.addEventListener("DOMContentLoaded", start, {once:true});
+    }else{
+        start();
+    }
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>株シミュレーター 推奨動作環境チェッカー</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:"Noto Sans JP",Arial,sans-serif;
+    background:#08111f;
+    color:white;
+}
+
+
+.container{
+    width:100%;
+    max-width:750px;
+    margin:50px auto;
+    padding:20px;
+}
+
+
+.card{
+    background:#132238;
+    padding:25px;
+    border-radius:20px;
+    margin-bottom:20px;
+}
+
+
+h1,h2{
+    text-align:center;
+}
+
+
+button{
+    width:100%;
+    padding:16px;
+    margin-top:15px;
+    border:none;
+    border-radius:12px;
+    background:#00aaff;
+    color:white;
+    font-size:17px;
+    cursor:pointer;
+}
+
+
+.item{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    padding:12px 0;
+    border-bottom:1px solid #ffffff22;
+}
+
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:#0008;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+
+.notice{
+    width:100%;
+    max-width:450px;
+    max-height:90vh;
+    overflow:auto;
+    background:#132238;
+    padding:30px;
+    border-radius:20px;
+}
+
+
+.ok{
+    color:#4cff88;
+}
+
+
+.ng{
+    color:#ff7777;
+}
+
+
+.close{
+    background:#555;
+}
+
+
+.license{
+    display:none;
+}
+
+
+
+/* スマホ対応 */
+
+@media(max-width:600px){
+
+.container{
+    margin:20px auto;
+    padding:15px;
+}
+
+
+h1{
+    font-size:24px;
+}
+
+
+.card{
+    padding:20px;
+}
+
+
+.notice{
+    padding:20px;
+}
+
+
+.item{
+    display:block;
+}
+
+
+.item span:first-child{
+    display:block;
+    font-weight:bold;
+    margin-bottom:5px;
+}
+
+
+button{
+    font-size:18px;
+    padding:18px;
+}
+
+}
+
+
+
+/* =========================
+   ACCESS RECORD NOTICE
+   ========================= */
+.access-consent{
+    position:fixed;
+    left:0;
+    right:0;
+    bottom:0;
+    z-index:99999;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:18px;
+    padding:14px 20px;
+    background:rgba(0,0,0,.92);
+    color:#fff;
+    box-shadow:0 -3px 15px rgba(0,0,0,.25);
+}
+.access-consent-text{font-size:12px;line-height:1.6;}
+.access-consent button{
+    flex-shrink:0;
+    padding:9px 24px;
+    border:0;
+    border-radius:20px;
+    background:#fff;
+    color:#006F68;
+    font-size:13px;
+    font-weight:bold;
+    cursor:pointer;
+}
+.access-consent button:hover{opacity:.85;}
+@media(max-width:700px){
+    .access-consent{gap:10px;padding:10px 12px;}
+    .access-consent-text{font-size:10px;}
+    .access-consent button{padding:8px 18px;font-size:12px;}
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<h1>
+📈 新株シミュレーター<br>
+推奨動作環境チェッカー
+</h1>
+
+
+<div class="card">
+
+<p>
+スマートフォン・PCの動作環境を確認します。
+</p>
+
+<button onclick="check()">
+🔍 動作環境を確認する
+</button>
+
+</div>
+
+
+
+<div class="card">
+
+<h2>📋 推奨動作環境</h2>
+
+
+<div class="item">
+<span>OS</span>
+<span>Windows 10/11・macOS・iOS・Android</span>
+</div>
+
+
+<div class="item">
+<span>ブラウザ</span>
+<span>Chrome / Edge / Safari 最新版</span>
+</div>
+
+
+<div class="item">
+<span>CPU</span>
+<span>4コア以上</span>
+</div>
+
+
+<div class="item">
+<span>メモリ</span>
+<span>4GB以上（8GB推奨）</span>
+</div>
+
+
+<div class="item">
+<span>画面</span>
+<span>1024×768以上</span>
+</div>
+
+
+<div class="item">
+<span>通信</span>
+<span>安定したインターネット接続</span>
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+
+<div class="modal" id="modal">
+
+<div class="notice">
+
+<h2>確認結果</h2>
+
+
+<div class="item">
+<span>OS</span>
+<span id="os"></span>
+</div>
+
+
+<div class="item">
+<span>ブラウザ</span>
+<span id="browser"></span>
+</div>
+
+
+<div class="item">
+<span>画面サイズ</span>
+<span id="screen"></span>
+</div>
+
+
+<div class="item">
+<span>メモリ</span>
+<span id="memory"></span>
+</div>
+
+
+<div class="item">
+<span>CPU</span>
+<span id="cpu"></span>
+</div>
+
+
+<div class="item">
+<span>通信状態</span>
+<span id="network"></span>
+</div>
+
+
+<div id="summary"></div>
+
+
+
+<div class="license" id="license">
+
+<p>
+⚠ 推奨環境を満たしていない場合、または動作速度が低下する可能性がある場合は、
+従来版利用ライセンスの発行を申請してください。
+</p>
+
+
+<button onclick="openForm()">
+従来版利用ライセンス申請
+</button>
+
+</div>
+
+
+<button class="close" onclick="closeModal()">
+閉じる
+</button>
+
+
+</div>
+
+</div>
+
+
+
+
+<script>
+
+
+function status(ok,text){
+
+return ok
+?
+"<span class='ok'>✓ "+text+"</span>"
+:
+"<span class='ng'>△ "+text+"</span>";
+
+}
+
+
+
+function check(){
+
+document.getElementById("modal").style.display="flex";
+
+
+let ua=navigator.userAgent;
+
+
+// OS
+
+let os="不明";
+
+if(ua.includes("Windows")) os="Windows";
+else if(ua.includes("Mac")) os="macOS";
+else if(ua.includes("iPhone")) os="iPhone";
+else if(ua.includes("Android")) os="Android";
+
+
+document.getElementById("os").innerHTML=status(os!="不明",os);
+
+
+
+// ブラウザ
+
+let browser="不明";
+
+if(ua.includes("Edg")) browser="Edge";
+else if(ua.includes("Chrome")) browser="Chrome";
+else if(ua.includes("Safari")) browser="Safari";
+
+
+document.getElementById("browser").innerHTML=
+status(browser!="不明",browser);
+
+
+
+// 画面
+
+let screenOK=screen.width>=320;
+
+
+document.getElementById("screen").innerHTML=
+status(screenOK,screen.width+"×"+screen.height);
+
+
+
+// メモリ
+
+let ram=navigator.deviceMemory||0;
+
+
+document.getElementById("memory").innerHTML=
+ram ? status(ram>=4,ram+"GB") : "取得不可";
+
+
+
+// CPU
+
+let cpu=navigator.hardwareConcurrency||0;
+
+
+document.getElementById("cpu").innerHTML=
+status(cpu>=4,cpu+"コア");
+
+
+
+// 通信
+
+let online=navigator.onLine;
+
+
+document.getElementById("network").innerHTML=
+status(online,"オンライン接続中");
+
+
+
+// 判定
+
+let bad=false;
+
+if(!screenOK) bad=true;
+if(ram && ram<4) bad=true;
+if(cpu && cpu<4) bad=true;
+if(!online) bad=true;
+
+
+if(bad){
+
+document.getElementById("summary").innerHTML=
+"<h2 class='ng'>⚠ 推奨環境外</h2>";
+
+document.getElementById("license").style.display="block";
+
+}else{
+
+document.getElementById("summary").innerHTML=
+"<h2 class='ok'>🎉 推奨環境です</h2>";
+
+}
+
+}
+
+
+
+function openForm(){
+
+window.open(
+"https://forms.gle/HZsA857GapWiuods6",
+"_blank"
+);
+
+}
+
+
+
+function closeModal(){
+
+document.getElementById("modal").style.display="none";
+
+}
+
+
+</script>
+
+
+
+<!-- ACCESS RECORD NOTICE -->
+<div class="access-consent" id="accessConsent">
+    <div class="access-consent-text">
+        このサイトでは、アクセス日時・ページURL・端末・OS・ブラウザ等のアクセス情報を記録しています。
+    </div>
+    <button type="button" id="accessConsentButton" aria-label="アクセス記録のお知らせを閉じる">OK</button>
+</div>
+
+
+<script>
+/* =========================
+   ACCESS RECORD + NOTICE
+   ========================= */
+(function(){
+    const FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSccfR4g1Ytnzr0aLv31R3NkjUWRmaaD6YwQnjNYF0d60Uexmg/formResponse";
+
+    function getDevice(){
+        const w=window.innerWidth;
+        if(w<=700) return "スマートフォン";
+        if(w<=1100) return "タブレット";
+        return "PC";
+    }
+    function getOS(){
+        const ua=navigator.userAgent;
+        if(/Android/i.test(ua)) return "Android";
+        if(/iPhone|iPad|iPod/i.test(ua)) return "iOS / iPadOS";
+        if(/Windows/i.test(ua)) return "Windows";
+        if(/Mac OS X/i.test(ua)) return "macOS";
+        if(/CrOS/i.test(ua)) return "ChromeOS";
+        if(/Linux/i.test(ua)) return "Linux";
+        return "その他 / 不明";
+    }
+    function getBrowser(){
+        const ua=navigator.userAgent;
+        if(/Edg\//i.test(ua)) return "Microsoft Edge";
+        if(/OPR\//i.test(ua)) return "Opera";
+        if(/Chrome\//i.test(ua) && !/Edg\//i.test(ua)) return "Google Chrome";
+        if(/Firefox\//i.test(ua)) return "Firefox";
+        if(/Safari\//i.test(ua) && !/Chrome\//i.test(ua)) return "Safari";
+        return "その他 / 不明";
+    }
+
+    function sendAccessLog(){
+        const now=new Date();
+        const params=new URLSearchParams();
+        params.set("entry.1390942320", now.toLocaleString("ja-JP", {timeZone:"Asia/Tokyo"}));
+        params.set("entry.600562719", location.href);
+        params.set("entry.32786128", document.title);
+        params.set("entry.318452337", getDevice());
+        params.set("entry.1152326462", getOS());
+        params.set("entry.777710718", getBrowser());
+
+        // Hidden iframe + form submit: Google Formsの送信を確実に行う
+        const iframe=document.createElement("iframe");
+        iframe.name="accessLogFrame_"+Date.now();
+        iframe.style.display="none";
+        document.body.appendChild(iframe);
+
+        const form=document.createElement("form");
+        form.method="GET";
+        form.action=FORM_URL;
+        form.target=iframe.name;
+        form.style.display="none";
+
+        params.forEach((value,key)=>{
+            const input=document.createElement("input");
+            input.type="hidden";
+            input.name=key;
+            input.value=value;
+            form.appendChild(input);
+        });
+        document.body.appendChild(form);
+        form.submit();
+    }
+
+    function setupNotice(){
+        const notice=document.getElementById("accessConsent");
+        const button=document.getElementById("accessConsentButton");
+        if(!notice || !button) return;
+        button.addEventListener("click", function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            notice.remove();
+            try{ sessionStorage.setItem("accessNoticeAccepted","1"); }catch(e){}
+        });
+        try{
+            if(sessionStorage.getItem("accessNoticeAccepted")==="1") notice.remove();
+        }catch(e){}
+    }
+
+    function start(){
+        setupNotice();
+        sendAccessLog();
+    }
+    if(document.readyState==="loading"){
+        document.addEventListener("DOMContentLoaded", start, {once:true});
+    }else{
+        start();
+    }
+})();
+</script>
+
+</body>
+</html>
