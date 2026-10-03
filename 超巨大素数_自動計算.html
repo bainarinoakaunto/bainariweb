@@ -1,0 +1,1667 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>超巨大素数 自動計算</title>
+
+<!-- Excel(.xlsx)生成用 -->
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Noto Sans JP",
+        sans-serif;
+    background:#070a12;
+    color:#f3f4f6;
+}
+
+header{
+    padding:32px 20px;
+    text-align:center;
+    background:linear-gradient(
+        135deg,
+        #312e81,
+        #7c3aed,
+        #2563eb
+    );
+}
+
+header h1{
+    margin:0;
+    font-size:clamp(28px,6vw,46px);
+}
+
+header p{
+    margin:10px 0 0;
+    color:#e0e7ff;
+}
+
+main{
+    width:min(1150px,calc(100% - 24px));
+    margin:20px auto 50px;
+}
+
+.card{
+    background:#111827;
+    border:1px solid #283247;
+    border-radius:20px;
+    padding:20px;
+    margin-bottom:16px;
+    box-shadow:0 10px 35px rgba(0,0,0,.25);
+}
+
+.controls{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    align-items:center;
+}
+
+button,
+select,
+input{
+    border:0;
+    border-radius:10px;
+    padding:12px 15px;
+    font-size:14px;
+}
+
+button{
+    background:#6366f1;
+    color:white;
+    font-weight:800;
+    cursor:pointer;
+}
+
+button:hover{
+    filter:brightness(1.12);
+}
+
+.stop{
+    background:#ef4444;
+}
+
+.reset{
+    background:#475569;
+}
+
+.excel{
+    background:#059669;
+}
+
+input,
+select{
+    background:#20283a;
+    color:white;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    gap:10px;
+}
+
+.stat{
+    background:#182235;
+    border-radius:14px;
+    padding:15px;
+    text-align:center;
+}
+
+.stat span{
+    display:block;
+    font-size:13px;
+    color:#94a3b8;
+}
+
+.stat b{
+    display:block;
+    margin-top:6px;
+    font-size:22px;
+    color:#c4b5fd;
+    word-break:break-all;
+}
+
+.big-number{
+    font-size:clamp(20px,4vw,38px);
+    font-weight:900;
+    color:#ddd6fe;
+    word-break:break-all;
+    line-height:1.4;
+}
+
+.status{
+    color:#94a3b8;
+}
+
+.formula{
+    margin-top:12px;
+    padding:15px;
+    border-radius:12px;
+    background:#090d18;
+    color:#cbd5e1;
+    font-family:
+        ui-monospace,
+        SFMono-Regular,
+        Menlo,
+        Consolas,
+        monospace;
+    white-space:pre-wrap;
+    overflow:auto;
+    line-height:1.65;
+}
+
+#primeList{
+    height:500px;
+    overflow-y:auto;
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+}
+
+.prime{
+    padding:10px 12px;
+    background:#18233b;
+    border:1px solid #303e62;
+    border-radius:10px;
+    word-break:break-all;
+    font-family:
+        ui-monospace,
+        SFMono-Regular,
+        Menlo,
+        Consolas,
+        monospace;
+}
+
+.note{
+    font-size:13px;
+    color:#aab4c8;
+    line-height:1.7;
+}
+
+.warning{
+    margin-top:12px;
+    padding:11px 13px;
+    background:#332b12;
+    color:#fde68a;
+    border-radius:10px;
+    font-size:13px;
+    line-height:1.6;
+}
+
+.explanation{
+    display:grid;
+    gap:10px;
+    margin-top:15px;
+}
+
+.explanationBox{
+    background:#182235;
+    border-radius:12px;
+    padding:14px;
+    line-height:1.7;
+}
+
+@media(max-width:850px){
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+}
+
+@media(max-width:600px){
+    .controls > *{
+        width:100%;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>⚡ 超巨大素数 自動計算</h1>
+    <p>0から順番に1個ずつ調べます</p>
+</header>
+
+<main>
+
+<!-- =====================================================
+     設定
+===================================================== -->
+
+<section class="card">
+
+    <h2>⚙️ 計算設定</h2>
+
+    <div class="controls">
+
+        <button onclick="startCalculation()">
+            ▶ 開始
+        </button>
+
+        <button
+            class="stop"
+            onclick="stopCalculation()">
+            ⏸ 停止
+        </button>
+
+        <button
+            class="reset"
+            onclick="resetCalculation()">
+            ↺ リセット
+        </button>
+
+        <label>
+            Miller–Rabin回数：
+            <select id="rounds">
+                <option value="8">8回</option>
+                <option value="16" selected>16回</option>
+                <option value="32">32回</option>
+            </select>
+        </label>
+
+        <button
+            class="excel"
+            onclick="exportExcel()">
+            📊 Excel出力
+        </button>
+
+    </div>
+
+    <p class="status" id="status">
+        停止中
+    </p>
+
+    <div class="warning">
+        Excelでは巨大整数を正確な「数値」として扱えないため、
+        素数そのものは文字列として保存します。
+        これにより100桁、1000桁なども表示上欠けません。
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     統計
+===================================================== -->
+
+<section class="card">
+
+    <div class="stats">
+
+        <div class="stat">
+            <span>現在の数</span>
+            <b id="current">0</b>
+        </div>
+
+        <div class="stat">
+            <span>発見した素数</span>
+            <b id="found">0</b>
+        </div>
+
+        <div class="stat">
+            <span>判定速度</span>
+            <b id="rate">0 /秒</b>
+        </div>
+
+        <div class="stat">
+            <span>自動バッチ</span>
+            <b id="batch">1</b>
+        </div>
+
+        <div class="stat">
+            <span>CPU温度</span>
+            <b id="temperature">取得不可</b>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     現在値
+===================================================== -->
+
+<section class="card">
+
+    <h2>🔢 現在処理している数</h2>
+
+    <div
+        class="big-number"
+        id="bigCurrent">
+        0
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     最新の判定
+===================================================== -->
+
+<section class="card">
+
+    <h2>🧮 最新の計算</h2>
+
+    <div
+        class="big-number"
+        id="latestNumber">
+        —
+    </div>
+
+    <p id="latestResult">
+        まだ計算していません。
+    </p>
+
+    <div
+        class="formula"
+        id="formula">
+n = —
+判定 = —
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     素数一覧
+===================================================== -->
+
+<section class="card">
+
+    <h2>✨ 見つかった素数</h2>
+
+    <div id="primeList"></div>
+
+</section>
+
+
+<!-- =====================================================
+     数式の説明
+===================================================== -->
+
+<section class="card">
+
+    <h2>📘 計算の根拠</h2>
+
+    <div class="explanation">
+
+        <div class="explanationBox">
+            <strong>① 基本条件</strong><br>
+            素数は「1と自分自身以外に正の約数を持たない」
+            2以上の整数です。
+        </div>
+
+        <div class="explanationBox">
+            <strong>② Miller–Rabin法</strong><br>
+            n - 1 を
+            <b>n - 1 = 2<sup>s</sup> × d</b>
+            と表し、べき乗剰余を使って合成数かどうかを調べます。
+        </div>
+
+        <div class="explanationBox">
+            <strong>③ 使用する数式</strong><br>
+            <code>a<sup>d</sup> mod n</code><br>
+            <code>x ← x<sup>2</sup> mod n</code>
+        </div>
+
+        <div class="explanationBox">
+            <strong>④ 巨大整数</strong><br>
+            JavaScriptのBigIntを使うため、
+            通常のNumberでは扱えない非常に大きな整数を処理できます。
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<script>
+
+/* =====================================================
+   状態
+===================================================== */
+
+let running = false;
+
+let current = 0n;
+
+let foundCount = 0;
+
+let testedCount = 0;
+
+let batchSize = 1;
+
+let totalTestedForSpeed = 0;
+
+let lastSpeedTime = performance.now();
+
+let rounds = 16;
+
+
+/*
+   Excel出力用
+
+   1つの素数について、
+   「数」「結果」「根拠」「数式」
+   をまとめて保存します。
+*/
+
+let primeRecords = [];
+
+
+/* =====================================================
+   DOM
+===================================================== */
+
+const currentEl =
+    document.getElementById("current");
+
+const bigCurrentEl =
+    document.getElementById("bigCurrent");
+
+const foundEl =
+    document.getElementById("found");
+
+const rateEl =
+    document.getElementById("rate");
+
+const batchEl =
+    document.getElementById("batch");
+
+const temperatureEl =
+    document.getElementById("temperature");
+
+const statusEl =
+    document.getElementById("status");
+
+const latestNumberEl =
+    document.getElementById("latestNumber");
+
+const latestResultEl =
+    document.getElementById("latestResult");
+
+const formulaEl =
+    document.getElementById("formula");
+
+const primeListEl =
+    document.getElementById("primeList");
+
+
+/* =====================================================
+   BigInt：高速べき乗剰余
+===================================================== */
+
+function modPow(
+    base,
+    exponent,
+    mod
+){
+
+    let result = 1n;
+
+    base %= mod;
+
+
+    while(exponent > 0n){
+
+        if(exponent & 1n){
+
+            result =
+                (result * base) % mod;
+        }
+
+        base =
+            (base * base) % mod;
+
+        exponent >>= 1n;
+    }
+
+    return result;
+}
+
+
+/* =====================================================
+   n-1 = 2^s × d
+===================================================== */
+
+function decomposeNMinusOne(n){
+
+    let d =
+        n - 1n;
+
+    let s = 0;
+
+
+    while(
+        (d & 1n) === 0n
+    ){
+
+        d >>= 1n;
+
+        s++;
+    }
+
+
+    return {
+        s:s,
+        d:d
+    };
+}
+
+
+/* =====================================================
+   乱数
+===================================================== */
+
+function randomBelow(max){
+
+    const bits =
+        max.toString(2).length;
+
+    const bytes =
+        Math.ceil(bits / 8);
+
+
+    while(true){
+
+        const data =
+            new Uint8Array(bytes);
+
+        crypto.getRandomValues(data);
+
+
+        let value = 0n;
+
+
+        for(
+            const byte
+            of data
+        ){
+
+            value =
+                (value << 8n) |
+                BigInt(byte);
+        }
+
+
+        if(value < max){
+
+            return value;
+        }
+    }
+}
+
+
+/* =====================================================
+   Miller-Rabin
+===================================================== */
+
+function millerRabin(
+    n,
+    k
+){
+
+    if(n < 2n){
+
+        return {
+            prime:false,
+            bases:[],
+            s:0,
+            d:0n
+        };
+    }
+
+
+    const smallPrimes = [
+        2n,
+        3n,
+        5n,
+        7n,
+        11n,
+        13n,
+        17n,
+        19n,
+        23n,
+        29n,
+        31n,
+        37n
+    ];
+
+
+    for(
+        const p
+        of smallPrimes
+    ){
+
+        if(n === p){
+
+            return {
+                prime:true,
+                bases:[p.toString()],
+                s:0,
+                d:0n
+            };
+        }
+
+
+        if(n % p === 0n){
+
+            return {
+                prime:false,
+                bases:[p.toString()],
+                s:0,
+                d:0n,
+                divisor:p.toString()
+            };
+        }
+    }
+
+
+    const decomposition =
+        decomposeNMinusOne(n);
+
+
+    const s =
+        decomposition.s;
+
+    const d =
+        decomposition.d;
+
+
+    const bases = [];
+
+
+    for(
+        let i = 0;
+        i < k;
+        i++
+    ){
+
+        const a =
+            2n +
+            randomBelow(
+                n - 3n
+            );
+
+
+        bases.push(
+            a.toString()
+        );
+
+
+        let x =
+            modPow(
+                a,
+                d,
+                n
+            );
+
+
+        if(
+            x === 1n ||
+            x === n - 1n
+        ){
+
+            continue;
+        }
+
+
+        let witnessFound =
+            true;
+
+
+        for(
+            let r = 1;
+            r < s;
+            r++
+        ){
+
+            x =
+                (x * x) % n;
+
+
+            if(
+                x === n - 1n
+            ){
+
+                witnessFound =
+                    false;
+
+                break;
+            }
+        }
+
+
+        if(witnessFound){
+
+            return {
+                prime:false,
+                bases:bases,
+                s:s,
+                d:d,
+                divisor:"Miller-Rabinで合成数と判定"
+            };
+        }
+    }
+
+
+    return {
+        prime:true,
+        bases:bases,
+        s:s,
+        d:d
+    };
+}
+
+
+/* =====================================================
+   素数判定
+===================================================== */
+
+function checkPrime(n){
+
+    if(n < 2n){
+
+        return {
+            prime:false,
+            reason:"2未満"
+        };
+    }
+
+
+    if(n === 2n){
+
+        return {
+            prime:true,
+            method:"直接判定"
+        };
+    }
+
+
+    if(n % 2n === 0n){
+
+        return {
+            prime:false,
+            method:"偶数判定",
+            divisor:"2"
+        };
+    }
+
+
+    return {
+        ...millerRabin(
+            n,
+            rounds
+        ),
+        method:"Miller-Rabin"
+    };
+}
+
+
+/* =====================================================
+   素数を画面に追加
+===================================================== */
+
+function addPrimeToScreen(
+    n
+){
+
+    const element =
+        document.createElement(
+            "div"
+        );
+
+
+    element.className =
+        "prime";
+
+
+    element.textContent =
+        n.toString();
+
+
+    primeListEl.prepend(
+        element
+    );
+}
+
+
+/* =====================================================
+   Excel用記録
+===================================================== */
+
+function recordPrime(
+    n,
+    info
+){
+
+    const decomposition =
+        info.s !== undefined
+            ? "n - 1 = 2^" +
+              info.s +
+              " × " +
+              info.d.toString()
+            : "直接判定";
+
+
+    const reason =
+        info.method ===
+            "偶数判定"
+            ? "2で割り切れるため合成数"
+            :
+        info.method ===
+            "直接判定"
+            ? "既知の素数 2"
+            :
+        "Miller-Rabinを" +
+        rounds +
+        "回実行し、合成数を示す結果が得られなかった";
+
+
+    primeRecords.push({
+
+        number:
+            n.toString(),
+
+        result:
+            "素数候補",
+
+        method:
+            info.method || "Miller-Rabin",
+
+        evidence:
+            reason,
+
+        decomposition:
+            decomposition,
+
+        rounds:
+            rounds,
+
+        bases:
+            info.bases
+                ? info.bases.join(", ")
+                : "",
+
+        powerFormula:
+            "a^d mod n",
+
+        squareFormula:
+            "x ← x^2 mod n"
+
+    });
+}
+
+
+/* =====================================================
+   1個処理
+===================================================== */
+
+function calculateOne(){
+
+    const n =
+        current;
+
+
+    const info =
+        checkPrime(n);
+
+
+    testedCount++;
+
+    totalTestedForSpeed++;
+
+
+    if(info.prime){
+
+        foundCount++;
+
+
+        addPrimeToScreen(
+            n
+        );
+
+
+        recordPrime(
+            n,
+            info
+        );
+    }
+
+
+    latestNumberEl.textContent =
+        n.toString();
+
+
+    current =
+        n + 1n;
+
+
+    currentEl.textContent =
+        current.toString();
+
+
+    bigCurrentEl.textContent =
+        current.toString();
+
+
+    foundEl.textContent =
+        foundCount.toLocaleString();
+
+
+    if(n < 2n){
+
+        latestResultEl.textContent =
+            "ℹ️ 2未満なので素数ではありません。";
+
+        formulaEl.textContent =
+            "n = " +
+            n.toString() +
+            "\n" +
+            "n < 2\n" +
+            "判定 = 素数ではない";
+
+        return;
+    }
+
+
+    if(
+        info.prime
+    ){
+
+        latestResultEl.textContent =
+            "✅ 素数候補";
+
+    }
+    else{
+
+        latestResultEl.textContent =
+            "❌ 合成数";
+    }
+
+
+    let formula =
+        "n = " +
+        n.toString() +
+        "\n\n";
+
+
+    if(
+        info.s !== undefined
+    ){
+
+        formula +=
+            "n - 1 = 2^s × d\n" +
+            "s = " +
+            info.s +
+            "\n" +
+            "d = " +
+            info.d.toString() +
+            "\n\n";
+    }
+
+
+    formula +=
+        "使用式:\n" +
+        "a^d mod n\n" +
+        "x ← x^2 mod n\n\n" +
+        "Miller-Rabin反復回数 = " +
+        rounds +
+        "\n\n" +
+        "判定 = " +
+        (
+            info.prime
+                ? "素数候補"
+                : "合成数"
+        );
+
+
+    if(info.divisor){
+
+        formula +=
+            "\n根拠 = " +
+            info.divisor;
+    }
+
+
+    formulaEl.textContent =
+        formula;
+}
+
+
+/* =====================================================
+   自動計算
+===================================================== */
+
+function calculationLoop(){
+
+    if(!running){
+
+        return;
+    }
+
+
+    const start =
+        performance.now();
+
+
+    for(
+        let i = 0;
+        i < batchSize;
+        i++
+    ){
+
+        calculateOne();
+    }
+
+
+    const elapsed =
+        performance.now() -
+        start;
+
+
+    const now =
+        performance.now();
+
+
+    const speedElapsed =
+        now -
+        lastSpeedTime;
+
+
+    if(
+        speedElapsed >= 500
+    ){
+
+        const speed =
+            totalTestedForSpeed /
+            (
+                speedElapsed /
+                1000
+            );
+
+
+        rateEl.textContent =
+            Math.round(
+                speed
+            ).toLocaleString() +
+            " /秒";
+
+
+        totalTestedForSpeed =
+            0;
+
+        lastSpeedTime =
+            now;
+    }
+
+
+    /*
+       自動速度調整
+    */
+
+    if(elapsed < 8){
+
+        batchSize =
+            Math.min(
+                batchSize * 2,
+                100000
+            );
+    }
+    else if(elapsed < 15){
+
+        batchSize =
+            Math.min(
+                Math.floor(
+                    batchSize * 1.5
+                ) + 1,
+                100000
+            );
+    }
+    else if(elapsed > 60){
+
+        batchSize =
+            Math.max(
+                1,
+                Math.floor(
+                    batchSize / 2
+                )
+            );
+    }
+    else if(elapsed > 35){
+
+        batchSize =
+            Math.max(
+                1,
+                Math.floor(
+                    batchSize * 0.75
+                )
+            );
+    }
+
+
+    batchEl.textContent =
+        batchSize.toLocaleString();
+
+
+    statusEl.textContent =
+        "⚡ 0から順番に計算中…";
+
+
+    setTimeout(
+        calculationLoop,
+        0
+    );
+}
+
+
+/* =====================================================
+   開始
+===================================================== */
+
+function startCalculation(){
+
+    if(running){
+
+        return;
+    }
+
+
+    rounds =
+        Number(
+            document.getElementById(
+                "rounds"
+            ).value
+        );
+
+
+    running =
+        true;
+
+
+    lastSpeedTime =
+        performance.now();
+
+
+    totalTestedForSpeed =
+        0;
+
+
+    statusEl.textContent =
+        "⚡ 0から順番に計算中…";
+
+
+    calculationLoop();
+}
+
+
+/* =====================================================
+   停止
+===================================================== */
+
+function stopCalculation(){
+
+    running =
+        false;
+
+
+    statusEl.textContent =
+        "⏸ 停止中";
+}
+
+
+/* =====================================================
+   リセット
+===================================================== */
+
+function resetCalculation(){
+
+    running =
+        false;
+
+
+    current =
+        0n;
+
+
+    foundCount =
+        0;
+
+
+    testedCount =
+        0;
+
+
+    batchSize =
+        1;
+
+
+    totalTestedForSpeed =
+        0;
+
+
+    primeRecords =
+        [];
+
+
+    currentEl.textContent =
+        "0";
+
+
+    bigCurrentEl.textContent =
+        "0";
+
+
+    foundEl.textContent =
+        "0";
+
+
+    rateEl.textContent =
+        "0 /秒";
+
+
+    batchEl.textContent =
+        "1";
+
+
+    latestNumberEl.textContent =
+        "—";
+
+
+    latestResultEl.textContent =
+        "まだ計算していません。";
+
+
+    formulaEl.textContent =
+        "n = —\n判定 = —";
+
+
+    primeListEl.innerHTML =
+        "";
+
+
+    statusEl.textContent =
+        "停止中";
+}
+
+
+/* =====================================================
+   CPU温度
+===================================================== */
+
+async function updateTemperature(){
+
+    try{
+
+        /*
+           標準Web APIとして
+           CPU温度を取得できないブラウザが多いため、
+           対応していない場合は取得不可にします。
+        */
+
+        if(
+            "temperature" in navigator &&
+            typeof navigator.temperature ===
+                "number"
+        ){
+
+            temperatureEl.textContent =
+                navigator.temperature.toFixed(
+                    1
+                ) +
+                " °C";
+
+            return;
+        }
+
+    }
+    catch(error){
+
+        console.warn(
+            error
+        );
+    }
+
+
+    temperatureEl.textContent =
+        "取得不可";
+}
+
+
+updateTemperature();
+
+setInterval(
+    updateTemperature,
+    2000
+);
+
+
+/* =====================================================
+   Excel出力
+===================================================== */
+
+function exportExcel(){
+
+    /*
+       SheetJSが読み込めているか確認
+    */
+
+    if(
+        typeof XLSX ===
+        "undefined"
+    ){
+
+        alert(
+            "Excel出力ライブラリを読み込めませんでした。"
+        );
+
+        return;
+    }
+
+
+    const workbook =
+        XLSX.utils.book_new();
+
+
+    /* =================================================
+       シート1：素数一覧
+    ================================================= */
+
+    const primeRows = [
+
+        [
+            "素数一覧"
+        ],
+
+        [],
+
+        [
+            "No.",
+            "素数",
+            "桁数",
+            "判定",
+            "判定方法",
+            "Miller-Rabin回数"
+        ]
+
+    ];
+
+
+    primeRecords.forEach(
+        (record,index) => {
+
+            primeRows.push([
+
+                index + 1,
+
+                record.number,
+
+                record.number.length,
+
+                record.result,
+
+                record.method,
+
+                record.rounds
+
+            ]);
+        }
+    );
+
+
+    const primeSheet =
+        XLSX.utils.aoa_to_sheet(
+            primeRows
+        );
+
+
+    primeSheet["!cols"] = [
+
+        {wch:8},
+        {wch:80},
+        {wch:10},
+        {wch:15},
+        {wch:22},
+        {wch:22}
+
+    ];
+
+
+    XLSX.utils.book_append_sheet(
+        workbook,
+        primeSheet,
+        "素数一覧"
+    );
+
+
+    /* =================================================
+       シート2：計算根拠
+    ================================================= */
+
+    const evidenceRows = [
+
+        [
+            "素数ごとの計算根拠"
+        ],
+
+        [],
+
+        [
+            "No.",
+            "素数",
+            "判定",
+            "根拠",
+            "n - 1 の分解",
+            "Miller-Rabin回数",
+            "使用基数",
+            "べき乗剰余の式",
+            "平方反復の式"
+        ]
+
+    ];
+
+
+    primeRecords.forEach(
+        (record,index) => {
+
+            evidenceRows.push([
+
+                index + 1,
+
+                record.number,
+
+                record.result,
+
+                record.evidence,
+
+                record.decomposition,
+
+                record.rounds,
+
+                record.bases,
+
+                record.powerFormula,
+
+                record.squareFormula
+
+            ]);
+        }
+    );
+
+
+    const evidenceSheet =
+        XLSX.utils.aoa_to_sheet(
+            evidenceRows
+        );
+
+
+    evidenceSheet["!cols"] = [
+
+        {wch:8},
+        {wch:70},
+        {wch:15},
+        {wch:65},
+        {wch:38},
+        {wch:22},
+        {wch:55},
+        {wch:25},
+        {wch:25}
+
+    ];
+
+
+    XLSX.utils.book_append_sheet(
+        workbook,
+        evidenceSheet,
+        "計算根拠"
+    );
+
+
+    /* =================================================
+       シート3：計算方法
+    ================================================= */
+
+    const methodRows = [
+
+        [
+            "巨大素数計算 ― 数式・根拠"
+        ],
+
+        [],
+
+        [
+            "項目",
+            "内容"
+        ],
+
+        [
+            "素数の定義",
+            "1と自分自身以外に正の約数を持たない2以上の整数"
+        ],
+
+        [
+            "判定法",
+            "Miller-Rabin法"
+        ],
+
+        [
+            "分解式",
+            "n - 1 = 2^s × d（dは奇数）"
+        ],
+
+        [
+            "べき乗剰余",
+            "a^d mod n"
+        ],
+
+        [
+            "平方反復",
+            "x ← x^2 mod n"
+        ],
+
+        [
+            "判定の考え方",
+            "複数の基数aについて条件を調べ、合成数を示す証拠があるか確認する"
+        ],
+
+        [
+            "巨大整数",
+            "JavaScript BigIntで処理"
+        ],
+
+        [
+            "Excel保存",
+            "巨大整数はExcelの数値精度問題を避けるため文字列として保存"
+        ],
+
+        [
+            "Excelでの数式例",
+            "=MOD(21,3)"
+        ],
+
+        [
+            "Excelでの平方根確認例",
+            "=SQRT(100)"
+        ],
+
+        [
+            "重要な注意",
+            "Miller-Rabinの結果は設定した反復回数に基づく素数候補判定であり、一般の設定では数学的証明そのものではありません。"
+        ]
+
+    ];
+
+
+    const methodSheet =
+        XLSX.utils.aoa_to_sheet(
+            methodRows
+        );
+
+
+    methodSheet["!cols"] = [
+
+        {wch:28},
+        {wch:100}
+
+    ];
+
+
+    XLSX.utils.book_append_sheet(
+        workbook,
+        methodSheet,
+        "計算方法"
+    );
+
+
+    /* =================================================
+       ファイル名
+    ================================================= */
+
+    const now =
+        new Date();
+
+
+    const fileName =
+        "巨大素数_計算結果_" +
+        now
+            .toISOString()
+            .slice(
+                0,
+                19
+            )
+            .replaceAll(
+                ":",
+                "-"
+            ) +
+        ".xlsx";
+
+
+    XLSX.writeFile(
+        workbook,
+        fileName
+    );
+}
+
+</script>
+
+</body>
+</html>
