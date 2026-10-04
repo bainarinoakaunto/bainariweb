@@ -2,13 +2,25 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>超巨大素数 自動計算｜自動保存・復元版</title>
+<title>超巨大素数 自動計算システム</title>
 
 <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
 
 <style>
+:root{
+    --bg:#080b12;
+    --panel:#111722;
+    --panel2:#171e2b;
+    --line:#283244;
+    --text:#edf2f7;
+    --sub:#9ba8ba;
+    --blue:#4da3ff;
+    --green:#35d07f;
+    --yellow:#ffd166;
+    --red:#ff5d73;
+}
 
 *{
     box-sizing:border-box;
@@ -16,509 +28,467 @@
 
 body{
     margin:0;
-    background:#070b14;
-    color:#f8fafc;
+    background:
+        radial-gradient(circle at top,#18243a 0,#080b12 45%);
+    color:var(--text);
     font-family:
         system-ui,
         -apple-system,
         BlinkMacSystemFont,
-        "Noto Sans JP",
+        "Segoe UI",
         sans-serif;
 }
 
+.container{
+    width:min(1200px,94%);
+    margin:30px auto;
+}
+
 header{
-    padding:32px 20px;
-    text-align:center;
-    background:
-        linear-gradient(
-            135deg,
-            #312e81,
-            #7c3aed,
-            #2563eb
-        );
+    padding:28px;
+    border:1px solid var(--line);
+    border-radius:20px;
+    background:rgba(17,23,34,.9);
+    box-shadow:0 20px 60px rgba(0,0,0,.35);
 }
 
-header h1{
-    margin:0;
-    font-size:clamp(28px,6vw,48px);
+h1{
+    margin:0 0 8px;
+    font-size:clamp(25px,4vw,42px);
 }
 
-header p{
-    margin:10px 0 0;
-    color:#ddd6fe;
+.subtitle{
+    color:var(--sub);
 }
 
-main{
-    width:min(1200px,calc(100% - 24px));
-    margin:20px auto 60px;
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:15px;
+    margin-top:18px;
 }
 
 .card{
-    background:#111827;
-    border:1px solid #293449;
-    border-radius:20px;
+    background:rgba(17,23,34,.95);
+    border:1px solid var(--line);
+    border-radius:16px;
     padding:20px;
-    margin-bottom:16px;
-    box-shadow:0 10px 35px rgba(0,0,0,.25);
+}
+
+.card h2{
+    margin-top:0;
+    font-size:17px;
+}
+
+.value{
+    font-size:27px;
+    font-weight:700;
+    word-break:break-all;
+}
+
+.small{
+    color:var(--sub);
+    font-size:13px;
 }
 
 .controls{
     display:flex;
     flex-wrap:wrap;
     gap:10px;
-}
-
-button,
-select{
-    border:0;
-    border-radius:11px;
-    padding:12px 16px;
-    font-size:14px;
+    margin-top:18px;
 }
 
 button{
-    background:#6366f1;
+    border:1px solid var(--line);
+    background:#1b2534;
     color:white;
-    font-weight:800;
+    padding:12px 18px;
+    border-radius:10px;
     cursor:pointer;
+    font-weight:700;
 }
 
 button:hover{
-    filter:brightness(1.12);
+    filter:brightness(1.15);
 }
 
-.stop{
-    background:#ef4444;
+button.primary{
+    background:#145ca8;
+    border-color:#267bcf;
 }
 
-.reset{
-    background:#475569;
+button.danger{
+    background:#702333;
+    border-color:#a43a51;
 }
 
-.delete{
-    background:#991b1b;
-}
-
-.excel{
-    background:#059669;
-}
-
-select{
-    background:#1e293b;
+input{
+    width:110px;
+    padding:11px;
+    border-radius:9px;
+    border:1px solid var(--line);
+    background:#0c111a;
     color:white;
 }
 
 .status{
-    color:#94a3b8;
-}
-
-.saveStatus{
-    margin-top:12px;
-    padding:10px 12px;
-    border-radius:10px;
-    background:#09251a;
-    color:#86efac;
-    font-size:13px;
-}
-
-.stats{
-    display:grid;
-    grid-template-columns:
-        repeat(5,1fr);
-    gap:10px;
-}
-
-.stat{
-    background:#182235;
-    padding:15px;
-    border-radius:14px;
-    text-align:center;
-}
-
-.stat span{
-    display:block;
-    color:#94a3b8;
-    font-size:13px;
-}
-
-.stat b{
-    display:block;
-    margin-top:7px;
-    font-size:20px;
-    color:#c4b5fd;
-    word-break:break-all;
-}
-
-.big{
-    font-size:clamp(22px,4vw,44px);
-    font-weight:900;
-    color:#ddd6fe;
-    word-break:break-all;
-    line-height:1.45;
-}
-
-.formula{
-    background:#080c15;
-    padding:16px;
+    margin-top:18px;
+    padding:14px 16px;
     border-radius:12px;
-    font-family:
-        ui-monospace,
-        SFMono-Regular,
-        Menlo,
-        Consolas,
-        monospace;
-    white-space:pre-wrap;
-    overflow:auto;
-    line-height:1.7;
+    background:#0c111a;
+    border:1px solid var(--line);
 }
 
-#primeList{
-    max-height:500px;
-    overflow-y:auto;
-    display:flex;
-    flex-direction:column;
-    gap:7px;
+.status.ok{
+    border-color:#276d49;
+}
+
+.status.warn{
+    border-color:#7d682b;
+}
+
+.progress{
+    height:12px;
+    background:#090d14;
+    border-radius:99px;
+    overflow:hidden;
+    margin-top:12px;
+    border:1px solid var(--line);
+}
+
+.progress-inner{
+    width:100%;
+    height:100%;
+    background:linear-gradient(
+        90deg,
+        #2778cf,
+        #35d07f,
+        #ffd166
+    );
+    animation:progress 1.2s linear infinite;
+    transform-origin:left;
+}
+
+@keyframes progress{
+    0%{transform:translateX(-100%)}
+    100%{transform:translateX(100%)}
+}
+
+.log{
+    max-height:400px;
+    overflow:auto;
+    font-family:monospace;
+    font-size:13px;
+}
+
+.log-item{
+    padding:9px 0;
+    border-bottom:1px solid #202938;
+    word-break:break-all;
 }
 
 .prime{
-    padding:10px 12px;
-    border-radius:10px;
-    background:#18233b;
-    border:1px solid #303e62;
-    font-family:
-        ui-monospace,
-        SFMono-Regular,
-        Menlo,
-        Consolas,
-        monospace;
+    color:var(--green);
+    font-weight:700;
+}
+
+.composite{
+    color:#aab4c3;
+}
+
+.formula{
+    padding:15px;
+    background:#090d14;
+    border-radius:12px;
+    border:1px solid var(--line);
+    font-family:monospace;
+    white-space:pre-wrap;
     word-break:break-all;
 }
 
-.info{
-    padding:14px;
-    border-radius:12px;
-    background:#182235;
-    color:#cbd5e1;
-    line-height:1.8;
-}
-
-.warning{
-    padding:13px;
-    margin-top:14px;
-    background:#332b12;
-    color:#fde68a;
-    border-radius:10px;
+footer{
+    color:var(--sub);
+    text-align:center;
+    padding:30px;
     font-size:13px;
-    line-height:1.7;
 }
 
-@media(max-width:850px){
-
-    .stats{
-        grid-template-columns:
-            repeat(2,1fr);
-    }
-
+.badge{
+    display:inline-block;
+    padding:4px 8px;
+    border-radius:99px;
+    font-size:11px;
+    margin-left:6px;
+    background:#243044;
 }
 
 @media(max-width:600px){
+    .container{
+        width:96%;
+    }
 
-    .controls > *{
+    header,
+    .card{
+        padding:16px;
+    }
+
+    button{
         width:100%;
     }
-
-    .stats{
-        grid-template-columns:1fr;
-    }
-
 }
-
 </style>
 </head>
 
 <body>
 
+<div class="container">
+
 <header>
+    <h1>超巨大素数 自動計算</h1>
+    <div class="subtitle">
+        0 → 1 → 2 → 3 → … の順番で自動計算し、
+        素数候補・計算根拠・処理速度を記録します。
+    </div>
 
-<h1>⚡ 超巨大素数 自動計算</h1>
+    <div class="controls">
 
-<p>
-自動保存・再読み込み復元・続きから計算・Excel出力
-</p>
+        <label>
+            Miller-Rabinラウンド
+            <input id="rounds" type="number" min="1" max="100" value="16">
+        </label>
 
+        <button class="primary" onclick="startCalculation()">
+            ▶ 計算開始
+        </button>
+
+        <button onclick="stopCalculation()">
+            ⏸ 停止
+        </button>
+
+        <button onclick="resetCalculation()">
+            ↻ 表示リセット
+        </button>
+
+        <button onclick="exportExcel()">
+            📊 Excel出力
+        </button>
+
+        <button class="danger" onclick="deleteSavedData()">
+            🗑 保存データ削除
+        </button>
+
+    </div>
+
+    <div id="status" class="status">
+        起動しています……
+    </div>
+
+    <div class="progress" id="progress">
+        <div class="progress-inner"></div>
+    </div>
 </header>
 
 
-<main>
+<div class="grid">
 
+    <div class="card">
+        <h2>現在の計算値</h2>
+        <div id="current" class="value">0</div>
+        <div class="small">次に判定する整数</div>
+    </div>
 
-<!-- =========================
-     操作
-========================= -->
+    <div class="card">
+        <h2>計算済み</h2>
+        <div id="tested" class="value">0</div>
+        <div class="small">判定した個数</div>
+    </div>
 
-<section class="card">
+    <div class="card">
+        <h2>発見した素数</h2>
+        <div id="found" class="value">0</div>
+        <div class="small">素数候補を含む</div>
+    </div>
 
-<h2>⚙️ 操作</h2>
+    <div class="card">
+        <h2>処理速度</h2>
+        <div id="speed" class="value">0 / 秒</div>
+        <div class="small">直近の処理速度</div>
+    </div>
 
-<div class="controls">
+    <div class="card">
+        <h2>バッチサイズ</h2>
+        <div id="batch" class="value">1</div>
+        <div class="small">自動調整</div>
+    </div>
 
-<button onclick="startCalculation()">
-▶ 続きから開始
-</button>
-
-<button
-class="stop"
-onclick="stopCalculation()">
-⏸ 停止
-</button>
-
-<button
-class="reset"
-onclick="resetCalculation()">
-↺ 画面リセット
-</button>
-
-<button
-class="delete"
-onclick="deleteSavedData()">
-🗑️ 保存データ削除
-</button>
-
-<select id="rounds">
-
-<option value="8">
-Miller–Rabin 8回
-</option>
-
-<option value="16" selected>
-Miller–Rabin 16回
-</option>
-
-<option value="32">
-Miller–Rabin 32回
-</option>
-
-</select>
-
-<button
-class="excel"
-onclick="exportExcel()">
-📊 Excelへ保存
-</button>
+    <div class="card">
+        <h2>CPU温度</h2>
+        <div class="value">取得不可</div>
+        <div class="small">
+            ブラウザの通常のJavaScriptからCPU温度は取得できません
+        </div>
+    </div>
 
 </div>
 
-<p
-id="status"
-class="status">
-停止中
-</p>
 
-<div
-id="saveStatus"
-class="saveStatus">
-💾 保存データを確認中…
-</div>
+<div class="grid">
 
-<div class="warning">
+    <div class="card">
 
-<strong>自動保存について</strong><br>
+        <h2>
+            最新の判定
+            <span id="latestBadge" class="badge">待機中</span>
+        </h2>
 
-計算状態はブラウザの
-<strong>localStorage</strong>
-に定期的に保存されます。<br>
+        <div id="latest" class="formula">
+            まだ計算されていません。
+        </div>
 
-ページを再読み込みしても、
-保存されている位置から復元できます。<br><br>
-
-ブラウザのサイトデータを削除した場合、
-保存データも削除される場合があります。
-
-</div>
-
-</section>
+    </div>
 
 
-<!-- =========================
-     統計
-========================= -->
+    <div class="card">
 
-<section class="card">
+        <h2>最新の計算式</h2>
 
-<div class="stats">
+        <div id="formula" class="formula">
+            -
+        </div>
 
-<div class="stat">
-<span>次に計算する数</span>
-<b id="current">0</b>
-</div>
-
-<div class="stat">
-<span>検査数</span>
-<b id="tested">0</b>
-</div>
-
-<div class="stat">
-<span>発見した素数</span>
-<b id="found">0</b>
-</div>
-
-<div class="stat">
-<span>処理速度</span>
-<b id="rate">0 /秒</b>
-</div>
-
-<div class="stat">
-<span>バッチサイズ</span>
-<b id="batch">1</b>
-</div>
+    </div>
 
 </div>
 
-</section>
 
+<div class="card" style="margin-top:18px">
 
-<!-- =========================
-     現在値
-========================= -->
+    <h2>発見した素数</h2>
 
-<section class="card">
-
-<h2>🔢 現在位置</h2>
-
-<div
-id="bigCurrent"
-class="big">
-0
-</div>
-
-</section>
-
-
-<!-- =========================
-     最新判定
-========================= -->
-
-<section class="card">
-
-<h2>🧮 最新の判定</h2>
-
-<div
-id="latestNumber"
-class="big">
-—
-</div>
-
-<p id="latestResult">
-まだ計算していません。
-</p>
-
-<div
-id="formula"
-class="formula">
-n = —
-判定 = —
-</div>
-
-</section>
-
-
-<!-- =========================
-     素数
-========================= -->
-
-<section class="card">
-
-<h2>✨ 発見した素数</h2>
-
-<div id="primeList"></div>
-
-</section>
-
-
-<!-- =========================
-     説明
-========================= -->
-
-<section class="card">
-
-<h2>📘 計算方法</h2>
-
-<div class="info">
-
-<strong>1. 0から順番に検査</strong><br>
-
-0 → 1 → 2 → 3 → 4 → … と
-1ずつ増やして判定します。
-
-<br><br>
-
-<strong>2. BigInt</strong><br>
-
-JavaScriptのBigIntを使用して、
-通常のNumberでは扱えない大きな整数を扱います。
-
-<br><br>
-
-<strong>3. Miller–Rabin</strong><br>
-
-n - 1 を
-
-<br><br>
-
-<b>
-n - 1 = 2<sup>s</sup> × d
-</b>
-
-<br><br>
-
-に分解し、
-
-<br>
-
-<b>
-a<sup>d</sup> mod n
-</b>
-
-<br>
-
-および
-
-<br>
-
-<b>
-x ← x² mod n
-</b>
-
-<br>
-
-を使って判定します。
-
-<br><br>
-
-<strong>4. 自動保存</strong><br>
-
-計算位置・素数・計算ログなどを
-localStorageへ保存します。
+    <div id="primeLog" class="log">
+        まだ素数はありません。
+    </div>
 
 </div>
 
-</section>
 
-</main>
+<div class="card" style="margin-top:18px">
+
+    <h2>計算ログ</h2>
+
+    <div id="calculationLog" class="log">
+        まだ計算ログはありません。
+    </div>
+
+</div>
+
+
+<div class="card" style="margin-top:18px">
+
+    <h2>保存状態</h2>
+
+    <div id="saveInfo" class="formula">
+        IndexedDBを準備しています……
+    </div>
+
+</div>
+
+
+<footer>
+    RUA / 超巨大素数 自動計算システム
+</footer>
+
+</div>
 
 
 <script>
 
 /* =========================================================
-   保存キー
+   IndexedDB
 ========================================================= */
 
-const STORAGE_KEY =
-    "RUA_PRIME_CALCULATOR_V4";
+const DB_NAME = "RUA_PRIME_CALCULATOR_DB";
+const DB_VERSION = 1;
+
+let db = null;
+
+function openDatabase(){
+
+    return new Promise((resolve,reject)=>{
+
+        const request =
+            indexedDB.open(DB_NAME,DB_VERSION);
+
+        request.onupgradeneeded = event => {
+
+            const database = event.target.result;
+
+            if(!database.objectStoreNames.contains("meta")){
+
+                database.createObjectStore(
+                    "meta",
+                    {keyPath:"id"}
+                );
+
+            }
+
+            if(!database.objectStoreNames.contains("calculations")){
+
+                const store =
+                    database.createObjectStore(
+                        "calculations",
+                        {keyPath:"number"}
+                    );
+
+                store.createIndex(
+                    "prime",
+                    "prime",
+                    {unique:false}
+                );
+
+            }
+
+            if(!database.objectStoreNames.contains("primes")){
+
+                const store =
+                    database.createObjectStore(
+                        "primes",
+                        {keyPath:"number"}
+                    );
+
+                store.createIndex(
+                    "order",
+                    "order",
+                    {unique:false}
+                );
+
+            }
+
+        };
+
+        request.onsuccess = event => {
+
+            db = event.target.result;
+
+            db.onversionchange = () => {
+                db.close();
+            };
+
+            resolve(db);
+
+        };
+
+        request.onerror = () => {
+            reject(request.error);
+        };
+
+    });
+
+}
 
 
 /* =========================================================
-   状態
+   State
 ========================================================= */
 
 let running = false;
@@ -535,120 +505,45 @@ let rounds = 16;
 
 let totalSpeedCount = 0;
 
-let lastSpeedTime =
-    performance.now();
+let lastSpeedTime = performance.now();
+
+let lastSpeedCount = 0;
 
 let lastSaveTime = 0;
 
+let primeSequence = 0;
 
-/*
-    Excelへ出すデータ
-*/
+let pendingRecords = [];
 
-let primeRecords = [];
+let pendingPrimes = [];
 
-let calculationRecords = [];
+let saveBusy = false;
 
 
 /* =========================================================
    DOM
 ========================================================= */
 
-const currentEl =
-    document.getElementById(
-        "current"
-    );
-
-const testedEl =
-    document.getElementById(
-        "tested"
-    );
-
-const foundEl =
-    document.getElementById(
-        "found"
-    );
-
-const rateEl =
-    document.getElementById(
-        "rate"
-    );
-
-const batchEl =
-    document.getElementById(
-        "batch"
-    );
-
-const bigCurrentEl =
-    document.getElementById(
-        "bigCurrent"
-    );
-
-const latestNumberEl =
-    document.getElementById(
-        "latestNumber"
-    );
-
-const latestResultEl =
-    document.getElementById(
-        "latestResult"
-    );
-
-const formulaEl =
-    document.getElementById(
-        "formula"
-    );
-
-const primeListEl =
-    document.getElementById(
-        "primeList"
-    );
-
-const statusEl =
-    document.getElementById(
-        "status"
-    );
-
-const saveStatus =
-    document.getElementById(
-        "saveStatus"
-    );
+const $ = id => document.getElementById(id);
 
 
 /* =========================================================
-   BigInt modPow
+   BigInt Math
 ========================================================= */
 
-function modPow(
-    base,
-    exponent,
-    mod
-){
+function modPow(base, exponent, mod){
 
     let result = 1n;
 
     base %= mod;
 
-    while(
-        exponent > 0n
-    ){
+    while(exponent > 0n){
 
-        if(
-            exponent & 1n
-        ){
-
-            result =
-                (
-                    result *
-                    base
-                ) % mod;
+        if(exponent & 1n){
+            result = (result * base) % mod;
         }
 
-        base =
-            (
-                base *
-                base
-            ) % mod;
+        base = (base * base) % mod;
 
         exponent >>= 1n;
     }
@@ -657,85 +552,68 @@ function modPow(
 }
 
 
-/* =========================================================
-   n - 1 = 2^s × d
-========================================================= */
+function decompose(n){
 
-function decompose(
-    n
-){
-
-    let d =
-        n - 1n;
+    let d = n - 1n;
 
     let s = 0;
 
-    while(
-        (d & 1n) === 0n
-    ){
+    while((d & 1n) === 0n){
 
         d >>= 1n;
-
         s++;
+
     }
 
-    return {
-        s,
-        d
-    };
+    return {s,d};
 }
 
 
 /* =========================================================
-   乱数
+   Random BigInt
 ========================================================= */
 
-function randomBelow(
-    max
-){
+function randomBelow(max){
 
-    const bits =
-        max
-            .toString(2)
-            .length;
+    if(max <= 0n){
+        return 0n;
+    }
+
+    const bits = max.toString(2).length;
 
     const bytes =
-        Math.ceil(
-            bits / 8
-        );
+        Math.ceil(bits / 8);
+
+    const mask =
+        2 ** (bits % 8) - 1;
 
     while(true){
 
-        const buffer =
-            new Uint8Array(
-                bytes
-            );
+        const array =
+            new Uint8Array(bytes);
 
-        crypto.getRandomValues(
-            buffer
-        );
+        crypto.getRandomValues(array);
+
+        if(bits % 8 !== 0){
+            array[0] &= mask;
+        }
 
         let value = 0n;
 
-        for(
-            const byte
-            of buffer
-        ){
+        for(const byte of array){
 
             value =
-                (
-                    value << 8n
-                ) |
+                (value << 8n) |
                 BigInt(byte);
+
         }
 
-        if(
-            value < max
-        ){
-
+        if(value < max){
             return value;
         }
+
     }
+
 }
 
 
@@ -743,295 +621,159 @@ function randomBelow(
    Miller-Rabin
 ========================================================= */
 
-function millerRabin(
-    n,
-    iterations
-){
+function millerRabin(n,iterations){
 
     const smallPrimes = [
-        2n,
-        3n,
-        5n,
-        7n,
-        11n,
-        13n,
-        17n,
-        19n,
-        23n,
-        29n,
-        31n,
-        37n
+        2n,3n,5n,7n,11n,13n,
+        17n,19n,23n,29n,31n,37n
     ];
 
+    for(const p of smallPrimes){
 
-    for(
-        const p
-        of smallPrimes
-    ){
-
-        if(
-            n === p
-        ){
+        if(n === p){
 
             return {
-
                 prime:true,
-
-                method:
-                    "既知の小素数",
-
-                evidence:
-                    p.toString() +
-                    "そのもの",
-
-                s:null,
-
-                d:null,
-
-                bases:[]
-
+                method:"小さい素数による判定",
+                evidence:`n = ${p} は素数`
             };
+
         }
 
-
-        if(
-            n % p === 0n
-        ){
+        if(n % p === 0n){
 
             return {
-
                 prime:false,
-
-                method:
-                    "小素数による除算",
-
-                evidence:
-                    n.toString() +
-                    " は " +
-                    p.toString() +
-                    " で割り切れる",
-
-                s:null,
-
-                d:null,
-
-                bases:[]
-
+                method:"小さい素数による割り切れ判定",
+                evidence:`${n} mod ${p} = 0`
             };
+
         }
+
     }
 
-
-    const {
-        s,
-        d
-    } =
-        decompose(n);
-
+    const {s,d} = decompose(n);
 
     const bases = [];
 
-
-    for(
-        let i = 0;
-        i < iterations;
-        i++
-    ){
+    for(let i=0;i<iterations;i++){
 
         const a =
-            2n +
-            randomBelow(
-                n - 3n
-            );
+            2n + randomBelow(n - 3n);
 
-
-        bases.push(
-            a.toString()
-        );
-
+        bases.push(a.toString());
 
         let x =
-            modPow(
-                a,
-                d,
-                n
-            );
+            modPow(a,d,n);
 
-
-        if(
-            x === 1n ||
-            x === n - 1n
-        ){
-
+        if(x === 1n || x === n - 1n){
             continue;
         }
 
+        let passed = false;
 
-        let passed =
-            false;
-
-
-        for(
-            let r = 1;
-            r < s;
-            r++
-        ){
+        for(let r=1;r<s;r++){
 
             x =
-                (
-                    x *
-                    x
-                ) % n;
+                (x * x) % n;
 
+            if(x === n - 1n){
 
-            if(
-                x === n - 1n
-            ){
-
-                passed =
-                    true;
-
+                passed = true;
                 break;
+
             }
+
         }
 
-
-        if(
-            !passed
-        ){
+        if(!passed){
 
             return {
-
                 prime:false,
-
-                method:
-                    "Miller-Rabin",
-
+                method:"Miller-Rabin",
                 evidence:
-                    "合成数を示す結果を検出",
-
+                    `底 a=${a} で素数条件を満たしません`,
                 s,
-
                 d,
-
                 bases
-
             };
+
         }
+
     }
 
+    return {
+        prime:true,
+        method:"Miller-Rabin",
+        evidence:
+            `${iterations}回の確率的素数判定を通過`,
+        s,
+        d,
+        bases
+    };
+
+}
+
+
+/* =========================================================
+   Number Check
+========================================================= */
+
+function checkNumber(n){
+
+    if(n < 2n){
+
+        return {
+            prime:false,
+            method:"定義による判定",
+            evidence:"2未満は素数ではありません"
+        };
+
+    }
+
+    if(n === 2n){
+
+        return {
+            prime:true,
+            method:"定義による判定",
+            evidence:"2は素数"
+        };
+
+    }
+
+    if(n % 2n === 0n){
+
+        return {
+            prime:false,
+            method:"偶数判定",
+            evidence:`${n} mod 2 = 0`
+        };
+
+    }
+
+    return millerRabin(n,rounds);
+
+}
+
+
+/* =========================================================
+   Record Creation
+========================================================= */
+
+function makeRecord(n,result){
 
     return {
 
-        prime:true,
+        number:n.toString(),
 
-        method:
-            "Miller-Rabin",
-
-        evidence:
-            iterations +
-            "回のMiller-Rabin判定で合成数の証拠を検出しなかった",
-
-        s,
-
-        d,
-
-        bases
-
-    };
-}
-
-
-/* =========================================================
-   判定
-========================================================= */
-
-function checkNumber(
-    n
-){
-
-    if(
-        n < 2n
-    ){
-
-        return {
-
-            prime:false,
-
-            method:
-                "基本条件",
-
-            evidence:
-                "2未満"
-
-        };
-    }
-
-
-    if(
-        n === 2n
-    ){
-
-        return {
-
-            prime:true,
-
-            method:
-                "既知の素数",
-
-            evidence:
-                "2は素数"
-
-        };
-    }
-
-
-    if(
-        n % 2n === 0n
-    ){
-
-        return {
-
-            prime:false,
-
-            method:
-                "偶数判定",
-
-            evidence:
-                "2で割り切れる"
-
-        };
-    }
-
-
-    return millerRabin(
-        n,
-        rounds
-    );
-}
-
-
-/* =========================================================
-   レコード保存
-========================================================= */
-
-function saveRecord(
-    n,
-    result
-){
-
-    const record = {
-
-        number:
-            n.toString(),
-
-        digits:
-            n.toString().length,
+        digits:n.toString().length,
 
         result:
             result.prime
-                ? "素数候補"
-                : "合成数",
+            ? "素数候補"
+            : "合成数",
+
+        prime:!!result.prime,
 
         method:
             result.method || "",
@@ -1040,132 +782,698 @@ function saveRecord(
             result.evidence || "",
 
         s:
-            result.s !== undefined &&
-            result.s !== null
-                ? result.s
-                : "",
+            result.s != null
+            ? result.s
+            : "",
 
         d:
-            result.d !== undefined &&
-            result.d !== null
-                ? result.d.toString()
-                : "",
+            result.d != null
+            ? result.d.toString()
+            : "",
 
         bases:
             result.bases
-                ? result.bases.join(", ")
-                : "",
+            ? result.bases.join(", ")
+            : "",
 
         rounds:
-            result.method ===
-            "Miller-Rabin"
-                ? rounds
-                : "",
+            result.method === "Miller-Rabin"
+            ? rounds
+            : "",
 
         formula1:
-            result.s !== undefined &&
-            result.s !== null
-                ? "n - 1 = 2^s × d"
-                : "",
+            result.s != null
+            ? "n - 1 = 2^s × d"
+            : "",
 
         formula2:
-            result.method ===
-            "Miller-Rabin"
-                ? "a^d mod n"
-                : "",
+            result.method === "Miller-Rabin"
+            ? "a^d mod n"
+            : "",
 
         formula3:
-            result.method ===
-            "Miller-Rabin"
-                ? "x ← x^2 mod n"
-                : ""
+            result.method === "Miller-Rabin"
+            ? "x ← x^2 mod n"
+            : "",
+
+        savedAt:
+            new Date().toISOString()
 
     };
 
-
-    calculationRecords.push(
-        record
-    );
-
-
-    if(
-        result.prime
-    ){
-
-        primeRecords.push(
-            record
-        );
-    }
 }
 
 
 /* =========================================================
-   画面へ素数追加
+   IndexedDB Save
 ========================================================= */
 
-function addPrime(
-    n,
-    fromRestore = false
-){
+async function flushRecords(){
 
-    const div =
-        document.createElement(
-            "div"
-        );
-
-    div.className =
-        "prime";
-
-    div.textContent =
-        n.toString();
-
-    /*
-       復元時は順番を維持
-    */
+    if(!db){
+        return;
+    }
 
     if(
-        fromRestore
+        pendingRecords.length === 0 &&
+        pendingPrimes.length === 0
     ){
+        return;
+    }
 
-        primeListEl.appendChild(
-            div
+    const records =
+        pendingRecords.splice(
+            0,
+            pendingRecords.length
         );
 
-    }
-    else{
-
-        primeListEl.prepend(
-            div
+    const primes =
+        pendingPrimes.splice(
+            0,
+            pendingPrimes.length
         );
-    }
+
+    return new Promise((resolve,reject)=>{
+
+        const transaction =
+            db.transaction(
+                ["calculations","primes"],
+                "readwrite"
+            );
+
+        const calculationStore =
+            transaction.objectStore("calculations");
+
+        const primeStore =
+            transaction.objectStore("primes");
+
+        for(const record of records){
+
+            calculationStore.put(record);
+
+        }
+
+        for(const prime of primes){
+
+            primeStore.put(prime);
+
+        }
+
+        transaction.oncomplete = () => {
+
+            updateSaveInfo();
+
+            resolve();
+
+        };
+
+        transaction.onerror = () => {
+
+            console.error(
+                transaction.error
+            );
+
+            showStatus(
+                "⚠️ IndexedDBへの保存に失敗しました",
+                "warn"
+            );
+
+            resolve();
+
+        };
+
+    });
+
 }
 
 
 /* =========================================================
-   画面更新
+   Meta Save
 ========================================================= */
 
-function updateStats(){
+async function saveMeta(){
 
-    currentEl.textContent =
+    if(!db){
+        return;
+    }
+
+    const data = {
+
+        id:"state",
+
+        current:current.toString(),
+
+        testedCount,
+
+        foundCount,
+
+        batchSize,
+
+        rounds,
+
+        primeSequence,
+
+        savedAt:
+            new Date().toISOString()
+
+    };
+
+    return new Promise((resolve,reject)=>{
+
+        const transaction =
+            db.transaction(
+                "meta",
+                "readwrite"
+            );
+
+        transaction.objectStore("meta")
+            .put(data);
+
+        transaction.oncomplete = () => {
+
+            lastSaveTime =
+                Date.now();
+
+            updateSaveInfo();
+
+            resolve();
+
+        };
+
+        transaction.onerror = () => {
+
+            console.error(
+                transaction.error
+            );
+
+            showStatus(
+                "⚠️ 状態保存に失敗しました",
+                "warn"
+            );
+
+            resolve();
+
+        };
+
+    });
+
+}
+
+
+/* =========================================================
+   Full Save
+========================================================= */
+
+async function saveState(force=false){
+
+    if(!db){
+        return;
+    }
+
+    if(
+        saveBusy &&
+        !force
+    ){
+        return;
+    }
+
+    saveBusy = true;
+
+    try{
+
+        await flushRecords();
+
+        await saveMeta();
+
+    }finally{
+
+        saveBusy = false;
+
+    }
+
+}
+
+
+/* =========================================================
+   Load State
+========================================================= */
+
+async function loadState(){
+
+    if(!db){
+        return;
+    }
+
+    return new Promise((resolve)=>{
+
+        const transaction =
+            db.transaction(
+                "meta",
+                "readonly"
+            );
+
+        const request =
+            transaction
+                .objectStore("meta")
+                .get("state");
+
+        request.onsuccess = async () => {
+
+            const data =
+                request.result;
+
+            if(data){
+
+                current =
+                    BigInt(
+                        data.current || "0"
+                    );
+
+                testedCount =
+                    data.testedCount || 0;
+
+                foundCount =
+                    data.foundCount || 0;
+
+                batchSize =
+                    data.batchSize || 1;
+
+                rounds =
+                    data.rounds || 16;
+
+                primeSequence =
+                    data.primeSequence || 0;
+
+                $("rounds").value =
+                    rounds;
+
+                updateUI();
+
+                await loadRecentPrimes();
+
+                await loadRecentCalculations();
+
+                showStatus(
+                    `💾 保存データを復元しました。${current.toString()} から続行できます。`,
+                    "ok"
+                );
+
+            }else{
+
+                showStatus(
+                    "新規計算として開始できます。",
+                    "ok"
+                );
+
+            }
+
+            updateSaveInfo();
+
+            resolve();
+
+        };
+
+        request.onerror = () => {
+
+            showStatus(
+                "⚠️ 保存データの読み込みに失敗しました",
+                "warn"
+            );
+
+            resolve();
+
+        };
+
+    });
+
+}
+
+
+/* =========================================================
+   Recent Primes
+========================================================= */
+
+async function loadRecentPrimes(){
+
+    if(!db){
+        return;
+    }
+
+    return new Promise(resolve=>{
+
+        const transaction =
+            db.transaction(
+                "primes",
+                "readonly"
+            );
+
+        const store =
+            transaction.objectStore("primes");
+
+        const index =
+            store.index("order");
+
+        const items = [];
+
+        const request =
+            index.openCursor(
+                null,
+                "prev"
+            );
+
+        request.onsuccess = event => {
+
+            const cursor =
+                event.target.result;
+
+            if(cursor && items.length < 500){
+
+                items.push(
+                    cursor.value
+                );
+
+                cursor.continue();
+
+            }else{
+
+                renderPrimes(
+                    items.reverse()
+                );
+
+                resolve();
+
+            }
+
+        };
+
+        request.onerror = () => resolve();
+
+    });
+
+}
+
+
+/* =========================================================
+   Recent Calculations
+========================================================= */
+
+async function loadRecentCalculations(){
+
+    if(!db){
+        return;
+    }
+
+    return new Promise(resolve=>{
+
+        const transaction =
+            db.transaction(
+                "calculations",
+                "readonly"
+            );
+
+        const store =
+            transaction.objectStore(
+                "calculations"
+            );
+
+        const items = [];
+
+        const request =
+            store.openCursor(
+                null,
+                "prev"
+            );
+
+        request.onsuccess = event => {
+
+            const cursor =
+                event.target.result;
+
+            if(
+                cursor &&
+                items.length < 500
+            ){
+
+                items.push(
+                    cursor.value
+                );
+
+                cursor.continue();
+
+            }else{
+
+                renderCalculations(
+                    items.reverse()
+                );
+
+                resolve();
+
+            }
+
+        };
+
+        request.onerror = () => resolve();
+
+    });
+
+}
+
+
+/* =========================================================
+   UI
+========================================================= */
+
+function updateUI(){
+
+    $("current").textContent =
         current.toString();
 
-    bigCurrentEl.textContent =
-        current.toString();
-
-    testedEl.textContent =
+    $("tested").textContent =
         testedCount.toLocaleString();
 
-    foundEl.textContent =
+    $("found").textContent =
         foundCount.toLocaleString();
 
-    batchEl.textContent =
-        batchSize.toLocaleString();
+    $("batch").textContent =
+        Math.floor(batchSize).toLocaleString();
+
+}
+
+
+function updateSpeed(){
+
+    const now =
+        performance.now();
+
+    const elapsed =
+        (now - lastSpeedTime) / 1000;
+
+    if(elapsed <= 0){
+        return;
+    }
+
+    const count =
+        totalSpeedCount -
+        lastSpeedCount;
+
+    const speed =
+        Math.round(
+            count / elapsed
+        );
+
+    $("speed").textContent =
+        `${speed.toLocaleString()} / 秒`;
+
+    lastSpeedTime = now;
+
+    lastSpeedCount =
+        totalSpeedCount;
+
+}
+
+
+function showStatus(text,type=""){
+
+    $("status").textContent =
+        text;
+
+    $("status").className =
+        "status " + type;
+
+}
+
+
+function updateSaveInfo(){
+
+    const saved =
+        lastSaveTime
+        ? new Date(lastSaveTime)
+        : null;
+
+    $("saveInfo").textContent =
+        saved
+        ? `IndexedDB保存済み\n最終保存: ${saved.toLocaleString("ja-JP")}\n現在値: ${current.toString()}\n計算済み: ${testedCount.toLocaleString()}`
+        : "IndexedDB保存準備完了";
+
 }
 
 
 /* =========================================================
-   1件計算
+   Render
+========================================================= */
+
+function renderPrime(record){
+
+    const container =
+        $("primeLog");
+
+    if(
+        container.textContent ===
+        "まだ素数はありません。"
+    ){
+
+        container.textContent = "";
+
+    }
+
+    const div =
+        document.createElement("div");
+
+    div.className =
+        "log-item prime";
+
+    div.textContent =
+        `★ ${record.number}　[${record.method}]`;
+
+    container.prepend(div);
+
+    while(
+        container.children.length > 500
+    ){
+
+        container.lastChild.remove();
+
+    }
+
+}
+
+
+function renderPrimes(records){
+
+    const container =
+        $("primeLog");
+
+    container.innerHTML = "";
+
+    if(records.length === 0){
+
+        container.textContent =
+            "まだ素数はありません。";
+
+        return;
+
+    }
+
+    for(const record of records){
+
+        const div =
+            document.createElement("div");
+
+        div.className =
+            "log-item prime";
+
+        div.textContent =
+            `★ ${record.number}　[${record.method}]`;
+
+        container.appendChild(div);
+
+    }
+
+}
+
+
+function renderCalculation(record){
+
+    const container =
+        $("calculationLog");
+
+    if(
+        container.textContent ===
+        "まだ計算ログはありません。"
+    ){
+
+        container.textContent = "";
+
+    }
+
+    const div =
+        document.createElement("div");
+
+    div.className =
+        "log-item " +
+        (
+            record.prime
+            ? "prime"
+            : "composite"
+        );
+
+    div.textContent =
+        `${record.number} → ${record.result} / ${record.method}`;
+
+    container.prepend(div);
+
+    while(
+        container.children.length > 500
+    ){
+
+        container.lastChild.remove();
+
+    }
+
+}
+
+
+function renderCalculations(records){
+
+    const container =
+        $("calculationLog");
+
+    container.innerHTML = "";
+
+    if(records.length === 0){
+
+        container.textContent =
+            "まだ計算ログはありません。";
+
+        return;
+
+    }
+
+    for(const record of records){
+
+        const div =
+            document.createElement("div");
+
+        div.className =
+            "log-item " +
+            (
+                record.prime
+                ? "prime"
+                : "composite"
+            );
+
+        div.textContent =
+            `${record.number} → ${record.result} / ${record.method}`;
+
+        container.appendChild(div);
+
+    }
+
+}
+
+
+/* =========================================================
+   One Calculation
 ========================================================= */
 
 function calculateOne(){
@@ -1173,708 +1481,464 @@ function calculateOne(){
     const n =
         current;
 
-
     const result =
         checkNumber(n);
-
 
     testedCount++;
 
     totalSpeedCount++;
 
+    const record =
+        makeRecord(
+            n,
+            result
+        );
 
-    saveRecord(
-        n,
-        result
+    pendingRecords.push(
+        record
     );
 
+    renderCalculation(record);
 
-    if(
-        result.prime
-    ){
+    if(result.prime){
 
         foundCount++;
 
-        addPrime(n);
-    }
+        primeSequence++;
 
+        const primeRecord = {
 
-    latestNumberEl.textContent =
-        n.toString();
+            ...record,
 
-
-    latestResultEl.textContent =
-        result.prime
-            ? "✅ 素数候補"
-            : "❌ " +
-              result.evidence;
-
-
-    let formula =
-        "n = " +
-        n.toString() +
-        "\n\n";
-
-
-    if(
-        result.s !==
-        undefined &&
-        result.s !==
-        null
-    ){
-
-        formula +=
-            "n - 1 = 2^s × d\n" +
-            "s = " +
-            result.s +
-            "\n" +
-            "d = " +
-            result.d.toString() +
-            "\n\n";
-    }
-
-
-    if(
-        result.method ===
-        "Miller-Rabin"
-    ){
-
-        formula +=
-            "a^d mod n\n" +
-            "x ← x^2 mod n\n\n" +
-            "Miller-Rabin = " +
-            rounds +
-            "回\n\n";
-    }
-
-
-    formula +=
-        "判定方法 = " +
-        result.method +
-        "\n" +
-        "根拠 = " +
-        result.evidence;
-
-
-    formulaEl.textContent =
-        formula;
-
-
-    current =
-        n + 1n;
-
-
-    updateStats();
-}
-
-
-/* =========================================================
-   自動保存
-========================================================= */
-
-function saveState(
-    force = false
-){
-
-    const now =
-        Date.now();
-
-
-    /*
-       通常は2秒に1回
-    */
-
-    if(
-        !force &&
-        now - lastSaveTime < 2000
-    ){
-
-        return;
-    }
-
-
-    lastSaveTime =
-        now;
-
-
-    try{
-
-        const data = {
-
-            version:4,
-
-            current:
-                current.toString(),
-
-            testedCount,
-
-            foundCount,
-
-            batchSize,
-
-            rounds,
-
-            primeRecords,
-
-            calculationRecords,
-
-            savedAt:
-                new Date().toISOString()
+            order:
+                primeSequence
 
         };
 
-
-        localStorage.setItem(
-            STORAGE_KEY,
-            JSON.stringify(data)
+        pendingPrimes.push(
+            primeRecord
         );
 
-
-        saveStatus.textContent =
-            "💾 自動保存済み：" +
-            new Date()
-                .toLocaleTimeString() +
-            "　／　現在位置 " +
-            current.toString();
-
-
-    }
-    catch(error){
-
-        console.error(
-            error
+        renderPrime(
+            primeRecord
         );
 
-        saveStatus.textContent =
-            "⚠️ 保存に失敗しました。データ量が大きすぎる可能性があります。";
     }
+
+    $("latestBadge").textContent =
+        result.prime
+        ? "素数候補"
+        : "合成数";
+
+    $("latest").textContent =
+        `${n.toString()}\n\n` +
+        `判定: ${
+            result.prime
+            ? "素数候補"
+            : "合成数"
+        }\n` +
+        `方法: ${result.method}\n` +
+        `根拠: ${result.evidence}`;
+
+    if(result.s != null){
+
+        $("formula").textContent =
+            `n - 1 = 2^s × d\n\n` +
+            `${n.toString()} - 1 = 2^${result.s} × ${result.d}\n\n` +
+            `a^d mod n\n` +
+            `x ← x^2 mod n`;
+
+    }else{
+
+        $("formula").textContent =
+            result.evidence;
+
+    }
+
+    current++;
+
+    updateUI();
+
 }
 
 
 /* =========================================================
-   保存データ復元
+   Calculation Loop
 ========================================================= */
 
-function loadState(){
+async function calculationLoop(){
 
-    try{
-
-        const raw =
-            localStorage.getItem(
-                STORAGE_KEY
-            );
-
-
-        if(
-            !raw
-        ){
-
-            saveStatus.textContent =
-                "💾 保存データはありません。0から開始します。";
-
-            updateStats();
-
-            return;
-        }
-
-
-        const data =
-            JSON.parse(raw);
-
-
-        current =
-            BigInt(
-                data.current || "0"
-            );
-
-
-        testedCount =
-            Number(
-                data.testedCount || 0
-            );
-
-
-        foundCount =
-            Number(
-                data.foundCount || 0
-            );
-
-
-        batchSize =
-            Number(
-                data.batchSize || 1
-            );
-
-
-        rounds =
-            Number(
-                data.rounds || 16
-            );
-
-
-        primeRecords =
-            Array.isArray(
-                data.primeRecords
-            )
-                ? data.primeRecords
-                : [];
-
-
-        calculationRecords =
-            Array.isArray(
-                data.calculationRecords
-            )
-                ? data.calculationRecords
-                : [];
-
-
-        document.getElementById(
-            "rounds"
-        ).value =
-            rounds;
-
-
-        /*
-           素数一覧を復元
-        */
-
-        primeListEl.innerHTML =
-            "";
-
-
-        /*
-           大量データの場合、
-           全件を一気にDOMへ入れない
-        */
-
-        const displayRecords =
-            primeRecords.slice(
-                -500
-            );
-
-
-        for(
-            const record
-            of displayRecords
-        ){
-
-            addPrime(
-                record.number,
-                true
-            );
-        }
-
-
-        updateStats();
-
-
-        saveStatus.textContent =
-            "🔄 復元完了：" +
-            new Date(
-                data.savedAt
-            ).toLocaleString() +
-            "　／　次は " +
-            current.toString() +
-            " から";
-
-
-    }
-    catch(error){
-
-        console.error(
-            error
-        );
-
-        saveStatus.textContent =
-            "⚠️ 保存データを読み込めませんでした。";
-    }
-}
-
-
-/* =========================================================
-   計算ループ
-========================================================= */
-
-function calculationLoop(){
-
-    if(
-        !running
-    ){
-
+    if(!running){
         return;
     }
-
 
     const start =
         performance.now();
 
-
     for(
-        let i = 0;
-        i < batchSize;
+        let i=0;
+        i<batchSize && running;
         i++
     ){
 
         calculateOne();
-    }
 
+    }
 
     const elapsed =
-        performance.now() -
-        start;
+        performance.now() - start;
 
 
-    const now =
-        performance.now();
+    /* 自動バッチ調整 */
 
-
-    const speedElapsed =
-        now -
-        lastSpeedTime;
-
-
-    if(
-        speedElapsed >= 500
-    ){
-
-        const speed =
-            totalSpeedCount /
-            (
-                speedElapsed /
-                1000
-            );
-
-
-        rateEl.textContent =
-            Math.round(
-                speed
-            ).toLocaleString() +
-            " /秒";
-
-
-        totalSpeedCount =
-            0;
-
-        lastSpeedTime =
-            now;
-    }
-
-
-    /*
-       自動バッチ調整
-    */
-
-    if(
-        elapsed < 8
-    ){
+    if(elapsed < 8){
 
         batchSize =
             Math.min(
-                batchSize * 2,
-                100000
+                100000,
+                Math.max(
+                    1,
+                    Math.floor(batchSize * 2)
+                )
             );
 
-    }
-    else if(
-        elapsed < 15
-    ){
+    }else if(elapsed < 15){
 
         batchSize =
             Math.min(
-                Math.floor(
-                    batchSize * 1.5
-                ) + 1,
-                100000
+                100000,
+                Math.max(
+                    1,
+                    Math.floor(batchSize * 1.5)
+                )
             );
 
-    }
-    else if(
-        elapsed > 60
-    ){
+    }else if(elapsed > 60){
 
         batchSize =
             Math.max(
                 1,
-                Math.floor(
-                    batchSize / 2
-                )
+                Math.floor(batchSize / 2)
             );
 
-    }
-    else if(
-        elapsed > 35
-    ){
+    }else if(elapsed > 35){
 
         batchSize =
             Math.max(
                 1,
-                Math.floor(
-                    batchSize * .75
-                )
+                Math.floor(batchSize * .75)
             );
+
     }
 
 
-    updateStats();
+    updateSpeed();
 
 
-    /*
-       自動保存
-    */
+    /* 一定量ごとにIndexedDBへ保存 */
 
-    saveState();
+    if(
+        pendingRecords.length >= 500
+    ){
 
+        await flushRecords();
 
-    statusEl.textContent =
-        "⚡ 計算中…　" +
-        current.toString() +
-        " まで確認済み";
+    }
 
 
-    setTimeout(
-        calculationLoop,
-        0
-    );
+    /* メタ情報は約1秒ごと */
+
+    if(
+        Date.now() - lastSaveTime > 1000
+    ){
+
+        await saveMeta();
+
+    }
+
+
+    if(running){
+
+        setTimeout(
+            calculationLoop,
+            0
+        );
+
+    }
+
 }
 
 
 /* =========================================================
-   開始
+   Start
 ========================================================= */
 
-function startCalculation(){
+async function startCalculation(){
 
-    if(
-        running
-    ){
-
+    if(running){
         return;
     }
 
-
     rounds =
-        Number(
-            document.getElementById(
-                "rounds"
-            ).value
+        Math.max(
+            1,
+            Math.min(
+                100,
+                Number(
+                    $("rounds").value
+                ) || 16
+            )
         );
 
+    $("rounds").value =
+        rounds;
 
-    running =
-        true;
+    running = true;
 
+    showStatus(
+        "🟢 計算中……IndexedDBへ自動保存しています。",
+        "ok"
+    );
 
-    statusEl.textContent =
-        "⚡ 続きから計算中…";
-
-
-    lastSpeedTime =
-        performance.now();
-
-
-    totalSpeedCount =
-        0;
-
+    await saveState(true);
 
     calculationLoop();
+
 }
 
 
 /* =========================================================
-   停止
+   Stop
 ========================================================= */
 
-function stopCalculation(){
+async function stopCalculation(){
 
-    running =
-        false;
+    running = false;
 
+    showStatus(
+        "⏸ 計算を停止しています……保存中。",
+        "warn"
+    );
 
-    /*
-       停止時は強制保存
-    */
+    await saveState(true);
 
-    saveState(true);
+    showStatus(
+        `⏸ 停止しました。${current.toString()} から再開できます。`,
+        "ok"
+    );
 
-
-    statusEl.textContent =
-        "⏸ 停止しました。状態を保存済みです。";
 }
 
 
 /* =========================================================
-   画面リセット
+   Reset Display
 ========================================================= */
 
 function resetCalculation(){
 
-    running =
-        false;
+    running = false;
 
-    current =
-        0n;
+    current = 0n;
 
-    testedCount =
-        0;
+    testedCount = 0;
 
-    foundCount =
-        0;
+    foundCount = 0;
 
-    batchSize =
-        1;
+    batchSize = 1;
 
-    primeRecords =
-        [];
+    totalSpeedCount = 0;
 
-    calculationRecords =
-        [];
+    lastSpeedCount = 0;
 
-    currentEl.textContent =
-        "0";
+    lastSpeedTime =
+        performance.now();
 
-    testedEl.textContent =
-        "0";
+    $("current").textContent = "0";
+    $("tested").textContent = "0";
+    $("found").textContent = "0";
+    $("batch").textContent = "1";
+    $("speed").textContent = "0 / 秒";
 
-    foundEl.textContent =
-        "0";
+    $("primeLog").textContent =
+        "まだ素数はありません。";
 
-    rateEl.textContent =
-        "0 /秒";
+    $("calculationLog").textContent =
+        "まだ計算ログはありません。";
 
-    batchEl.textContent =
-        "1";
+    $("latest").textContent =
+        "まだ計算されていません。";
 
-    bigCurrentEl.textContent =
-        "0";
+    $("formula").textContent =
+        "-";
 
-    latestNumberEl.textContent =
-        "—";
-
-    latestResultEl.textContent =
-        "まだ計算していません。";
-
-    formulaEl.textContent =
-        "n = —\n判定 = —";
-
-    primeListEl.innerHTML =
-        "";
-
-    statusEl.textContent =
-        "画面をリセットしました。";
-
-    saveStatus.textContent =
-        "⚠️ 保存データは残っています。";
+    showStatus(
+        "表示をリセットしました。保存データは削除していません。",
+        "ok"
+    );
 
 }
 
 
 /* =========================================================
-   保存データ完全削除
+   Delete All Saved Data
 ========================================================= */
 
-function deleteSavedData(){
+async function deleteSavedData(){
 
     const ok =
         confirm(
-            "保存されている計算データを完全に削除します。\n\n" +
-            "次回は0から開始されます。\n\n" +
-            "本当に削除しますか？"
+            "IndexedDBに保存されている計算データをすべて削除します。\n\n本当に削除しますか？"
         );
 
-
-    if(
-        !ok
-    ){
-
+    if(!ok){
         return;
     }
 
+    running = false;
 
-    localStorage.removeItem(
-        STORAGE_KEY
-    );
+    return new Promise(resolve=>{
 
+        const transaction =
+            db.transaction(
+                [
+                    "meta",
+                    "calculations",
+                    "primes"
+                ],
+                "readwrite"
+            );
 
-    running =
-        false;
+        transaction.objectStore("meta").clear();
 
-    current =
-        0n;
+        transaction
+            .objectStore("calculations")
+            .clear();
 
-    testedCount =
-        0;
+        transaction
+            .objectStore("primes")
+            .clear();
 
-    foundCount =
-        0;
+        transaction.oncomplete = () => {
 
-    batchSize =
-        1;
+            current = 0n;
+            testedCount = 0;
+            foundCount = 0;
+            batchSize = 1;
+            primeSequence = 0;
 
-    primeRecords =
-        [];
+            pendingRecords = [];
+            pendingPrimes = [];
 
-    calculationRecords =
-        [];
+            $("current").textContent = "0";
+            $("tested").textContent = "0";
+            $("found").textContent = "0";
+            $("batch").textContent = "1";
+            $("speed").textContent = "0 / 秒";
 
+            $("primeLog").textContent =
+                "まだ素数はありません。";
 
-    primeListEl.innerHTML =
-        "";
+            $("calculationLog").textContent =
+                "まだ計算ログはありません。";
 
+            $("latest").textContent =
+                "まだ計算されていません。";
 
-    updateStats();
+            $("formula").textContent =
+                "-";
 
+            lastSaveTime = 0;
 
-    bigCurrentEl.textContent =
-        "0";
+            showStatus(
+                "🗑 保存データをすべて削除しました。",
+                "ok"
+            );
 
-    latestNumberEl.textContent =
-        "—";
+            updateSaveInfo();
 
-    latestResultEl.textContent =
-        "まだ計算していません。";
+            resolve();
 
-    formulaEl.textContent =
-        "n = —\n判定 = —";
+        };
 
+    });
 
-    saveStatus.textContent =
-        "🗑️ 保存データを削除しました。0から開始できます。";
-
-
-    statusEl.textContent =
-        "0から開始できます。";
 }
 
 
 /* =========================================================
-   Excel出力
+   Excel Export
 ========================================================= */
 
-function exportExcel(){
+async function getAllRecords(storeName){
 
-    if(
-        typeof XLSX ===
-        "undefined"
-    ){
+    return new Promise(resolve=>{
 
-        alert(
-            "Excel出力ライブラリの読み込みに失敗しました。"
+        const transaction =
+            db.transaction(
+                storeName,
+                "readonly"
+            );
+
+        const store =
+            transaction.objectStore(
+                storeName
+            );
+
+        const result = [];
+
+        const request =
+            store.openCursor();
+
+        request.onsuccess = event => {
+
+            const cursor =
+                event.target.result;
+
+            if(cursor){
+
+                result.push(
+                    cursor.value
+                );
+
+                cursor.continue();
+
+            }else{
+
+                resolve(result);
+
+            }
+
+        };
+
+        request.onerror = () => {
+
+            resolve(result);
+
+        };
+
+    });
+
+}
+
+
+async function exportExcel(){
+
+    showStatus(
+        "📊 Excelデータを準備しています……",
+        "warn"
+    );
+
+    await saveState(true);
+
+    const calculations =
+        await getAllRecords(
+            "calculations"
         );
 
-        return;
-    }
-
-
-    if(
-        calculationRecords.length === 0
-    ){
-
-        alert(
-            "まだ計算データがありません。"
+    const primes =
+        await getAllRecords(
+            "primes"
         );
-
-        return;
-    }
 
 
     const workbook =
@@ -1882,77 +1946,49 @@ function exportExcel(){
 
 
     /* =====================================================
-       1. 素数一覧
+       素数一覧
     ===================================================== */
 
     const primeRows = [
 
         [
-            "発見した素数一覧"
-        ],
-
-        [],
-
-        [
-            "No",
-            "素数",
+            "番号",
             "桁数",
             "判定",
             "判定方法",
-            "根拠"
+            "計算根拠",
+            "Miller-Rabin回数",
+            "保存日時"
         ]
 
     ];
 
+    for(const record of primes){
 
-    primeRecords.forEach(
-        (
-            record,
-            index
-        ) => {
+        primeRows.push([
 
-            primeRows.push([
+            record.number,
 
-                index + 1,
+            record.digits,
 
-                /*
-                   巨大整数なので
-                   文字列として保存
-                */
+            record.result,
 
-                record.number,
+            record.method,
 
-                record.digits,
+            record.evidence,
 
-                record.result,
+            record.rounds,
 
-                record.method,
+            record.savedAt
 
-                record.evidence
+        ]);
 
-            ]);
-
-        }
-    );
-
+    }
 
     const primeSheet =
         XLSX.utils.aoa_to_sheet(
             primeRows
         );
-
-
-    primeSheet["!cols"] = [
-
-        {wch:8},
-        {wch:80},
-        {wch:10},
-        {wch:15},
-        {wch:25},
-        {wch:80}
-
-    ];
-
 
     XLSX.utils.book_append_sheet(
         workbook,
@@ -1962,129 +1998,104 @@ function exportExcel(){
 
 
     /* =====================================================
-       2. 計算根拠
+       計算根拠
     ===================================================== */
 
-    const evidenceRows = [
+    const reasonRows = [
 
         [
-            "素数の計算根拠"
-        ],
-
-        [],
-
-        [
-            "No",
-            "素数",
-            "n - 1 = 2^s × d",
+            "数値",
+            "判定",
+            "方法",
+            "根拠",
             "s",
             "d",
-            "回数",
-            "使用基数",
-            "べき乗剰余",
-            "平方反復",
-            "根拠"
+            "使用した底",
+            "ラウンド"
         ]
 
     ];
 
+    for(const record of calculations){
 
-    primeRecords.forEach(
-        (
-            record,
-            index
-        ) => {
+        reasonRows.push([
 
-            evidenceRows.push([
+            record.number,
 
-                index + 1,
+            record.result,
 
-                record.number,
+            record.method,
 
-                record.formula1,
+            record.evidence,
 
-                record.s,
+            record.s,
 
-                record.d,
+            record.d,
 
-                record.rounds,
+            record.bases,
 
-                record.bases,
+            record.rounds
 
-                record.formula2,
+        ]);
 
-                record.formula3,
+    }
 
-                record.evidence
-
-            ]);
-
-        }
-    );
-
-
-    const evidenceSheet =
+    const reasonSheet =
         XLSX.utils.aoa_to_sheet(
-            evidenceRows
+            reasonRows
         );
-
-
-    evidenceSheet["!cols"] = [
-
-        {wch:8},
-        {wch:75},
-        {wch:30},
-        {wch:8},
-        {wch:50},
-        {wch:10},
-        {wch:70},
-        {wch:25},
-        {wch:25},
-        {wch:80}
-
-    ];
-
 
     XLSX.utils.book_append_sheet(
         workbook,
-        evidenceSheet,
+        reasonSheet,
         "計算根拠"
     );
 
 
     /* =====================================================
-       3. 全計算ログ
+       計算ログ
     ===================================================== */
 
-    const logRows = [
+    const maxRows =
+        1000000;
 
-        [
-            "全計算ログ"
-        ],
+    let sheetNumber = 1;
 
-        [],
+    for(
+        let start=0;
+        start<calculations.length;
+        start+=maxRows
+    ){
 
-        [
-            "No",
-            "候補数",
-            "桁数",
-            "判定",
-            "方法",
-            "根拠"
-        ]
+        const part =
+            calculations.slice(
+                start,
+                start + maxRows
+            );
 
-    ];
+        const rows = [
 
+            [
+                "数値",
+                "桁数",
+                "判定",
+                "方法",
+                "計算根拠",
+                "s",
+                "d",
+                "使用した底",
+                "ラウンド",
+                "式1",
+                "式2",
+                "式3",
+                "保存日時"
+            ]
 
-    calculationRecords.forEach(
-        (
-            record,
-            index
-        ) => {
+        ];
 
-            logRows.push([
+        for(const record of part){
 
-                index + 1,
+            rows.push([
 
                 record.number,
 
@@ -2094,170 +2105,119 @@ function exportExcel(){
 
                 record.method,
 
-                record.evidence
+                record.evidence,
+
+                record.s,
+
+                record.d,
+
+                record.bases,
+
+                record.rounds,
+
+                record.formula1,
+
+                record.formula2,
+
+                record.formula3,
+
+                record.savedAt
 
             ]);
 
         }
-    );
 
+        const sheet =
+            XLSX.utils.aoa_to_sheet(
+                rows
+            );
 
-    const logSheet =
-        XLSX.utils.aoa_to_sheet(
-            logRows
+        XLSX.utils.book_append_sheet(
+            workbook,
+            sheet,
+            `計算ログ_${sheetNumber}`
         );
 
+        sheetNumber++;
 
-    logSheet["!cols"] = [
-
-        {wch:8},
-        {wch:75},
-        {wch:10},
-        {wch:15},
-        {wch:25},
-        {wch:80}
-
-    ];
-
-
-    XLSX.utils.book_append_sheet(
-        workbook,
-        logSheet,
-        "計算ログ"
-    );
+    }
 
 
     /* =====================================================
-       4. 数式・説明
+       数式説明
     ===================================================== */
 
-    const methodRows = [
+    const formulaRows = [
+
+        ["項目","内容"],
 
         [
-            "計算方法・数式"
-        ],
-
-        [],
-
-        [
-            "項目",
-            "内容"
+            "Miller-Rabin",
+            "確率的素数判定アルゴリズム"
         ],
 
         [
-            "計算開始",
-            "0"
+            "n - 1 = 2^s × d",
+            "n-1を2の累乗と奇数dに分解"
         ],
 
         [
-            "計算方法",
-            "0 → 1 → 2 → 3 → … と順番に検査"
+            "a^d mod n",
+            "底aを使ったべき乗剰余"
         ],
 
         [
-            "整数型",
-            "JavaScript BigInt"
+            "x ← x^2 mod n",
+            "平方剰余を繰り返して判定"
         ],
 
         [
-            "素数候補判定",
-            "Miller-Rabin法"
+            "BigInt",
+            "JavaScriptの任意精度整数"
         ],
 
         [
-            "分解式",
-            "n - 1 = 2^s × d"
-        ],
-
-        [
-            "べき乗剰余",
-            "a^d mod n"
-        ],
-
-        [
-            "平方反復",
-            "x ← x^2 mod n"
-        ],
-
-        [
-            "保存方式",
-            "localStorage"
-        ],
-
-        [
-            "復元方式",
-            "ページ読み込み時にlocalStorageから復元"
-        ],
-
-        [
-            "Excel保存",
-            "SheetJSによるXLSX生成"
-        ],
-
-        [
-            "巨大整数について",
-            "Excelの精度問題を避けるため文字列として保存"
-        ],
-
-        [
-            "Miller-Rabinについて",
-            "設定回数による確率的な素数候補判定であり、一般の任意巨大整数に対する完全な数学的証明ではない"
+            "注意",
+            "Miller-Rabinの結果は素数候補として記録"
         ]
 
     ];
 
-
-    const methodSheet =
+    const formulaSheet =
         XLSX.utils.aoa_to_sheet(
-            methodRows
+            formulaRows
         );
-
-
-    methodSheet["!cols"] = [
-
-        {wch:30},
-        {wch:110}
-
-    ];
-
 
     XLSX.utils.book_append_sheet(
         workbook,
-        methodSheet,
+        formulaSheet,
         "数式・説明"
     );
 
 
     /* =====================================================
-       5. 保存状態
+       保存状態
     ===================================================== */
 
     const stateRows = [
 
-        [
-            "現在の保存状態"
-        ],
+        ["項目","値"],
 
-        [],
+        ["現在値",current.toString()],
 
         [
-            "項目",
-            "値"
-        ],
-
-        [
-            "次に計算する数",
-            current.toString()
-        ],
-
-        [
-            "検査数",
+            "計算済み",
             testedCount
         ],
 
         [
-            "発見した素数",
+            "発見素数",
             foundCount
+        ],
+
+        [
+            "バッチサイズ",
+            batchSize
         ],
 
         [
@@ -2266,31 +2226,31 @@ function exportExcel(){
         ],
 
         [
-            "現在のバッチサイズ",
-            batchSize
+            "計算ログ件数",
+            calculations.length
         ],
 
         [
-            "保存日時",
-            new Date().toLocaleString()
+            "素数ログ件数",
+            primes.length
+        ],
+
+        [
+            "保存方式",
+            "IndexedDB"
+        ],
+
+        [
+            "出力日時",
+            new Date().toISOString()
         ]
 
     ];
-
 
     const stateSheet =
         XLSX.utils.aoa_to_sheet(
             stateRows
         );
-
-
-    stateSheet["!cols"] = [
-
-        {wch:30},
-        {wch:80}
-
-    ];
-
 
     XLSX.utils.book_append_sheet(
         workbook,
@@ -2300,89 +2260,174 @@ function exportExcel(){
 
 
     /* =====================================================
-       XLSX生成
+       Export
     ===================================================== */
-
-    const now =
-        new Date();
-
-
-    const filename =
-        "超巨大素数_計算結果_" +
-        now
-            .toISOString()
-            .replaceAll(":","-")
-            .replace(
-                /\..*/,
-                ""
-            ) +
-        ".xlsx";
-
 
     XLSX.writeFile(
         workbook,
-        filename
+        "超巨大素数_計算結果.xlsx"
     );
 
-
-    alert(
-        "Excelを保存しました。\n\n" +
-        "素数：" +
-        primeRecords.length.toLocaleString() +
-        "個\n" +
-        "計算ログ：" +
-        calculationRecords.length.toLocaleString() +
-        "件\n" +
-        "次回計算位置：" +
-        current.toString()
+    showStatus(
+        `📊 Excel出力完了。計算ログ ${calculations.length.toLocaleString()}件、素数 ${primes.length.toLocaleString()}件。`,
+        "ok"
     );
+
 }
 
 
 /* =========================================================
-   ページ読み込み時
-========================================================= */
-
-window.addEventListener(
-    "load",
-    () => {
-
-        loadState();
-
-    }
-);
-
-
-/* =========================================================
-   ページを閉じる直前にも保存
-========================================================= */
-
-window.addEventListener(
-    "beforeunload",
-    () => {
-
-        saveState(true);
-
-    }
-);
-
-
-/* =========================================================
-   visibility変更時にも保存
+   Page Visibility
 ========================================================= */
 
 document.addEventListener(
     "visibilitychange",
-    () => {
+    async ()=>{
+        
+        if(
+            document.visibilityState ===
+            "hidden"
+        ){
 
-        /*
-           タブ切り替え・画面移動などでも保存
-        */
+            await saveState(true);
 
-        saveState(true);
+        }
 
     }
 );
+
+
+/* =========================================================
+   Before Unload
+========================================================= */
+
+window.addEventListener(
+    "beforeunload",
+    ()=>{
+        
+        /*
+         * beforeunloadでは非同期処理が保証されないため、
+         * 通常時に約1秒ごと保存する方式を採用。
+         * ここでは未送信データがある場合だけ同期的に
+         * IndexedDBへトランザクションを開始する。
+         */
+
+        if(
+            pendingRecords.length > 0 ||
+            pendingPrimes.length > 0
+        ){
+
+            try{
+
+                const transaction =
+                    db.transaction(
+                        [
+                            "calculations",
+                            "primes",
+                            "meta"
+                        ],
+                        "readwrite"
+                    );
+
+                const calculationStore =
+                    transaction.objectStore(
+                        "calculations"
+                    );
+
+                const primeStore =
+                    transaction.objectStore(
+                        "primes"
+                    );
+
+                for(
+                    const record
+                    of pendingRecords
+                ){
+
+                    calculationStore.put(
+                        record
+                    );
+
+                }
+
+                for(
+                    const prime
+                    of pendingPrimes
+                ){
+
+                    primeStore.put(
+                        prime
+                    );
+
+                }
+
+                transaction
+                    .objectStore("meta")
+                    .put({
+
+                        id:"state",
+
+                        current:
+                            current.toString(),
+
+                        testedCount,
+
+                        foundCount,
+
+                        batchSize,
+
+                        rounds,
+
+                        primeSequence,
+
+                        savedAt:
+                            new Date().toISOString()
+
+                    });
+
+            }catch(error){
+
+                console.warn(
+                    "終了時保存:",
+                    error
+                );
+
+            }
+
+        }
+
+    }
+);
+
+
+/* =========================================================
+   Initialisation
+========================================================= */
+
+(async function(){
+
+    try{
+
+        await openDatabase();
+
+        await loadState();
+
+        updateUI();
+
+        updateSaveInfo();
+
+    }catch(error){
+
+        console.error(error);
+
+        showStatus(
+            "⚠️ IndexedDBを利用できません。ブラウザの設定を確認してください。",
+            "warn"
+        );
+
+    }
+
+})();
 
 </script>
 
