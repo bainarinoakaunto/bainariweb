@@ -1,24 +1,9 @@
 {
-  "system": "All services are operating normally.",
-
-  
-  "blog": {
-    "status": "正常稼働中"
-  },
-  
-  "kabu": {
-    "status": "正常稼働中"
-  },
-
-  "tube": {
-    "status": "正常稼働中"
-  },
-
-  "timer": {
-    "status": "正常稼働中"
-  },
-
-  "project": {
-    "status": "正常稼働中"
-  }
+  "stockServer": "稼働中",
+  "waterlog": "稼働中",
+  "calendar": "稼働中",
+  "timer": "稼働中",
+  "digitalCard": "稼働中",
+  "kabu": "稼働中",
+  "password": "稼働中"
 }
