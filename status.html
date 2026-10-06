@@ -26,8 +26,9 @@ body{
     color:#17233c;
 }
 
+
 /* =========================
-   HEADER / MENU
+   HEADER
 ========================= */
 
 header{
@@ -104,6 +105,7 @@ nav a:hover{
     stroke-linecap:round;
     stroke-linejoin:round;
 }
+
 
 /* =========================
    MOBILE MENU
@@ -233,6 +235,7 @@ nav a:hover{
     background:rgba(255,255,255,.14);
 }
 
+
 /* =========================
    MAIN
 ========================= */
@@ -292,8 +295,9 @@ main{
     font-weight:600;
 }
 
+
 /* =========================
-   STATUS TITLE
+   STATUS HEADING
 ========================= */
 
 .status-heading{
@@ -303,7 +307,7 @@ main{
 
     gap:13px;
 
-    margin-bottom:26px;
+    margin-bottom:32px;
 
     font-size:25px;
 
@@ -345,26 +349,88 @@ main{
     stroke-linejoin:round;
 }
 
+
+/* =========================
+   SYSTEM SECTION
+========================= */
+
+.system-section{
+    width:100%;
+
+    margin-bottom:46px;
+}
+
+.system-section:last-child{
+    margin-bottom:0;
+}
+
+
+/* =========================
+   SECTION TITLE
+========================= */
+
+.system-section-title{
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin-bottom:22px;
+
+    color:#17233c;
+
+    font-size:19px;
+
+    font-weight:800;
+}
+
+.system-section-title::before{
+    content:"";
+
+    width:7px;
+    height:7px;
+
+    flex-shrink:0;
+
+    border-radius:50%;
+
+    background:#006F68;
+}
+
+.system-section-title::after{
+    content:"";
+
+    height:1px;
+
+    flex:1;
+
+    background:#d8e0e8;
+}
+
+
 /* =========================
    STATUS GRID
+   1列1個
 ========================= */
 
 .status-grid{
     display:grid;
 
-    grid-template-columns:
-        repeat(4,minmax(0,1fr));
+    grid-template-columns:1fr;
 
-    gap:24px 18px;
+    gap:24px;
 }
 
+
 /* =========================
-   CARD
+   STATUS CARD
 ========================= */
 
 .status-card{
     position:relative;
 
+    width:100%;
     min-width:0;
 
     background:#fff;
@@ -403,7 +469,7 @@ main{
     align-items:center;
     justify-content:space-between;
 
-    gap:12px;
+    gap:15px;
 
     min-height:38px;
 }
@@ -431,6 +497,7 @@ main{
 
     white-space:normal;
 }
+
 
 /* =========================
    SERVICE ICON
@@ -491,6 +558,7 @@ main{
     color:#2588d8;
 }
 
+
 /* =========================
    STATUS BADGE
 ========================= */
@@ -539,6 +607,7 @@ main{
     line-height:1;
 }
 
+
 /* =========================
    UPTIME
 ========================= */
@@ -562,8 +631,9 @@ main{
     background:#38cfaa;
 }
 
+
 /* =========================
-   NEW
+   NEW BADGE
 ========================= */
 
 .new-badge{
@@ -592,6 +662,7 @@ main{
     letter-spacing:.3px;
 }
 
+
 /* =========================
    WARNING
 ========================= */
@@ -614,6 +685,7 @@ main{
 .status-card.warning
 .service-status{
     background:#fff1d9;
+
     color:#ad6a00;
 }
 
@@ -625,6 +697,7 @@ main{
 .status-card.error
 .service-status{
     background:#fbe3ed;
+
     color:#bd4879;
 }
 
@@ -636,6 +709,7 @@ main{
 .status-card.maintenance
 .service-status{
     background:#e7f0fa;
+
     color:#4f7da8;
 }
 
@@ -644,8 +718,9 @@ main{
     background:#6e9bc8;
 }
 
+
 /* =========================
-   REPORT
+   REPORT BOX
 ========================= */
 
 .report-box{
@@ -733,6 +808,7 @@ main{
     color:#666;
 }
 
+
 /* =========================
    FOOTER
 ========================= */
@@ -746,6 +822,7 @@ footer{
 
     font-size:13px;
 }
+
 
 /* =========================
    ACCESS NOTICE
@@ -809,6 +886,7 @@ footer{
     cursor:pointer;
 }
 
+
 /* =========================
    ANIMATION
 ========================= */
@@ -831,6 +909,7 @@ footer{
 
 }
 
+
 /* =========================
    RESPONSIVE
 ========================= */
@@ -844,11 +923,11 @@ footer{
     }
 
     .status-grid{
-        grid-template-columns:
-            repeat(2,minmax(0,1fr));
+        grid-template-columns:1fr;
     }
 
 }
+
 
 @media(max-width:700px){
 
@@ -889,6 +968,10 @@ footer{
 
     .status-heading{
         font-size:22px;
+    }
+
+    .system-section-title{
+        font-size:18px;
     }
 
     .status-grid{
@@ -969,11 +1052,13 @@ footer{
 </style>
 </head>
 
+
 <body>
 
-<!-- =====================================================
-     MENU
-===================================================== -->
+
+<!-- =========================
+     HEADER
+========================= -->
 
 <header>
 
@@ -1091,6 +1176,9 @@ Contact
 
 </nav>
 
+
+<!-- モバイルメニューボタン -->
+
 <button
 class="menu-button"
 id="menuButton"
@@ -1110,12 +1198,15 @@ MENU
 
 </button>
 
+
+<!-- モバイルメニュー -->
+
 <div
 class="mobile-menu"
 id="mobileMenu"
 >
 
-<a href="index">Home</a>
+<a href="index.html">Home</a>
 <a href="about">About</a>
 <a href="projects">Projects</a>
 <a href="videos">License</a>
@@ -1130,19 +1221,23 @@ id="mobileMenu"
 
 </header>
 
-<!-- =====================================================
+
+<!-- =========================
      MAIN
-===================================================== -->
+========================= -->
 
 <main>
+
 
 <div class="title">
 STATUS
 </div>
 
+
 <div class="description">
 BAINARI関連サービスのシステム稼働状況
 </div>
+
 
 <div class="meta">
 
@@ -1156,6 +1251,11 @@ BAINARI関連サービスのシステム稼働状況
 </div>
 
 </div>
+
+
+<!-- =========================
+     システム稼働状況
+========================= -->
 
 <div class="status-heading">
 
@@ -1171,11 +1271,22 @@ BAINARI関連サービスのシステム稼働状況
 
 </div>
 
+
+
 <!-- =====================================================
-     STATUS CARDS
+     臨時システム
 ===================================================== -->
 
+<section class="system-section">
+
+
+<div class="system-section-title">
+臨時システム
+</div>
+
+
 <div class="status-grid">
+
 
 <!-- [臨時] 株シミュレーター管理システムサーバー -->
 
@@ -1186,11 +1297,10 @@ data-key="rinzikabu"
 
 <div class="card-top">
 
+
 <div class="service-title">
 
-<span
-class="service-icon icon-server"
->
+<span class="service-icon icon-server">
 
 <svg viewBox="0 0 32 32">
 
@@ -1210,17 +1320,21 @@ height="8"
 rx="2"
 />
 
-<path d="M9 9h.1M9 23h.1M14 9h9M14 23h9"/>
+<path
+d="M9 9h.1M9 23h.1M14 9h9M14 23h9"
+/>
 
 </svg>
 
 </span>
+
 
 <span>
 [臨時] 株シミュレーター管理システムサーバー
 </span>
 
 </div>
+
 
 <div
 class="service-status"
@@ -1235,17 +1349,43 @@ id="rinzikabuStatus"
 
 </div>
 
+
 </div>
+
 
 <div
 class="uptime"
 id="rinzikabuBars"
 ></div>
 
+
 </article>
 
 
-<!-- 株シミュレータ管理サーバー -->
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     通常システム
+===================================================== -->
+
+<section class="system-section">
+
+
+<div class="system-section-title">
+通常システム
+</div>
+
+
+<div class="status-grid">
+
+
+<!-- =================================================
+     株シミュレータ管理サーバー
+================================================= -->
 
 <article
 class="status-card"
@@ -1254,11 +1394,10 @@ data-key="stockServer"
 
 <div class="card-top">
 
+
 <div class="service-title">
 
-<span
-class="service-icon icon-server"
->
+<span class="service-icon icon-server">
 
 <svg viewBox="0 0 32 32">
 
@@ -1278,17 +1417,21 @@ height="8"
 rx="2"
 />
 
-<path d="M9 9h.1M9 23h.1M14 9h9M14 23h9"/>
+<path
+d="M9 9h.1M9 23h.1M14 9h9M14 23h9"
+/>
 
 </svg>
 
 </span>
+
 
 <span>
 株シミュレータ管理サーバー
 </span>
 
 </div>
+
 
 <div
 class="service-status"
@@ -1303,17 +1446,23 @@ id="stockServerStatus"
 
 </div>
 
+
 </div>
+
 
 <div
 class="uptime"
 id="stockServerBars"
 ></div>
 
+
 </article>
 
 
-<!-- WaterLog -->
+
+<!-- =================================================
+     WaterLog
+================================================= -->
 
 <article
 class="status-card"
@@ -1322,11 +1471,10 @@ data-key="waterlog"
 
 <div class="card-top">
 
+
 <div class="service-title">
 
-<span
-class="service-icon icon-water"
->
+<span class="service-icon icon-water">
 
 <svg viewBox="0 0 32 32">
 
@@ -1338,11 +1486,13 @@ d="M16 4s-8 9-8 15a8 8 0 0 0 16 0c0-6-8-15-8-15z"
 
 </span>
 
+
 <span>
 WaterLog
 </span>
 
 </div>
+
 
 <div
 class="service-status"
@@ -1357,17 +1507,23 @@ id="waterlogStatus"
 
 </div>
 
+
 </div>
+
 
 <div
 class="uptime"
 id="waterlogBars"
 ></div>
 
+
 </article>
 
 
-<!-- calendar -->
+
+<!-- =================================================
+     calendar
+================================================= -->
 
 <article
 class="status-card"
@@ -1376,11 +1532,10 @@ data-key="calendar"
 
 <div class="card-top">
 
+
 <div class="service-title">
 
-<span
-class="service-icon icon-calendar"
->
+<span class="service-icon icon-calendar">
 
 <svg viewBox="0 0 32 32">
 
@@ -1392,20 +1547,29 @@ height="21"
 rx="3"
 />
 
-<path d="M9 4v7M23 4v7M4 13h24"/>
+<path
+d="M9 4v7M23 4v7M4 13h24"
+/>
 
-<path d="M9 18h3M16 18h3M23 18h3"/>
-<path d="M9 23h3M16 23h3"/>
+<path
+d="M9 18h3M16 18h3M23 18h3"
+/>
+
+<path
+d="M9 23h3M16 23h3"
+/>
 
 </svg>
 
 </span>
+
 
 <span>
 calendar
 </span>
 
 </div>
+
 
 <div
 class="service-status"
@@ -1420,17 +1584,23 @@ id="calendarStatus"
 
 </div>
 
+
 </div>
+
 
 <div
 class="uptime"
 id="calendarBars"
 ></div>
 
+
 </article>
 
 
-<!-- ryoタイマー -->
+
+<!-- =================================================
+     ryoタイマー
+================================================= -->
 
 <article
 class="status-card"
@@ -1439,11 +1609,10 @@ data-key="timer"
 
 <div class="card-top">
 
+
 <div class="service-title">
 
-<span
-class="service-icon icon-timer"
->
+<span class="service-icon icon-timer">
 
 <svg viewBox="0 0 32 32">
 
@@ -1453,18 +1622,25 @@ cy="17"
 r="11"
 />
 
-<path d="M16 10v8l5 3"/>
-<path d="M12 3h8"/>
+<path
+d="M16 10v8l5 3"
+/>
+
+<path
+d="M12 3h8"
+/>
 
 </svg>
 
 </span>
+
 
 <span>
 ryoタイマー
 </span>
 
 </div>
+
 
 <div
 class="service-status"
@@ -1479,17 +1655,23 @@ id="timerStatus"
 
 </div>
 
+
 </div>
+
 
 <div
 class="uptime"
 id="timerBars"
 ></div>
 
+
 </article>
 
 
-<!-- Digital暗記カード -->
+
+<!-- =================================================
+     Digital暗記カード
+================================================= -->
 
 <article
 class="status-card"
@@ -1500,31 +1682,43 @@ data-key="digitalCard"
 NEW
 </span>
 
+
 <div class="card-top">
+
 
 <div class="service-title">
 
-<span
-class="service-icon icon-card"
->
+<span class="service-icon icon-card">
 
 <svg viewBox="0 0 32 32">
 
-<path d="M8 28V11l8-6 8 6v17z"/>
+<path
+d="M8 28V11l8-6 8 6v17z"
+/>
 
-<path d="M11 15h10"/>
-<path d="M11 20h10"/>
-<path d="M11 25h6"/>
+<path
+d="M11 15h10"
+/>
+
+<path
+d="M11 20h10"
+/>
+
+<path
+d="M11 25h6"
+/>
 
 </svg>
 
 </span>
+
 
 <span>
 Digital暗記カード
 </span>
 
 </div>
+
 
 <div
 class="service-status"
@@ -1539,17 +1733,23 @@ id="digitalCardStatus"
 
 </div>
 
+
 </div>
+
 
 <div
 class="uptime"
 id="digitalCardBars"
 ></div>
 
+
 </article>
 
 
-<!-- 株シュミレーター26.1 -->
+
+<!-- =================================================
+     株シュミレーター26.1
+================================================= -->
 
 <article
 class="status-card"
@@ -1558,11 +1758,10 @@ data-key="kabu"
 
 <div class="card-top">
 
+
 <div class="service-title">
 
-<span
-class="service-icon icon-stock"
->
+<span class="service-icon icon-stock">
 
 <svg viewBox="0 0 32 32">
 
@@ -1570,19 +1769,25 @@ class="service-icon icon-stock"
 <path d="M14 27V12"/>
 <path d="M23 27V6"/>
 
-<path d="M4 11l7-5 6 4 10-7"/>
+<path
+d="M4 11l7-5 6 4 10-7"
+/>
 
-<path d="M22 3h5v5"/>
+<path
+d="M22 3h5v5"
+/>
 
 </svg>
 
 </span>
+
 
 <span>
 株シュミレーター26.1
 </span>
 
 </div>
+
 
 <div
 class="service-status"
@@ -1597,17 +1802,23 @@ id="kabuStatus"
 
 </div>
 
+
 </div>
+
 
 <div
 class="uptime"
 id="kabuBars"
 ></div>
 
+
 </article>
 
 
-<!-- パスワードランダム生成 -->
+
+<!-- =================================================
+     パスワードランダム生成
+================================================= -->
 
 <article
 class="status-card"
@@ -1616,11 +1827,10 @@ data-key="password"
 
 <div class="card-top">
 
+
 <div class="service-title">
 
-<span
-class="service-icon icon-password"
->
+<span class="service-icon icon-password">
 
 <svg viewBox="0 0 32 32">
 
@@ -1636,17 +1846,21 @@ rx="3"
 d="M11 14V10a5 5 0 0 1 10 0v4"
 />
 
-<path d="M16 20v4"/>
+<path
+d="M16 20v4"
+/>
 
 </svg>
 
 </span>
+
 
 <span>
 パスワードランダム生成
 </span>
 
 </div>
+
 
 <div
 class="service-status"
@@ -1661,31 +1875,47 @@ id="passwordStatus"
 
 </div>
 
+
 </div>
+
 
 <div
 class="uptime"
 id="passwordBars"
 ></div>
 
+
 </article>
+
 
 </div>
 
+</section>
+
+
 </main>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
 
 <footer>
 © BAINARI
 </footer>
 
-<!-- =====================================================
-     REPORT
-===================================================== -->
+
+
+<!-- =========================
+     REPORT BOX
+========================= -->
 
 <div
 id="reportBox"
 class="report-box"
 >
+
 
 <button
 class="close-btn"
@@ -1694,14 +1924,17 @@ onclick="closeReport()"
 ✕
 </button>
 
+
 <h3>
 ⚠️ 不具合を発見しましたか？
 </h3>
+
 
 <p>
 サービスに問題や表示の不具合を見つけた場合は、
 Googleフォームからご報告ください。
 </p>
+
 
 <a
 href="https://forms.gle/kRhMupMydqeaiFa98"
@@ -1712,16 +1945,20 @@ class="report-btn"
 不具合を報告する
 </a>
 
+
 </div>
 
-<!-- =====================================================
+
+
+<!-- =========================
      ACCESS NOTICE
-===================================================== -->
+========================= -->
 
 <div
 class="access-consent"
 id="accessConsent"
 >
+
 
 <div class="access-consent-text">
 
@@ -1731,6 +1968,7 @@ id="accessConsent"
 
 </div>
 
+
 <button
 type="button"
 id="accessConsentButton"
@@ -1738,9 +1976,13 @@ id="accessConsentButton"
 OK
 </button>
 
+
 </div>
 
+
+
 <script>
+
 
 /* =====================================================
    MENU
@@ -1755,6 +1997,7 @@ const mobileMenu =
 document.getElementById(
     "mobileMenu"
 );
+
 
 menuButton.addEventListener(
 "click",
@@ -1776,6 +2019,7 @@ function(){
     );
 
 });
+
 
 document.addEventListener(
 "click",
@@ -1807,11 +2051,16 @@ function(event){
 
 });
 
+
+
 /* =====================================================
    SERVICES
 ===================================================== */
 
 const services = [
+
+
+/* 臨時システム */
 
 {
     key:"rinzikabu",
@@ -1822,8 +2071,12 @@ const services = [
         "rinzi-kabu"
     ],
 
-    statusId:"rinzikabuStatus"
+    statusId:
+        "rinzikabuStatus"
 },
+
+
+/* 通常システム */
 
 {
     key:"stockServer",
@@ -1835,7 +2088,8 @@ const services = [
         "managementServer"
     ],
 
-    statusId:"stockServerStatus"
+    statusId:
+        "stockServerStatus"
 },
 
 {
@@ -1847,7 +2101,8 @@ const services = [
         "water"
     ],
 
-    statusId:"waterlogStatus"
+    statusId:
+        "waterlogStatus"
 },
 
 {
@@ -1857,7 +2112,8 @@ const services = [
         "calendar"
     ],
 
-    statusId:"calendarStatus"
+    statusId:
+        "calendarStatus"
 },
 
 {
@@ -1867,7 +2123,8 @@ const services = [
         "timer"
     ],
 
-    statusId:"timerStatus"
+    statusId:
+        "timerStatus"
 },
 
 {
@@ -1880,7 +2137,8 @@ const services = [
         "digitalAnki"
     ],
 
-    statusId:"digitalCardStatus"
+    statusId:
+        "digitalCardStatus"
 },
 
 {
@@ -1892,7 +2150,8 @@ const services = [
         "simulator"
     ],
 
-    statusId:"kabuStatus"
+    statusId:
+        "kabuStatus"
 },
 
 {
@@ -1904,10 +2163,13 @@ const services = [
         "randomPassword"
     ],
 
-    statusId:"passwordStatus"
+    statusId:
+        "passwordStatus"
 }
 
 ];
+
+
 
 /* =====================================================
    UPTIME BARS
@@ -1917,13 +2179,16 @@ services.forEach(
 function(service){
 
     const element =
-    document.getElementById(
-        service.key + "Bars"
-    );
+        document.getElementById(
+            service.key + "Bars"
+        );
 
     if(!element){
+
         return;
+
     }
+
 
     for(
         let i = 0;
@@ -1932,9 +2197,9 @@ function(service){
     ){
 
         const bar =
-        document.createElement(
-            "span"
-        );
+            document.createElement(
+                "span"
+            );
 
         element.appendChild(
             bar
@@ -1944,6 +2209,8 @@ function(service){
 
 });
 
+
+
 /* =====================================================
    STATUS JSON
 ===================================================== */
@@ -1951,8 +2218,10 @@ function(service){
 const STATUS_JSON_URL =
 "https://bainarinoakaunto.github.io/bainariweb/kadou.json";
 
+
+
 /* =====================================================
-   FIND DATA
+   FIND SERVICE DATA
 ===================================================== */
 
 function findServiceData(
@@ -1961,10 +2230,11 @@ function findServiceData(
 ){
 
     if(!data){
+
         return null;
+
     }
 
-    /* 直接形式 */
 
     for(
         const id of ids
@@ -1981,7 +2251,6 @@ function findServiceData(
 
     }
 
-    /* data形式 */
 
     if(
         data.data &&
@@ -2005,7 +2274,6 @@ function findServiceData(
 
     }
 
-    /* services配列形式 */
 
     if(
         Array.isArray(
@@ -2014,14 +2282,14 @@ function findServiceData(
     ){
 
         for(
-            const item
-            of data.services
+            const item of data.services
         ){
 
             const id =
                 item.id ||
                 item.key ||
                 item.name;
+
 
             if(
                 id &&
@@ -2036,35 +2304,44 @@ function findServiceData(
 
     }
 
+
     return null;
 
 }
 
+
+
 /* =====================================================
-   STATUS
+   STATUS INFO
 ===================================================== */
 
-function getStatusInfo(
-    item
-){
+function getStatusInfo(item){
 
     if(!item){
 
         return {
+
             text:"状態不明",
-            className:"warning",
+
+            className:
+                "warning",
+
             symbol:"!"
+
         };
 
     }
 
+
     let status;
+
 
     if(
         typeof item === "string"
     ){
 
-        status = item;
+        status =
+            item;
 
     }
     else{
@@ -2077,12 +2354,16 @@ function getStatusInfo(
 
     }
 
+
     status =
         String(status)
         .trim();
 
+
     const lower =
         status.toLowerCase();
+
+
 
     /* 正常 */
 
@@ -2112,99 +2393,146 @@ function getStatusInfo(
 
         return {
 
-            text:"稼働中",
+            text:
+                "稼働中",
 
-            className:"normal",
+            className:
+                "normal",
 
-            symbol:"✓"
+            symbol:
+                "✓"
 
         };
 
     }
+
+
 
     /* メンテナンス */
 
     if(
+
         status.includes(
             "メンテナンス"
         ) ||
+
         lower.includes(
             "maintenance"
         )
-    ){
-
-        return {
-
-            text:"メンテナンス中",
-
-            className:"maintenance",
-
-            symbol:"!"
-
-        };
-
-    }
-
-    /* 障害 */
-
-    if(
-
-        status.includes("停止") ||
-
-        status.includes("障害") ||
-
-        status.includes("エラー") ||
-
-        status.includes("接続不可") ||
-
-        lower.includes("down") ||
-
-        lower.includes("error") ||
-
-        lower.includes("offline")
 
     ){
 
         return {
 
             text:
-                status || "停止中",
+                "メンテナンス中",
 
-            className:"error",
+            className:
+                "maintenance",
 
-            symbol:"×"
+            symbol:
+                "!"
 
         };
 
     }
 
-    /* 警告 */
+
+
+    /* 障害 */
 
     if(
 
-        status.includes("一部") ||
+        status.includes(
+            "停止"
+        ) ||
 
-        status.includes("遅延") ||
+        status.includes(
+            "障害"
+        ) ||
 
-        status.includes("警告") ||
+        status.includes(
+            "エラー"
+        ) ||
 
-        lower.includes("warning") ||
+        status.includes(
+            "接続不可"
+        ) ||
 
-        lower.includes("degraded")
+        lower.includes(
+            "down"
+        ) ||
+
+        lower.includes(
+            "error"
+        ) ||
+
+        lower.includes(
+            "offline"
+        )
 
     ){
 
         return {
 
-            text:status,
+            text:
+                status ||
+                "停止中",
 
-            className:"warning",
+            className:
+                "error",
 
-            symbol:"!"
+            symbol:
+                "×"
 
         };
 
     }
+
+
+
+    /* 警告 */
+
+    if(
+
+        status.includes(
+            "一部"
+        ) ||
+
+        status.includes(
+            "遅延"
+        ) ||
+
+        status.includes(
+            "警告"
+        ) ||
+
+        lower.includes(
+            "warning"
+        ) ||
+
+        lower.includes(
+            "degraded"
+        )
+
+    ){
+
+        return {
+
+            text:
+                status,
+
+            className:
+                "warning",
+
+            symbol:
+                "!"
+
+        };
+
+    }
+
+
 
     return {
 
@@ -2212,16 +2540,20 @@ function getStatusInfo(
             status ||
             "状態不明",
 
-        className:"warning",
+        className:
+            "warning",
 
-        symbol:"!"
+        symbol:
+            "!"
 
     };
 
 }
 
+
+
 /* =====================================================
-   UPDATE CARD
+   UPDATE SERVICE
 ===================================================== */
 
 function updateService(
@@ -2230,14 +2562,16 @@ function updateService(
 ){
 
     const card =
-    document.querySelector(
-        `.status-card[data-key="${service.key}"]`
-    );
+        document.querySelector(
+            `.status-card[data-key="${service.key}"]`
+        );
+
 
     const statusElement =
-    document.getElementById(
-        service.statusId
-    );
+        document.getElementById(
+            service.statusId
+        );
+
 
     if(
         !card ||
@@ -2248,22 +2582,26 @@ function updateService(
 
     }
 
+
     const item =
-    findServiceData(
-        data,
-        service.ids
-    );
+        findServiceData(
+            data,
+            service.ids
+        );
+
 
     const result =
-    getStatusInfo(
-        item
-    );
+        getStatusInfo(
+            item
+        );
+
 
     card.classList.remove(
         "warning",
         "error",
         "maintenance"
     );
+
 
     if(
         result.className !==
@@ -2275,6 +2613,7 @@ function updateService(
         );
 
     }
+
 
     statusElement.innerHTML = `
 
@@ -2288,47 +2627,58 @@ function updateService(
 
 }
 
+
+
 /* =====================================================
-   LOAD kadou.json
+   LOAD STATUS
 ===================================================== */
 
 async function loadStatus(){
 
     const systemElement =
-    document.getElementById(
-        "system"
-    );
+        document.getElementById(
+            "system"
+        );
+
 
     const syncElement =
-    document.getElementById(
-        "sync"
-    );
+        document.getElementById(
+            "sync"
+        );
+
 
     try{
 
         systemElement.textContent =
             "稼働状況を読み込み中";
 
+
         const response =
-        await fetch(
-            STATUS_JSON_URL +
-            "?t=" +
-            Date.now(),
-            {
-                method:"GET",
+            await fetch(
 
-                cache:"no-store",
+                STATUS_JSON_URL +
+                "?t=" +
+                Date.now(),
 
-                headers:{
-                    "Accept":
-                        "application/json"
+                {
+
+                    method:
+                        "GET",
+
+                    cache:
+                        "no-store",
+
+                    headers:{
+                        "Accept":
+                            "application/json"
+                    }
+
                 }
-            }
-        );
 
-        if(
-            !response.ok
-        ){
+            );
+
+
+        if(!response.ok){
 
             throw new Error(
                 "HTTP " +
@@ -2337,35 +2687,33 @@ async function loadStatus(){
 
         }
 
+
         const data =
-        await response.json();
+            await response.json();
+
 
         console.log(
             "kadou.json:",
             data
         );
 
-        /* システム全体 */
 
         systemElement.textContent =
             data.system ||
             data.message ||
             "システム稼働状況を取得済み";
 
-        /* 各カード */
 
         services.forEach(
-            function(service){
+        function(service){
 
-                updateService(
-                    service,
-                    data
-                );
+            updateService(
+                service,
+                data
+            );
 
-            }
-        );
+        });
 
-        /* 最終更新時刻 */
 
         syncElement.textContent =
             new Date().toLocaleTimeString(
@@ -2374,6 +2722,7 @@ async function loadStatus(){
 
     }
 
+
     catch(error){
 
         console.error(
@@ -2381,24 +2730,29 @@ async function loadStatus(){
             error
         );
 
+
         systemElement.textContent =
             "稼働状況を読み込めません";
 
+
         syncElement.textContent =
             "読み込みエラー";
+
 
         services.forEach(
         function(service){
 
             const card =
-            document.querySelector(
-                `.status-card[data-key="${service.key}"]`
-            );
+                document.querySelector(
+                    `.status-card[data-key="${service.key}"]`
+                );
+
 
             const element =
-            document.getElementById(
-                service.statusId
-            );
+                document.getElementById(
+                    service.statusId
+                );
+
 
             if(card){
 
@@ -2412,6 +2766,7 @@ async function loadStatus(){
                 );
 
             }
+
 
             if(element){
 
@@ -2433,31 +2788,33 @@ async function loadStatus(){
 
 }
 
+
+
 /* =====================================================
-   FIRST LOAD
+   START STATUS
 ===================================================== */
 
 loadStatus();
 
-/* =====================================================
-   AUTO REFRESH
-===================================================== */
 
 setInterval(
     loadStatus,
     5000
 );
 
+
+
 /* =====================================================
-   REPORT
+   REPORT BOX
 ===================================================== */
 
 function closeReport(){
 
     const box =
-    document.getElementById(
-        "reportBox"
-    );
+        document.getElementById(
+            "reportBox"
+        );
+
 
     if(box){
 
@@ -2468,19 +2825,27 @@ function closeReport(){
 
 }
 
+
+
 /* =====================================================
    ACCESS LOG
 ===================================================== */
 
 (function(){
 
+
     const FORM_URL =
-    "https://docs.google.com/forms/d/e/1FAIpQLSccfR4g1Ytnzr0aLv31R3NkjUWRmaaD6YwQnjNYF0d60Uexmg/formResponse";
+        "https://docs.google.com/forms/d/e/1FAIpQLSccfR4g1Ytnzr0aLv31R3NkjUWRmaaD6YwQnjNYF0d60Uexmg/formResponse";
+
+
+
+    /* 端末 */
 
     function getDevice(){
 
         const width =
             window.innerWidth;
+
 
         if(
             width <= 700
@@ -2490,6 +2855,7 @@ function closeReport(){
 
         }
 
+
         if(
             width <= 1100
         ){
@@ -2498,95 +2864,157 @@ function closeReport(){
 
         }
 
+
         return "PC";
 
     }
+
+
+
+    /* OS */
 
     function getOS(){
 
         const ua =
             navigator.userAgent;
 
+
         if(
             /Android/i.test(ua)
-        )
+        ){
+
             return "Android";
+
+        }
+
 
         if(
             /iPhone|iPad|iPod/i.test(ua)
-        )
+        ){
+
             return "iOS / iPadOS";
+
+        }
+
 
         if(
             /Windows/i.test(ua)
-        )
+        ){
+
             return "Windows";
+
+        }
+
 
         if(
             /Mac OS X/i.test(ua)
-        )
+        ){
+
             return "macOS";
+
+        }
+
 
         if(
             /CrOS/i.test(ua)
-        )
+        ){
+
             return "ChromeOS";
+
+        }
+
 
         if(
             /Linux/i.test(ua)
-        )
+        ){
+
             return "Linux";
+
+        }
+
 
         return "その他 / 不明";
 
     }
+
+
+
+    /* ブラウザ */
 
     function getBrowser(){
 
         const ua =
             navigator.userAgent;
 
+
         if(
             /Edg\//i.test(ua)
-        )
+        ){
+
             return "Microsoft Edge";
+
+        }
+
 
         if(
             /OPR\//i.test(ua)
-        )
+        ){
+
             return "Opera";
+
+        }
+
 
         if(
             /Chrome\//i.test(ua) &&
             !/Edg\//i.test(ua)
-        )
+        ){
+
             return "Google Chrome";
+
+        }
+
 
         if(
             /Firefox\//i.test(ua)
-        )
+        ){
+
             return "Firefox";
+
+        }
+
 
         if(
             /Safari\//i.test(ua) &&
             !/Chrome\//i.test(ua)
-        )
+        ){
+
             return "Safari";
+
+        }
+
 
         return "その他 / 不明";
 
     }
+
+
+
+    /* アクセスログ送信 */
 
     function sendAccessLog(){
 
         const now =
             new Date();
 
+
         const params =
-        new URLSearchParams();
+            new URLSearchParams();
+
 
         params.set(
             "entry.1390942320",
+
             now.toLocaleString(
                 "ja-JP",
                 {
@@ -2596,80 +3024,107 @@ function closeReport(){
             )
         );
 
+
         params.set(
             "entry.600562719",
+
             location.href
         );
 
+
         params.set(
             "entry.32786128",
+
             document.title
         );
 
+
         params.set(
             "entry.318452337",
+
             getDevice()
         );
 
+
         params.set(
             "entry.1152326462",
+
             getOS()
         );
 
+
         params.set(
             "entry.777710718",
+
             getBrowser()
         );
 
+
+
         const iframe =
-        document.createElement(
-            "iframe"
-        );
+            document.createElement(
+                "iframe"
+            );
+
 
         iframe.name =
             "accessLog_" +
             Date.now();
 
+
         iframe.style.display =
             "none";
+
 
         document.body.appendChild(
             iframe
         );
 
+
+
         const form =
-        document.createElement(
-            "form"
-        );
+            document.createElement(
+                "form"
+            );
+
 
         form.method =
             "GET";
 
+
         form.action =
             FORM_URL;
+
 
         form.target =
             iframe.name;
 
+
         form.style.display =
             "none";
+
+
 
         params.forEach(
         function(value,key){
 
             const input =
-            document.createElement(
-                "input"
-            );
+                document.createElement(
+                    "input"
+                );
+
 
             input.type =
                 "hidden";
 
+
             input.name =
                 key;
 
+
             input.value =
                 value;
+
 
             form.appendChild(
                 input
@@ -2677,25 +3132,34 @@ function closeReport(){
 
         });
 
+
+
         document.body.appendChild(
             form
         );
+
 
         form.submit();
 
     }
 
+
+
+    /* アクセス情報案内 */
+
     function setupNotice(){
 
         const notice =
-        document.getElementById(
-            "accessConsent"
-        );
+            document.getElementById(
+                "accessConsent"
+            );
+
 
         const button =
-        document.getElementById(
-            "accessConsentButton"
-        );
+            document.getElementById(
+                "accessConsentButton"
+            );
+
 
         if(
             !notice ||
@@ -2706,6 +3170,7 @@ function closeReport(){
 
         }
 
+
         button.addEventListener(
         "click",
         function(event){
@@ -2714,7 +3179,9 @@ function closeReport(){
 
             event.stopPropagation();
 
+
             notice.remove();
+
 
             try{
 
@@ -2724,10 +3191,11 @@ function closeReport(){
                 );
 
             }
-
             catch(error){}
 
         });
+
+
 
         try{
 
@@ -2742,10 +3210,13 @@ function closeReport(){
             }
 
         }
-
         catch(error){}
 
     }
+
+
+
+    /* 開始 */
 
     function start(){
 
@@ -2754,6 +3225,8 @@ function closeReport(){
         sendAccessLog();
 
     }
+
+
 
     if(
         document.readyState ===
@@ -2774,6 +3247,7 @@ function closeReport(){
         start();
 
     }
+
 
 })();
 
