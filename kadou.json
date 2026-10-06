@@ -1,10 +1,10 @@
 {
-  "rinzikabu": "メンテナンス中"
+  "rinzikabu": "メンテナンス中",
   "stockServer": "接続不可",
   "waterlog": "稼働中",
   "calendar": "稼働中",
   "timer": "稼働中",
   "digitalCard": "稼働中",
   "kabu": "接続不可",
-  "password": "稼働中" 
+  "password": "稼働中"
 }
