@@ -430,11 +430,11 @@ main{
 }
 
 .service-title span:last-child{
-    overflow:hidden;
+    overflow:visible;
 
-    text-overflow:ellipsis;
+    text-overflow:clip;
 
-    white-space:nowrap;
+    white-space:normal;
 }
 
 
@@ -1167,7 +1167,7 @@ BAINARI関連サービスのシステム稼働状況
 <div class="meta">
 
 <div id="system">
-稼働状況を読み込み中...
+稼働状況を読み込み中
 </div>
 
 <div>
@@ -2310,7 +2310,7 @@ async function loadStatus(){
     try{
 
         systemElement.textContent =
-            "稼働状況を読み込み中...";
+            "稼働状況を読み込み中";
 
 
         const response =
