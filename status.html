@@ -7,1225 +7,2776 @@
 <title>BAINARI｜システム稼働状況</title>
 
 <style>
-:root{
-    --black:#101010;
-    --navy:#15152b;
-    --purple:#6416a8;
-    --purple-light:#9c3ed2;
-    --bg:#f6f7fb;
-    --card:#ffffff;
-    --text:#202124;
-    --muted:#70757d;
-    --border:#e4e6eb;
-
-    --green:#42a66a;
-    --green-bg:#e7f5eb;
-
-    --red:#d9534f;
-    --red-bg:#fdebea;
-
-    --yellow:#d59b22;
-    --yellow-bg:#fff6df;
-
-    --blue:#6e9bc8;
-    --blue-bg:#e7f0fa;
-}
-
 *{
     box-sizing:border-box;
-}
-
-html,
-body{
     margin:0;
     padding:0;
-    min-height:100%;
-    width:100%;
+}
+
+body{
     font-family:
         -apple-system,
         BlinkMacSystemFont,
-        "Segoe UI",
+        "Helvetica Neue",
+        Arial,
         "Noto Sans JP",
-        "Yu Gothic",
-        "Hiragino Kaku Gothic ProN",
-        Meiryo,
         sans-serif;
 
-    color:var(--text);
-    background:var(--bg);
-
-    writing-mode:horizontal-tb;
-    text-orientation:mixed;
+    background:#fff;
+    color:#17233c;
 }
 
-body{
-    overflow-x:hidden;
-}
+/* =========================
+   HEADER / MENU
+========================= */
 
 header{
-    background:linear-gradient(
-        135deg,
-        var(--navy),
-        #29294d
-    );
-    color:#fff;
-    padding:30px 20px;
-}
+    position:fixed;
+    top:0;
+    right:0;
+    width:100%;
+    padding:4px 15px;
+    z-index:1000;
 
-.header-inner{
-    max-width:1100px;
-    margin:0 auto;
-}
-
-.brand{
-    font-size:13px;
-    letter-spacing:.12em;
-    opacity:.75;
-    margin-bottom:8px;
-}
-
-h1{
-    margin:0;
-    font-size:clamp(27px,5vw,40px);
-    line-height:1.3;
-    font-weight:800;
-}
-
-.subtitle{
-    margin:10px 0 0;
-    color:#d8d8e6;
-    font-size:14px;
-    line-height:1.8;
+    display:flex;
+    justify-content:flex-end;
 }
 
 nav{
-    background:#fff;
-    border-bottom:1px solid var(--border);
-}
+    width:max-content;
+    max-width:calc(100vw - 30px);
+    height:58px;
 
-.nav-inner{
-    max-width:1100px;
-    margin:0 auto;
     display:flex;
-    flex-wrap:wrap;
-    gap:6px;
-    padding:10px 20px;
+    align-items:center;
+
+    background:#006F68;
+    border-radius:8px;
+    overflow:hidden;
+
+    box-shadow:0 3px 12px rgba(0,0,0,.12);
 }
 
 nav a{
-    display:inline-block;
-    padding:9px 13px;
-    color:#555;
-    text-decoration:none;
-    border-radius:8px;
-    font-size:13px;
-    line-height:1.4;
-}
+    height:58px;
 
-nav a:hover{
-    background:#f1eef5;
-    color:var(--purple);
-}
-
-main{
-    width:100%;
-    max-width:1100px;
-    margin:0 auto;
-    padding:30px 20px 100px;
-}
-
-.system-summary{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:16px;
-    padding:21px;
-    margin-bottom:24px;
-}
-
-.summary-title{
-    font-size:18px;
-    line-height:1.5;
-    font-weight:800;
-}
-
-.summary-text{
-    margin-top:7px;
-    color:var(--muted);
-    font-size:14px;
-    line-height:1.8;
-}
-
-.status-grid{
-    display:grid;
-    grid-template-columns:repeat(2,minmax(0,1fr));
-    gap:18px;
-}
-
-.status-card{
-    min-width:0;
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:16px;
-    padding:20px;
-    box-shadow:0 4px 15px rgba(20,20,40,.04);
-    transition:
-        border-color .2s ease,
-        box-shadow .2s ease;
-}
-
-.status-card:hover{
-    box-shadow:0 6px 20px rgba(20,20,40,.07);
-}
-
-/* 横書きを強制 */
-.status-card,
-.status-card *{
-    writing-mode:horizontal-tb;
-    text-orientation:mixed;
-}
-
-.service-head{
     display:flex;
-    align-items:flex-start;
-    justify-content:space-between;
-    gap:15px;
-    min-width:0;
-}
-
-.service-title-wrap{
-    flex:1 1 auto;
-    min-width:0;
-}
-
-.service-name{
-    margin:0;
-    padding:0;
-    font-size:18px;
-    font-weight:800;
-    line-height:1.55;
-
-    writing-mode:horizontal-tb;
-    white-space:normal;
-    word-break:normal;
-    overflow-wrap:anywhere;
-}
-
-.service-key{
-    margin-top:5px;
-    color:var(--muted);
-    font-size:11px;
-    line-height:1.5;
-
-    font-family:
-        ui-monospace,
-        SFMono-Regular,
-        Menlo,
-        Monaco,
-        Consolas,
-        monospace;
-
-    white-space:normal;
-    overflow-wrap:anywhere;
-}
-
-.service-status{
-    flex:0 0 auto;
-    display:inline-flex;
     align-items:center;
     justify-content:center;
     gap:6px;
 
-    min-width:max-content;
+    padding:0 10px;
 
-    padding:7px 11px;
-    border-radius:999px;
+    color:#fff;
+    text-decoration:none;
 
-    font-size:12px;
-    font-weight:700;
-    line-height:1.4;
+    font-size:13px;
+    font-weight:bold;
 
     white-space:nowrap;
+
+    transition:.2s;
 }
 
-.status-dot{
-    width:8px;
-    height:8px;
-    min-width:8px;
-    border-radius:50%;
-    display:inline-block;
+nav a:hover{
+    background:rgba(255,255,255,.14);
 }
 
-.status-text{
-    display:inline-block;
-    white-space:nowrap;
-}
+.icon{
+    width:19px;
+    height:19px;
 
-/* 稼働中 */
-.status-card.normal{
-    border-color:var(--border);
-}
-
-.status-card.normal .service-status{
-    background:var(--green-bg);
-    color:#368554;
-}
-
-.status-card.normal .status-dot{
-    background:var(--green);
-}
-
-.status-card.normal .uptime span{
-    background:#8bc59d;
-}
-
-/* 接続不可・障害 */
-.status-card.error{
-    border-color:#efd2d0;
-}
-
-.status-card.error .service-status{
-    background:var(--red-bg);
-    color:#b63d39;
-}
-
-.status-card.error .status-dot{
-    background:var(--red);
-}
-
-.status-card.error .uptime span{
-    background:#e5aaa7;
-}
-
-/* 警告 */
-.status-card.warning{
-    border-color:#eadfb9;
-}
-
-.status-card.warning .service-status{
-    background:var(--yellow-bg);
-    color:#a97512;
-}
-
-.status-card.warning .status-dot{
-    background:var(--yellow);
-}
-
-.status-card.warning .uptime span{
-    background:#e4c77d;
-}
-
-/* メンテナンス */
-.status-card.maintenance{
-    border-color:#d5e1ee;
-}
-
-.status-card.maintenance .service-status{
-    background:var(--blue-bg);
-    color:#4f7da8;
-}
-
-.status-card.maintenance .status-dot{
-    background:var(--blue);
-}
-
-.status-card.maintenance .uptime span{
-    background:#8fb2d8;
-}
-
-.uptime{
-    width:100%;
     display:flex;
-    gap:4px;
-    height:8px;
-    margin-top:18px;
+    align-items:center;
+    justify-content:center;
+
+    flex-shrink:0;
 }
 
-.uptime span{
+.icon svg{
+    width:19px;
+    height:19px;
+
+    fill:none;
+    stroke:currentColor;
+    stroke-width:1.8;
+
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+/* =========================
+   MOBILE MENU
+========================= */
+
+.menu-button{
+    display:none;
+
+    position:absolute;
+    top:4px;
+    right:15px;
+
+    width:50px;
+    height:50px;
+
+    border:0;
+    border-radius:8px;
+
+    background:#006F68;
+    color:#fff;
+
+    cursor:pointer;
+
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+
+    gap:3px;
+
+    box-shadow:0 3px 12px rgba(0,0,0,.12);
+}
+
+.hamburger{
+    width:21px;
+    height:16px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+}
+
+.hamburger span{
+    width:21px;
+    height:2px;
+
     display:block;
-    flex:1 1 0;
-    min-width:0;
-    height:8px;
-    border-radius:3px;
+
+    background:#fff;
+
+    border-radius:2px;
+
+    transition:.25s;
 }
 
-.card-note{
-    margin-top:14px;
-    color:var(--muted);
-    font-size:12px;
+.menu-text{
+    font-size:8px;
+    line-height:8px;
+
+    font-weight:bold;
+}
+
+.menu-button.active
+.hamburger span:nth-child(1){
+    transform:
+        translateY(7px)
+        rotate(45deg);
+}
+
+.menu-button.active
+.hamburger span:nth-child(2){
+    opacity:0;
+}
+
+.menu-button.active
+.hamburger span:nth-child(3){
+    transform:
+        translateY(-7px)
+        rotate(-45deg);
+}
+
+.mobile-menu{
+    display:none;
+
+    position:absolute;
+
+    top:62px;
+    right:15px;
+
+    width:250px;
+
+    padding:5px;
+
+    background:#006F68;
+
+    border-radius:8px;
+
+    box-shadow:
+        0 6px 20px
+        rgba(0,0,0,.18);
+}
+
+.mobile-menu.active{
+    display:block;
+}
+
+.mobile-menu a{
+    width:100%;
+    min-height:47px;
+
+    padding:11px 14px;
+
+    display:flex;
+    align-items:center;
+
+    gap:12px;
+
+    color:#fff;
+    text-decoration:none;
+
+    font-size:14px;
+    font-weight:bold;
+
+    border-radius:5px;
+}
+
+.mobile-menu a:hover{
+    background:rgba(255,255,255,.14);
+}
+
+/* =========================
+   MAIN
+========================= */
+
+main{
+    max-width:1280px;
+
+    margin:0 auto;
+
+    padding:
+        105px
+        28px
+        70px;
+}
+
+.title{
+    font-size:34px;
+
+    font-weight:800;
+
+    color:#17233c;
+
+    margin-bottom:8px;
+
+    letter-spacing:.5px;
+}
+
+.description{
+    font-size:15px;
+
+    color:#68758a;
+
+    margin-bottom:32px;
+
     line-height:1.7;
 }
 
-.updated{
-    margin-top:22px;
-    color:var(--muted);
+.meta{
+    display:flex;
+
+    align-items:center;
+
+    gap:22px;
+
+    margin-bottom:25px;
+
+    color:#7a8798;
+
     font-size:12px;
-    text-align:right;
-    line-height:1.5;
 }
 
-.notice{
-    margin-top:25px;
-    padding:18px;
-    background:#fffdf3;
-    border:1px solid #eadfb9;
-    border-radius:14px;
+#system{
+    margin-right:auto;
 
-    font-size:13px;
-    line-height:1.8;
+    color:#5f6f82;
+
+    font-weight:600;
 }
 
-.notice strong{
-    display:block;
-    margin-bottom:5px;
+/* =========================
+   STATUS TITLE
+========================= */
+
+.status-heading{
+    display:flex;
+
+    align-items:center;
+
+    gap:13px;
+
+    margin-bottom:26px;
+
+    font-size:25px;
+
+    font-weight:800;
+
+    color:#17233c;
 }
 
-.report{
-    position:fixed;
-    right:20px;
-    bottom:20px;
-    z-index:20;
+.status-heading::after{
+    content:"";
 
-    width:max-content;
-    max-width:330px;
+    height:1px;
 
-    padding:13px 16px;
+    background:#d8e0e8;
+
+    flex:1;
+
+    margin-left:5px;
+}
+
+.status-heading-icon{
+    color:#16a085;
+
+    display:flex;
+    align-items:center;
+}
+
+.status-heading-icon svg{
+    width:28px;
+    height:28px;
+
+    fill:none;
+
+    stroke:currentColor;
+
+    stroke-width:2;
+
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+/* =========================
+   STATUS GRID
+========================= */
+
+.status-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(4,minmax(0,1fr));
+
+    gap:24px 18px;
+}
+
+/* =========================
+   CARD
+========================= */
+
+.status-card{
+    position:relative;
+
+    min-width:0;
 
     background:#fff;
-    border:1px solid var(--border);
-    border-radius:13px;
 
-    box-shadow:0 8px 25px rgba(0,0,0,.12);
+    border:
+        1px solid
+        #e1e7ee;
+
+    border-radius:15px;
+
+    padding:
+        20px
+        24px
+        18px;
+
+    box-shadow:
+        0 3px 14px
+        rgba(29,52,84,.07);
+
+    transition:
+        transform .18s,
+        box-shadow .18s;
+}
+
+.status-card:hover{
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 7px 22px
+        rgba(29,52,84,.11);
+}
+
+.card-top{
+    display:flex;
+
+    align-items:center;
+    justify-content:space-between;
+
+    gap:12px;
+
+    min-height:38px;
+}
+
+.service-title{
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    min-width:0;
+
+    font-size:17px;
+
+    font-weight:800;
+
+    color:#17233c;
+}
+
+.service-title span:last-child{
+    overflow:visible;
+
+    text-overflow:clip;
+
+    white-space:normal;
+}
+
+/* =========================
+   SERVICE ICON
+========================= */
+
+.service-icon{
+    width:31px;
+    height:31px;
+
+    flex:
+        0 0 31px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+}
+
+.service-icon svg{
+    width:31px;
+    height:31px;
+
+    fill:none;
+
+    stroke:currentColor;
+
+    stroke-width:2;
+
+    stroke-linecap:round;
+    stroke-linejoin:round;
+}
+
+.icon-server{
+    color:#2687df;
+}
+
+.icon-water{
+    color:#2387df;
+}
+
+.icon-calendar{
+    color:#bb68d6;
+}
+
+.icon-timer{
+    color:#ed962d;
+}
+
+.icon-card{
+    color:#9a5cdb;
+}
+
+.icon-stock{
+    color:#7b54d8;
+}
+
+.icon-password{
+    color:#2588d8;
+}
+
+/* =========================
+   STATUS BADGE
+========================= */
+
+.service-status{
+    flex:
+        0 0 auto;
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:6px;
+
+    padding:
+        7px
+        11px;
+
+    border-radius:999px;
 
     font-size:12px;
+
+    font-weight:800;
+
+    background:#e2f7ef;
+
+    color:#16876f;
+}
+
+.status-dot{
+    width:15px;
+    height:15px;
+
+    border-radius:50%;
+
+    display:inline-flex;
+
+    align-items:center;
+    justify-content:center;
+
+    background:#169b7b;
+
+    color:#fff;
+
+    font-size:10px;
+    line-height:1;
+}
+
+/* =========================
+   UPTIME
+========================= */
+
+.uptime{
+    display:grid;
+
+    grid-template-columns:
+        repeat(36,1fr);
+
+    gap:3px;
+
+    margin-top:19px;
+}
+
+.uptime span{
+    height:24px;
+
+    border-radius:2px;
+
+    background:#38cfaa;
+}
+
+/* =========================
+   NEW
+========================= */
+
+.new-badge{
+    position:absolute;
+
+    left:22px;
+    top:10px;
+
+    transform:
+        translateY(-50%);
+
+    padding:
+        3px
+        9px;
+
+    border-radius:999px;
+
+    background:#ff5b8a;
+
+    color:#fff;
+
+    font-size:10px;
+
+    font-weight:900;
+
+    letter-spacing:.3px;
+}
+
+/* =========================
+   WARNING
+========================= */
+
+.status-card.warning
+.uptime span{
+    background:#f2b85b;
+}
+
+.status-card.error
+.uptime span{
+    background:#e681ad;
+}
+
+.status-card.maintenance
+.uptime span{
+    background:#8fb2d8;
+}
+
+.status-card.warning
+.service-status{
+    background:#fff1d9;
+    color:#ad6a00;
+}
+
+.status-card.warning
+.status-dot{
+    background:#e39a20;
+}
+
+.status-card.error
+.service-status{
+    background:#fbe3ed;
+    color:#bd4879;
+}
+
+.status-card.error
+.status-dot{
+    background:#d65c8e;
+}
+
+.status-card.maintenance
+.service-status{
+    background:#e7f0fa;
+    color:#4f7da8;
+}
+
+.status-card.maintenance
+.status-dot{
+    background:#6e9bc8;
+}
+
+/* =========================
+   REPORT
+========================= */
+
+.report-box{
+    position:fixed;
+
+    right:25px;
+    bottom:25px;
+
+    width:320px;
+
+    background:#fff;
+
+    border-radius:18px;
+
+    padding:20px;
+
+    box-shadow:
+        0 10px 30px
+        rgba(0,0,0,.15);
+
+    border-top:
+        5px solid
+        #006F68;
+
+    z-index:9999;
+
+    animation:
+        fadeIn .3s;
+}
+
+.report-box h3{
+    color:#006F68;
+
+    margin-bottom:10px;
+
+    font-size:20px;
+}
+
+.report-box p{
+    color:#555;
+
+    font-size:14px;
+
+    line-height:1.6;
+
+    margin-bottom:15px;
+}
+
+.report-btn{
+    display:block;
+
+    text-align:center;
+
+    background:#006F68;
+
+    color:#fff;
+
+    text-decoration:none;
+
+    padding:12px;
+
+    border-radius:10px;
+
+    font-weight:bold;
+}
+
+.report-btn:hover{
+    background:#00524d;
+}
+
+.close-btn{
+    position:absolute;
+
+    top:10px;
+    right:10px;
+
+    border:none;
+
+    background:none;
+
+    font-size:20px;
+
+    cursor:pointer;
+
+    color:#666;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    text-align:center;
+
+    padding:35px;
+
+    color:#8a95a5;
+
+    font-size:13px;
+}
+
+/* =========================
+   ACCESS NOTICE
+========================= */
+
+.access-consent{
+    position:fixed;
+
+    left:0;
+    right:0;
+    bottom:0;
+
+    z-index:99999;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    gap:18px;
+
+    padding:
+        14px
+        20px;
+
+    background:
+        rgba(0,0,0,.92);
+
+    color:#fff;
+
+    box-shadow:
+        0 -3px 15px
+        rgba(0,0,0,.18);
+}
+
+.access-consent-text{
+    font-size:12px;
+
     line-height:1.6;
 }
 
-.report a{
-    color:var(--purple);
-    font-weight:700;
-    text-decoration:none;
+.access-consent button{
+    flex-shrink:0;
+
+    padding:
+        9px
+        24px;
+
+    border:0;
+
+    border-radius:20px;
+
+    background:#fff;
+
+    color:#006F68;
+
+    font-size:13px;
+
+    font-weight:bold;
+
+    cursor:pointer;
 }
 
-.report a:hover{
-    text-decoration:underline;
+/* =========================
+   ANIMATION
+========================= */
+
+@keyframes fadeIn{
+
+    from{
+        opacity:0;
+
+        transform:
+            translateY(20px);
+    }
+
+    to{
+        opacity:1;
+
+        transform:
+            translateY(0);
+    }
+
 }
 
-footer{
-    padding:30px 20px;
-    text-align:center;
-    color:#888;
-    font-size:12px;
-    line-height:1.5;
-}
+/* =========================
+   RESPONSIVE
+========================= */
 
-/* スマートフォン */
-@media(max-width:700px){
+@media(max-width:1050px){
+
+    nav a{
+        padding:0 7px;
+
+        font-size:11px;
+    }
 
     .status-grid{
-        grid-template-columns:1fr;
+        grid-template-columns:
+            repeat(2,minmax(0,1fr));
     }
 
-    .service-head{
-        flex-direction:column;
-        align-items:stretch;
-    }
+}
 
-    .service-status{
-        align-self:flex-start;
-    }
+@media(max-width:700px){
 
     header{
-        padding:25px 16px;
+        padding:4px 8px;
+    }
+
+    nav{
+        display:none;
+    }
+
+    .menu-button{
+        display:flex;
+
+        right:8px;
+    }
+
+    .mobile-menu{
+        top:62px;
+
+        right:8px;
     }
 
     main{
-        padding:22px 14px 110px;
+        padding:
+            92px
+            15px
+            50px;
     }
 
-    .nav-inner{
-        padding:9px 14px;
+    .title{
+        font-size:29px;
     }
 
-    .report{
-        left:14px;
-        right:14px;
-        bottom:14px;
-        width:auto;
-        max-width:none;
+    .description{
+        font-size:14px;
     }
-}
 
-@media(max-width:420px){
+    .status-heading{
+        font-size:22px;
+    }
+
+    .status-grid{
+        grid-template-columns:1fr;
+
+        gap:15px;
+    }
 
     .status-card{
-        padding:17px;
+        padding:
+            18px
+            18px
+            16px;
     }
 
-    .service-name{
-        font-size:17px;
+    .service-title{
+        font-size:15px;
     }
 
     .service-status{
+        padding:
+            6px
+            9px;
+
+        font-size:11px;
+    }
+
+    .uptime{
+        gap:2px;
+    }
+
+    .uptime span{
+        height:20px;
+    }
+
+    .meta{
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:5px;
+    }
+
+    #system{
+        margin-right:0;
+    }
+
+    .report-box{
+        left:15px;
+        right:15px;
+
+        bottom:15px;
+
+        width:auto;
+    }
+
+    .access-consent{
+        gap:10px;
+
+        padding:
+            10px
+            12px;
+    }
+
+    .access-consent-text{
+        font-size:10px;
+    }
+
+    .access-consent button{
+        padding:
+            8px
+            18px;
+
         font-size:12px;
     }
+
 }
 </style>
 </head>
 
 <body>
 
+<!-- =====================================================
+     MENU
+===================================================== -->
+
 <header>
-    <div class="header-inner">
-        <div class="brand">BAINARI</div>
-
-        <h1>システム稼働状況</h1>
-
-        <p class="subtitle">
-            バイナリ関連サービスの現在の稼働状況をご確認いただけます。
-        </p>
-    </div>
-</header>
 
 <nav>
-    <div class="nav-inner">
-        <a href="index.html">ホーム</a>
-        <a href="status.html">稼働状況</a>
-        <a href="news.html">お知らせ</a>
-    </div>
+
+<a href="index.html">
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M3 11.5L12 4l9 7.5"/>
+<path d="M5 10.5V20h14v-9.5"/>
+<path d="M9 20v-6h6v6"/>
+</svg>
+</span>
+Home
+</a>
+
+<a href="about">
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<circle cx="12" cy="8" r="3"/>
+<path d="M5 21c0-3.5 3-6 7-6s7 2.5 7 6"/>
+</svg>
+</span>
+About
+</a>
+
+<a href="projects">
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<rect x="3" y="4" width="18" height="16" rx="2"/>
+<path d="M8 9l3 3-3 3"/>
+<path d="M13 15h4"/>
+</svg>
+</span>
+Projects
+</a>
+
+<a href="videos">
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<circle cx="12" cy="12" r="9"/>
+<path d="M10 8l6 4-6 4z"/>
+</svg>
+</span>
+License
+</a>
+
+<a href="news">
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M4 5h16v14H4z"/>
+<path d="M7 8h10"/>
+<path d="M7 12h10"/>
+<path d="M7 16h6"/>
+</svg>
+</span>
+News
+</a>
+
+<a href="documents">
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M6 3h9l4 4v14H6z"/>
+<path d="M14 3v5h5"/>
+<path d="M9 13h6"/>
+<path d="M9 17h6"/>
+</svg>
+</span>
+Documents
+</a>
+
+<a href="link">
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M10 13a5 5 0 0 0 7.1.1l2-2a5 5 0 0 0-7.1-7.1l-1.2 1.2"/>
+<path d="M14 11a5 5 0 0 0-7.1-.1l-2 2a5 5 0 0 0 7.1 7.1l1.2-1.2"/>
+</svg>
+</span>
+Link
+</a>
+
+<a href="status">
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M4 19V9"/>
+<path d="M10 19V5"/>
+<path d="M16 19v-7"/>
+<path d="M22 19V3"/>
+</svg>
+</span>
+Status
+</a>
+
+<a href="qa">
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<path d="M4 5h16v12H4z"/>
+<path d="M8 9h8"/>
+<path d="M8 13h5"/>
+<path d="M7 17l-2 4 5-4"/>
+</svg>
+</span>
+Q&amp;A
+</a>
+
+<a href="contact">
+<span class="icon">
+<svg viewBox="0 0 24 24">
+<rect x="3" y="5" width="18" height="14" rx="2"/>
+<path d="M3 7l9 6 9-6"/>
+</svg>
+</span>
+Contact
+</a>
+
 </nav>
+
+<button
+class="menu-button"
+id="menuButton"
+aria-label="メニュー"
+aria-expanded="false"
+>
+
+<span class="hamburger">
+<span></span>
+<span></span>
+<span></span>
+</span>
+
+<span class="menu-text">
+MENU
+</span>
+
+</button>
+
+<div
+class="mobile-menu"
+id="mobileMenu"
+>
+
+<a href="index">Home</a>
+<a href="about">About</a>
+<a href="projects">Projects</a>
+<a href="videos">License</a>
+<a href="news">News</a>
+<a href="documents">Documents</a>
+<a href="link">Link</a>
+<a href="status">Status</a>
+<a href="qa">Q&amp;A</a>
+<a href="contact">Contact</a>
+
+</div>
+
+</header>
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
 
 <main>
 
-    <section class="system-summary">
-        <div class="summary-title">
-            現在のシステム状況
-        </div>
-
-        <div class="summary-text">
-            各サービスの最新の稼働状況を表示しています。
-            稼働状況は5秒ごとに自動更新されます。
-        </div>
-    </section>
-
-
-    <section class="status-grid">
-
-        <!-- [臨時] 株シミュレーター管理サーバー -->
-        <article
-            class="status-card"
-            data-key="rinzikabu"
-        >
-            <div class="service-head">
-
-                <div class="service-title-wrap">
-                    <h2 class="service-name">
-                        [臨時] 株シミュレーター管理サーバー
-                    </h2>
-
-                    <div class="service-key">
-                        rinzikabu
-                    </div>
-                </div>
-
-                <div
-                    class="service-status"
-                    id="rinzikabuStatus"
-                >
-                    <span class="status-dot"></span>
-                    <span class="status-text">
-                        読み込み中...
-                    </span>
-                </div>
-
-            </div>
-
-            <div
-                class="uptime"
-                id="rinzikabuBars"
-            >
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-
-            <div class="card-note">
-                臨時の株シミュレーター管理サーバーです。
-            </div>
-        </article>
-
-
-        <!-- 株シミュレーター管理サーバー -->
-        <article
-            class="status-card"
-            data-key="stockServer"
-        >
-            <div class="service-head">
-
-                <div class="service-title-wrap">
-                    <h2 class="service-name">
-                        株シミュレーター管理サーバー
-                    </h2>
-
-                    <div class="service-key">
-                        stockServer
-                    </div>
-                </div>
-
-                <div
-                    class="service-status"
-                    id="stockServerStatus"
-                >
-                    <span class="status-dot"></span>
-                    <span class="status-text">
-                        読み込み中...
-                    </span>
-                </div>
-
-            </div>
-
-            <div
-                class="uptime"
-                id="stockServerBars"
-            >
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </article>
-
-
-        <!-- 水ログ -->
-        <article
-            class="status-card"
-            data-key="waterlog"
-        >
-            <div class="service-head">
-
-                <div class="service-title-wrap">
-                    <h2 class="service-name">
-                        水ログ
-                    </h2>
-
-                    <div class="service-key">
-                        waterlog
-                    </div>
-                </div>
-
-                <div
-                    class="service-status"
-                    id="waterlogStatus"
-                >
-                    <span class="status-dot"></span>
-                    <span class="status-text">
-                        読み込み中...
-                    </span>
-                </div>
-
-            </div>
-
-            <div
-                class="uptime"
-                id="waterlogBars"
-            >
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </article>
-
-
-        <!-- カレンダー -->
-        <article
-            class="status-card"
-            data-key="calendar"
-        >
-            <div class="service-head">
-
-                <div class="service-title-wrap">
-                    <h2 class="service-name">
-                        カレンダー
-                    </h2>
-
-                    <div class="service-key">
-                        calendar
-                    </div>
-                </div>
-
-                <div
-                    class="service-status"
-                    id="calendarStatus"
-                >
-                    <span class="status-dot"></span>
-                    <span class="status-text">
-                        読み込み中...
-                    </span>
-                </div>
-
-            </div>
-
-            <div
-                class="uptime"
-                id="calendarBars"
-            >
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </article>
-
-
-        <!-- タイマー -->
-        <article
-            class="status-card"
-            data-key="timer"
-        >
-            <div class="service-head">
-
-                <div class="service-title-wrap">
-                    <h2 class="service-name">
-                        タイマー
-                    </h2>
-
-                    <div class="service-key">
-                        timer
-                    </div>
-                </div>
-
-                <div
-                    class="service-status"
-                    id="timerStatus"
-                >
-                    <span class="status-dot"></span>
-                    <span class="status-text">
-                        読み込み中...
-                    </span>
-                </div>
-
-            </div>
-
-            <div
-                class="uptime"
-                id="timerBars"
-            >
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </article>
-
-
-        <!-- デジタルカード -->
-        <article
-            class="status-card"
-            data-key="digitalCard"
-        >
-            <div class="service-head">
-
-                <div class="service-title-wrap">
-                    <h2 class="service-name">
-                        デジタルカード
-                    </h2>
-
-                    <div class="service-key">
-                        digitalCard
-                    </div>
-                </div>
-
-                <div
-                    class="service-status"
-                    id="digitalCardStatus"
-                >
-                    <span class="status-dot"></span>
-                    <span class="status-text">
-                        読み込み中...
-                    </span>
-                </div>
-
-            </div>
-
-            <div
-                class="uptime"
-                id="digitalCardBars"
-            >
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </article>
-
-
-        <!-- 株シミュレーター -->
-        <article
-            class="status-card"
-            data-key="kabu"
-        >
-            <div class="service-head">
-
-                <div class="service-title-wrap">
-                    <h2 class="service-name">
-                        株シミュレーター
-                    </h2>
-
-                    <div class="service-key">
-                        kabu
-                    </div>
-                </div>
-
-                <div
-                    class="service-status"
-                    id="kabuStatus"
-                >
-                    <span class="status-dot"></span>
-                    <span class="status-text">
-                        読み込み中...
-                    </span>
-                </div>
-
-            </div>
-
-            <div
-                class="uptime"
-                id="kabuBars"
-            >
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </article>
-
-
-        <!-- パスワード -->
-        <article
-            class="status-card"
-            data-key="password"
-        >
-            <div class="service-head">
-
-                <div class="service-title-wrap">
-                    <h2 class="service-name">
-                        パスワード
-                    </h2>
-
-                    <div class="service-key">
-                        password
-                    </div>
-                </div>
-
-                <div
-                    class="service-status"
-                    id="passwordStatus"
-                >
-                    <span class="status-dot"></span>
-                    <span class="status-text">
-                        読み込み中...
-                    </span>
-                </div>
-
-            </div>
-
-            <div
-                class="uptime"
-                id="passwordBars"
-            >
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </article>
-
-    </section>
-
-
-    <div class="updated">
-        最終更新：
-        <span id="lastUpdated">読み込み中...</span>
-    </div>
-
-
-    <div class="notice">
-        <strong>ℹ️ 稼働状況について</strong>
-
-        表示されている情報は、
-        管理サーバーから取得した
-        <strong style="display:inline;">kadou.json</strong>
-        の内容をもとに表示しています。
-        状態は5秒ごとに自動更新されます。
-    </div>
+<div class="title">
+STATUS
+</div>
+
+<div class="description">
+BAINARI関連サービスのシステム稼働状況
+</div>
+
+<div class="meta">
+
+<div id="system">
+稼働状況を読み込み中
+</div>
+
+<div>
+最終更新：
+<span id="sync">--:--:--</span>
+</div>
+
+</div>
+
+<div class="status-heading">
+
+<span class="status-heading-icon">
+
+<svg viewBox="0 0 32 32">
+<path d="M2 17h6l3-10 5 18 4-14 3 6h7"/>
+</svg>
+
+</span>
+
+システム稼働状況
+
+</div>
+
+<!-- =====================================================
+     STATUS CARDS
+===================================================== -->
+
+<div class="status-grid">
+
+<!-- [臨時] 株シミュレーター管理システムサーバー -->
+
+<article
+class="status-card"
+data-key="rinzikabu"
+>
+
+<div class="card-top">
+
+<div class="service-title">
+
+<span
+class="service-icon icon-server"
+>
+
+<svg viewBox="0 0 32 32">
+
+<rect
+x="5"
+y="5"
+width="22"
+height="8"
+rx="2"
+/>
+
+<rect
+x="5"
+y="19"
+width="22"
+height="8"
+rx="2"
+/>
+
+<path d="M9 9h.1M9 23h.1M14 9h9M14 23h9"/>
+
+</svg>
+
+</span>
+
+<span>
+[臨時] 株シミュレーター管理システムサーバー
+</span>
+
+</div>
+
+<div
+class="service-status"
+id="rinzikabuStatus"
+>
+
+<span class="status-dot">
+!
+</span>
+
+読み込み中
+
+</div>
+
+</div>
+
+<div
+class="uptime"
+id="rinzikabuBars"
+></div>
+
+</article>
+
+
+<!-- 株シミュレータ管理サーバー -->
+
+<article
+class="status-card"
+data-key="stockServer"
+>
+
+<div class="card-top">
+
+<div class="service-title">
+
+<span
+class="service-icon icon-server"
+>
+
+<svg viewBox="0 0 32 32">
+
+<rect
+x="5"
+y="5"
+width="22"
+height="8"
+rx="2"
+/>
+
+<rect
+x="5"
+y="19"
+width="22"
+height="8"
+rx="2"
+/>
+
+<path d="M9 9h.1M9 23h.1M14 9h9M14 23h9"/>
+
+</svg>
+
+</span>
+
+<span>
+株シミュレータ管理サーバー
+</span>
+
+</div>
+
+<div
+class="service-status"
+id="stockServerStatus"
+>
+
+<span class="status-dot">
+!
+</span>
+
+読み込み中
+
+</div>
+
+</div>
+
+<div
+class="uptime"
+id="stockServerBars"
+></div>
+
+</article>
+
+
+<!-- WaterLog -->
+
+<article
+class="status-card"
+data-key="waterlog"
+>
+
+<div class="card-top">
+
+<div class="service-title">
+
+<span
+class="service-icon icon-water"
+>
+
+<svg viewBox="0 0 32 32">
+
+<path
+d="M16 4s-8 9-8 15a8 8 0 0 0 16 0c0-6-8-15-8-15z"
+/>
+
+</svg>
+
+</span>
+
+<span>
+WaterLog
+</span>
+
+</div>
+
+<div
+class="service-status"
+id="waterlogStatus"
+>
+
+<span class="status-dot">
+!
+</span>
+
+読み込み中
+
+</div>
+
+</div>
+
+<div
+class="uptime"
+id="waterlogBars"
+></div>
+
+</article>
+
+
+<!-- calendar -->
+
+<article
+class="status-card"
+data-key="calendar"
+>
+
+<div class="card-top">
+
+<div class="service-title">
+
+<span
+class="service-icon icon-calendar"
+>
+
+<svg viewBox="0 0 32 32">
+
+<rect
+x="4"
+y="7"
+width="24"
+height="21"
+rx="3"
+/>
+
+<path d="M9 4v7M23 4v7M4 13h24"/>
+
+<path d="M9 18h3M16 18h3M23 18h3"/>
+<path d="M9 23h3M16 23h3"/>
+
+</svg>
+
+</span>
+
+<span>
+calendar
+</span>
+
+</div>
+
+<div
+class="service-status"
+id="calendarStatus"
+>
+
+<span class="status-dot">
+!
+</span>
+
+読み込み中
+
+</div>
+
+</div>
+
+<div
+class="uptime"
+id="calendarBars"
+></div>
+
+</article>
+
+
+<!-- ryoタイマー -->
+
+<article
+class="status-card"
+data-key="timer"
+>
+
+<div class="card-top">
+
+<div class="service-title">
+
+<span
+class="service-icon icon-timer"
+>
+
+<svg viewBox="0 0 32 32">
+
+<circle
+cx="16"
+cy="17"
+r="11"
+/>
+
+<path d="M16 10v8l5 3"/>
+<path d="M12 3h8"/>
+
+</svg>
+
+</span>
+
+<span>
+ryoタイマー
+</span>
+
+</div>
+
+<div
+class="service-status"
+id="timerStatus"
+>
+
+<span class="status-dot">
+!
+</span>
+
+読み込み中
+
+</div>
+
+</div>
+
+<div
+class="uptime"
+id="timerBars"
+></div>
+
+</article>
+
+
+<!-- Digital暗記カード -->
+
+<article
+class="status-card"
+data-key="digitalCard"
+>
+
+<span class="new-badge">
+NEW
+</span>
+
+<div class="card-top">
+
+<div class="service-title">
+
+<span
+class="service-icon icon-card"
+>
+
+<svg viewBox="0 0 32 32">
+
+<path d="M8 28V11l8-6 8 6v17z"/>
+
+<path d="M11 15h10"/>
+<path d="M11 20h10"/>
+<path d="M11 25h6"/>
+
+</svg>
+
+</span>
+
+<span>
+Digital暗記カード
+</span>
+
+</div>
+
+<div
+class="service-status"
+id="digitalCardStatus"
+>
+
+<span class="status-dot">
+!
+</span>
+
+読み込み中
+
+</div>
+
+</div>
+
+<div
+class="uptime"
+id="digitalCardBars"
+></div>
+
+</article>
+
+
+<!-- 株シュミレーター26.1 -->
+
+<article
+class="status-card"
+data-key="kabu"
+>
+
+<div class="card-top">
+
+<div class="service-title">
+
+<span
+class="service-icon icon-stock"
+>
+
+<svg viewBox="0 0 32 32">
+
+<path d="M5 27V18"/>
+<path d="M14 27V12"/>
+<path d="M23 27V6"/>
+
+<path d="M4 11l7-5 6 4 10-7"/>
+
+<path d="M22 3h5v5"/>
+
+</svg>
+
+</span>
+
+<span>
+株シュミレーター26.1
+</span>
+
+</div>
+
+<div
+class="service-status"
+id="kabuStatus"
+>
+
+<span class="status-dot">
+!
+</span>
+
+読み込み中
+
+</div>
+
+</div>
+
+<div
+class="uptime"
+id="kabuBars"
+></div>
+
+</article>
+
+
+<!-- パスワードランダム生成 -->
+
+<article
+class="status-card"
+data-key="password"
+>
+
+<div class="card-top">
+
+<div class="service-title">
+
+<span
+class="service-icon icon-password"
+>
+
+<svg viewBox="0 0 32 32">
+
+<rect
+x="7"
+y="14"
+width="18"
+height="14"
+rx="3"
+/>
+
+<path
+d="M11 14V10a5 5 0 0 1 10 0v4"
+/>
+
+<path d="M16 20v4"/>
+
+</svg>
+
+</span>
+
+<span>
+パスワードランダム生成
+</span>
+
+</div>
+
+<div
+class="service-status"
+id="passwordStatus"
+>
+
+<span class="status-dot">
+!
+</span>
+
+読み込み中
+
+</div>
+
+</div>
+
+<div
+class="uptime"
+id="passwordBars"
+></div>
+
+</article>
+
+</div>
 
 </main>
 
-
-<div class="report">
-    ⚠️ 不具合を発見しましたか？<br>
-
-    <a
-        href="https://forms.gle/kRhMupMydqeaiFa98"
-        target="_blank"
-        rel="noopener noreferrer"
-    >
-        不具合を報告する
-    </a>
-</div>
-
-
 <footer>
-    BAINARI｜システム稼働状況
+© BAINARI
 </footer>
 
+<!-- =====================================================
+     REPORT
+===================================================== -->
+
+<div
+id="reportBox"
+class="report-box"
+>
+
+<button
+class="close-btn"
+onclick="closeReport()"
+>
+✕
+</button>
+
+<h3>
+⚠️ 不具合を発見しましたか？
+</h3>
+
+<p>
+サービスに問題や表示の不具合を見つけた場合は、
+Googleフォームからご報告ください。
+</p>
+
+<a
+href="https://forms.gle/kRhMupMydqeaiFa98"
+target="_blank"
+rel="noopener noreferrer"
+class="report-btn"
+>
+不具合を報告する
+</a>
+
+</div>
+
+<!-- =====================================================
+     ACCESS NOTICE
+===================================================== -->
+
+<div
+class="access-consent"
+id="accessConsent"
+>
+
+<div class="access-consent-text">
+
+このサイトでは、
+アクセス日時・ページURL・端末・OS・ブラウザ等の
+アクセス情報を記録しています。
+
+</div>
+
+<button
+type="button"
+id="accessConsentButton"
+>
+OK
+</button>
+
+</div>
 
 <script>
-"use strict";
 
-/*
- * =========================================================
- * 稼働状況JSON
- * =========================================================
- */
+/* =====================================================
+   MENU
+===================================================== */
 
-const STATUS_URL =
-    "https://bainarinoakaunto.github.io/bainariweb/kadou.json";
+const menuButton =
+document.getElementById(
+    "menuButton"
+);
 
+const mobileMenu =
+document.getElementById(
+    "mobileMenu"
+);
 
-/*
- * JSONから取得するサービス一覧
- */
-const SERVICES = [
-    "rinzikabu",
-    "stockServer",
-    "waterlog",
-    "calendar",
-    "timer",
-    "digitalCard",
-    "kabu",
-    "password"
-];
+menuButton.addEventListener(
+"click",
+function(){
 
+    mobileMenu.classList.toggle(
+        "active"
+    );
 
-/*
- * =========================================================
- * ステータス判定
- * =========================================================
- */
+    menuButton.classList.toggle(
+        "active"
+    );
 
-function getStatusInfo(status){
+    menuButton.setAttribute(
+        "aria-expanded",
+        mobileMenu.classList.contains(
+            "active"
+        )
+    );
 
-    const value =
-        String(status ?? "").trim();
+});
 
-    const lower =
-        value.toLowerCase();
+document.addEventListener(
+"click",
+function(event){
 
-
-    /*
-     * メンテナンス
-     */
     if(
-        lower.includes("メンテナンス") ||
-        lower.includes("maintenance")
+        !mobileMenu.contains(
+            event.target
+        ) &&
+        !menuButton.contains(
+            event.target
+        )
     ){
-        return {
-            text:"メンテナンス中",
-            className:"maintenance"
-        };
+
+        mobileMenu.classList.remove(
+            "active"
+        );
+
+        menuButton.classList.remove(
+            "active"
+        );
+
+        menuButton.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
     }
 
+});
 
-    /*
-     * 接続不可・障害
-     */
-    if(
-        lower.includes("接続不可") ||
-        lower.includes("停止") ||
-        lower.includes("障害") ||
-        lower.includes("エラー") ||
-        lower.includes("offline") ||
-        lower.includes("error") ||
-        lower.includes("down")
-    ){
-        return {
-            text:value || "障害発生中",
-            className:"error"
-        };
-    }
+/* =====================================================
+   SERVICES
+===================================================== */
 
+const services = [
 
-    /*
-     * 警告・一部障害
-     */
-    if(
-        lower.includes("一部") ||
-        lower.includes("遅延") ||
-        lower.includes("警告") ||
-        lower.includes("warning") ||
-        lower.includes("degraded")
-    ){
-        return {
-            text:value || "警告",
-            className:"warning"
-        };
-    }
+{
+    key:"rinzikabu",
 
+    ids:[
+        "rinzikabu",
+        "rinziKabu",
+        "rinzi-kabu"
+    ],
 
-    /*
-     * 正常
-     */
-    if(
-        value === "稼働中" ||
-        value === "正常" ||
-        value === "正常稼働中" ||
-        value === "運用中" ||
-        lower === "operational" ||
-        lower === "online" ||
-        lower === "up" ||
-        lower === "ok"
-    ){
-        return {
-            text:value || "稼働中",
-            className:"normal"
-        };
-    }
+    statusId:"rinzikabuStatus"
+},
 
+{
+    key:"stockServer",
 
-    /*
-     * 未知の状態
-     */
-    return {
-        text:value || "状態不明",
-        className:"warning"
-    };
+    ids:[
+        "stockServer",
+        "stockserver",
+        "kabuServer",
+        "managementServer"
+    ],
+
+    statusId:"stockServerStatus"
+},
+
+{
+    key:"waterlog",
+
+    ids:[
+        "waterlog",
+        "waterLog",
+        "water"
+    ],
+
+    statusId:"waterlogStatus"
+},
+
+{
+    key:"calendar",
+
+    ids:[
+        "calendar"
+    ],
+
+    statusId:"calendarStatus"
+},
+
+{
+    key:"timer",
+
+    ids:[
+        "timer"
+    ],
+
+    statusId:"timerStatus"
+},
+
+{
+    key:"digitalCard",
+
+    ids:[
+        "digitalCard",
+        "digital",
+        "anki",
+        "digitalAnki"
+    ],
+
+    statusId:"digitalCardStatus"
+},
+
+{
+    key:"kabu",
+
+    ids:[
+        "kabu",
+        "stock",
+        "simulator"
+    ],
+
+    statusId:"kabuStatus"
+},
+
+{
+    key:"password",
+
+    ids:[
+        "password",
+        "passwordGenerator",
+        "randomPassword"
+    ],
+
+    statusId:"passwordStatus"
 }
 
+];
 
-/*
- * =========================================================
- * サービス表示を更新
- * =========================================================
- */
+/* =====================================================
+   UPTIME BARS
+===================================================== */
 
-function updateService(key,status){
+services.forEach(
+function(service){
+
+    const element =
+    document.getElementById(
+        service.key + "Bars"
+    );
+
+    if(!element){
+        return;
+    }
+
+    for(
+        let i = 0;
+        i < 36;
+        i++
+    ){
+
+        const bar =
+        document.createElement(
+            "span"
+        );
+
+        element.appendChild(
+            bar
+        );
+
+    }
+
+});
+
+/* =====================================================
+   STATUS JSON
+===================================================== */
+
+const STATUS_JSON_URL =
+"https://bainarinoakaunto.github.io/bainariweb/kadou.json";
+
+/* =====================================================
+   FIND DATA
+===================================================== */
+
+function findServiceData(
+    data,
+    ids
+){
+
+    if(!data){
+        return null;
+    }
+
+    /* 直接形式 */
+
+    for(
+        const id of ids
+    ){
+
+        if(
+            data[id] !== undefined &&
+            data[id] !== null
+        ){
+
+            return data[id];
+
+        }
+
+    }
+
+    /* data形式 */
+
+    if(
+        data.data &&
+        typeof data.data === "object"
+    ){
+
+        for(
+            const id of ids
+        ){
+
+            if(
+                data.data[id] !== undefined &&
+                data.data[id] !== null
+            ){
+
+                return data.data[id];
+
+            }
+
+        }
+
+    }
+
+    /* services配列形式 */
+
+    if(
+        Array.isArray(
+            data.services
+        )
+    ){
+
+        for(
+            const item
+            of data.services
+        ){
+
+            const id =
+                item.id ||
+                item.key ||
+                item.name;
+
+            if(
+                id &&
+                ids.includes(id)
+            ){
+
+                return item;
+
+            }
+
+        }
+
+    }
+
+    return null;
+
+}
+
+/* =====================================================
+   STATUS
+===================================================== */
+
+function getStatusInfo(
+    item
+){
+
+    if(!item){
+
+        return {
+            text:"状態不明",
+            className:"warning",
+            symbol:"!"
+        };
+
+    }
+
+    let status;
+
+    if(
+        typeof item === "string"
+    ){
+
+        status = item;
+
+    }
+    else{
+
+        status =
+            item.status ||
+            item.state ||
+            item.message ||
+            "";
+
+    }
+
+    status =
+        String(status)
+        .trim();
+
+    const lower =
+        status.toLowerCase();
+
+    /* 正常 */
+
+    if(
+
+        status === "稼働中" ||
+
+        status === "正常" ||
+
+        status === "正常稼働中" ||
+
+        status === "運用中" ||
+
+        status === "Operational" ||
+
+        status === "operational" ||
+
+        status === "OK" ||
+
+        lower === "ok" ||
+
+        lower === "online" ||
+
+        lower === "up"
+
+    ){
+
+        return {
+
+            text:"稼働中",
+
+            className:"normal",
+
+            symbol:"✓"
+
+        };
+
+    }
+
+    /* メンテナンス */
+
+    if(
+        status.includes(
+            "メンテナンス"
+        ) ||
+        lower.includes(
+            "maintenance"
+        )
+    ){
+
+        return {
+
+            text:"メンテナンス中",
+
+            className:"maintenance",
+
+            symbol:"!"
+
+        };
+
+    }
+
+    /* 障害 */
+
+    if(
+
+        status.includes("停止") ||
+
+        status.includes("障害") ||
+
+        status.includes("エラー") ||
+
+        status.includes("接続不可") ||
+
+        lower.includes("down") ||
+
+        lower.includes("error") ||
+
+        lower.includes("offline")
+
+    ){
+
+        return {
+
+            text:
+                status || "停止中",
+
+            className:"error",
+
+            symbol:"×"
+
+        };
+
+    }
+
+    /* 警告 */
+
+    if(
+
+        status.includes("一部") ||
+
+        status.includes("遅延") ||
+
+        status.includes("警告") ||
+
+        lower.includes("warning") ||
+
+        lower.includes("degraded")
+
+    ){
+
+        return {
+
+            text:status,
+
+            className:"warning",
+
+            symbol:"!"
+
+        };
+
+    }
+
+    return {
+
+        text:
+            status ||
+            "状態不明",
+
+        className:"warning",
+
+        symbol:"!"
+
+    };
+
+}
+
+/* =====================================================
+   UPDATE CARD
+===================================================== */
+
+function updateService(
+    service,
+    data
+){
 
     const card =
-        document.querySelector(
-            `.status-card[data-key="${key}"]`
-        );
+    document.querySelector(
+        `.status-card[data-key="${service.key}"]`
+    );
 
-    if(!card){
+    const statusElement =
+    document.getElementById(
+        service.statusId
+    );
+
+    if(
+        !card ||
+        !statusElement
+    ){
+
         return;
+
     }
 
+    const item =
+    findServiceData(
+        data,
+        service.ids
+    );
 
-    const statusBox =
-        document.getElementById(
-            `${key}Status`
-        );
+    const result =
+    getStatusInfo(
+        item
+    );
 
-    if(!statusBox){
-        return;
-    }
-
-
-    const textElement =
-        statusBox.querySelector(
-            ".status-text"
-        );
-
-
-    const info =
-        getStatusInfo(status);
-
-
-    /*
-     * 以前の状態クラスを削除
-     */
     card.classList.remove(
-        "normal",
-        "error",
         "warning",
+        "error",
         "maintenance"
     );
 
+    if(
+        result.className !==
+        "normal"
+    ){
 
-    /*
-     * JSONの状態を反映
-     */
-    card.classList.add(
-        info.className
-    );
-
-
-    if(textElement){
-
-        textElement.textContent =
-            info.text;
+        card.classList.add(
+            result.className
+        );
 
     }
+
+    statusElement.innerHTML = `
+
+        <span class="status-dot">
+            ${result.symbol}
+        </span>
+
+        ${result.text}
+
+    `;
+
 }
 
-
-/*
- * =========================================================
- * kadou.jsonを取得
- * =========================================================
- */
+/* =====================================================
+   LOAD kadou.json
+===================================================== */
 
 async function loadStatus(){
 
+    const systemElement =
+    document.getElementById(
+        "system"
+    );
+
+    const syncElement =
+    document.getElementById(
+        "sync"
+    );
+
     try{
 
+        systemElement.textContent =
+            "稼働状況を読み込み中";
+
         const response =
-            await fetch(
-                `${STATUS_URL}?t=${Date.now()}`,
-                {
-                    method:"GET",
-                    cache:"no-store"
+        await fetch(
+            STATUS_JSON_URL +
+            "?t=" +
+            Date.now(),
+            {
+                method:"GET",
+
+                cache:"no-store",
+
+                headers:{
+                    "Accept":
+                        "application/json"
                 }
-            );
+            }
+        );
 
-
-        if(!response.ok){
+        if(
+            !response.ok
+        ){
 
             throw new Error(
-                `HTTP ${response.status}`
+                "HTTP " +
+                response.status
             );
 
         }
 
-
         const data =
-            await response.json();
+        await response.json();
 
+        console.log(
+            "kadou.json:",
+            data
+        );
 
-        /*
-         * JSONに存在する値を
-         * すべてサービスへ反映
-         */
-        SERVICES.forEach(key => {
+        /* システム全体 */
 
-            updateService(
-                key,
-                data[key]
+        systemElement.textContent =
+            data.system ||
+            data.message ||
+            "システム稼働状況を取得済み";
+
+        /* 各カード */
+
+        services.forEach(
+            function(service){
+
+                updateService(
+                    service,
+                    data
+                );
+
+            }
+        );
+
+        /* 最終更新時刻 */
+
+        syncElement.textContent =
+            new Date().toLocaleTimeString(
+                "ja-JP"
             );
 
-        });
-
-
-        /*
-         * 最終更新時刻
-         */
-        document
-            .getElementById("lastUpdated")
-            .textContent =
-                new Date()
-                    .toLocaleString("ja-JP");
-
     }
+
     catch(error){
 
         console.error(
-            "kadou.json の取得に失敗しました:",
+            "kadou.json読み込みエラー:",
             error
         );
 
+        systemElement.textContent =
+            "稼働状況を読み込めません";
 
-        document
-            .getElementById("lastUpdated")
-            .textContent =
-                "取得失敗";
+        syncElement.textContent =
+            "読み込みエラー";
+
+        services.forEach(
+        function(service){
+
+            const card =
+            document.querySelector(
+                `.status-card[data-key="${service.key}"]`
+            );
+
+            const element =
+            document.getElementById(
+                service.statusId
+            );
+
+            if(card){
+
+                card.classList.remove(
+                    "error",
+                    "maintenance"
+                );
+
+                card.classList.add(
+                    "warning"
+                );
+
+            }
+
+            if(element){
+
+                element.innerHTML = `
+
+                    <span class="status-dot">
+                        !
+                    </span>
+
+                    読み込みエラー
+
+                `;
+
+            }
+
+        });
+
     }
+
 }
 
-
-/*
- * =========================================================
- * 初回読み込み
- * =========================================================
- */
+/* =====================================================
+   FIRST LOAD
+===================================================== */
 
 loadStatus();
 
-
-/*
- * =========================================================
- * 5秒ごとにJSONを再取得
- * =========================================================
- */
+/* =====================================================
+   AUTO REFRESH
+===================================================== */
 
 setInterval(
     loadStatus,
     5000
 );
+
+/* =====================================================
+   REPORT
+===================================================== */
+
+function closeReport(){
+
+    const box =
+    document.getElementById(
+        "reportBox"
+    );
+
+    if(box){
+
+        box.style.display =
+            "none";
+
+    }
+
+}
+
+/* =====================================================
+   ACCESS LOG
+===================================================== */
+
+(function(){
+
+    const FORM_URL =
+    "https://docs.google.com/forms/d/e/1FAIpQLSccfR4g1Ytnzr0aLv31R3NkjUWRmaaD6YwQnjNYF0d60Uexmg/formResponse";
+
+    function getDevice(){
+
+        const width =
+            window.innerWidth;
+
+        if(
+            width <= 700
+        ){
+
+            return "スマートフォン";
+
+        }
+
+        if(
+            width <= 1100
+        ){
+
+            return "タブレット";
+
+        }
+
+        return "PC";
+
+    }
+
+    function getOS(){
+
+        const ua =
+            navigator.userAgent;
+
+        if(
+            /Android/i.test(ua)
+        )
+            return "Android";
+
+        if(
+            /iPhone|iPad|iPod/i.test(ua)
+        )
+            return "iOS / iPadOS";
+
+        if(
+            /Windows/i.test(ua)
+        )
+            return "Windows";
+
+        if(
+            /Mac OS X/i.test(ua)
+        )
+            return "macOS";
+
+        if(
+            /CrOS/i.test(ua)
+        )
+            return "ChromeOS";
+
+        if(
+            /Linux/i.test(ua)
+        )
+            return "Linux";
+
+        return "その他 / 不明";
+
+    }
+
+    function getBrowser(){
+
+        const ua =
+            navigator.userAgent;
+
+        if(
+            /Edg\//i.test(ua)
+        )
+            return "Microsoft Edge";
+
+        if(
+            /OPR\//i.test(ua)
+        )
+            return "Opera";
+
+        if(
+            /Chrome\//i.test(ua) &&
+            !/Edg\//i.test(ua)
+        )
+            return "Google Chrome";
+
+        if(
+            /Firefox\//i.test(ua)
+        )
+            return "Firefox";
+
+        if(
+            /Safari\//i.test(ua) &&
+            !/Chrome\//i.test(ua)
+        )
+            return "Safari";
+
+        return "その他 / 不明";
+
+    }
+
+    function sendAccessLog(){
+
+        const now =
+            new Date();
+
+        const params =
+        new URLSearchParams();
+
+        params.set(
+            "entry.1390942320",
+            now.toLocaleString(
+                "ja-JP",
+                {
+                    timeZone:
+                        "Asia/Tokyo"
+                }
+            )
+        );
+
+        params.set(
+            "entry.600562719",
+            location.href
+        );
+
+        params.set(
+            "entry.32786128",
+            document.title
+        );
+
+        params.set(
+            "entry.318452337",
+            getDevice()
+        );
+
+        params.set(
+            "entry.1152326462",
+            getOS()
+        );
+
+        params.set(
+            "entry.777710718",
+            getBrowser()
+        );
+
+        const iframe =
+        document.createElement(
+            "iframe"
+        );
+
+        iframe.name =
+            "accessLog_" +
+            Date.now();
+
+        iframe.style.display =
+            "none";
+
+        document.body.appendChild(
+            iframe
+        );
+
+        const form =
+        document.createElement(
+            "form"
+        );
+
+        form.method =
+            "GET";
+
+        form.action =
+            FORM_URL;
+
+        form.target =
+            iframe.name;
+
+        form.style.display =
+            "none";
+
+        params.forEach(
+        function(value,key){
+
+            const input =
+            document.createElement(
+                "input"
+            );
+
+            input.type =
+                "hidden";
+
+            input.name =
+                key;
+
+            input.value =
+                value;
+
+            form.appendChild(
+                input
+            );
+
+        });
+
+        document.body.appendChild(
+            form
+        );
+
+        form.submit();
+
+    }
+
+    function setupNotice(){
+
+        const notice =
+        document.getElementById(
+            "accessConsent"
+        );
+
+        const button =
+        document.getElementById(
+            "accessConsentButton"
+        );
+
+        if(
+            !notice ||
+            !button
+        ){
+
+            return;
+
+        }
+
+        button.addEventListener(
+        "click",
+        function(event){
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+            notice.remove();
+
+            try{
+
+                sessionStorage.setItem(
+                    "accessNoticeAccepted",
+                    "1"
+                );
+
+            }
+
+            catch(error){}
+
+        });
+
+        try{
+
+            if(
+                sessionStorage.getItem(
+                    "accessNoticeAccepted"
+                ) === "1"
+            ){
+
+                notice.remove();
+
+            }
+
+        }
+
+        catch(error){}
+
+    }
+
+    function start(){
+
+        setupNotice();
+
+        sendAccessLog();
+
+    }
+
+    if(
+        document.readyState ===
+        "loading"
+    ){
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            start,
+            {
+                once:true
+            }
+        );
+
+    }
+    else{
+
+        start();
+
+    }
+
+})();
+
 </script>
 
 </body>
