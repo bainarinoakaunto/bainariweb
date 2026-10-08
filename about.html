@@ -349,6 +349,27 @@ footer{
     .access-consent button{padding:8px 18px;font-size:12px;}
 }
 
+
+/* =========================
+   ACTIVITY POLICY
+   ========================= */
+.activity-policy-card{
+    position:relative;
+    overflow:hidden;
+    padding:42px 40px;
+    background:linear-gradient(135deg,rgba(0,111,104,.045),#fff 58%);
+    border:1px solid rgba(0,111,104,.10);
+}
+.activity-policy-card::before{content:"";position:absolute;top:0;left:0;width:7px;height:100%;background:#006F68;}
+.activity-policy-card::after{content:"";position:absolute;width:180px;height:180px;right:-75px;top:-80px;border-radius:50%;background:rgba(0,111,104,.055);}
+.policy-label{display:inline-flex;margin-bottom:13px;padding:6px 11px;border-radius:999px;background:rgba(0,111,104,.09);color:#006F68;font-size:11px;font-weight:800;letter-spacing:1.5px;}
+.activity-policy-card h2{margin-bottom:18px;font-size:28px;}
+.policy-main{position:relative;z-index:1;color:#222;font-size:24px;line-height:1.65;font-weight:800;}
+.policy-main span{color:#006F68;}
+.policy-divider{width:58px;height:4px;margin:24px 0 22px;border-radius:10px;background:#006F68;}
+.activity-policy-card p{position:relative;z-index:1;}
+@media(max-width:700px){.activity-policy-card{padding:30px 25px}.policy-main{font-size:20px;line-height:1.6}.policy-break{display:none}}
+
 </style>
 
 </head>
@@ -710,6 +731,23 @@ Contact
 <div class="title">
 ABOUT
 </div>
+<div class="card activity-policy-card">
+    <div class="policy-label">ACTIVITY POLICY</div>
+    <h2>活動方針</h2>
+    <div class="policy-main">
+        利用者・視聴者が求めているものを考え、<br class="policy-break">
+        <span>期待を超えるものを届ける。</span>
+    </div>
+    <div class="policy-divider"></div>
+    <p>
+        るあは、利用者・視聴者の声やニーズを大切にし、何が求められているのかを考えながら、楽しさや便利さにつながるサービス・コンテンツを生み出していきます。
+        <br><br>
+        ただ自分がやりたいことを発信するのではなく、利用する人・見る人の視点を大切にし、反応や意見を取り入れながら継続的に改善します。
+        <br><br>
+        一人でも多くの人に「見てよかった」「使ってよかった」「また見たい・使いたい」と思ってもらえる活動を目指します。
+    </p>
+</div>
+
 
 <div class="card">
 
