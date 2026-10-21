@@ -450,6 +450,40 @@ footer{
 
 
 
+
+/* =========================
+   EMERGENCY MAINTENANCE NEWS
+========================= */
+.news .maintenance-label{
+    display:inline-flex;
+    align-items:center;
+    gap:7px;
+    margin-bottom:12px;
+    padding:6px 12px;
+    border-radius:5px;
+    background:#fff2e8;
+    color:#a84a00;
+    font-size:13px;
+    font-weight:800;
+}
+.news .maintenance-label::before{
+    content:"";
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#d96b20;
+}
+.news .maintenance-summary{
+    border-left-color:#d96b20;
+    background:#fff8f2;
+}
+.news .maintenance-summary strong{
+    color:#8c3d00;
+}
+@media(max-width:700px){
+    .news .maintenance-label{font-size:12px;}
+}
+
 /* =========================
    ACCESS RECORD NOTICE
    ========================= */
@@ -840,6 +874,53 @@ Contact
 <main>
 
     <div class="title">NEWS</div>
+
+    <!-- NEWS：2026.10.21 株シミュレーター緊急メンテナンス -->
+    <article class="news">
+        <div class="date">2026.10.21</div>
+        <span class="maintenance-label">緊急メンテナンス実施中</span>
+
+        <h1>株シミュレーター 緊急メンテナンスのお知らせ</h1>
+
+        <p>
+            株シミュレーターをご利用の皆さまへ。
+            安全性を確認するため、2026年10月21日（水）22:00より
+            緊急メンテナンスを実施しています。
+        </p>
+
+        <p>
+            利用しているソフトウェアについて重大な脆弱性に関する情報が公表されたことを受け、
+            予防的な対応として、関連するPHPプログラムの点検と動作確認を行っています。
+        </p>
+
+        <h2>実施内容</h2>
+        <ul>
+            <li>PHPプログラムおよび関連処理の点検</li>
+            <li>脆弱性の影響有無と安全性の確認</li>
+            <li>必要に応じた設定・プログラムの見直し</li>
+            <li>作業後の動作確認</li>
+        </ul>
+
+        <div class="news-info maintenance-summary">
+            <p><strong>対象サービス：</strong>株シミュレーター</p>
+            <p><strong>開始日時：</strong>2026年10月21日（水）22:00</p>
+            <p><strong>終了日時：</strong>未定（確認・作業状況により決定）</p>
+            <p><strong>現在の状況：</strong>点検・動作確認中</p>
+            <p><strong>利用への影響：</strong>作業中はサービスを利用できない、または一部機能が正常に動作しない場合があります。</p>
+        </div>
+
+        <h2>今後について</h2>
+        <p>
+            安全性と正常な動作を確認したうえで、サービスの再開を判断します。
+            終了時刻は現時点で未定です。進捗や再開については、確認でき次第このNEWSページでお知らせします。
+        </p>
+
+        <p>
+            ご利用の皆さまにはご不便をおかけしますが、安全性を優先した対応へのご理解とご協力をお願いいたします。
+        </p>
+    </article>
+
+
 <article class="news">
 
 <article class="news">
