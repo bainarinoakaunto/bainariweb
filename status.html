@@ -1270,15 +1270,602 @@ BAINARI関連サービスのシステム稼働状況
 システム稼働状況
 
 </div>
-<body bgcolor="#f8f8f8" text="#333333">
-  <center>
-    <br><br><br><br>
-    <h2>ただいまメンテナンス中です</h2>
-    <p>
-      現在、システムメンテナンスを実施しております。<br>
-      ご不便をおかけいたしますが、<br>
-      しばらく経ってから再度アクセスしてください。
-    </p>
+
+
+
+<!-- =====================================================
+     臨時システム
+===================================================== -->
+
+<section class="system-section">
+
+
+<div class="system-section-title">
+臨時システム
+</div>
+
+<h5>現在臨時システムは立ち上げられていません。</h5>
+
+<!-- =====================================================
+     通常システム
+===================================================== -->
+
+<section class="system-section">
+
+
+<div class="system-section-title">
+通常システム
+</div>
+
+
+<div class="status-grid">
+
+
+<!-- =================================================
+     株シミュレータ管理サーバー
+================================================= -->
+
+<article
+class="status-card"
+data-key="stockServer"
+>
+
+<div class="card-top">
+
+
+<div class="service-title">
+
+<span class="service-icon icon-server">
+
+<svg viewBox="0 0 32 32">
+
+<rect
+x="5"
+y="5"
+width="22"
+height="8"
+rx="2"
+/>
+
+<rect
+x="5"
+y="19"
+width="22"
+height="8"
+rx="2"
+/>
+
+<path
+d="M9 9h.1M9 23h.1M14 9h9M14 23h9"
+/>
+
+</svg>
+
+</span>
+
+
+<span>
+株シミュレータ管理サーバー
+</span>
+
+</div>
+
+
+<div
+class="service-status"
+id="stockServerStatus"
+>
+
+<span class="status-dot">
+!
+</span>
+
+読み込み中
+
+</div>
+
+
+</div>
+
+
+<div
+class="uptime"
+id="stockServerBars"
+></div>
+
+
+</article>
+
+
+
+<!-- =================================================
+     WaterLog
+================================================= -->
+
+<article
+class="status-card"
+data-key="waterlog"
+>
+
+<div class="card-top">
+
+
+<div class="service-title">
+
+<span class="service-icon icon-water">
+
+<svg viewBox="0 0 32 32">
+
+<path
+d="M16 4s-8 9-8 15a8 8 0 0 0 16 0c0-6-8-15-8-15z"
+/>
+
+</svg>
+
+</span>
+
+
+<span>
+WaterLog
+</span>
+
+</div>
+
+
+<div
+class="service-status"
+id="waterlogStatus"
+>
+
+<span class="status-dot">
+!
+</span>
+
+読み込み中
+
+</div>
+
+
+</div>
+
+
+<div
+class="uptime"
+id="waterlogBars"
+></div>
+
+
+</article>
+
+
+
+<!-- =================================================
+     calendar
+================================================= -->
+
+<article
+class="status-card"
+data-key="calendar"
+>
+
+<div class="card-top">
+
+
+<div class="service-title">
+
+<span class="service-icon icon-calendar">
+
+<svg viewBox="0 0 32 32">
+
+<rect
+x="4"
+y="7"
+width="24"
+height="21"
+rx="3"
+/>
+
+<path
+d="M9 4v7M23 4v7M4 13h24"
+/>
+
+<path
+d="M9 18h3M16 18h3M23 18h3"
+/>
+
+<path
+d="M9 23h3M16 23h3"
+/>
+
+</svg>
+
+</span>
+
+
+<span>
+calendar
+</span>
+
+</div>
+
+
+<div
+class="service-status"
+id="calendarStatus"
+>
+
+<span class="status-dot">
+!
+</span>
+
+読み込み中
+
+</div>
+
+
+</div>
+
+
+<div
+class="uptime"
+id="calendarBars"
+></div>
+
+
+</article>
+
+
+
+<!-- =================================================
+     ryoタイマー
+================================================= -->
+
+<article
+class="status-card"
+data-key="timer"
+>
+
+<div class="card-top">
+
+
+<div class="service-title">
+
+<span class="service-icon icon-timer">
+
+<svg viewBox="0 0 32 32">
+
+<circle
+cx="16"
+cy="17"
+r="11"
+/>
+
+<path
+d="M16 10v8l5 3"
+/>
+
+<path
+d="M12 3h8"
+/>
+
+</svg>
+
+</span>
+
+
+<span>
+ryoタイマー
+</span>
+
+</div>
+
+
+<div
+class="service-status"
+id="timerStatus"
+>
+
+<span class="status-dot">
+!
+</span>
+
+読み込み中
+
+</div>
+
+
+</div>
+
+
+<div
+class="uptime"
+id="timerBars"
+></div>
+
+
+</article>
+
+
+
+<!-- =================================================
+     Digital暗記カード
+================================================= -->
+
+<article
+class="status-card"
+data-key="digitalCard"
+>
+
+<span class="new-badge">
+NEW
+</span>
+
+
+<div class="card-top">
+
+
+<div class="service-title">
+
+<span class="service-icon icon-card">
+
+<svg viewBox="0 0 32 32">
+
+<path
+d="M8 28V11l8-6 8 6v17z"
+/>
+
+<path
+d="M11 15h10"
+/>
+
+<path
+d="M11 20h10"
+/>
+
+<path
+d="M11 25h6"
+/>
+
+</svg>
+
+</span>
+
+
+<span>
+Digital暗記カード
+</span>
+
+</div>
+
+
+<div
+class="service-status"
+id="digitalCardStatus"
+>
+
+<span class="status-dot">
+!
+</span>
+
+読み込み中
+
+</div>
+
+
+</div>
+
+
+<div
+class="uptime"
+id="digitalCardBars"
+></div>
+
+
+</article>
+
+
+
+<!-- =================================================
+     株シュミレーター26.1
+================================================= -->
+
+<article
+class="status-card"
+data-key="kabu"
+>
+
+<div class="card-top">
+
+
+<div class="service-title">
+
+<span class="service-icon icon-stock">
+
+<svg viewBox="0 0 32 32">
+
+<path d="M5 27V18"/>
+<path d="M14 27V12"/>
+<path d="M23 27V6"/>
+
+<path
+d="M4 11l7-5 6 4 10-7"
+/>
+
+<path
+d="M22 3h5v5"
+/>
+
+</svg>
+
+</span>
+
+
+<span>
+株シュミレーター26.1
+</span>
+
+</div>
+
+
+<div
+class="service-status"
+id="kabuStatus"
+>
+
+<span class="status-dot">
+!
+</span>
+
+読み込み中
+
+</div>
+
+
+</div>
+
+
+<div
+class="uptime"
+id="kabuBars"
+></div>
+
+
+</article>
+
+
+
+<!-- =================================================
+     パスワードランダム生成
+================================================= -->
+
+<article
+class="status-card"
+data-key="password"
+>
+
+<div class="card-top">
+
+
+<div class="service-title">
+
+<span class="service-icon icon-password">
+
+<svg viewBox="0 0 32 32">
+
+<rect
+x="7"
+y="14"
+width="18"
+height="14"
+rx="3"
+/>
+
+<path
+d="M11 14V10a5 5 0 0 1 10 0v4"
+/>
+
+<path
+d="M16 20v4"
+/>
+
+</svg>
+
+</span>
+
+
+<span>
+パスワードランダム生成
+</span>
+
+</div>
+
+
+<div
+class="service-status"
+id="passwordStatus"
+>
+
+<span class="status-dot">
+!
+</span>
+
+読み込み中
+
+</div>
+
+
+</div>
+
+
+<div
+class="uptime"
+id="passwordBars"
+></div>
+
+
+</article>
+
+
+</div>
+
+</section>
+
+
+</main>
+
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer>
+© BAINARI
+</footer>
+
+
+
+<!-- =========================
+     REPORT BOX
+========================= -->
+
+<div
+id="reportBox"
+class="report-box"
+>
+
+
+<button
+class="close-btn"
+onclick="closeReport()"
+>
+✕
+</button>
+
+
+<h3>
+⚠️ 不具合を発見しましたか？
+</h3>
+
+
+<p>
+サービスに問題や表示の不具合を見つけた場合は、
+Googleフォームからご報告ください。
+</p>
+
+
+<a
+href="https://forms.gle/kRhMupMydqeaiFa98"
+target="_blank"
+rel="noopener noreferrer"
+class="report-btn"
+>
+不具合を報告する
+</a>
+
+
+</div>
+
 
 
 <!-- =========================
