@@ -1251,7 +1251,144 @@ BAINARI関連サービスのシステム稼働状況
 </div>
 
 </div>
+<!-- =========================
+     障害情報
+========================= -->
 
+
+<!-- Status 障害告知 -->
+<div class="status-incident">
+  <div class="status-incident-header">
+    <span class="status-incident-icon">⚠</span>
+    <span class="status-incident-label">SYSTEM INCIDENT</span>
+    <span class="status-incident-badge">障害発生中</span>
+  </div>
+
+  <h2>システム障害のお知らせ</h2>
+
+  <p class="status-incident-message">
+    現在、Statusページにおいてシステムトラブルが発生しております。
+  </p>
+
+  <div class="status-incident-detail">
+    <strong>■ 発生している事象</strong>
+    <p>
+      Statusデータが正常に読み込まれない、またはページの読み込みに
+      時間がかかる場合があります。
+    </p>
+
+    <strong>■ 原因</strong>
+    <p>
+      Statusデータの読み込み先サーバーにシステム負荷が集中し、
+      サーバーが正常に応答しない事象が発生しております。
+    </p>
+
+    <strong>■ 対応状況</strong>
+    <p>
+      現在、原因の調査および復旧に向けた対応を進めております。
+    </p>
+  </div>
+
+  <p class="status-incident-footer">
+    ご利用の皆様にはご不便、ご迷惑をおかけしておりますことを
+    お詫び申し上げます。
+  </p>
+</div>
+
+<style>
+.status-incident {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 22px;
+  margin: 20px 0;
+  background: #fff8f0;
+  border: 1px solid #f0c28c;
+  border-left: 5px solid #e58a25;
+  border-radius: 12px;
+  color: #333;
+  font-family: Arial, "Noto Sans JP", sans-serif;
+}
+
+.status-incident-header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.status-incident-icon {
+  font-size: 21px;
+  color: #d97706;
+}
+
+.status-incident-label {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #a65b13;
+}
+
+.status-incident-badge {
+  margin-left: auto;
+  padding: 5px 10px;
+  border-radius: 20px;
+  background: #fde5c8;
+  color: #a64b08;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.status-incident h2 {
+  margin: 0 0 12px;
+  font-size: 20px;
+  color: #9a4d0b;
+}
+
+.status-incident-message {
+  line-height: 1.8;
+  margin-bottom: 18px;
+}
+
+.status-incident-detail {
+  padding: 16px;
+  background: rgba(255,255,255,.7);
+  border-radius: 8px;
+  line-height: 1.8;
+}
+
+.status-incident-detail strong {
+  display: block;
+  margin-top: 10px;
+  color: #9a5a19;
+}
+
+.status-incident-detail strong:first-child {
+  margin-top: 0;
+}
+
+.status-incident-detail p {
+  margin: 4px 0 12px;
+  font-size: 14px;
+}
+
+.status-incident-footer {
+  margin: 16px 0 0;
+  font-size: 13px;
+  line-height: 1.8;
+  color: #75583f;
+}
+
+@media (max-width: 600px) {
+  .status-incident {
+    padding: 16px;
+  }
+
+  .status-incident h2 {
+    font-size: 18px;
+  }
+}
+</style>
 
 <!-- =========================
      システム稼働状況
