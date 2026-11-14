@@ -1,15 +1,58 @@
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>転送中...</title>
-  <meta http-equiv="refresh" content="0;url=http://192.0.2.1/">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>接続中...</title>
+<style>
+body {
+  background: #101318;
+  color: white;
+  font-family: sans-serif;
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+  text-align: center;
+}
+</style>
 </head>
 <body>
-  <p>ページを転送しています...</p>
-  <script>
-    window.location.replace("http://192.0.2.1/");
-  </script>
+<div>
+  <h2>サーバーに接続しています</h2>
+  <p id="status">接続を試行しています...</p>
+  <p id="count">試行回数：0</p>
+</div>
+
+<script>
+const target = "http://192.0.2.1/";
+let attempts = 0;
+
+async function connect() {
+  attempts++;
+  document.getElementById("count").textContent =
+    "試行回数：" + attempts;
+
+  document.getElementById("status").textContent =
+    "サーバーへの接続を試行中...";
+
+  try {
+    const response = await fetch(target, {
+      mode: "no-cors",
+      cache: "no-store"
+    });
+
+    document.getElementById("status").textContent =
+      "接続要求を送信しました。";
+  } catch (error) {
+    document.getElementById("status").textContent =
+      "サーバーから応答がありません。再試行します...";
+  }
+
+  setTimeout(connect, 5000);
+}
+
+connect();
+</script>
 </body>
 </html>
