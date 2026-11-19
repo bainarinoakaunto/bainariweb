@@ -268,7 +268,7 @@ main{
 
     color:#68758a;
 
-    margin-bottom:32px;
+    margin-bottom:24px;
 
     line-height:1.7;
 }
@@ -293,6 +293,52 @@ main{
     color:#5f6f82;
 
     font-weight:600;
+}
+
+
+/* =========================
+   MONITORING NOTICE
+========================= */
+
+.monitoring-notice{
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+
+    margin-bottom:28px;
+    padding:14px 18px;
+
+    background:#f4f8f8;
+    border:1px solid #d5e4e3;
+    border-left:4px solid #006F68;
+    border-radius:10px;
+
+    color:#435366;
+    font-size:13.5px;
+    line-height:1.7;
+}
+
+.monitoring-notice-icon{
+    width:20px;
+    height:20px;
+    flex:0 0 20px;
+    margin-top:2px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    color:#006F68;
+}
+
+.monitoring-notice-icon svg{
+    width:20px;
+    height:20px;
+    fill:none;
+    stroke:currentColor;
+    stroke-width:2;
+    stroke-linecap:round;
+    stroke-linejoin:round;
 }
 
 
@@ -1019,6 +1065,12 @@ footer{
         font-size:14px;
     }
 
+    .monitoring-notice{
+        margin-bottom:22px;
+        padding:12px 14px;
+        font-size:12.5px;
+    }
+
     .status-heading{
         font-size:22px;
     }
@@ -1293,10 +1345,21 @@ STATUS
 <div class="description">
 BAINARI関連サービスのシステム稼働状況
 </div>
-<div style="background:#fff8e6;border:1px solid #f0d48b;border-radius:12px;padding:14px 18px;margin-bottom:20px;color:#755514;font-size:.88rem;line-height:1.7;display:flex;align-items:flex-start;gap:10px" role="note">
-  <span style="font-size:1.1rem;line-height:1.5">⚠️</span>
-  <div>システムに接続できるかどうかを定点観測したデータを表示しています。システムが部分的に動作しないなどの障害は検知できない可能性があります。</div>
+
+
+<div class="monitoring-notice" role="note">
+    <span class="monitoring-notice-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="9"/>
+            <path d="M12 8v5"/>
+            <path d="M12 16h.01"/>
+        </svg>
+    </span>
+    <div>
+        システムに接続できるかどうかを定点観測したデータを表示しています。システムが部分的に動作しないなどの障害は検知できない可能性があります。
+    </div>
 </div>
+
 
 <div class="meta">
 
@@ -1328,6 +1391,7 @@ BAINARI関連サービスのシステム稼働状況
 
 システム稼働状況
 
+</div>
 
 
 <!-- =====================================================
