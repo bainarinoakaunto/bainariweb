@@ -1715,6 +1715,23 @@ function getStatusInfo(statusText){
 
 
 /* =====================================================
+   HTML ESCAPE
+===================================================== */
+
+function escapeHtml(value){
+    return String(value).replace(/[&<>"']/g, function(char){
+        return {
+            "&": "&amp;",
+            "<": "&lt;",
+            ">": "&gt;",
+            '"': "&quot;",
+            "'": "&#39;"
+        }[char];
+    });
+}
+
+
+/* =====================================================
    CREATE SERVICE CARD
 ===================================================== */
 
@@ -1733,9 +1750,8 @@ function createServiceCard(item){
         ? `<span class="new-badge">NEW</span>`
         : (item.isNew ? `<span class="new-badge">NEW</span>` : "");
 
-    const titleHtml = item.url
-        ? `<a href="${item.url}" target="_blank" rel="noopener noreferrer">${item.name}</a>`
-        : item.name;
+    // JSONにurlが含まれていても、サービス名はリンクにせず通常の文字として表示
+    const titleHtml = escapeHtml(item.name || "名称未設定");
 
     const history = Array.isArray(item.history) ? item.history : [];
     const offset = 36 - history.length;
