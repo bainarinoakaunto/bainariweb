@@ -464,7 +464,8 @@ main{
 .status-grid{
     display:grid;
 
-    grid-template-columns:1fr;
+    /* PCでは1行に3サービスを表示 */
+    grid-template-columns: repeat(3, minmax(0, 1fr));
 
     gap:24px;
 }
@@ -1159,6 +1160,112 @@ footer{
     }
 
 }
+
+
+/* =========================
+   DARK BASE THEME
+   ミントグリーンのアクセントカラーは維持
+========================= */
+
+body{
+    background:#080d0c;
+    color:#edf5f2;
+}
+
+.title,
+.status-heading,
+.system-section-title,
+.service-title{
+    color:#edf5f2;
+}
+
+.description{
+    color:#a7b8b2;
+}
+
+.meta{
+    color:#91a39c;
+}
+
+#system{
+    color:#b8c9c2;
+}
+
+.status-heading::after,
+.system-section-title::after{
+    background:#293a34;
+}
+
+.monitoring-notice{
+    background:#111b18;
+    border-color:#294039;
+    border-left-color:#006F68;
+    color:#c2d2cb;
+}
+
+.monitoring-notice-icon{
+    color:#006F68;
+}
+
+.status-card{
+    background:#111816;
+    border-color:#293a34;
+    box-shadow:0 3px 14px rgba(0,0,0,.24);
+}
+
+.status-card:hover{
+    box-shadow:0 7px 22px rgba(0,0,0,.36);
+}
+
+.service-title{
+    color:#edf5f2;
+}
+
+.uptime span,
+.status-card.warning .uptime span,
+.status-card.error .uptime span,
+.status-card.maintenance .uptime span{
+    background:#293832;
+}
+
+.uptime-labels{
+    color:#91a39c;
+}
+
+.bar-tooltip{
+    background:#17221e;
+    color:#edf5f2;
+    border-color:#3b5148;
+    box-shadow:0 4px 14px rgba(0,0,0,.4);
+}
+
+footer{
+    color:#81938b;
+}
+
+.report-box{
+    background:#111816;
+    border-color:#293a34;
+    border-top-color:#006F68;
+}
+
+.report-box h3{
+    color:#55c9ad;
+}
+
+.report-box p{
+    color:#c2d2cb;
+}
+
+.close-btn{
+    color:#b8c9c2;
+}
+
+#noTempSystemMsg{
+    color:#b8c9c2;
+}
+
+
 </style>
 </head>
 
