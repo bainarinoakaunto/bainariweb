@@ -1266,6 +1266,30 @@ footer{
 }
 
 
+/* 管理者用ステータス絞り込み */
+.admin-filter{
+  display:flex;align-items:center;flex-wrap:wrap;gap:7px;
+  margin:0 0 13px;padding:9px 11px;
+  background:#111816;border:1px solid #263631;border-radius:10px;
+}
+.admin-filter-label{font-size:11px;color:#9aada5;font-weight:700;margin-right:2px}
+.filter-button{
+  appearance:none;border:1px solid #34463f;background:#17211e;color:#c9d9d2;
+  border-radius:7px;padding:7px 11px;font-size:11px;font-weight:700;cursor:pointer;
+}
+.filter-button:hover{border-color:#65e6c1;color:#fff}
+.filter-button.active{background:#006F68;border-color:#65e6c1;color:#fff}
+.filter-count{margin-left:auto;color:#9aada5;font-size:10px}
+.filter-empty{
+  display:none;padding:18px;text-align:center;color:#9aada5;
+  border:1px dashed #34463f;border-radius:9px;font-size:12px;
+}
+.system-section.is-filter-empty{display:none!important}
+@media(max-width:600px){
+ .admin-filter{gap:6px}
+ .filter-button{padding:7px 9px}
+ .filter-count{width:100%;margin:2px 0 0}
+}
 </style>
 </head>
 
@@ -1446,16 +1470,6 @@ id="mobileMenu"
 <main>
 
 
-<div class="title">
-STATUS
-</div>
-
-
-<div class="description">
-BAINARI関連サービスのシステム稼働状況
-</div>
-
-
 <div class="monitoring-notice" role="note">
     <span class="monitoring-notice-icon" aria-hidden="true">
         <svg viewBox="0 0 24 24">
@@ -1483,6 +1497,15 @@ BAINARI関連サービスのシステム稼働状況
 
 </div>
 
+
+<div class="admin-filter" aria-label="表示するサービスの絞り込み">
+  <span class="admin-filter-label">表示：</span>
+  <button type="button" class="filter-button active" data-filter="all">すべて</button>
+  <button type="button" class="filter-button" data-filter="issues">障害・メンテナンス</button>
+  <button type="button" class="filter-button" data-filter="error">接続不可</button>
+  <button type="button" class="filter-button" data-filter="warning">混雑</button>
+  <span id="filterCount" class="filter-count"></span>
+</div>
 
 <!-- =========================
      システム稼働状況
@@ -1908,6 +1931,78 @@ function createServiceCard(item){
 
 
 /* =====================================================
+   ADMIN FILTER
+===================================================== */
+
+let adminStatusFilter = "all";
+let adminServices = [];
+
+function matchesAdminFilter(item){
+    const status = String(item.status || "").trim();
+    if(adminStatusFilter === "all") return true;
+    if(adminStatusFilter === "issues"){
+        return status === "接続不可" || status === "メンテナンス中" || status === "混雑";
+    }
+    if(adminStatusFilter === "error") return status === "接続不可";
+    if(adminStatusFilter === "warning") return status === "混雑";
+    return true;
+}
+
+function renderAdminServices(){
+    const tempGrid = document.getElementById("tempSystemGrid");
+    const noTempMsg = document.getElementById("noTempSystemMsg");
+    const normalGrid = document.getElementById("normalSystemGrid");
+    const tempSection = tempGrid.closest(".system-section");
+    const normalSection = normalGrid.closest(".system-section");
+
+    tempGrid.innerHTML = "";
+    normalGrid.innerHTML = "";
+
+    const filtered = adminServices.filter(matchesAdminFilter);
+    let tempCount = 0;
+    let normalCount = 0;
+
+    filtered.forEach(function(item){
+        const card = createServiceCard(item);
+        if(item.isTemporary){
+            tempGrid.appendChild(card);
+            tempCount++;
+        } else {
+            normalGrid.appendChild(card);
+            normalCount++;
+        }
+    });
+
+    tempGrid.style.display = tempCount > 0 ? "grid" : "none";
+    noTempMsg.style.display = adminStatusFilter === "all" && tempCount === 0 ? "block" : "none";
+    tempSection.classList.toggle("is-filter-empty", tempCount === 0 && adminStatusFilter !== "all");
+    normalSection.classList.toggle("is-filter-empty", normalCount === 0);
+
+    let empty = document.getElementById("adminFilterEmpty");
+    if(!empty){
+        empty = document.createElement("div");
+        empty.id = "adminFilterEmpty";
+        empty.className = "filter-empty";
+        document.querySelector(".admin-filter").after(empty);
+    }
+    empty.textContent = "選択した条件に該当するサービスはありません。";
+    empty.style.display = filtered.length === 0 ? "block" : "none";
+
+    document.getElementById("filterCount").textContent =
+        `${filtered.length} / ${adminServices.length} 件表示`;
+}
+
+document.querySelectorAll(".filter-button").forEach(function(button){
+    button.addEventListener("click",function(){
+        adminStatusFilter = button.dataset.filter;
+        document.querySelectorAll(".filter-button").forEach(function(b){
+            b.classList.toggle("active",b === button);
+        });
+        renderAdminServices();
+    });
+});
+
+/* =====================================================
    LOAD STATUS
 ===================================================== */
 
@@ -1941,27 +2036,8 @@ async function loadStatus(){
         syncElement.textContent =
             data.updatedAt || new Date().toLocaleTimeString("ja-JP");
 
-        tempGrid.innerHTML = "";
-        normalGrid.innerHTML = "";
-        let tempCount = 0;
-
-        (data.services || []).forEach(function(item){
-            const card = createServiceCard(item);
-            if(item.isTemporary){
-                tempGrid.appendChild(card);
-                tempCount++;
-            } else {
-                normalGrid.appendChild(card);
-            }
-        });
-
-        if(tempCount > 0){
-            tempGrid.style.display = "grid";
-            noTempMsg.style.display = "none";
-        } else {
-            tempGrid.style.display = "none";
-            noTempMsg.style.display = "block";
-        }
+        adminServices = Array.isArray(data.services) ? data.services : [];
+        renderAdminServices();
 
     }
     catch(error){
